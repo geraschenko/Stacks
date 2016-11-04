@@ -1,0 +1,133 @@
+\sektion{22}{The 2-Yoneda lemma}
+
+ \begin{theorem}[2-Yoneda Lemma]
+   Let $p:\F\to \C$ be a fibered category, and let $X\in \C$. Then the ``evaluation''
+   functor $e_X:\HOM_\C(\C/X,\F)\to \F(X)$, given by $(f:\C/X\to \F)\mapsto f(\id_X)$, is an
+   equivalence of categories.
+ \end{theorem}
+ \begin{proof}
+   We need to find a quasi-inverse $\eta:\F(X)\to \HOM_\C(\C/X,\F)$. Given $x\in \F(X)$, we
+   need to define a morphism of fibered categories $\eta_x:\C/X\to \F$. Given
+   $\phi:Y\to X$, choose a cartesian arrow $\phi^* x\to x$ over $\phi$. Then we define
+   $\eta_x(\phi)$ to be $\phi^* x$. This defines $\eta_x$ on objects. Given an $X$-morphism
+   $\e:Y'\to Y$, we should get $\eta_x(\e):\phi'^* x\to \phi^* x$, and we do.
+   \[\xymatrix@R-1.5pc{
+    \phi'^* x \ar@{|->}[dd]\ar@{-->}[dr]_{\exists!} \ar@/^/[rrd]^{\phi'^*}\\
+     & \phi^* x\ar@{|->}[dd] \ar[r]_{\phi^*} & x \ar@{|->}[dd]\\
+    Y' \ar[dr]_\e \ar@/^/[rrd]^(.65){\phi'}|!{[ru];[rd]}\hole \\
+    & Y \ar[r]_{p(\phi)} & X
+   }\]
+    The uniqueness of the dashed arrow implies that $\eta_x$ respects composition and
+   identities. Note that $\eta_x$ is a morphism of fibered categories (it respects the
+   projections and sends cartesian arrows to cartesian arrows \anton{we didn't really
+   check this}). \anton{we still didn't say what $\eta$ does to arrows.}
+
+   Now we'll check that these functors are inverses. Consider
+   \[\xymatrix@R-1.5pc{
+    \F(X)\ar[r]^<>(.5)\eta & \HOM_\C(\C/X,\F) \ar[r]^<>(.5){e_X} & \F(X)\\
+    x\ar@{|->}[r] & \eta_x \ar@{|->}[r]& \eta_x(\id_X)\ar@{}[r]|<>(.5){\mbox{$=$}}
+    & (\id_X)^*x\cong x
+   }\]
+    The unique isomorphism $\id^* x\cong x$ exists because $x\xrightarrow\id x$ is a
+   pullback along $\id_X$. Since the behavior of $\eta$ on morphisms was determined using
+   a universal property, it is easy to check that $e_X\circ \eta$ is isomorphic to the
+   identity on morphisms as well.
+
+   Now the other direction.
+   \[\xymatrix@R-1.5pc{
+     \HOM_\C(\C/X,\F) \ar[r]^<>(.5){e_X} & \F(X) \ar[r]^<>(.5)\eta & \HOM_\C(\C/X,\F)\\
+     f \ar@{|->}[r]& f(\id_X) \ar@{|->}[r]& \eta(f(\id_X))
+   }\]
+    The morphism $\eta(f(\id_X))$ is given by $(\phi:Y\to X)\mapsto \phi^*f(\id_X)$. So
+   we want a natural isomorphism $f(\phi)\cong \phi^*f(\id_X)$. Since $\id_X:X\to X$ is
+   the initial object in $\C/X$, there exists a unique morphism $\phi\to \id_X$, and this
+   is a cartesian arrow (just like every other arrow in $\C/X$). We know that $f$ takes
+   cartesian arrows to cartesian arrows, so $f(\phi)\to f(\id_X)$ is cartesian, and we
+   also have that $\phi^*f(\id_X)\to f(\id_X)$ is also a cartesian arrow (by
+   construction), so there is a unique isomorphism $f(\phi)\to \phi^*f(\id_X)$.
+ \end{proof}
+
+ \subsektion{Presheaves and categories fibered in sets}
+
+ \begin{definition}\label{lec22D:F^fib}
+   Let $F:\C^{op}\to \set$ be a functor. Then define $p:F^{fib}\to \C$ to be a fibered
+   category whose objects are pairs $(U,x)$ with $U\in \C$ and $x\in F(U)$. The morphisms
+   $(U',x')\to (U,x)$ are morphisms $f:U'\to U$ such that $Ff(x)=x'$ in $F(U')$. The
+   projection is $(U,x)\mapsto U$.
+ \end{definition}
+ We can check that $F^{fib}\to \C$ is a fibered category.
+   \[\xymatrix@R-1.5pc{
+    x'' \ar@{|->}[dd]\ar@{-->}[dr] \ar@/^/[rrd]\\
+     & x'\ar@{|->}[dd] \ar[r] & x \ar@{|->}[dd]\\
+    U'' \ar[dr]_h \ar@/^/[rrd]|!{[ru];[rd]}\hole \\
+    & U' \ar[r]_{f} & U
+   }\]
+ If $F f(x)=x'$ and $\bigl(F (f\circ h))(x)=x''$, then $F h(x')=x''$ by the axioms of a
+ presheaf.
+
+ One can picture the fibered category $F^{fib}$ as an object for every section of $F$,
+ with morphisms given by reversing the restriction maps. In particular, the pullback of
+ an object along an arrow is unique (it is given by restriction).
+ \begin{example}
+   Let $\C$ be the category $\xymatrix{x\ar[r]^\alpha& y
+   \ar[r]^\beta & z\ar@(rd,ru)_\gamma}$ (identity morphisms not drawn), and let
+   $F:\C^{op}\to \set$ be given by $F(x)=\{a,b,c\}$, $F(y)=\{d,e\}$, $F(z)=\{f,g,h\}$,
+   with $F\alpha (d,e)=(b,c)$, $F\beta(f,g,h)=(d,d,e)$, and $F(f,g,h)=(g,h,h)$. Then
+   $F^{fib}$ looks like this.
+   \[\xymatrix@R-2pc{
+    a & d \ar[r] \ar[rd]& f \\
+    b \ar[ru] & e \ar[rd] & g \ar@/_3ex/[u] \\
+    c \ar[ru] &   & h \ar@/_3ex/[u] \ar@(d,r) \\ \rule{0pt}{3ex} \\
+    x\ar[r]^\alpha & y\ar[r]^\beta & z\ar@(dr,ru)_\gamma
+   }\]
+   Note that every arrow is cartesian, cartesian arrows are unique, and the only
+   morphisms in the fibers are identity morphisms (remember that morphisms in the fiber
+   must lie over the identity morphism).
+ \end{example}
+ \begin{example}
+   $h_X^{fib}=\C/X$.
+ \end{example}
+ \begin{definition}
+   A category is called a \emph{set} if it is a small category in which all morphisms are
+   identity morphisms. Note that any set can be interpreted as a category in this way.
+ \end{definition}
+ \begin{remark}
+   A category $\C$ is equivalent to a set if and only if for every pair of objects
+   $x,y\in \C$, $\hom_\C(x,y)$ is either empty or consists of a single isomorphism. Such
+   a category is called a \emph{discrete groupoid}. To show that a groupoid is discrete,
+   it is enough to show that no objects have non-identity automorphisms.
+ \end{remark}
+ \begin{definition}
+   A \emph{category fibered in sets} over $\C$ is a fibered category $p:F\to \C$ such that
+   for every $U\in \C$, the category $F(U)$ is a set.
+ \end{definition}
+ Note that for a presheaf $F$, $F^{fib}$ is fibered in sets (its fiber over $U$ is the
+ set $F(U)$).
+ \begin{lemma}
+   Let $G\to \C$ be a fibered category and $F\to \C$ a category fibered in sets. Then
+   $\HOM_\C(G,F)$ is a set.
+ \end{lemma}
+ \begin{proof}
+   We have to check that the only morphisms are identity morphisms. Let $f,g:G\to F$ be
+   two morphisms of fibered categories and let $\alpha:f\to g$ be a base preserving
+   natural transformation. That means that for every $y\in G$, we have a map
+   $\alpha_y:f(y)\to g(y)$ in $F(p_G(y))$, which only has identity morphisms. This
+   implies that $f(y)=g(y)$ and $\alpha_y=\id$.
+ \end{proof}
+ \begin{corollary}
+   If $X,Y\in \C$, then $\HOM_\C(\C/X,\C/Y)\xrightarrow\sim (\C/Y)(X)$, which has objects
+   $X\to Y$ and $Y$-morphisms which project to the identity arrow (so they must be
+   identity maps), so it is just the set $\hom_\C(X,Y)$.
+ \end{corollary}
+ \begin{proposition}\label{lec22P:presh<=>fibered_in_sets}
+   The functor $(\text{\rm presheaves})\to (\text{\rm categories fibered in sets})$ given by
+   $F\mapsto F^{fib}$ is an equivalence of categories.
+ \end{proposition}
+ \begin{proof}
+   This is obvious. Here is the inverse:
+
+   Given a category fibered in sets $\F\to \C$, define a presheaf $\F_*:\C^{op}\to \set$
+   by $U\mapsto \HOM_\C(\C/U,\F)\cong \F(U)$ (this is actually a bijection of sets).
+   Given $w:V\to U$ and $\rho:\C/U\to \F$, define $\F_* w(\rho)$ to be the composite
+   $\C/V\xrightarrow w \C/U \xrightarrow\rho \F$.
+ \end{proof}

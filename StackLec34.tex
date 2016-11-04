@@ -1,0 +1,56 @@
+ \subsektion{Artin's Theorem}
+
+%David: I can make this example clear. An fppf space is the same as an
+%etale space by artin's theorem.
+\begin{example}
+ Say $X/S$ is an algebraic space and $G/S$ is a smooth group scheme
+acting freely on $X$. Then the quotient $[X/G]$ is an algebraic space
+\anton{explain}. This is not clear because it only comes with a
+smooth covering.
+\end{example}
+\begin{corollary}
+ Let $\X$ be an algebraic stack over $S$. Then the following are
+equivalent.
+ \begin{enumerate}
+   \item $\X$ is an algebraic space,
+   \item for every $x\in \X$, $\aut_x=\{\id\}$.
+ \end{enumerate}
+\end{corollary}
+\begin{proof}
+ $(1\Rightarrow 2)$ is clear. $(2\Rightarrow 1)$ Let's check that
+$\Delta$ is formally unramified. This is clear because doing
+something, we get a non-trivial automorphism of $x_1$.
+ \[\xymatrix{
+  T_0\ar@{^(->}[r]\ar[d] & T\ar[d]\ar@{-->}[dl]\\
+  \isom(x_1,x_2)\ar[d]\ar[r] & Z\ar[d]^{(x_1,x_2)}\\
+  \X\ar[r] & \X\times_S \X
+ }\]
+ So there exists an \'etale cover $X\to \X$. Also, 2 implies that
+$\Delta:\X\to \X\times \X$ is a monomorphism, which implies that
+$\X\cong |\X|$ (the sheaf of isomorphism classes of things in the
+fibers). Thus, we can assume $\X=F$ is a sheaf, and it has an \'etale
+cover $X\to F$. The remaining point is that $F\to F\times F$ is
+representable (by algebraic spaces); we have to check
+representability by schemes. Let $T$ be a scheme.
+ \[\xymatrix{
+  \Delta^{-1}(T)\ar[d]\ar@{^(->}[r] & T\ar[d]\\
+  F\ar[r] & F\times F
+ }\]
+ where $\Delta^{-1}(T)\hookrightarrow T$ is separated and
+quasi-finite (the fibers are empty or one point), so scheme.
+\end{proof}
+This should make you happy. Usually when we have moduli, they are
+presented as something with a group action.
+\begin{example}
+ $B\mu_p$ over the field $\FF_p$. Recall that $\mu_p=\ker(\GG_m\to
+\GG_m;u\mapsto u^p)$. We see that $B\mu_p=[\GG_m/\GG_m]$, where the
+action is $u\ast v=u^pv$. So $B\mu_p$ is an Artin (algebraic) stack,
+but it is not Deligne-Mumford in general.
+ \[\xymatrix{
+  \mu_p\ar[d]\ar[r]^{\text{not}}_{\text{unram.}} & \spec
+\FF_p\ar[d]^{(p_1,p_2)} \\
+  B\mu_p\ar[r] & B\mu_p\times B\mu_p
+ }\]
+ you can't make an \'etale cover.
+\end{example}
+

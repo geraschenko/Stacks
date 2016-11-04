@@ -1,0 +1,299 @@
+\newpage
+\section*{Appendix}
+\addcontentsline{toc}{section}{Appendix}
+\renewcommand{\thesection}{A\arabic{subsection}}
+\renewcommand{\thesubsection}{\thesection}
+\gdef\sectionname{Appendix}
+\setcounter{equation}{0}
+\setcounter{footnote}{0}
+\makeatletter\@addtoreset{equation}{subsection}\makeatother
+
+\anton{This is where I'll put stuff that I'd like written down, but is too long-winded to insert elsewhere without disturbing the flow of ideas.} \anton{I guess I'll also put common arguments here if they don't fit well elsewhere\dots I'd really rather this kind of thing be in the main text}
+
+\subsection{Verification of the adjunctions \texorpdfstring{$f^*\vdash f_*$ and $f^\star\vdash f_*$}{f*|- f\_*}}
+
+I feel like maybe these calculations should be done out. \anton{which way is that adjunction symbol supposed to be written?}
+
+\subsection{Extending properties}\label{ApdxSec:ExtendingProperties}
+
+If $\C$ is a site in which coproducts exist, then we can replace the topology on $\C$ by the finest topology which produces the same topos. Then any cover can be replaced by a big coproduct. \anton{and the explanation}
+
+\anton{do the following}
+$\P$ (objects) \emph{descends along covers}, \emph{is stable}; $\P$ (morphisms) \emph{descends along covers}, \emph{is stable}, \emph{is local on domain}. These should probably be done in the manner of lecture 10. Note in particular that the axioms of a Grothendieck topology imply that ``is a cover'' is stable.
+
+Let $\C$ be a full subcategory of $\D_0$. Then define what it means for $X\in \D_0$ to be $\C$-representable and what it means for a morphism in $\D_0$ to be $\C$-representable.
+
+If $\P$ is a stable property of morphisms, a representable morphism $f:F\to G$ in $\D_0$ \emph{has $\P$} if for every morphism $X\to G$ with $X\in \C$, $F\times_G X\to X$ (which is a morphism in $\C$ since $f$ is representable) has $\P$. In particular, since ``is a cover'' is stable, we now know when a representable morphism in $\D$ is a cover.
+
+% Let $\C$ be a site (for simplicity, we'll take covers by single morphisms).
+% \begin{definition}
+%  A property $\P$ of objects in $\C$ \emph{descends along covers} (resp.~is \emph{stable}) if for every cover $X\to Y$, $Y$ has $\P$ if (resp.~if and only if) $X$ has $\P$.
+% 
+%  A property $\P$ of morphisms in $\C$ \emph{descends along covers} (resp.~is \emph{stable}) if for every cover $X\to Y$ and every morphism $f:Z\to Y$, $f$ has $\P$ if (resp.~if and only if) the projection $Z\times_Y X\to X$ has $\P$.
+% 
+%  A property $\P$ of morphisms in $\C$ is \emph{local on domain} if \dots
+% \end{definition}
+% \anton{maybe this should be done as in lecture 10}
+% 
+% Assume $\C$ is a subcategory of some category $\D$.
+
+
+
+\subsection{Effective Descent Classes}
+
+Let $\C$ be a site. \anton{I think} A property $\P$ of morphisms in $\C$ is an \emph{effective descent class} if for any $\P$ morphism $F\to T$ from a sheaf $F$ on $\C$ to an object $T\in \C$ (in the sense of \ref{ApdxSec:ExtendingProperties}), we get that $F\in \C$.
+
+% whenever $U\to T$ is a morphism in $\C$ and $F$ is a sheaf on $\C$ with a $\P$ morphism to $T$  \anton{$\P$ local on domain?}, $F\times_T U\in \C\Longrightarrow F\in \C$.
+% \[\xymatrix{
+%    \C\ni F\times_T U\ar[r]\ar[d]\ar@{}[dr]|(.25)\pb & F\ar[d]^\P\\
+%    **[l] \C\ni U\ar[r] & **[r] T \in \C
+% }\qquad\raisebox{-1.5pc}{$\Longrightarrow F\in \C$}
+% \]
+
+For example, ``closed immersion'' is an effective descent class in $\sch_{fppf}$.
+
+ \anton{I'd like to have a long list of effective descent classes in $\sch_{??}$ here}
+\begin{itemize}
+ \item closed immersion
+ \item open immersion
+ \item quasi-affine
+\end{itemize}
+
+
+\subsection{Descent for Algebraic Spaces}
+
+\begin{lemma} \label{ApdxL:representability_diagonal}
+ Let $F:\C^{op}\to \set$ be a presheaf on a category $\C$ in which fiber products are representable, and let $F\to U$ be a morphism from $F$ to an object in $\C$ (thought of as a presheaf via the Yoneda embedding). Then the diagonal morphism $F\to F\times F$ is representable if and only if the diagonal morphism $F\to F\times_U F$ is representable.
+\end{lemma}
+\begin{proof}
+ $(\Rightarrow)$ Let $T\in \C$ and let $T\to F\times_U F$ be a morphism. By composing with the canonical morphism $F\times_U F\to F\times F$, we get a morphism $T\to F\times F$. Then $T\times_{F\times_U F,\Delta}F = T\times_{F\times F,\Delta} F$ is a sheaf by the hypothesis that $\Delta:F\to F\times F$ is representable.
+ 
+ $(\Leftarrow)$ Let $T\in \C$ and let $T\to F\times F$ be a morphism. In the diagram below, verify that all squares are cartesian.
+ \[\xymatrix{
+  T\times_{F\times F,\Delta}F \ar[r] \ar[d]
+      & T\times_{U\times U,\Delta} U\ar[r]\ar[d]
+      & T \ar[d]\\
+  F\ar[r]^<>(.5)\Delta & F\times_U F\ar@{^(->}[r]\ar[d] & F\times F\ar[d]\\
+  & U\ar[r]^<>(.5)\Delta & U\times U
+ }\]
+ Since fiber products are representable in $\C$, we have that $T\times_{U\times U,\Delta}U$ is in $\C$, so $T\times_{F\times F,\Delta}F$ is in $\C$ by the hypothesis that $F\to F\times_U F$ is representable.
+\end{proof}
+
+\begin{definition}
+ For a scheme $U$, let $\algsp_{nice}(U)$ be the category of algebraic $F$ over $U$ whose diagonal morphism $F\to F\times_U F$ belongs to some effective descent class.
+\end{definition}
+ Supposedly, $F\to F\times_U F$ almost always belongs to some effective descent class. In particular, the diagonal is almost always quasi-affine. \anton{I guess}
+\begin{theorem} \label{ApdxT:descent_alg_spaces}
+ If $V\to U$ is an \'etale cover of schemes, then the pullback functor $\algsp_{nice}(U)\to \algsp_{nice}(V\to U)$ is an equivalence of categories.
+\end{theorem}
+ \begin{proof}
+   In light of Theorem \ref{lec07T:descent_of_sheaves} (descent for sheaves in a site)
+   and Exercise 2.4 (the topos of $\C/X$ is equivalent to the category of morphism to $X$
+   in the topos of $\C$), it is enough to prove that if $F$ is a sheaf with a morphism to
+   $U$, and $X=F\times_U V$ is an algebraic space (whose diagonal is in some effective
+   descent class), then $F$ is an algebraic space (whose diagonal is in some effective
+   descent class)
+
+   (1) $F$ is an \'etale sheaf already.
+
+   (2) By the lemma, it is enough to show that $F\to F\times_U F$ is representable. Let
+   $T\to F\times_U F$ be a a morphism from a scheme, and let $P=T\times_{F\times_U F}F$.
+   Define $T'$ and $P'$ so that all the squares in the following diagram are
+   cartesian.
+   \[\xymatrix@!0 @C+2pc{
+    P'\ar[dd]\ar[rr]\ar[dr] & & T'\ar[dd]|\hole \ar[dr]\\
+        & P\ar[rr]\ar[dd] & & T\ar[dd]\\
+    X\ar[rr]|\hole \ar[dd]\ar[dr] & & X\times_V X \ar[dd]|\hole \ar[dr]\\
+        & F\ar[dd]\ar[rr] & & F\times_U F\ar[dd]\\
+    V\ar[dr] & & V\ar[dr]\\
+        & U & & U
+   }\]
+    All the down-right arrows in the diagram are \'etale surjections. Since $T'=T\times_U
+   V$, $T'$ is a scheme. By the hypothesis that $X$ is an algebraic space, $P'$ is a
+   scheme, and $P'\to T'$ belongs to the effective descent class that $X\to X\times_V X$
+   is in, so $P$ is a scheme.
+
+   (3) If $W\to X$ is an \'etale cover of $X$, then $W\to X\to F$ is an \'etale cover of
+   $F$.
+ \end{proof}
+
+ \subsection{2-Categories} \label{ApdxSec:2-categories}
+
+ \anton{this is where I'll put relevant stuff about 2-categories. \textbf{Watch out, I
+ make most of this stuff up, but hopefully the obvious definitions are the right ones.}}
+
+ \anton{definitions about 2-categories go here. It may or not be worth it to talk about
+ non-strict 2-categories}
+ \begin{definition}
+   A \emph{strict 2-category} $\C$ is a category in which the $\hom$ sets are categories.
+   The morphisms in $\hom$ sets are called \emph{2-morphisms}. If $f,g,h\in
+   \hom_\C(A,B)$, and $f\xRightarrow\eta g\xRightarrow\tau h$ are two 2-morphisms, then
+   we denote the composition by $\tau\cdot\eta:f\Rightarrow h$. This is referred to as
+   \emph{vertical composition}. Additionally, we require that there is an associative
+   \emph{horizontal composition}: if $f,g\in \hom_\C(A,B)$ with $\eta:f\Rightarrow g$ and
+   $f',g'\in \hom_\C(B,C)$ with $\eta':f'\Rightarrow g'$, then we get a 2-morphism
+   $\eta'\circ \eta:f'\circ f\Rightarrow g'\circ g$. Finally, we impose the following
+   compatibility relation: if $f,g,h\in\hom_C(A,B)$, $f',g',h'\in\hom_\C(B,C)$, with
+   $f\xRightarrow\eta g\xRightarrow\tau h$ and $f'\xRightarrow{\eta'}
+   g'\xRightarrow{\tau'} h'$, then $(\tau'\circ\tau)\cdot(\eta'\circ\eta) =
+   (\tau'\cdot\eta')\circ(\tau\cdot\eta)$.
+   \[\xymatrix@+3pc{
+    A \ar@/^5ex/[r]^f_{}="a" \ar[r]|(.7)g^{}="b"_{}="c" \ar@/_5ex/[r]_h^{}="d"
+    & B \ar@/^5ex/[r]^{f'}_{}="a'" \ar[r]|(.7){g'}^{}="b'"_{}="c'" \ar@/_5ex/[r]_{h'}^{}="d'"
+    & C
+    \ar@{=>}_\eta "a";"b" \ar@{=>}_\tau "c";"d"
+    \ar@{=>}_{\eta'} "a'";"b'" \ar@{=>}_{\tau'} "c'";"d'"
+   }\]
+   That is, we require the diagram above to be an unambiguous 2-morphism $f'\circ
+   f\Rightarrow h'\circ h$.
+ \end{definition}
+ \begin{example}
+   The category $\cat$ is a 2-category in which the objects are categories, the
+   1-morphisms are functors, and the 2-morphisms are natural transformations.
+ \end{example}
+ \begin{example}
+   Just as any set can be thought of as a category in which all morphisms are identities,
+   any category can be thought of as a 2-category in which all 2-morphisms are
+   identities.
+ \end{example}
+
+ Commutative diagrams in 2-categories look like hallow 2-dimensional polytopes, with
+ 1-morphisms along the edges and 2-morphisms along the faces. Since these are hard to
+ draw, I'll draw them by cutting them open and saying that the 2-morphism represented by
+ one half is equal to the 2-morphism represented by the other half (if your 2-morphisms
+ are not isomorphisms, then you have to be careful about where you cut, but we will not
+ have such troubles).
+
+ \begin{definition}
+   Let $\C$ and $\D$ be 2-categories, then a \emph{lax 2-functor} $F:\C\to \D$ associates
+   to each object $A\in \C$ an object $FA\in \D$, to each morphism $f:A\to B$ in $\C$ a
+   morphism $Ff:FA\to FC$ in $\D$, and to each pair of morphisms $A\xrightarrow f
+   B\xrightarrow g C$ in $\C$ a 2-morphism $F_{g,f}:Fg\circ Ff\Rightarrow F(gf)$ such
+   that for every triple of morphisms $A\xrightarrow f B\xrightarrow g C\xrightarrow h D$
+   in $\C$, we have that $F_{h,gf}\cdot (\id_h\circ F_{g,f})=F_{hg,f}\cdot
+   (F_{h,g}\circ\id_f)$.
+   \[\raisebox{3pc}{$\xymatrix{
+    & B\ar[r]^g_(.15){\ }="a" & C\ar[dr]^h\\
+    A\ar[rrr]_{hgf}^(.58){}="d" \ar@/_2ex/[urr]|(.65){gf}^{}="b"_(.85){}="c" \ar[ur]^f
+      & & & D
+    \ar@{=>}_(.7){F_{g,f}} "a";"b"
+    \ar@{=>}^{F_{h,gf}} "c";"d"
+   }\quad\raisebox{-2pc}{$=$}\quad
+   \xymatrix{
+    & B\ar[r]^g_(.85){\ }="a" \ar@/_2ex/[rrd]|(.35){hg}^{}="b"_(.15){}="c" & C\ar[dr]^h\\
+    A\ar[rrr]_{hgf}^(.42){}="d" \ar[ur]^f & & & D
+    \ar@{=>}^(.7){F_{g,f}} "a";"b"
+    \ar@{=>}_{F_{h,gf}} "c";"d"
+   }$}\qedhere\]
+ \end{definition}
+ \begin{definition}
+   Let $F,G:\C\to \D$ be lax 2-functors, then a \emph{lax natural transformation}
+   $\eta:F\to G$ consists of a 1-morphism $\eta_A:FA\to GA$ for each $A\in \C$ and a
+   2-isomorphism $\eta_{f}:Gf\circ \eta_A \Rightarrow \eta_B\circ Ff$ for each $f:A\to B$
+   in $\C$ so that for any pair of morphisms $A\xrightarrow f B\xrightarrow g C$ in $\C$,
+   we have that $\eta_{gf}\cdot(G_{g,f}\circ \id_{\eta_A})=( \id_{\eta_C}\circ
+   F_{g,f})\cdot (\eta_g\circ \id_{Ff}\circ\id_{F(gf)})\cdot (\eta_f\circ \id_{F(gf)})$.
+   \[\xymatrix@!0 @R+1pc @C+2pc{
+    FA\ar[rr]^{\eta_A}\ar[dd]_{F(gf)}_{}="b" & &
+        GA\ar[dd]_(.3){G(gf)}_{}="c"^{}="b" \ar[dr]^{Gf}_(.7){}="a"\\
+    & & & GB\ar[dl]^{Gg}\\
+    FC\ar[rr]_{\eta_C}^(.2){}="d" & & GC
+    \ar@{=>}^{G_{g,f}} "a";"b"
+    \ar@{=>}_{\eta_{gf}} "c";"d"
+   }\quad\raisebox{-3pc}{$=$}\quad
+   \xymatrix@!0 @R+1pc @C+2pc{
+    FA \ar[dr]^{Ff}_(.7){}="a"^(.7){}="d"
+        \ar[rr]^{\eta_A}_(.8){}="c"
+        \ar[dd]_{F(gf)}^(.6){}="b"
+        & & GA\ar[dr]^{Gf}\\
+    & FB\ar[dl]^{Fg} \ar[rr]^{\eta_B}_(.7){}="e" & & GB\ar[dl]^{Gg}\\
+    FC \ar[rr]_{\eta_C}^{}="f" & & GC
+    \ar@{=>}^{F_{g,f}} "a";"b"
+    \ar@{=>}^{\eta_f} "c";"d"
+    \ar@{=>}_{\eta_g} "e";"f"
+   }\]
+    If $\eta,\tau:F\to G$ are lax natural transformations, a morphism between them
+   $\alpha:\eta\to \tau$ is a 2-morphism $\alpha_A:\eta_A\Rightarrow \tau_A$ for each
+   $A\in \C$ such that $\tau_f\cdot(\id_{Gf}\circ \alpha_A) = (\alpha_B \circ
+   \id_{Ff})\cdot \eta_f$ for each $f:A\to B$ in $\C$. This makes the set of lax natural
+   transformations from $F$ to $G$ into a category, which we'll denote $\Nat(F,G)$. A
+   natural transformation $\eta:F\to G$ is a \emph{natural equivalence} if there is a
+   $\tau:G\to F$ such that $\eta\circ \tau\cong \id_G$ in $\Nat(G,G)$ and $\tau\circ
+   \eta\cong \id_F$ in $\Nat(F,F)$.
+ \end{definition}
+ \begin{definition}
+   If $\C$ is a 2-category and $X\in\C$, $h_X:\C\to \cat$ is the functor given by
+   $Y\mapsto \hom_\C(Y,X)$. A lax 2-functor $F:\C\to \cat$ is \emph{representable} if is
+   naturally equivalent to a functor of the form $h_X$ for some $X\in \C$.
+ \end{definition}
+ \begin{theorem}[2-Yoneda Lemma]
+   If $F:\C^{op}\to \cat$ is a lax 2-functor and $X\in \C$, then the ``evaluation
+   functor'' $e_X:\Nat(h_X,F)\to F(X)$, given by $\eta\mapsto \eta_X(\id_X)\in F(X)$ and
+   $(\alpha:\eta\to \tau)\mapsto \alpha_{\id_X}$ (which is a morphism in $F(X)$), is an
+   equivalence of categories, natural in $F$ and $X$.
+ \end{theorem}
+ \begin{proof}
+   We need to construct an inverse functor $\eta:F(X)\to \Nat(h_X,F)$. Given $a\in F(X)$,
+   we define $\eta^a:h_X\to F$ by $\eta^a_Y:h_X(Y)\ni f\mapsto Ff(a)\in F(Y)$ for each
+   $Y\in \C$. If $g:Z\to Y$ is a morphism in $\C$ and $f:Y\to X$ is a morphism in $\C$,
+   then we define $\eta^a_g(f):Fg(Ff(a))=Fg(\eta^a_Y(f))\to \eta^a_Z(fg)=F(gf)(a)$ to be
+   $F_{g,f}(a)$. One can check that this is a lax natural transformation.
+
+   One can check that a morphism in $FX$ yields a morphism of lax natural transformations
+   and that $\eta$ is inverse to $e_X$ \anton{I think the easiest way to do this is to
+   check that $\eta$ is fully faithful and essentially surjective}.
+ \end{proof}
+
+ \begin{definition}[Limits]\label{ApdxD:limits_in_2-categories}
+   If $I$ and $\C$ are 2-categories and $F:I\to \C$ is a lax 2-functor, then we define
+   $\varprojlim F:\C^{op}\to \cat$ to be the functor $X\mapsto \Nat(k_X,F)$, where $k_X$ is
+   the functor which sends all objects, morphisms, and 2-morphisms of $I$ to $X$, $\id_X$,
+   and the identity 2-morphism of $\id_X$, respectively. Similarly, we define $\varinjlim
+   F:\C^{op}\to \cat$ by $X\mapsto \Nat(F,k_X)$.
+ \end{definition}
+ \begin{example}
+   Taking $I=(\cdot\rightrightarrows \cdot)$, a set, or $(\cdot\to\cdot\leftarrow\cdot)$
+   (with no non-identity 2-morphisms), we get equalizers, products, and fiber products,
+   respectively.
+ \end{example}
+ \anton{I think the proof of Lemma \ref{lec03L:limits_representable} carries over to give
+ the following result}
+ \begin{lemma}
+   Let $\C$ be a 2-category, then the following are equivalent.
+   \begin{enumerate}
+     \item Projective limits (resp.~finite projective limits) in $\C$ are representable.
+     \item Products (resp.~finite products) and equalizers are representable.
+     \item Products and fiber products (resp.~finite products and fiber products) are representable.
+   \end{enumerate}
+ \end{lemma}
+
+ \begin{lemma} \label{ApdxL:proj_limits_in_CAT}
+   Finite projective limits are representable in $\cat$.
+ \end{lemma}
+ \begin{proof}
+   Since $\cat$ has a terminal object (an object that represents the 2-functor which
+   sends every object to the trivial category and all (2-)morphisms to identities), it is
+   enough to show that fiber products are representable.
+
+   Let $F(\cdot\to \cdot\leftarrow \cdot)=\C_1\xrightarrow a \C_2 \xleftarrow b \C_3$ be
+   a diagram of categories. Define $\C_1\times_{\C_2}\C_3$ to have objects triples
+   $(x_1,x_3,\sigma)$ where $x_i\in \C_i$ and $\sigma:a(x_1)\xrightarrow\sim b(x_3)$. A
+   morphism $(x_1',x_3',\sigma')\to (x_1,x_3,\sigma)$ is a pair of morphisms $f_i:x_i'\to
+   x_i$ such that the diagram on the left commutes.
+   \[\xymatrix{
+    a(x_1')\ar[r]^{a(f_1)}\ar[d]_{\sigma'} & a(x_1) \ar[d]^\sigma\\
+    b(x_3')\ar[r]^{b(f_3)}& b(x_3)
+   }\qquad\qquad
+   \xymatrix{
+    \C_1\times_{\C_2}\C_3 \ar[r]^<>(.5){x_3}\ar[d]_{x_1} & \C_3\ar[d]^b_(.3){}="a"\\
+    \C_1 \ar[r]_a^(.3){}="b" & \C_2 \ar@{=>}_\sigma "a";"b"
+   }\]
+    $\C_1\times_{\C_2}\C_3$ comes with the obvious maps to $\C_1$ and $\C_3$, and a
+   2-isomorphism $\sigma$ (the union of all the $\sigma$'s) between $bx_3$ and $ax_1$.
+
+   Given a category $\D$, the category $\Nat(k_\D,F)$, which consists of triples
+   $(g_1:\D\to \C_1,g_3:\D\to \C_3, \eta:bg_3\xrightarrow\sim ag_1)$, is obviously
+   equivalent (in fact, isomorphic) to the category
+   $\hom_{\cat}(\D,\C_1\times_{\C_2}\C_3)$. Thus, $\C_1\times_{\C_2}\C_3$ represents the
+   fiber product.
+ \end{proof}

@@ -1,0 +1,142 @@
+\sektion{30}{Sheaf cohomology and Torsors}
+
+\anton{the following stuff needs to go somewhere}
+
+If $\C$ is a site and $F$ is a fibered category over $\C$, then a \emph{global section} of $F$ is, for each object $X\in \C$, an element $\alpha_X\in F(X)$ such that for every morphism $f:X\to Y$ in $\C$, we have $f^*\alpha_Y\cong\alpha_X$. Two such choices $\alpha$ and $\alpha'$ are considered the same if $\alpha_X$ and $\alpha'_X$ are isomorphic in the fiber $F(X)$ for every $X$. In the case where $\C=\sch/X$ (or any other site with a final object) for some scheme $X$ and $F$ is a sheaf on $X$, this really corresponds to a section of $F$ over $X$ since all the others can be obtained by pullback. The set of global sections of $F$ on $\C$ will be denoted $\Ga(\C,F)$ or $\Ga(\T,F)$, where $\T$ is the topos of $\C$. To see that this is independent of the site (for $F$ a sheaf), just note that $\Ga(\C,F)=\hom_\T(\ast,F)$, where $\ast$ is the punctual sheaf (terminal object in $\T$). \anton{how to do this if $F$ a fibered category? I guess define $\T$ as the 2-category of fibered categories over $\C$, then $\Ga(\T,F)$ is parametrized by isoclasses of $\HOM(\ast,F)$}
+
+Define cohomology. First prove that the category $\ab(\C)$ of sheaves of abelian groups on $\C$ has enough injectives \anton{The topos has to have ``enough points'' and not all Topoi do have enough points. See Lemmas \ref{lec18L:enough_points} and \ref{lec18L:enough_injectives_among_modules}. Deligne has some criteria for when a topos has enough points in \cite[4.VI.9]{SGA}. See \cite[4.IV.7]{SGA} for a topos with no points}. Given a sheaf of abelian groups $\mu$, take an injective resolution $0\to \mu\to I^\udot$. Then $H^i(\C,\mu)$ is defined to be the $i$-th homology of the complex $\Ga(\C,I^\udot)$.
+
+\anton{/stuff}
+
+\begin{definition} \label{lec30D:torsor}
+ Let $\C$ be a site, let $\mu$ be a sheaf of groups on $\C$, let $P\to X$ be a morphism from a sheaf $P$ on $\C$ to an object $X\in \C$, and assume $\mu$ acts on $P$ over $X$. We say $P$ is a \emph{$\mu$-torsor} over $X$ if there is a cover $Z\to X$ in $\C$ and a $\mu$-equivariant isomorphism of sheaves $Z\times_X P\cong Z\times \mu$. We call $X\times \mu$ \emph{the trivial $\mu$-torsor}. \anton{It's okay that we insisted torsors be algebraic spaces before by Corollary \ref{lec30C:G-torsor=>AlgSp}. We used descent for algebraic spaces in the proof of Prop \ref{lec26P:[Y/G]=stack}, but we could have just as easily used descent for torsors (which follows almost immediately from decent for sheaves) together with that corollary.}
+
+ A morphism of $\mu$-torsors $(P'\to X')\xrightarrow{(f,\bar f)} (P\to X)$ is a morphism $\bar f:X'\to X$ and a $\mu$-equivariant morphism $f:P'\to P$ such that the following square commutes.
+ \[\xymatrix{
+  P'\ar[r]^{f} \ar[d] & P\ar[d]\\
+  X'\ar[r]^{\bar f} & X
+ }\]
+ The category of $\mu$-torsors is denoted $\tors(\mu)$.
+\end{definition}
+\begin{remark}[An alternative definition]
+ Let $\mu$ is a sheaf of abelian groups on $X$ (i.e.~on $\C/X$), and let $P$ be a sheaf on $X$ with an action of $\mu$. Then $P$ is a $\mu$-torsor if and only if there is some cover $Z\to X$ so that $P|_Z\cong \mu|_Z$ as sheaves on $Z$.
+
+ To see that these definitions are equivalent, use Exercise 4.2: the category of sheaves on $\C$ with a morphism to $X$ is equivalent the category of sheaves on $\C/X$.
+
+ Incidently, this allows us to define a tosor on a site. If $\mu$ is a sheaf of abelian groups on $\C$ and $P$ is a sheaf on $\C$ with a $\mu$ action, $P$ is a $\mu$-torsor if for every object $X$, $P|_X$ is a $\mu|_X$-torsor. This is equivalent to an element of $\Ga(\C,\tors(\mu))$.
+\end{remark}
+
+Note that $\tors(\mu)$ is fibered over $\C$. A torsor $P\to X$ lies over the object $X$ and the pullback of a torsor is a torsor.
+\begin{lemma}
+ The category $\tors(\mu)$ is a stack over $\C$.
+\end{lemma}
+\begin{proof}
+ This follows almost immediately from descent for sheaves (Theorem \ref{lec07T:descent_of_sheaves}). If $P'\to Z$ is a $\mu$-torsor with descent data with respect to the cover $Z\to X$, then the theorem tells us that there is a unique sheaf $P$ over $X$ whose pullback is $P'$. The theorem also descends the action of $\mu$ on $P'$ to an action of $\mu$ on $P$ (note that the pullback of $\mu$ to $Z$ is just the restriction of $\mu$ to the site $\C/Z$). \anton{does this need to be clearer?}
+\end{proof}
+The following lemma shows that it is a stack in groupoids.
+\begin{lemma}\label{lec30L:mapTorsors=iso}
+ Any morphism of torsors over an object $X$ is an isomorphism.
+\end{lemma}
+\begin{proof}
+ First note that any morphism of trivial torsors is an isomorphism. If $f:X\times \mu\to X\times \mu$ is a morphism over $X$, then for a test object $T\in \C$, we have a $\mu(T)$-equivariant map $X(T)\times \mu(T)\to X(T)\times \mu(T)$ over $X(T)$, which is automatically a bijection. Thus, $f$ is an isomorphism.
+
+ Let $f:P\to P'$ be a morphism of $\mu$-torsors over $X$ (i.e.~$\bar f=\id_X$). Then there is some cover $Z\to X$ so that both $P$ and $P'$ are trivial over $Z$. Now we have that $f_Z:P_Z\to P'_Z$ is a morphism of trivial torsors, so it is an isomorphism. It follows that $f$ is an isomorphism (the descent data on $f_Z$ induces descent data for the inverse of $f_Z$, which descends to an inverse of $f$).
+\end{proof}
+\begin{corollary}\label{lec30C:section->trivial}
+ Let $f:P\to X$ be a $\mu$-torsor. A section $s:X\to P$ of $f$ induces an isomorphism of torsors $P\cong X\times \mu$ (a \emph{trivialization} of $P$).
+\end{corollary}
+\begin{proof}
+  We get a morphism $X\times \mu \to P$ over $X$ given by $(h,g)\mapsto s(h)\cdot g$. By the previous lemma, this is an isomorphism.
+\end{proof}
+\begin{proposition}[Another alternative definition of torsors] \label{lec30P:altdef_torsor}
+ Let $\mu$ be a sheaf of abelian groups on a site $\C$, and let $P\to X$ be a morphism from a sheaf $P$ to an object $X$. Then $P$ is a $\mu$-torsor if and only if
+ \begin{enumerate}
+  \item there exists a cover $g:Z\to X$ which factors through $P$, and
+  \item $\mu(T)$ acts simply transitively on the fibers of $P(T)\to X(T)$ whenever $P(T)$ is non-empty.
+ \end{enumerate}
+\end{proposition}
+\begin{proof}
+ $(\Rightarrow)$ Assume $P\to X$ is a $\mu$-torsor. Then condition (1) follows immediately. (2) Let $f:T\to X$ be an element of $X(T)$. A lifting $\tilde f:T\to P$ is equivalent to a section of the torsor $T\times_X P\to T$.
+ \[\xymatrix{
+  T\times_X P \ar[r]\ar[d] & P\ar[d]\\
+  T\ar[r]_f\ar@{-->}[ur]^{\tilde f} \ar@{-->}@/^/[u]& X
+ }\]
+ If $P(T)$ is non-empty, then we have some section $s:T\to T\times_X P$. By Corollary \ref{lec30C:section->trivial}, we get that $T\times_X P\to T$ is the trivial torsor, isomorphic to $T\times \mu\to T$. A section of $T\times \mu\to T$ is equivalent to an element of $\mu(T)$. Since $\mu(T)$ acts simply transitively on itself, we get that it acts simply transitively on the inverse image of $f$ in $P(T)$.
+
+ $(\Leftarrow)$ Let $\tilde g:Z\to P$ be the factorization of the cover $g:Z\to X$. There is a bijection between such factorizations and sections of $Z\times_X P\to Z$. Let $s$ be the section corresponding to $\tilde g$. Define $h(T):Z(T)\times \mu(T)\to Z(T)\times_{X(T)}P(T)$ by $(z,m)\mapsto \bigl(z,s(z)\cdot m\bigr)$. It is clear that this defines a $\mu$-equivariant morphism $h$ of sheaves over $Z$. Since $\mu(T)$ acts transitively on $P(T)$ over $X(T)$, $h(T)$ is always a bijection (if $P(T)$ is empty, then $Z(T)$ is empty, so $h(T)$ is still a bijection). Thus, $h$ is an isomorphism, so $P$ is a $\mu$-torsor.
+\end{proof}
+\begin{theorem} \label{lec30T:H^1(mu)<->mu-torsors}
+ If $\mu$ is a sheaf of abelian groups, there is an natural bijection between isomorphism classes of $\mu$-torsors over $X$ and $H^1(\C/X,\mu)$. \anton{more generally, I think this proof should show that $H^1(\C,\mu)\cong \Ga(\C,\tors(\mu))$}
+\end{theorem}
+\begin{proof}
+ $\bigl(H^1(\C/X,\mu)\to \{\mu\text{-torsors}\}\bigr)$ Let $\mu\to I$ be an injection into an injective sheaf of abelian groups and let $K$ be the cokernel sheaf. Then we have an exact sequence
+ \[
+  0\to \mu\to I\xrightarrow d K\to 0
+ \]
+ and an element of $H^1(\C/X,\mu)$ is represented by some element $\alpha\in (I/\mu)(X)$. Given such an element, define $P_\alpha:\C^{op}\to \set$ by $T\mapsto \bigl\{\bigl(x\in X(T),s\in I(T)\bigr)\bigm| ds=x^*\alpha \bigr\}$. This presheaf comes with a projection map to $X$. Thinking of it as a presheaf on $\C/X$, we see that it is a sheaf because it is the following fibered product.
+ \[\xymatrix{
+  P_\alpha\ar[r]\ar[d]\ar@{}[dr]|(.25)\pb & \ast\ar[d]^{\alpha}\\
+  I\ar[r]^<>(.5)d & I/\mu
+ }\]
+ There is an obvious action of $\mu$ on $P_\alpha$ over $X$ (given by addition in the second coordinate). Finally, we need to show that $P_\alpha$ is locally the trivial torsor. Since $d$ is surjective as a morphism of sheaves, there is some cover $f:Z\to X$ so that $f^*\alpha\in K(Z)$ is $di$ for some $i\in I(Z)$. The calculation on the right verifies that the diagram on the left is cartesian.
+ \[\xymatrix{
+   Z\times \mu \ar[d]\ar[r] & P\ar[d]\\
+   Z\ar[r] & X
+ }\qquad\qquad\begin{array}[t]{r@{\:}l}
+   (Z\times_X P)(T) &= \{(z,x,s)|ds=x^*\alpha,\ fz=x\}\\
+   &= \{(z,s)|ds=z^*f^*\alpha=z^*(di)\}\\
+   &= \{(z,s)|s-z^*i\in \mu(T)\}\\
+   &\cong (Z\times\mu)(T)
+  \end{array}\]
+ Note that for the third equality we're using the fact that the kernel presheaf is the same as the kernel sheaf.
+
+ $P$ is independent of the choice of representative in $H^1(\C/X,\mu)$. Assume $\alpha,\alpha'\in K(X)$ represent the same cohomology class, with $\gamma\in I(X)$ and $d\gamma=\alpha'-\alpha$. Then we get a morphism of torsors $P_\alpha\to P_{\alpha'}$, given by $(x,s)\mapsto (x,s+\gamma)$. By Lemma \ref{lec30L:mapTorsors=iso}, this is an isomorphism.
+
+ Moreover, $P_\alpha$ is independent of the choice of injective resolution of $\mu$. Let $J^\udot$ be another injective sheaf with an injection $\mu\to J$ with cokernel $R$, and let $\alpha\in K$ and $\beta\in R$ represent the same cohomology class. By the usual arguments with injective resolutions, there is is a morphism of complexes $I^\udot\to J^\udot$ inducing the identity on homology. Changing $\beta$ to another representative in the same cohomology class, we may assume this map of complexes sends $\alpha$ to $\beta$. This induces a morphism $P_\alpha\to P_\beta$, which must be an isomorphism by Lemma \ref{lec30L:mapTorsors=iso}.
+
+ $\bigl(\{\mu\text{-torsors}\}\to H^1(\C/X,\mu)\bigr)$ Given a $\mu$-torsor $P\to X$, let $f:Z\to X$ be a cover over which $P$ is trivial. That is, the sheaves $Z\times\mu$ and $Z\times_X P$ are isomorphic. That is, the sheaves $\mu|_Z$ and $P|_Z$ are isomorphic. Note that we have a canonical map $P\to f_*(P|_Z)$; explicitly, for an object $T$ over $X$, the map $P(T\to X)\to f_*(P|_Z)(T\to X)=P(T\times_X Z\to Z)$ is induced by the projection map $T\times_X Z\to T$. Since $T\times_X Z\to T$ is a cover, the sheaf axiom on $P$ tells us that this map is an injection. Similarly, we have an injection $\mu\to f_*(\mu|_Z)$. Let $I$ be an injective sheaf of abelian groups such that there is an injection $f_*(\mu|_Z)\hookrightarrow I$. Then we have the following diagram (the rows are not exact).
+ \[\xymatrix{
+  0\ar[r]& P\ \ar@{^(->}[r] & f_*(P|_Z) \ar@{->}[d]^\wr\\
+  0\ar[r] & \mu\ar@{^(->}[r] & f_*(\mu|_Z)\ \ar@{^(->}[r] & I\ar@{->>}[r] & I/\mu \ar[r] & 0
+ }\]
+ Since $Z\times_X P\to Z$ is a trivial $\mu$-torsor, it has a section. That is, $P(Z)$ has an element. Let $\beta\in (I/\mu)(Z)$ be the image of this point. The claim is that $\beta$ is the pullback of a point $\alpha\in (I/\mu)(X)$ along $f$. \anton{I want to try to prove this with the sheaf axiom on $I/\mu$ (really on $f_*\mu/\mu$), but I can't get my hands around the point $\beta$ to check that $p_2^*\beta=p_1^*\beta$.}
+
+ \anton{show that these two procedures are inverse}
+\end{proof}
+
+\anton{Before, we always took torsors to be algebraic spaces. The following lemma says that that was ok.}
+\begin{lemma}
+ If $X$ is a scheme and $G$ is a group scheme over $X$ (i.e.~a group object in $\sch/X$),\footnote{A group object in $\sch/X$ is not the same as a group scheme with a morphism to $X$. One of them has group structure morphism $G\times G\to G$, and the other has $G\times_X G\to G$. If you like, the \emph{fibers} of a group object $G\to X$ in $\sch/X$ are groups.} then any $G$-torsor $P\to X$ is an algebraic space. Furthermore, any stable property (in the same topology which makes $P$ a torsor) of the diagonal map $G\to G\times_X G$ is inherited by the diagonal $P\to P\times_X P$.
+\end{lemma}
+\begin{proof}
+ Let $P\to X$ be a $G$-torsor. Then $P$ is already a sheaf. To check representability of the diagonal $P\to P\times P$, it is enough to check representability of $P\to P\times_X P$ by Lemma \ref{ApdxL:representability_diagonal}, so let $T\to P\times_X P$ be a morphism from a scheme given by $p_1\times p_2$ and let $Z$ be the fiber product as shown in the diagram on the left.
+ \[\xymatrix{
+  Z\ar[r]\ar[d] & T\ar[d]^{p_1\times p_2}\\
+  P\ar[r]^<>(.5)\Delta & P\times_X P 
+ }\qquad\qquad\xymatrix{
+  Z\ar[r]\ar[d] & T\ar[d]^{p_1\times\id_T\times p_2\times \id_T}\\
+  P\times_X T\ar[r]^<>(.5)\Delta & (P\times_X T)\times_X (P\times_X T) 
+ }\]
+ Note that $Z$ is then also the fiber product shown in the diagram the right. Since $P\times_X T\to T$ has a section ($p_1\times \id_T$, for example), it is the trivial $G$-torsor $G\times_X T$, so it is a scheme. Thus, $Z$ is a fiber product of schemes over a scheme, so it is a scheme.
+
+ Let $f:U\to X$ be a cover of $X$ so that $P\times_X U\cong G\times_X U$. Then the projection $G\times_X U\cong P\times_X U \to P$ is an \'etale cover of $P$ by a scheme.
+
+ Finally, if $\Delta:G\to G\times_X G$ has some stable property, then we have the following diagram. It is easy to verify that the squares are cartesian and that the double headded arrows are covers.
+ \[\xymatrix@!0 @C=6pc @R=2pc{
+  & (P\times_X U)\times_U (P\times_X U) \ar@{->>}[dd]|\hole \ar[rr]^<>(.5)\sim & & (G\times_X U)\times_U (G\times_X U) \ar[dd]\\
+  P\times_X U\ar[ur] \ar@{->>}[dd]\ar[rr]^<>(.7)\sim & & G\times_X U\ar[dd] \ar[ur]\\
+  & P\times_X P & & G\times_X G\\
+  P\ar[ur] & & G\ar[ur]
+ }\]
+ Any stable property of the diagonal of $G$ pulls up, over, and down to a property of the diagonal of $P$.
+\end{proof}
+\begin{corollary} \label{lec30C:G-torsor=>AlgSp}
+ If $X$ is a scheme over $S$ and $G$ is a group scheme over $S$, then any $G$-torsor $P\to X$ is an algebraic space. Furthermore, any stable property of $G\to G\times_S G$ is inherited by $P\to P\times_X P$.
+\end{corollary}
+\begin{proof}
+ A $G$-torsor $P\to X$ is the same thing as a $(G\times_S X)$-torsor over $X$, where $G\times_S X$ is thought of a a group scheme over $X$. \anton{put insightful remark here to make this really clear} Any stable property of $\Delta_{G,S}:G\to G\times_S G$ is inherited by $\Delta_{G\times_S X,X}=\Delta_{G,S}\times \id_X:G\times_S X\to (G\times_S X)\times_X (G\times_S X)=(G\times_S G)\times_S X$.
+\end{proof}
+\begin{remark}
+ \anton{I don't know where we'll want this, but it will be somewhere} If $G\to S$ is locally of finite type, then $G\to G\times_S G$ is of finite type. ``This takes an argument, but we won't give it here''. Thus, if $G$ is, say, a smooth group scheme over $S$, then all $G$-torsors $P\to X$ are algebraic spaces with finite type diagonal.
+\end{remark}
+

@@ -1,0 +1,116 @@
+\sektion{10}{Properties of Sheaves and Morphisms}
+
+The goal of this lecture is to extend properties of objects (resp.~morephisms) of a site to sheaves (resp.~morphisms of sheaves) on that site. We will let $\C$ be a subcanonical site (i.e.~a site in which representable presheaves are sheaves).
+\begin{definition}
+ A class of objects $S\subseteq \C$ is \emph{stable} if for every covering $\{U_i\to U\}$, $U\in S$ if and only if $U_i\in S$ for each $i$. We call a property $\P$ of objects \emph{stable} if the class of objects satisfying $\P$ is stable.
+\end{definition}
+\begin{example}
+ Stable properties in $\aff$ with the Zariski topology: locally noetherian, reduced, normal, regular, \dots.
+\end{example}
+\begin{definition}
+ Let $F:\aff^{op}\to \set$ be a separated scheme, and let $\P$ be a stable property of affine schemes. Then we say that $F$ has property $\P$ if there exists a covering $\{h_{X_i}\to F\}$ (i.e.~$\coprod h_i\to F$ is surjective as a map of sheaves, with $h_{X_i}\to F$ affine open immersions) with $X_i$ affine such that each $X_i$ has property $\P$.
+\end{definition}
+\begin{remark}
+ Exercise: Equivalently, we could require that for \emph{every} affine covering $\{h_{X_i}\to F\}$,  the $X_i$ have $\P$.
+\end{remark}
+\begin{definition}
+ A subcategory $\D\subseteq \C$ is \emph{closed}\footnote{\anton{AFAIK, this has nothing to do with the other kind of closed categories (the ones with internal hom functors).}} if
+ \begin{enumerate}
+  \item $\D$ contains all isomorphisms, and
+  \item for all cartesian diagrams as below, $f\in \D$ implies that $f'\in \D$.
+  \[\xymatrix{
+   U \ar[d]_{f'} \ar[r] \ar@{}[dr]|(.25){\pb} & V\ar[d]^f\\
+   X\ar[r] & Y
+  }\]
+ \end{enumerate}
+\end{definition}
+\begin{definition}
+ A subcategory $\D\subseteq \C$ is \emph{local on the base} if for all morphisms $f:X\to Y$ in $\C$ and all coverings $\{Y_i\to Y\}\in Cov(Y)$, $f\in \D$ if and only if all the maps $f_i:X\times_Y Y_i\to Y_i$ are in $\D$. 
+\end{definition}
+\begin{definition}
+ A subcategory $\D\subseteq \C$ is \emph{stable} if it is closed and local on the base.
+\end{definition}
+\begin{definition}
+ A subcategory $\D\subseteq \C$ is \emph{local on domain} if for all $f:X\to Y$ in $\C$ and all $\{X_i\xrightarrow{\phi_i} X\}\in Cov(X)$, $f\in \D$ if and only if $f\circ \phi_i\in \D$ for all $i$.
+\end{definition}
+\begin{definition}
+ If $\P$ is a property of morphisms in $\C$ is satisfied by isomorphisms and closed under composition, then we say that $\P$ is \emph{closed} (resp.~\emph{local on the base}, \emph{stable}, \emph{local on domain}) if the category $\C_\P\subseteq \C$ (all objects and morphisms are morphisms with $\P$) is closed (resp.~local on the base, stable, local on domain).
+\end{definition}
+\begin{example}
+ Let $\C=\sch$ with the Zariski topology.
+
+ Some stable properties: proper, separated, surjective, quasi-compact, \dots.
+
+ Some stable and local on domain properties: locally of finite type, locally of finite presentation, flat, \'etale, universally open, locally quasi-finite, smooth, \dots.
+\end{example}
+\begin{definition}
+ A relatively representable morphism of sheaves $f\colon F\to G$ is said to have a closed property of morphisms $\P$ if for every $X\in \C$ and every morphism $X\to G$, the pullback $F\times_G X \to X$ has $\P$.
+\end{definition}
+
+\anton{say something about Knutson's S3 properties (being a cover is local on domain) and talk about properties of non-representable morphisms}
+
+\begin{definition}
+ Let $\P$ be a stable property of maps in $\aff$, and let $f:F\to G$ be a relatively representable morphism of sheaves. We say $f$ \emph{has property $\P$} if for every affine $X\in \aff$ and every map $h_X\to G$, the corresponding map $h_X\times_G F\to h_X$ has property $\P$.
+\end{definition}
+\begin{remark}
+ Note that the affine notion of properness is not the right one ... for global notions you have to do things differently.
+\end{remark}
+\begin{definition}
+ Let $f:F\to G$ be a morphism of separated schemes, and $\P$ a stable and local on domain property of maps in $\aff$. We say $f$ \emph{has property $\P$} if for every pair of affine coverings $\{G_i\to G\}$ and $\{F_{ij}\to F\times_G G_i\}$, the compositions $F_{ij}\to F\times_G G_i\to G_i$ have property $\P$. (we have to do this because we didn't assume $f$ was relatively representable by affines) \anton{why do we need to assume $F$ and $G$ are separated schemes? That is, why do we need $\Delta_F$ and $\Delta_G$ to be affine closed immersions?\dots maybe we need $F\times_G G_i$ to be schemes so that they have open affine covers, so we need $F$ and $G$ to be schemes.}
+ \[\xymatrix{
+  F_{ij}\ar[r]_<>(.5)\forall \ar@/^2ex/[rr]^\P
+  & F\times_G G_i\ar[r] \ar[d] \ar@{}[dr]|(.25){\pb}
+  & G_i\ar[d]^\forall\\
+  & F \ar[r] & G
+ }\]
+\end{definition}
+
+As we can see, in order to define what it means for a sheaf or morphism of sheaves to have a property, representability of certian morphisms is important. In particular, we'll see that representability of the diagonal morphism of a sheaf is important. This is because of the following lemma.
+\begin{lemma}\label{lec12L:prod_schemes_over_alg_space}
+ Assume $\C$ has products and fiber products. A sheaf $F$ on $\C$ has representable diagonal if and only if all morphisms $X\to F$ from objects of $\C$ are representable (i.e.~$X_1\times_F X_2$ is an object of $\C$ for all objects $X_i$ of $\C$)
+\end{lemma}
+\begin{proof}
+ First assume that $\Delta_F\colon F\to F\times F$ is representable, and let $f_i\colon X_i\to F$ be morphisms, $i=1,2$. Verify that the diagram on the left is cartesian. Since $X_1\times X_2$ is an object in $\C$ and $\Delta_F$ is representable, $X_1\times_F X_2$ is an object in $\C$.
+  \[\xymatrix{
+  X_1\times_F X_2 \ar[r] \ar[d] \ar@{}[dr]|(.25)\pb & X_1\times X_2 \ar[d]^{f_1\times f_2}\\
+  F\ar[r]^-{\Delta_F} &F\times F
+ }\qquad\qquad
+ \raisebox{2pc}{$\xymatrix{
+  \bullet \ar@{}[dr]|(.25)\pb \ar[r] \ar[d]& T \ar[d]^{\Delta_T}\\
+  T\times_F T \ar[r] \ar[d] \ar@{}[dr]|(.25)\pb& T\times T \ar[d]^{\substack{(p_1\circ f)\times(p_2\circ f)\\ = g_1\times g_2}}\\
+  F\ar[r]^-{\Delta_F} & F\times F
+ }$}\]
+ Conversely, suppose $X_1\times_F X_2$ is in $\C$ for any morphisms $f_i\colon X_i\to F$ from objects in $\C$, and let $f\colon T\to F\times F$ be a morphism from an object in $\C$. Composing with the two projections, this $f$ induces two morphisms $g_i=p_i\circ f\colon T\to F$. Note that $f=(g_1\times g_2)\circ \Delta_T$. From the diagram on the right, we see that the $T\times_{f,F\times F,\Delta} F\cong \bullet \cong T\times_{T\times T}(T\times_{g_1,F,g_2} T)$, which is an object of $\C$ by the hypothesis that $T\times_{g_1,F,g_2} T$ is an object in $\C$ and because $\C$ has products and fiber products.
+\end{proof}
+
+\begin{definition}
+ A stable property $\P$ of morphisms is an \emph{effective descent class} if the following property holds. For any morphism from a sheaf to an object $F\to X$ and any covering $\{X_i\to X\}$, if $F\times_X X_i$ are objects of $\C$ and $F\times_X X_i\to X_i$ have $\P$, then $F$ is an object of $\C$ (and therefore $F\to X$ has $\P$).
+\end{definition}
+
+\anton{by Example \ref{lec07E:descent_closed_subschemes}, closed immersions are an effective descent class in the fppf topology. Similarly, affine morphisms are an effective descent class. Therefore, so are open immersions, immersions, quasi-affine maps}
+
+\anton{define what it means for a construction to be local on the base. Any construction local on the base which is in an effective descent class is effective. In particular, the following are effective constructions (in the fppf topology, I think): affine morphisms, reduced subscheme structure on a set, scheme-theoretic closed image, open complement of a closed subscheme, reduced complement of an open subscheme, reduction of a scheme}
+
+\anton{Add (sub?)section on (pre-)relations. If $R\to U\times U$ belongs to any effective descent class, then the quotient sheaf $F$ has representable diagonal. If $R\rightrightarrows U$ are covers, then $U\to F$ is a cover.}
+
+\begin{lemma}[{\cite[IV.8.14.2]{EGA}}]
+ A morphism of schemes $f:X\to \spec A$ is locally of finite presentation if and only if for every filtering inductive system of $A$-algebras $\{B_i\}$, the canonical map $\varinjlim h_X(\spec B_i)\to h_X\bigl(\spec (\varinjlim B_i)\bigr)$ is bijective.
+\end{lemma}
+In the case where $X=\spec R$, finite presentation means that we have a surjection $\pi:A[x_1,\dots, x_r]\twoheadrightarrow R$, and $\ker \pi$ is finitely generated by $f_1,\dots, f_s$. We can choose some $B_i$ which contains the $x_i$. The $f_i$ may not be zero, but they are in the limit, so we can find some $B_j$ and a map $R\to B_j$ so that $R\to B$ factors through $B_j$.
+\begin{example}
+ Let $B$ be any $A$-algebra, and write $B=\bigcup B_i$, where $B_i$ are finitely generated over $A$. Then $B=\varinjlim B_i$. The lemma says that $\varinjlim h_X(\spec B_i)\xrightarrow\sim h_X(\spec B)$.
+ \[\raisebox{2pc}{$\xymatrix@C-1pc @R-1pc{
+  \spec B\ar[dr] \ar[rr] & & X\\
+  & \spec B_{i} \ar@{-->}[ur]_{\exists}
+ }$}\qedhere\]
+\end{example}
+\begin{definition}
+ Let $f:X\to Y$ be a morphism of schemes. We call $f$ \emph{formally smooth} (resp.~\emph{formally unramified}, \emph{formally \'etale}) if for every affine $Y$-scheme $Y'\to Y$ and every closed immersion $Y'_0\hookrightarrow Y'$ defined by a nilpotent ideal, the map $h_X(Y')\to h_X(Y'_0)$ is surjective (resp.~injective, bijective). If $f$ is also locally of finite presentation, then it is \emph{smooth} (resp.~\emph{unramified}, \emph{\'etale}).
+\end{definition}
+\begin{proposition}
+ A map of rings $A\to B$ is \'etale if and only if $B$ is isomorphic to $A[x_1,\dots, x_n]/(f_1,\dots, f_m)$ with $n\le m$ such that the unit ideal in $B$ is generated by the $n\times n$ minors of the matrix $(\partial f_i/\partial x_j)$.
+\end{proposition}
+\anton{This proposition says that the definition of \'etale from \cite{Hartshorne} agrees with this one. You prove it by looking at some infinitesimal neighborhood of the diagonal.}
+\begin{remark}
+ The class of \'etale maps of schemes is the smallest class of maps in $\sch$ which (i) includes all \'etale maps of affine schemes, and (ii) is stable and local on domain in the Zariski topology, and (iii) if $\{X_i\xrightarrow{f_i}Y\}$ is a collection of morphisms, then the map $X=\coprod_i X_i\to Y$ is \'etale if and only if each $f_i$ is \'etale. \anton{follows from local on domain}
+\end{remark}

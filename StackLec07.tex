@@ -1,0 +1,497 @@
+\sektion{7}{Descent}
+
+\subsektion{Descent in general}
+For an object $Y$ (in some category), let $\C(Y)$ be some category associated to $Y$. For a morphism $f:X\to Y$, assume we have a pullback functor $f^*:\C(Y)\to \C(X)$. The question is, \emph{``which objects in $\C(X)$ come from objects in $\C(Y)$ via $f^*$?''}
+
+First we do a sanity check: if $E\in \C(X)$ is to be of the form $f^*D$ for some $D\in \C(Y)$, then pulling $E$ back along morphisms coequalized by $f$ had better produce isomorphic results. In particular, $f$ coequalizes the two projections $p_1,p_2:X\times_Y X\to X$, so there had better be some isomorphism $\sigma: p_2^*E\xrightarrow\sim p_1^* E$. Moreover, this $\sigma$ would have to satisfy the cocycle condition $p_{13}^* \sigma = p_{12}^*\sigma \circ p_{23}^* \sigma$. The general form of descent theorems is this: if $f$ is a nice morphism, and $E$ passes the above sanity check, then it is $f^*D$ for some $D\in \C(Y)$. Here is a more precise formulation.
+
+\begin{definition} \label{lec07D:descent_category}
+ Let $\D$ be a category in which fiber products are representable (like $\sch$), and let $\C:\D^{op}\to \cat$ be a lax 2-functor.\footnote{That is, if $f$ and $g$ are composable morphisms in $\D$, then we do not require the isomorphism $(fg)^*\cong g^*f^*$ to be an equality, but we \emph{do} require that the isomorphism is natural in $f$ and $g$. Moreover, we require that the two isomorphisms $f^*g^*h^*\cong (gf)^*h^*\cong (hgf)^*$ and $f^*g^*h^*\cong f^*(hg)^*\cong (hgf)^*$ agree.} For a morphism $g$ in $\D$, denote $\C g$ by $g^*$. Let $f:X\to Y$ be a morphism in $\D$. We define the category $\C(X\xrightarrow f Y)$ as follows. The objects are pairs $(E,\sigma)$, where $E$ is in $\C(X)$ and $\sigma:p_2^* E\xrightarrow\sim p_1^* E$ is an isomorphism, where $p_1$ and $p_2$ are the projections $X\times_Y X\to X$. Furthermore, if $p_{12}$, $p_{13}$, and $p_{23}$ are the projections $X\times_Y X\times_Y X\to X\times_Y X$, we require the diagram on the left to commute (the ``equalities'' are really canonical isomorphisms).
+ \[\xymatrix @R-1pc @C-1pc {
+  & p_{13}^*p_2^*E \ar[rr]^{p_{13}^*\sigma} \ar@{=}[dl] & & p_{13}^*p_1^*E \ar@{=}[dr] & \\
+  p_{23}^*p_2^*E \ar[dr]_{p_{23}^*\sigma} & & & & p_{12}^*p_1^*E \\
+  & p_{23}^*p_1^*E \ar@{=}[rr] & & p_{12}^*p_2^*E \ar[ur]_{p_{12}^*\sigma}\\
+ }\qquad\qquad
+ \raisebox{-1pc}{$\xymatrix{
+  p_2^* E' \ar[r]^{p_2^* \varepsilon} \ar[d]_{\sigma'} & p_2^* E \ar[d]^{\sigma}\\
+  p_1^*E' \ar[r]^{p_1^*\varepsilon} & p_1^* E
+ }$}\]
+ A morphism $(E,\sigma)\xrightarrow\e (E',\sigma')$ is a morphism $\e:E\to E'$ in $\C(X)$ such that the diagram on the right commutes. We call $\sigma$ \emph{descent data} for the object $E$.
+\end{definition}
+ \begin{remark}
+   If $\{X_i\to Y\}$ is a set of morphisms, we can define $\C(\{X_i\to Y\})$ similarly,
+   but in most of the sites we care about and for most applications, we can always
+   replace  $\{X_i\to Y\}$ by the single morphism $X=\coprod X_i\to Y$.
+ \end{remark}
+ Note that if $F\in \C(Y)$, then $(f^*F,\textrm{can})\in \C(X\to Y)$, where
+ $\textrm{can}$ is the canonical isomorphism $p_2^*f^*F\cong (f\circ p_2)^*F=(f\circ
+ p_1)^*F\cong p_1^*f^*F$. That is, the functor $f^*:\C(Y)\to \C(X)$ factors through
+ $\C(X\to Y)$. In general, descent theorems say that if $f$ is sufficiently nice, then
+ $f^*:\C(Y)\to \C(X\to Y)$ is an equivalence of categories. Here are some examples of
+ descent theorems.
+ \begin{itemize}
+   \item (Theorem \ref{lec07T:descent_of_sheaves}) If $f:X\to Y$ is a covering in
+   some site $\C$ (which has projective limits), then a sheaf on $\C/X$ with descent data
+   is equivalent to a sheaf on $\C/Y$.
+
+   \item (Proposition \ref{lec07P:morphisms_fppf_glue}) ``Sheaf $\hom$ of fppf sheaves is
+   an fppf sheaf.''\anton{this works in any site} In particular morphisms between schemes over $S$ can be defined fppf locally on $S$.
+
+%    If $X\to Y$ is a quasi-compact
+%   fppf covering of schemes, and if $Z$ and $W$ are $Y$-schemes, then defining a
+%   $Y$-morphism $Z\to W$ is equivalent to defining an $X$-morphism $Z\times_Y X\to
+%   W\times_Y X$ so that the two induced morphism $Z\times_Y X\times_Y X\rightrightarrows
+%   W\times_Y X\times_Y X$ are equal.\anton{notation is bad here}
+
+   \item (Theorem \ref{lec07T:descent_qcoh_sheaves}) If $X\to Y$ is a quasi-compact
+   fppf covering of schemes, then a quasi-coherent sheaf on $X$ together with descent
+   data is equivalent to a quasi-coherent sheaf on $Y$.
+
+   \item (Theorem \ref{lec08P:descent_Mg}) If $g\ge 2$ and $X\to Y$ is a quasi-compact
+   fppf covering of schemes, then a genus $g$ curve over $X$ with descent data is
+   equivalent to a genus $g$ curve over $Y$.
+ \end{itemize}
+
+ \subsektion{Descent for morphisms of sheaves/schemes}
+ The following proposition shows that
+ morphism of schemes over $S$ can be defined locally \emph{over $S$} in the fppf
+ topology. More generally, morphisms of sheaves on $S$ can be defined locally in the fppf
+ topology.
+ \begin{proposition}[``Sheaf $\hom$ is already a sheaf'']
+ \label{lec07P:morphisms_fppf_glue}
+   Let $F$ and $G$ be fppf sheaves on a scheme $S$, let $S'\to S$ be an fppf cover, and
+   let $S''=S'\times_S S'$. Note that we have two $S$-morphism $p_1,p_2:S''\to S'$. If
+   $f':F|_{S'}\to G|_{S'}$ is a morphism such that $p_1^*f'=p_2^*f':F|_{S''}\to G|_{S''}$,
+   then $f'$ is induced by a unique morphism of fppf sheaves $f:F\to G$.
+ \end{proposition}
+ \anton{this works in any site}
+ \begin{proof}
+   For any $S$-scheme $U$, let $U'=U\times_S S'$ and $U''=U\times_S S''$. Then we get a
+   diagram
+   \[\xymatrix{
+    F(U)\ar[r] \ar@{-->}[d]^{\exists ! f} & F(U')\ar@<.5ex>[r]\ar@<-.5ex>[r] \ar[d]^{f'} & F(U'') \ar[d]^{f''=p_1^*f=p_2^*f}\\
+    G(U)\ar[r] & G(U')\ar@<.5ex>[r]\ar@<-.5ex>[r] & G(U'')
+   }\qquad
+   \xymatrix{
+    *++[o][F-]{x} \ar@{|-->}[d] \ar@{|->}[r] & y \ar@/^/@{|->}[r]\ar@/_/@{|->}[r] \ar@{|->}[d] & z \ar@{|->}[d] \\
+    a \ar@{|->}[r] & b \ar@/^/@{|.>}[r]\ar@/_/@{|.>}[r] & c
+   }\]
+    Since $S'\to S$ is an fppf cover, so is $U'\to U$ (one of the axioms of a site). Note
+   also that
+   \[
+   U'\times_U U' \cong U'\times_U (U\times_S S')\cong U'\times_U S'
+   \cong U'\times_{S'}(S'\times_S S')= U'\times_S S'' = U''.
+   \]
+   Since $F$ and $G$ are fppf sheaves, the two horizontal sequences are exact. Now a
+   diagram chase produces $f$. (See the footnote in lecture 6 for how to read the chase.)
+ \end{proof}
+ \begin{corollary} \label{lec07C:morphisms_fppf_glue}
+   Let $X$ and $Y$ be schemes over $S$, let $S'\to S$ be an fppf cover, let
+   $S''=S'\times_S S'$, let $X'=X\times_S S'$, $X''=X\times_S S''$, and define $Y'$ and
+   $Y''$ similarly. Note that we have two $S$-morphism $p_1,p_2:S''\to S'$. If $f':X'\to
+   Y'$ is a morphism such that $p_1^*f'=p_2^*f':X''\to Y''$, then $f'$ is induced
+   by a unique $S$-morphism $f:X\to Y$.
+ \end{corollary}
+ \begin{proof}
+   By the Yoneda lemma, it is enough to find a morphism $f:h_X\to h_Y$ inducing $f'$.
+   Note that the universal properties of $X'$, $X''$, $Y'$, and $Y''$, we have that
+   $h_X|_{S'}=h_{X'}|_{S'}$, $h_{X}|_{S''}=h_{X''}|_{S''}$, etc. Now the proposition
+   produces $f$.
+%   . For
+%   any $S$-scheme $U$, let $U'=U\times_S S'$ and $U''=U\times_S S''$. Then we get a
+%   diagram
+%   \[\xymatrix{
+%    h_X(U)\ar[r] \ar@{-->}[d]^{\exists ! f} & h_X(U')\ar@<.5ex>[r]\ar@<-.5ex>[r] \ar[d]^{f'} & h_X(U'') \ar[d]^{f''=p_1^*f=p_2^*f}\\
+%    h_Y(U)\ar[r] & h_Y(U')\ar@<.5ex>[r]\ar@<-.5ex>[r] & h_Y(U'')
+%   }\qquad
+%   \xymatrix{
+%    *++[o][F-]{x} \ar@{|-->}[d] \ar@{|->}[r] & y \ar@/^/@{|->}[r]\ar@/_/@{|->}[r] \ar@{|->}[d] & z \ar@{|->}[d] \\
+%    a \ar@{|->}[r] & b \ar@/^/@{|.>}[r]\ar@/_/@{|.>}[r] & c
+%   }\]
+%    By the universal properties of $X'$, $Y'$,  we have that $h_X(U')=h_{X'}(U')$,
+%   $h_Y(U')=h_{Y'}(U')$, $h_X(U'')=h_{X''}(U'')$, and $h_Y(U'')=h_{Y''}(U'')$. Thus, the
+%   two vertical maps $f'$ and $f''$ are defined. Since $S'\to S$ is an fppf cover, so is
+%   $U'\to U$ (one of the axioms of a site). Note also that
+%   \[
+%   U'\times_U U' \cong U'\times_U (U\times_S S')\cong U'\times_U S'
+%   \cong U'\times_{S'}(S'\times_S S')= U'\times_S S'' = U''.
+%   \]
+%   Since $h_X$ and $h_Y$ are fppf sheaves, the two horizontal sequences are exact. Now a
+%   diagram chase produces $f$. (See the footnote in lecture 6 for how to read the chase.)
+ \end{proof}
+
+ \subsektion{Descent for sheaves in a site}
+ The main point of this section is roughly that ``a sheaf on a site can be defined
+ locally in the topology of that site''.
+
+ Let $\C$ be a site in which finite projective limits are representable. For any object
+ $X$ in $\C$, we can form the site $\C/X$ (see Example \ref{lec02Eg:comma_sites}). Let
+ $\sh(X)$ be the category of sheaves on $\C/X$. If $f:X\to Y$ is morphism in $\C$, then
+ we get an induced morphism of sites $\C/Y\to \C/X$, given by $(Z\to Y)\mapsto (Z\times_Y
+ X\to X)$. It is immediate to check that this induced functor is continuous. By Theorem
+ \ref{lec05T:CommWithFiniteProjLimits}, it induces a morphism of topoi $f:\sh(X)\to
+ \sh(Y)$. For a sheaf $E$ on $\C/X$, $f_*E(Z\to Y)=E(Z\times_Y X\to X)$. For a sheaf $F$
+ on $\C/Y$, $f^*F(Z\to X)=\lim_W G(W\to Y)$, where the limit is taken over objects $W\to
+ Y$ such that the following diagram commutes.
+ \[\xymatrix{
+    Z\ar[r]\ar[d] & W\ar[d]\\
+    X\ar[r] & Y
+ }\]
+  But this system has an initial object,\footnote{Yeah, I know, it looks like you want a
+ \emph{terminal} object, but you apply $G$ and then take the limit, and $G$ is
+ contravariant, so what you really want to find is an initial object \emph{before} you
+ apply $G$ (or a terminal object after you apply $G$.} namely $Z\to Y$. Thus, $f^*F(Z\to
+ X) = F(Z\to Y)$, so the functor $f^*$ is just given by restriction of the sheaf $F$.
+ \begin{theorem}\label{lec07T:descent_of_sheaves}
+   Let $f:X\to Y$ be a covering of $Y$. Then the functor $f^*:\sh(Y)\to \sh(X\to Y)$, is
+   an equivalence of categories.
+ \end{theorem}
+ \begin{proof}
+   To show that $f^*$ is an equivalence, it is enough to show that it is fully faithful
+   (induces isomorphisms on $\hom$ sets) and is essentially surjective (every isomorphism class
+   is in the image).
+
+   (Full faithfulness) It is enough to construct a left inverse. Given $(E,\sigma)\in
+   \sh(X\to Y)$, define
+   \[
+   h(E,\sigma) =
+    Eq\Bigl(
+      \raisebox{2ex}{$\xymatrix @!0 @C=7pc @R=2ex  {
+        & f_*p_{1*}p_1^*E \ar@{=}[dr] \\
+        f_*E \ar[ru] \ar[rd] & & g_* p_1^* E \\
+        & f_*p_{2*}p_2^*E \ar[ru]_<>(.6){g_*(\sigma)}
+    }$}\Bigr).
+   \]
+   Next we show that $h$ is right adjoint to $f^*$. Since $f^*$ is left adjoint to $f_*$,
+   a morphism $f^*F\to E$ corresponds to a morphism $F\to f_*E$. The condition that $F\to
+   f_*E$ equalizes the two maps above turns out to be equivalent the the condition that
+   the morphism $f^*F\to E$ is compatible with the descent data. \anton{check this some
+   time}
+
+   We get a unit of adjunction, the natural transformation $\id\to hf^*$. If we can show
+   that this natural transformation is an isomorphism on each object, then it follows
+   that $hf^*$ is isomorphic to the identity functor. First note that for $F\in \sh(Y)$
+   and $Z\to Y$, we get that $hf^*F(Z\to Y) = f^*F(Z\times_Y X\to X)=F(Z\times_Y X\to
+   Y)$, and the morphism from $F(Z\to Y)$ is induced by the $Y$-morphism $Z\times_Y X\to
+   Z$ \anton{good way to see this?}. Thus, we wish to check that the obvious
+   morphism $F(Z\to Y)\to F(Z\times_Y X\to Y)$ is the equalizer in question, i.e.~that
+   the following sequence is exact.
+   \begin{equation}\label{lec07Eq:sheaf_axiom}
+   \xymatrix@R-1.3pc{
+    F(Z) \ar[r]\ar@{=}[d] & f_*f^*F(Z) \ar@<.5ex>[r]\ar@<-.5ex>[r]\ar@{=}[d] & g_*g^*F(Z) \ar@{=}[d]\\
+    F(Z) \ar[r] & F(Z\times_Y X)\ar@<.5ex>[r]\ar@<-.5ex>[r] & F(Z\times_Y X\times_Y X)
+   }\end{equation}
+    But $Z\times_Y X\to Z$ is a covering (since $X\to Y$ is a covering), and $(Z\times_Y
+   X)\times_Z (Z\times_Y X)=Z\times_Y X\times_Y X$, so the sequence is exact by
+   the sheaf axiom on $F$.
+
+   (Essential surjectivity) Given $(E,\sigma)$, let $F = h(E,\sigma)$. We wish to show
+   that $(E,\sigma)\cong (f^*F,\textrm{can})$. Since both of these
+   are sheaves on $X$, it is enough to check that these sheaves are isomorphic when
+   restricted to some cover $W\to X$.\footnote{For any $Z\to X$ and any sheaf $G\in
+   \sh(X)$, the sheaf axiom forces $G(Z\to X)$ to be the equalizer of $G(Z\times_X W\to
+   X)\rightrightarrows G(Z\times_X W\times_X W\to X)$, but these two morphisms factor
+   through $W\to X$, so their values are known once we know $G$ restricted to $W$.
+
+   If you feel like we're assuming the result of the theorem we're trying to prove, think
+   about it this way. This statement is saying ``it is enough to verify that a morphism
+   of sheaves is an isomorphism by looking on a basis for the topology''. The theorem
+   is saying ``given an open cover, with sheaves defined on each open set so that the
+   restrictions to the intersections agree compatibly, there is a unique sheaf on the
+   whole space which restricts to the given sheaves on each of the open sets''.} Using
+   this, we will now reduce to the case where $f:X\to Y$ has a section.
+
+   Base extending by $f:X\to Y$, we change the names of things in the following way.
+   \def\n{\text{'}}
+   \[
+    \xymatrix{
+    & `X\n\times_{`Y\n} `X\n \ar@<.5ex>[d]^{`p_2\n}\ar@<-.5ex>[d]_{`p_1\n} \ar@{}[r]|{=}
+    &(X\times_Y X)\times_Y X \ar@<.5ex>[d]^{p_{23}}
+            \ar@<-.5ex>[d]_{p_{13}} \ar[r]^<>(.5){p_{12}}
+    & X\times_Y X \ar@<.5ex>[d]^{p_2}\ar@<-.5ex>[d]_{p_1}\\
+    `E\n,\quad `f\n^* `F\n \hspace{-2em}
+    & `X\n \ar[d]^{`f\n}\ar@{}[r]|{=}
+    & X\times_Y X \ar[r]^<>(.5){p_1} \ar[d]^{p_2} & X \ar[d]^f & \hspace{-2em} E,\quad f^*F\\
+    `F\n = `h\n(`E\n,`\sigma\n) \hspace{-2em}
+    & `Y\n \ar@/^2ex/[u]^{`s\n}\ar@{}[r]|{=}
+    & X\ar[r]^f \ar@/^2ex/[u]^{\Delta} & Y & \hspace{-2em} F=h(E,\sigma)
+    }
+   \]
+    $E_X$ and $\sigma$ pull back along $p_1$ to give a sheaf on $X\times_Y X$ with
+   descent data with respect to $p_2$, and $F$ pulls back along $f$ to give $`F\n$. We
+   have that $p_1^* (f^* F)\cong p_2^*f^* F = `f\n^*`F\n$. Moreover, commutativity of the
+   following diagram (in which the pairs of vertical arrows are adjoint functors) tells
+   us that $`h\n(`E\n,`\sigma\n)=`F\n$. This concludes the reduction to the case where
+   $f$ has a section.
+   \[\qquad\qquad\xymatrix{
+    \llap{$\sh(X\times_Y X \xrightarrow{p_2} X)=$}\sh(`X\n\xrightarrow{`f\n}`Y\n) \ar@<.5ex>[d]^{`h\n}
+    & \sh(X\to Y)\ar[l]_<>(.5){p_1^*} \ar@<.5ex>[d]^{h} \\
+    \llap{$\sh(X)=$}\sh(`Y\n) \ar@<.5ex>[u]^{p_2^*=`f\n^*} & \sh(Y) \ar[l]_{f^*}\ar@<.5ex>[u]^{f^*}
+   }\]
+    In what follows, we suppress the descent data in the notation. We have an isomorphism
+   \begin{gather*}
+     E=(sf\times 1)^* p_2^* E \xrightarrow[(sf\times 1)^*\sigma]{\sim}
+     (sf\times 1)^*p_1^*E =f^*s^*E.\\
+   \xymatrix{
+    X \ar[r]^<>(.5){sf\times 1}
+    & X\times_Y X \ar@<.5ex>[r]^<>(.5){p_2} \ar@<-.5ex>[r]_<>(.5){p_1} & X
+   }
+   \end{gather*}
+   By the first part of this proof, $h$ is a left inverse to $f^*$, so we have that $F =
+   hE \cong hf^*s^*E\cong s^*E$. Applying $f^*$, we get the isomorphism $f^*F\cong f^*s^*
+   E\cong E$, as desired.
+ \end{proof}
+
+ \subsektion{Descent for sheaves of modules}
+
+ \anton{Notation. In class, we use $f^*$ for what I would usually call $f^{-1}$, and I
+ don't want to use notation different from what we use in class. Unfortunately, for
+ sheaves of modules, there is a different $f^*$, and sometimes the distinction is
+ important. Since I can't come up with a good solution, I'm going to use $f^*$ to mean
+ $f^{-1}$ (for all sheaves) and $f^\star$ to mean pullback for sheaves of modules. Let
+ me know if you have a better solution.}
+
+ Let $X$ and $Y$ be objects in $\C$, and let $\O_X\in \sh(X)$ and $\O_Y\in \sh(Y)$ be
+ sheaves of rings. For a morphism $f:X\to Y$, assume we also have a morphism of sheaves
+ of rings $f^*\O_Y\to \O_X$. We get that $f$ induces a continuous morphism of sites
+ $\C/Y\to \C/X$, given by $(Y'\to Y)\mapsto (X\times_Y Y'\to X)$. Since finite projective
+ limits are representable in $\C/Y$, Theorem \ref{lec05T:CommWithFiniteProjLimits} tells
+ us that this induces a morphism of topoi $(f_*,f^*):\sh(X)\to \sh(Y)$. Note that $f_*$
+ is also a morphism of the categories $\O_X\mod\to \O_Y\mod$, where $\O_Y$ acts on
+ $f_*\F$ via the map $\O_Y\to f_*\O_X$. However, $f^*$ is not left adjoint to $f_*$ (it
+ doesn't even give a functor the other way). But there is a left adjoint, which we call
+ $f^\star$. It is given by $f^\star\G = f^*\G\otimes_{f^*\O_Y}\O_X$ (you have to sheafify
+ after your take the tensor product). \anton{it would be nice to prove that $f^\star$ is
+ left adjoint to $f_*$}
+ \[\xymatrix{
+    X_{et}\ar@<.5ex>[r]^{f_*} & Y_{et}\ar@<.5ex>[l]^{f^*}\\
+    \O_X\mod \ar@<.5ex>[r]^{f_*} \ar[u] & \O_Y\mod\ar@<.5ex>[l]^{f^\star} \ar[u]
+ }\]
+ \begin{remark}\label{lec07R:easy_pullbacks}
+   For regular Zariski sheaves on schemes (or topological spaces for that matter), if
+   $X\to Y$ is an open map, then it is really easy to understand $f^*$ and $f^\star$.
+   There is an analogous statement in this situation.
+
+   If $\O_X$ and $\O_Y$ are obtained by restricting some sheaf of rings $\O$ on $\C$,
+   $f:X\to Y$ is a morphism in $\C$, $\G$ is a sheaf on $Y$, and $U\to X$ is an element
+   of $\C/X$, then $f^*\G(U\to X) = \varinjlim_{U\to V} \G(V\to Y) = \G(U\to Y)$. That
+   is, $f^*\G$ is obtained simply by restricting $\G$ to $\C/X$. In particular,
+   $f^*\O_Y=\O_X$. If $\G$ is an $\O_Y$-module, then $f^\star\G = f^*\G\otimes_{f^*\O_Y}
+   \O_X = f^*\G$ is given by restricting $\G$ to $\C/X$.
+
+   In some sense, this says that the bigger your site is, the easier it is to understand
+   $f^*$ and $f^\star$. In the case of Zariski sheaves on schemes, $f^*$ and $f^\star$
+   are hard because most morphisms between schemes are not open immersions (i.e.~$f$ is
+   usually not in $\C$).
+ \end{remark}
+ \begin{corollary}\label{lec07C:descent_modules}
+   Let $\C$ be a site with projective limits, let $f:X\to Y$ be a covering, and let
+   $\O_X\in \sh(X)$ and $\O_Y\in \sh(Y)$ be sheaves of rings, with $\O_X=f^*\O_Y$. Then
+   $f^*:\O_Y\mod\to \O_{X\to Y}\mod$ (interpret this in the obvious way) is an
+   equivalence of categories.
+ \end{corollary}
+ \begin{proof}
+   The module structure comes along for the ride along $f_*$, $f^*$, and $h$.
+ \end{proof}
+
+ \subsektion{Descent for quasi-coherent sheaves}
+ For any scheme $X$, define the presheaf $\O_{X_{fppf}}$ on $\sch/X$ by $(T\to X)\mapsto
+ \Ga(T,\O_T)$. Note that $\O_{X_{fppf}}$ is represented by $\AA^1_X$, so by Theorem
+ \ref{lec06T:hXfppfsheaf}, it is an fppf sheaf. Note that this is the restriction of the
+ sheaf $\O_{\spec\ZZ}$ on $\sch$.
+
+ Given a quasi-coherent sheaf $F$ on $X$ (i.e.~in $X_{zar}$), we define an
+ $\O_{X_{fppf}}$-module $F_{fppf}:\sch/X \to \set$ by $(T\xrightarrow{h} X)\mapsto
+ \Ga(T,h^\star F)$.
+ \begin{lemma}\label{lec07L:F^F_is_fppf_sheaf}
+   $F_{fppf}$ is a sheaf in the fppf topology on $X$.
+ \end{lemma}
+ \begin{proof}
+   We will apply Lemma \ref{lec06L:zariski+affine_condition=>fppf_sheaf}. For
+   $T\xrightarrow h X$, $h^\star F$ is a (Zariski) sheaf on $T$, so $F_{fppf}$ is a sheaf
+   in the big Zariski topology on $X$. Next we need to check the sheaf condition for an
+   fppf cover of the form $\spec B \to \spec A$ over $X$. Since $F$ is quasi-coherent,
+   $h_A^\star F$ is quasi-coherent on $\spec A$, so it is $\tilde M$ for some $A$-module
+   $M$; then $h_B^\star F \cong (B\otimes_A M)^\sim$ and $h^\star_{B\otimes_A B} F \cong
+   (B\otimes_A B\otimes_A M)^\sim$. Thus, the sheaf condition is equivalent to the
+   sequence $\xymatrix@-1pc{M\ar[r] & B\otimes_A M \ar@<.5ex>[r]\ar@<-.5ex>[r] &
+   B\otimes_A B\otimes_A M}$ being exact. The proof of Lemma
+   \ref{lec06P:fflat_exact_sequence} works almost verbatim.
+ \end{proof}
+% Note that this $\F$ is a sheaf of $\O_{X_{fppf}}$-modules.
+% \anton{Does this still hold if $F$ is not
+% quasi-coherent to begin with? I dunno}
+
+ There is a sort of inverse procedure. If $\F$ is \emph{any} sheaf of
+ $\O_{X_{fppf}}$-modules on $(\sch/X)_{fppf}$, then for any $X$-scheme $T\to X$, we get a
+ sheaf $\F_T$ (in $T_{zar}$) by restricting $\F$ to the small Zarliski site of $T$ (an
+ open subset of $T$ is a scheme over $X$). Moreover, if we have an $X$-morphism
+ $T'\xrightarrow{g} T$, we get a morphism $\F_T\to g_*\F_{T'}$, given by
+ \[
+   \F_T(U)=\F(U\to T)\xrightarrow{\F p_1} \F(U\times_T T'\to T') = g_* \F_{T'}(U).
+ \]
+ By the adjunction, this induces a morphism $g^\star\F_T\to \F_{T'}$. Furthermore, if we
+ have morphisms $T''\xrightarrow f T'\xrightarrow g T$ over $X$, then
+ $\hom(\F_T,g_*f_*\F_{T''})\cong \hom(g^\star \F_T,f_*\F_{T''})\cong \hom(f^\star g^\star
+ \F_{T},\F_{T''})\cong \hom((gf)^\star \F_T,\F_{T''})$, so for some reason \anton{}
+ $(gf)^\star\F_T \to \F_{T''}$ is the same as the composition $f^\star
+ g^\star\F_{T}\xrightarrow{f^\star(-)} f^\star\F_{T'} \to \F_{T''}$.
+ \begin{remark}
+   If $F$ is a quasi-coherent sheaf on $X_{zar}$, then given morphisms $T'\xrightarrow g
+   T\xrightarrow h X$ we get $(F_{fppf})_T = h^\star F$. Then the map $g^\star
+   (F_{fppf})_T\to (F_{fppf})_{T'}$ is just the isomorphism $g^\star h^\star F \cong (h
+   g)^\star F$.
+ \end{remark}
+ \begin{definition}
+   $\qco(X_{fppf})$ is the full subcategory of $\O_{X_{fppf}}\mod$ whose objects are $\F$
+   such that
+   \begin{enumerate}
+     \item for all $T\to X$, $\F_T$ is quasi-coherent, and
+     \item for all $g:T'\to T$, the map $g^\star \F_T\to \F_{T'}$ is an isomorphism.
+     \qedhere
+%     (i.e.~the category is \emph{cartesian}).
+   \end{enumerate}
+ \end{definition}
+% \begin{remark}
+%   The first condition actually follows from the second one. \anton{Assuming (2), it is
+%   enough to show that $\F_X$ is quasi-coherent, because then $\F_{T} \cong h^*\F_X$,
+%   which is quasi-coherent, but why should $\F_X$ be quasi-coherent? Now I'm not sure
+%   it's true anymore}
+% \end{remark}
+ \begin{proposition} \label{lec07P:qcoh_equivalence}
+   $\pi^\star:\qco(X_{zar})\to \qco(X_{fppf})$, given by $F\mapsto F_{fppf}$ is an
+   equivalence of categories.
+ \end{proposition}
+ \begin{proof}
+   Define $\pi_*:\qco(X_{fppf})\to \qco(X_{zar})$, sending $\F$ to $\F_X$. It is clear
+   that $\pi_*\circ \pi^\star =\id$, and we compute
+   \[
+     (\pi^\star \pi_* \F)(T\xrightarrow h X) = (h^\star \F_X)(T)\xrightarrow{\sim}
+     \F_T(T) = \F(T\xrightarrow h X)
+   \]
+   where the isomorphism in the middle is because $\F$ is in $\qco(X_{fppf})$.
+ \end{proof}
+ There is a stronger statement, which is what people properly call descent of
+ quasi-coherent sheaves.
+% To state it, we need the following definition.
+% \begin{definition}\label{lec07D:qco(X->Y)}
+%   Let $X\xrightarrow f Y$ be an fppf covering. Then we have the diagram
+%   \[\xymatrix{
+%      X\times_Y X\times_Y X \ar[r]|<>(.5){p_{13}} \ar@<1ex>[r]^<>(.5){p_{23}} \ar@<-1ex>[r]_<>(.5){p_{12}}
+%      & X\times_ Y X \ar@<.5ex>[r]^<>(.5){p_1} \ar@<-.5ex>[r]_<>(.5){p_2}
+%      & X\ar[r]^f \ar@/_4ex/[l]_<>(.1){\Delta} & Y
+%   }\]
+%    The category $\qco(X\to Y)$ has objects pairs $(E_X,\sigma)$, where $E_X$ is a
+%   quasi-coherent sheaf on $X$, and $\sigma:p_2^*E_X\xrightarrow{\sim} p_1^* E_X$ such
+%   that the diagram on the left commutes.
+%   \[\xymatrix @R-1pc @C-1pc {
+%    p_3^*E_X \ar@{=}[d] \ar@{=}[r]%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     & p_{13}^*p_2^*E_X \ar[rr]^{p_{13}^*\sigma} \ar@{=}[dl]
+%    & & p_{13}^*p_1^*E_X \ar@{=}[dr]
+%    &
+%    p_1^* E_X \ar@{=}[d] \ar@{=}[l] %%%%%%%%%%%%%%%%%%%%%%%%%%
+%    \\
+%    p_{23}^*p_2^*E_X \ar[dr]_{p_{23}^*\sigma} & &
+%    p_2^* E_X \ar@{=}[dr]\ar@{=}[dl] %%%%%%%%%%%%%%%%%%%%%%%%
+%    & & p_{12}^*p_1^*E_X \\
+%    & p_{23}^*p_1^*E_X \ar@{=}[rr] & & p_{12}^*p_2^*E_X \ar[ur]_{p_{12}^*\sigma}\\
+%   }\qquad\qquad
+%   \raisebox{-1pc}{$\xymatrix{
+%    p_2^* E_X' \ar[r]^{p_2^* \varepsilon} \ar[d]_{\sigma'} & p_2^* E_X \ar[d]^{\sigma}\\
+%    p_1^*E_X' \ar[r]^{p_1^*\varepsilon} & p_1^* E_X
+%   }$}\]
+%    The morphisms are $(E'_X,\sigma')\xrightarrow \varepsilon (E_X,\sigma)$ is a morphism
+%   of $\O_X$-modules $E_X'\xrightarrow\varepsilon E_X$ such that the diagram on the right
+%   commutes.
+% \end{definition}
+For a morphism $f\colon X\to Y$ of schemes, define $\qco((X\to Y)_{zar})$ as in Definition \ref{lec07D:descent_category}, but with all instances of $-^*$ replaced with $-^\star$. In other words, it's the category of quasi-coherent (Zariski) sheaves $E$ on $X$ together with an isomorphism $p_2^\star E\cong p_1^\star E$ satisfying a cocycle condition (which involves $p_{ij}^\star$ instead of $p_{ij}^*$).
+\begin{theorem}\label{lec07T:descent_qcoh_sheaves}
+ Let $X\xrightarrow f Y$ be an fppf cover with $f$ quasi-compact and quasi-separated. Then $f^\star:\qco(Y_{zar})\to \qco((X\xrightarrow f Y)_{zar})$ is an equivalence of categories.
+\end{theorem}
+\begin{proof}
+ The trick is to reinterpret the statement in the fppf site. We identify $\qco(Y_{zar})$ with $\qco(Y_{fppf})$ as above, and we identify $\qco((X\to Y)_{zar})$ with $\qco(X\to Y)$ (where the objects are quasi-coherent fppf sheaves with regular descent data). Then $f^\star\colon \qco(Y_{zar})\to \qco((X\xrightarrow f Y)_{zar})$ is identified with $f^*\colon \qco(Y_{fppf})\to \qco(X\to Y)$.
+
+ By the hypotheses, $f_*$, $p_{1*}$, and $p_{2*}$ preserve quasi-coherence \cite[II.5.8]{Hartshorne}, and all the pullbacks preserve quasi-coherence as usual. Since kernels of maps of quasi-coherent sheaves are quasi-coherent, we have that the functor $h$ from the proof of Theorem \ref{lec07T:descent_of_sheaves} preserves quasi-coherence. Now Theorem \ref{lec07T:descent_of_sheaves} applies to prove the result.
+\end{proof}
+\begin{remark}
+ The hypothesis that $f$ is quasi-compact and quasi-separated is actually unnecessary. Let $Y=\bigcup_i Y_i$, with each $Y_i$ affine, and let $f^{-1}(Y_i)=\bigcup_{j} X_{ij}$ with $X_{ij}$ quasi-compact and $f(X_{ij})=Y_i$ for each $j$ (we can do this by Corollary \ref{lec06C:fppf->qcmpt_cover}). Then $f|_{X_{ij}}:X_{ij}\to Y_i$ is an fppf cover for each $i$ and $j$, so the above argument proves descent for quasi-coherent sheaves \anton{how do you see that $X_{ij}\to Y_i$ are quasi-separated?}. Similarly, we can cover $Y_i\cap Y_j$ and $Y_i\cap Y_j\cap Y_k$ by affine schemes, and cover their pre-images by quasi-compact schemes so that we get descent for quasi-coherent sheaves there.
+
+ Now given a quasi-coherent sheaf $\G$ on $X$ with descent data, we descend $\G|_{X_{ij}}$ to a quasi-coherent sheaf on $Y_i$. The descent data tells us \anton{somehow} that the resulting sheaf is independent of $j$, so we'll call it $\F_i$. On the affine cover of the intersections $Y_i\cap Y_j$,  $\F_i$ and $\F_j$ must both restrict to the sheaf same sheaf (the descended restriction of $\G$), so they are isomorphic, and we get a cocycle condition by the same sort of argument on the triple intersections. Thus, the $\F_i$ glue together to give a quasi-coherent sheaf $\F$, which pulls back to $\G$.
+\end{remark}
+\begin{remark}\label{lec07R:descent_ideals,algebras,loc_frees}
+ We can replace ``quasi-coherent sheaves'' by ``quasi-coherent sheaves of ideals'', ``quasi-coherent sheaves of algebras'', or ``locally free sheaves'', and the proof still works.
+\end{remark}
+\begin{example}[Descent for closed subschemes]\label{lec07E:descent_closed_subschemes}
+ If $X$ is a scheme and $\I\subseteq \O_X$ is a quasi-coherent sheaf of ideals, then the closed subscheme defined by $\I$ is the sheaf given by $T\mapsto \{g:T\to X|$the composition $\I\hookrightarrow \O_X\to g_*\O_T$ is zero$\}$. Let $f:X\to Y$ be a quasi-compact fppf cover, let $F$ be an fppf sheaf on schemes with a map $F\to Y$, and assume that $Z:=F\times_Y X$ is the closed subscheme of $X$ defined by some quasi-coherent sheaf of ideals $\I\subseteq \O_X$. We wish to show that $F$ is a closed subscheme of $Y$.
+ \[\xymatrix{
+  Z\ar[r]^\I \ar[d]\ar@{}[dr]|(.25)\pb & X\ar[d]^f\\
+  F\ar[r] & Y
+ }\]
+ Since $p_2^* Z$ and $p_1^* Z$ are both isomorphic to $(fp_1)^* F$, they are the same closed subscheme of $X\times_Y X$, so we have that $p_2^\star \I= p_1^\star \I$ (and we get the cocycle condition similarly). By descent for quasi-coherent sheaves of ideals, we have that $\I\cong f^\star \J$ for some quasi-coherent sheaf of ideals $\J\subseteq \O_Y$. Let $W\subseteq Y$ be the closed subscheme defined by $\J$.
+
+ Given $g:T\to X$, the composition $\J\hookrightarrow \O_Y \to f_*g_*\O_T$ is equal to zero if and only if the composition $f^\star \J=\I\hookrightarrow f^\star \O_Y = \O_X\to g_*\O_T$ is zero (since the adjunction $f^\star \vdash f_*$ is a group isomorphism). Thus, we get that $Z\cong f^*W$. By Exercise 2.4, $\sch_{fppf}/h_X \cong X_{fppf}$, so we may think of $Z$ as an fppf sheaf on $X$, and we may think of $F$ and $W$ as fppf sheaves on $Y$. Since $f^*F\cong Z\cong f^*W$, descent for sheaves in a site tells us that $F\cong W$. Thus, $F$ is the closed subscheme of $Y$ defined by $\J$.
+\end{example}
+
+% \begin{proof}
+%   To show that $H$ is an equivalence of categories, it is enough to show that it is
+%   fully faithful (is injective on objects and $\hom$ sets) and is essentially surjective
+%   (hits every isomorphism class).
+%
+%   (Full faithfulness) It is enough to construct a left inverse to $H$. Let
+%   $g=fp_1=fp_2:X\times_Y X\to Y$. Consider $G:\qco(X\xrightarrow f Y)\to \qco(Y)$, given
+%   by
+%   \[
+%    (E_X,\sigma)\mapsto
+%    Eq\Bigl(
+%      \raisebox{2ex}{$\xymatrix @!0 @C=7pc @R=2ex  {
+%        & f_*p_{1*}p_1^*E_X \ar@{=}[dr] \\
+%        f_*E_X \ar[ru] \ar[rd] & & g_* p_1^* E_X \\
+%        & f_*p_{2*}p_2^*E_X \ar[ru]_<>(.6){g_*(\sigma)}
+%    }$}\Bigr).
+%   \]
+%   Given $F\in \qco(Y_{zar})$, we have that $H(F)=(f^*F,\textrm{can})$, where
+%   \textrm{can} is the map $p_1^*f^* F\cong g^* F\cong p_2^* f^* F$. Given an open subset
+%   $U\subseteq Y$, we want to show that $F(U)$ is the equalizer in question. That is, we
+%   want to show that the sequence $\xymatrix@-1pc{F(U) \ar[r] &
+%   f^*F\bigl(f^{-1}(U)\bigr)\ar@<.5ex>[r]\ar@<-.5ex>[r] & g^*F\bigl(g^{-1}(U)\bigr)}$ is
+%   exact. Since $f^{-1}(U)\to U$ is an fppf cover, and $g^{-1}(U)=f^{-1}(U)\times_U
+%   f^{-1}(U)$, exactness of the sequence follows from the fact that $F_{fppf}$ is an fppf
+%   sheaf (Lemma \ref{lec07L:F^F_is_fppf_sheaf}). \anton{is it clear that $GH$ is the
+%   identity on morphisms \dots probably} This shows full faithfulness.
+%
+%   (Essential surjectivity) Let $(E_X,\sigma)\in \qco(X\to Y)$, and let
+%   $F=G(E_X,\sigma)$. We wish to show that $(f^*F,\text{can})$ is isomorphic to
+%   $(E_X,\sigma)$. Since $f^*F$ and $E_X$ are fppf sheaves, it is enough to check that
+%   they are locally isomorphic in the fppf topology. Base extending by $f:X\to Y$, we may
+%   assume there is a section $s$ of $f$ (see Remark \ref{lec06R:fflat_extensions}, and
+%   the diagram below).
+%   \def\n{\text{'}}
+%   \[
+%    \xymatrix{
+%    & `X\n\times_{`Y\n} `X\n \ar@<.5ex>[d]^{`p_2\n}\ar@<-.5ex>[d]_{`p_1\n} \ar@{}[r]|{=}
+%    &(X\times_Y X)\times_Y X \ar@<.5ex>[d]^{p_{23}}
+%            \ar@<-.5ex>[d]_{p_{13}} \ar[r]^<>(.5){p_{12}}
+%    & X\times_Y X \ar@<.5ex>[d]^{p_2}\ar@<-.5ex>[d]_{p_1}\\
+%    `E_X\n,\quad `f\n^* `F\n \hspace{-2em}
+%    & `X\n \ar[d]^{`f\n}\ar@{}[r]|{=}
+%    & X\times_Y X \ar[r]^<>(.5){p_1} \ar[d]^{p_2} & X \ar[d]^f & \hspace{-2em} E_X,\quad f^*F\\
+%    `F\n = G(`E_X\n,`\sigma\n) \hspace{-2em}
+%    & `Y\n \ar@/^2ex/[u]^{`s\n}\ar@{}[r]|{=}
+%    & X\ar[r]^f \ar@/^2ex/[u]^{\Delta} & Y & \hspace{-2em} F=G(E_X,\sigma)
+%    }
+%   \]
+%   $E_X$ and $\sigma$ pull back nicely, from which it follows that
+%   $G(`E_X\n,`\sigma\n)=`F\n$. Moreover, $p_1^* (f^* F)\cong p_2^*f^* F = `f\n^*`F\n$, so
+%   everything is kosher; we've made a valid reduction. We get an isomorphism
+%   \begin{gather*}
+%     E_X=(sf\times 1)^* p_2^* E_X \xrightarrow[(sf\times 1)^*\sigma]{\sim} (sf\times 1)^* p_1^*
+%     E_X =f^*s^*E_X.\\
+%   \xymatrix{
+%    X \ar[r]^<>(.5){sf\times 1}
+%    & X\times_Y X \ar@<.5ex>[r]^<>(.5){p_2} \ar@<-.5ex>[r]_<>(.5){p_1} & X
+%   }
+%   \end{gather*}
+%   Thus, $E_X$ is in the image of the pullback functor $H$. By the first part of this
+%   proof, $G$ is a left inverse to $H$, so we have that $s^* E_X \cong G(E_X,\sigma)=F$.
+%   Thus, we get the isomorphism $E_X\cong f^* s^* E_X \cong f^*F$ as desired.
+% \end{proof}

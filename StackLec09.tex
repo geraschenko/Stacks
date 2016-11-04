@@ -1,0 +1,178 @@
+\sektion{9}{Separated schemes: a warmup for algebraic spaces}
+
+The question for today is, ``How can we characterize (separated) schemes among presheaves on $\aff_{zar}$ (of $\aff_{fppf}$)?''
+
+\begin{definition}
+ Let $\C$ be a category, and we have two functors $F,G:\C^{op}\to \set$. A morphism of functors $f:F\to G$ is called \emph{relatively representable} if for every $X\in \C$, and for every $g:h_X\to G$, the fiber product $h_X\times_G F:\C^{op}\to \set$ is representable.
+\end{definition}
+\begin{remark}
+  $f:h_X\to G$ is the same as an element of $G(X)$.
+\end{remark}
+In our case, take $C=\aff$.
+\begin{definition}
+  A morphism $f:F\to G$ is an \emph{affine open (resp.~closed) immersion} if
+  (1) $f$ is relatively representable, and (2) for all $X\in \aff$ and $g:h_X\to
+  G$, the map $F\times_G h_X\to h_X$ is an open (resp.~closed) immersion.
+\end{definition}
+\begin{proposition}
+  A functor $F:\aff^{op}\to \set$ is representable by a separated scheme if and
+  only if the following hold
+  \begin{enumerate}
+    \item $F$ is a sheaf with respect to the big Zariski topology,
+    \item the diagonal morphism $\Delta:F\to F\times F$ is an affine closed immersion,
+    and
+    \item there exists a family of objects $\{X_i\}$ in $\aff$ and morphisms
+    $\pi_i:h_{X_i}\to F$ which are affine open immersions and such that the map of Zariski
+    sheaves $\coprod_i h_{X_i} \to F$ is surjective. (note that this is not the same as
+    a surjection of functors ... things only have to be locally in the image)
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  ($\Longrightarrow$) Say $X$ is separated, and $F=h_X$. (1) is clear. For (2), the
+  important point is that the Yoneda embedding commutes with products, so $h_X\times
+  h_X\cong h_{X\times X}$
+  \[\xymatrix{
+   h_P \ar[r] \ar[d] \ar@{}[dr]|(.25){\pb} & h_Y \ar[d]\\
+   h_X \ar[r] & h_{X\times X}
+  }\qquad\qquad
+  \xymatrix{
+   P\ar[r]^r \ar[d] \ar@{}[dr]|(.25){\pb} & Y\ar[d]\\
+   X\ar[r]^<>(.5)\Delta & X\times X
+  }\]
+  (2) is equivalent to saying that $r$ is a closed immersion for all affine $Y$. Since
+  $X$ is separated, $\Delta$ is a closed immersion, so $r$ is a closed immersion.
+
+  (3) Let $X = \bigcup X_i$ be an open covering by affines, so $h_{X_i}\to h_X$ are
+  affine open immersions.\footnote{We use that $X$ is separated here. Otherwise,
+  $h_{X_i}\to h_X$ might not be relatively representable (e.g.~the intersection of two
+  affine open sets may not be affine).} We wish to show local surjectivity of $\coprod
+  h_{X_i}\to h_X$. That is, for every affine $Y$, and for every element of $g\in h_X(Y)$
+  (which we may think of as a morphism $h_Y\to h_X$), there is a covering of $Y$ so that
+  $g$ factors through $\coprod h_{X_i}$. It is clear that we may take the covering
+  $Y=\bigcup g^{-1}(X_i)$.
+  \[\xymatrix{
+   h_{g^{-1}(X_i)} \ar@{}[dr]|(.3)\pb \ar[r]^<>(.5){g_i} \ar[d] & h_{X_i}\ar[d]\\
+   h_Y \ar[r]^g & h_X
+  }\qquad\qquad
+  \xymatrix{
+   \coprod h_{g^{-1}(X_i)} \ar[d] \ar@{-->}[r]^<>(.5){\coprod g_i} & \coprod h_{X_i}\ar[d]\\
+   h_Y \ar[r]_g & h_X }
+  \]
+
+  $(\Longleftarrow)$ For every $i$ and $j$, we get
+  \[\xymatrix{
+   h_{V_{ij}}\ar@{}[r]|<>(.5){=}
+   & h_{X_i}\times_F h_{X_j} \ar[d] \ar[r] \ar@{}[dr]|(.25)\pb
+   & h_{X_i} \ar[d]^{\pi_i} \\
+   & h_{X_j} \ar[r]^{\pi_j} & F
+  }\]
+   Since $\pi_j:h_{X_j}\to F$ is relatively representable, the fiber product is
+  represented by some affine $V_{ij}$. Since $\pi_j$ is an affine open immersion,
+  $V_{ij}$ is an open subset of $X_i$. So we have $\{X_i\}$, and for every $i$ and $j$,
+  we have $V_{ij}\subseteq X_i$, and we have isomorphisms
+  $\varphi_{ij}:V_{ij}\xrightarrow\sim V_{ji}$. We need to have the cocycle condition
+  $\varphi_{ij}'\varphi_{jk}'=\varphi_{ik}'$, where
+  $\varphi_{ij}'=\varphi_{ij}|_{V_{ij}\cap V_{ik}}:V_{ij}\cap V_{ik} \to V_{ji}\cap
+  V_{jk}$. The cocycle condition (and the fact that $\varphi_{ij}'$ is well-defined) is
+  obvious if you look at the functor of points: $\varphi_{ij}':h_{X_i}\times_F
+  h_{X_j}\times_F h_{X_k}\to h_{X_j}\times_F h_{X_i}\times_F h_{X_k}$ just switches
+  factors around.
+
+  Thus, we have gluing data to define a scheme $X$. Let $G=\coprod_i h_{X_i}$. We have
+  that $\sigma:G\to F$ is surjective, and we wish to show that $F\cong h_X$.
+
+  We get $G\times_F G\subseteq G\times G$, so for $U\in \aff$,  $G(U)\times_{F(U)}
+  G(U)\subseteq G(U)\times G(U)$. This subset is an equivalence relation (it identifies
+  points in the same fiber of $G(U)\to F(U)$).
+
+  Both $h_X$ and $F$ are isomorphic to the sheafification of $U\mapsto G(U)/\sim$.
+
+  \anton{why is $h_X$ isomorphic to that? some argument follows, but I'm not yet happy.}
+  $h_X$ is the sheaf associated to the presheaf $U\mapsto G(U)/\sim$. This induces a map
+  of presheaves $(U\mapsto G(U)/\sim)\to h_X$, and $G\to F$ factors through it. Suppose
+  we have $s_1:U\to X_i$ and $s_2:U\to X_j$ (through $V_{ij}$) which define the same
+  element of $F(U)$. Then we have maps
+  \[\xymatrix{
+   U\ar[r]^{s_1}\ar[d]_{s_2} & X_i\ar[d]^{h_i}\\
+   X_j \ar[r]^{h_j} & X
+  }\]
+\end{proof}
+\begin{example} \anton{this example needs work}
+  $\PP^n: \spec R\mapsto \{$quotients $R^{n+1}\to L| L$ a projective $R$-module of rank
+  1$\}/\simeq$, where the isomorphisms are ``under $R$'' (if an isomorphism exists, it
+  is unique). (1) This is clearly a sheaf in $\aff_{zar}$; just look at the kernel. (2)
+  $\Delta:\PP^n\to \PP^n\times \PP^n$ is a closed immersion. To see this, let
+  \[\xymatrix{
+   P \ar@{}[dr]|(.25){\pb} \ar[r] \ar[d] & h_{\spec R}\ar[d]^{(L_1,L_2)}\\
+   \PP^n \ar[r] & \PP^n\times \PP^n
+  }\]
+  we want to show that $P$ is affine closed in $\spec R$. As a functor on $\aff/\spec
+  R$, we have
+  \[P:(\spec R'\xrightarrow f \spec R) \mapsto \begin{cases}
+    \ast & (R')^{n+1}\xrightarrow{\beta_i} f^* L_i \text{ equal for $i=1,2$ in }\PP^n(R')\\
+    \varnothing & \text{else}
+  \end{cases}
+  \]
+  Using the proposition: (i) we know that $P$ is a sheaf in the Zariski topology. (ii)
+  choose an open cover $\spec R=\bigcup \spec R_i$ such that both $L_1$ and $L_2$
+  restricted to $R_i$ are trivial modules (so $L_1\cong L_2\cong R_i$).
+
+  If $L_1$ and $L_2$ are trivial and $\ker \beta_i$ are free, then we claim that $P$ is
+  representable.
+  \[\xymatrix{
+   R^{n+1} \ar[r]^{\beta_1} \ar[dr]_{\beta_2} & R \ar@{.>}[d]\\ & R
+  }\]
+  means exactly that $\ker \beta_1=\ker \beta_2$. We want that $\ker \beta_2 \subseteq
+  R^{n+1}\xrightarrow{\beta_1} R$ is the zero map. $\ker \beta_2\simeq R^n$, with
+  $e_i\mapsto f_i$.
+  \[\xymatrix{
+   h_P\times_{h_{\spec R}} h_{\spec R_i \cap \spec R_j} & h_{\spec R_i}\times_{h_{\spec R}} h_{\spec R_j} = h_{\spec R_i\cap \spec R_j}  \\
+   h_{Z_i}=P_i\ar[r] \ar[d] & h_{\spec R_i} \ar@{^(->}[d]\\
+   P\ar[r] & h_{\spec R}
+  }\]
+  So $Z_i$ in $\spec R_i$ is a closed subscheme, and these glue to give you a closed
+  subscheme $Z\subseteq \spec R$. By the same argument as before, the functor of points
+  of $Z$ is $P$.
+
+  Finally, we need an open cover. $U_i\subseteq \PP^n$ is given by $R\mapsto
+  \{R^{n+1}\twoheadrightarrow L|e_i\mapsto $basis for $L\}$.
+  \begin{claim}
+    The inclusion $U_i\hookrightarrow \PP^n$ is representable by affine open immersions.
+  \end{claim}
+  This is clear because this is the complement of the zero locus of something.
+  \begin{claim}
+    $U_i\cong h_{\AA^n}$.
+  \end{claim}
+  \[\xymatrix{
+   R^{n+1} \ar[r]\ar[dr]_<{e_i}="e"_>{1}="1" \ar@{|->} "e";"1" & L\ar[d]_{\wr}^{e_i}\\
+   & R
+  }\]
+  Something equivalent to $f_0,\dots, \hat f_i,\dots, f_n\in R$.
+
+  \[
+   K_1 \to \O_X^{n+1}\to L_2\to 0
+  \]
+  should be zero, then
+  \[
+   L_2^{-1}\otimes K_1\to O_X
+  \]
+  is zero.
+
+  (3) $\coprod U_i\to \PP^n$ is surjective (as sheaves).
+  \[\xymatrix{
+   \coprod U_i(\spec R) \ar[r] & \PP^n(\spec R) \ar@{}[r]|{\ni}
+   & (R^{n+1}\twoheadrightarrow L)
+  }\]
+  after possibly replacing $\spec R$ by a covering, this is in the image if and only if
+  some $e_i$ maps to a basis for $L$. We can write $\spec R = \bigcup_j \spec R_j$ such
+  that for each $j$ some $e_i$ maps to a basis for $L|_{\spec R_j}$.
+\end{example}
+% Let $\C$ be a site. A class of objects $S\subseteq \C$ is \emph{stable} if for every
+% covering $\{U_i\to U\}$, $U\in S$ if and only if $U_i\in S$ for all $i$.
+% \begin{definition}
+%   Let $F:\aff^{op}\to \set$ se a separated scheme,\footnote{From now on we don't
+%   distinguish between the scheme and the functor of points.} and let $\P$ be a stable
+%   property of affine schemes (locally noetherian, reduced, normal, regular, etc.). Then
+%   $F$ has property $\P$ if there exists a covering $\{h_X\to F\}$ such that each $X_i$
+%   has property $\P$.
+% \end{definition}

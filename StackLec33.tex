@@ -1,0 +1,204 @@
+\sektion{33}{\texorpdfstring{$\X$}{X} Deligne-Mumford \texorpdfstring{$\Leftrightarrow\ \Delta_\X$}{<=> Delta\_X} formally unramified}
+
+ Recall that if $\P$ is a property of morphisms of algebraic spaces which is local on
+ source and target in the smooth topology, then we say that a morphism $f:\X\to \Y$ of
+ algebraic stacks has $\P$ if there is a commutative diagram
+ \[\xymatrix{
+    X'\ar[r]^H\ar[dr]_{f'} & \X'\ar[r]\ar[d]\ar@{}[dr]|(.25)\pb & \X\ar[d]^f\\
+    & Y\ar[r]^Q & \Y
+ }\]
+ where $H$ and $Q$ are presentations an $f'$ has $\P$.
+ \begin{remark}
+   If $f$ has $\P$, then for every diagram of the form above, $f'$ has $\P$.
+ \end{remark}
+ \begin{definition}
+   A morphism of algebraic stacks $f:\X\to \Y$ is \emph{quasi-compact} if for every
+   quasi-compact scheme $Y$ and morphism $Y\to \Y$ (need not be smooth), the fiber
+   product $Y\times_\Y \X$ is quasi-compact.
+ \end{definition}
+ Then finite presentation (resp.~type) means locally of finite presentation (resp.~type)
+ and quasi-compact.
+ \begin{definition}
+   An algebraic stack $\X$ is \emph{Deligne-Mumford} if there exists an \'etale
+   surjection $X\to \X$ with $X$ an algebraic space.
+ \end{definition}
+ \begin{theorem}
+   Let $\X$ be an algebraic stack over $S$. Then $\X$ is Deligne-Mumford if and only if
+   $\Delta:\X\to \X\times_S \X$ is formally unramified.
+ \end{theorem}
+ \begin{remark}
+   We have to say what unramified means for a morphism of algebraic spaces (since
+   $\Delta$ is representable). We say that a morphism of algebraic spaces $g:Z\to W$ is
+   \emph{formally unramified} if for every closed immersion $T_0\hookrightarrow T$ of
+   affine schemes\anton{its weird that you have to use affine schemes \dots what is the weird example with a non-affine scheme that goes wrong?} defined by a nilpotent ideal, the map $Z(T)\to
+   Z(T_0)\times_{W(T_0)}W(T)$ is injective.
+   \[\xymatrix{
+    T_0\ar[r]\ar[d] & T\ar[d]\\
+    Z\ar[r]\ar@{-->}[ur]^{\exists \le 1} & W
+   }\]
+   you also see that it is enough to check on ideals which square to zero.
+
+   Unramified means locally of finite presentation \anton{type?} and formally unramified.
+   I think we can do the theorem with only formally unramified.
+
+   The key point is that $g$ formally unramified is equivalent to saying that
+   $g^*\Om^1_{W/S}\to \Om^1_{Z/S}$ \anton{i.e.~$\Om^1_{Z/W}=0$} is surjective, which  is
+   what we'll use in the proof.
+ \end{remark}
+ Note that this makes it easy to check that $\M_g$, for example, is Deligne-Mumford.
+ Consider
+ \[\xymatrix{
+    \isom(C_1,C_2)\ar[r]\ar[d] & S\ar[d]^{(C_1,C_2)}\\
+    \M_g \ar[r]^<>(.5)\Delta & \M_g\times\M_g
+ }\qquad\qquad
+ \xymatrix{
+    T_0\ar[r]^{\iota_0}\ar@{^(->}[d] & \isom(C_1,C_2)\ar[d]\\
+    T\ar[r]\ar@{-->}[ur]_{\exists\le 1} & S
+ }\]
+  \anton{other picture} We have to check that $\isom(C_1,C_2)\to S$ is formally
+ unramified, so draw the picture on the right. We need to show that if $\sigma:C_{1,T}\to
+ C_{1,T}$ is an automorphism reducing to the identity over $T_0$ then $\sigma\cong \id$.
+ First of all, it is enough to consider $T_0\hookrightarrow T$ defined by a square zero
+ ideal $J\subseteq \O_T$.
+
+ It follows from stuff about gerbes that $H^0(C_{1,T},T_{C_{1,T_0}/T_0}\otimes_{\O_{T_0}}
+ J)$ is naturally in bijection with the group of automorphisms reducing to the identity. \anton{magic?}
+
+ Using $g\ge 2$, we see that $H^0(C_{1,T},T_{C_{1,T_0}/T_0}\otimes_{\O_{T_0}} J)=0$. \anton{$\Om^1$ is ample, which implies that $T_{C_1/T_0}$ is negative, so it has no global sections.}
+
+ \begin{proof}[Proof of Theorem]
+   $DM\Rightarrow \Delta$ formally unramified. Let $X\to \X$ be an \'etale surjection.
+   Then we have
+   \[\xymatrix{
+    X\times_\X X \ar[r] \ar[d]\ar@{}[dr]|(.25)\pb & X\times_S X \ar[d]\\
+    \X\ar[r]^\Delta & \X\times_S \X
+   }\]
+    (1) $\Delta$ is formally unramified if and only if $X\times_\X X\to X\times_S X$ is
+   formally unramified. This is because of the usual diagram; checking unramified, we can
+   replace things by \'etale covers. Check that $X\times_\X X \to X\times_S
+   X\xrightarrow{p_1} X$ is \'etale (it is a base change of $X\to \X$, which is \'etale).
+   \[\xymatrix{
+    X\times_\X X\ar[r] & X\times_S X\ar[r]^{p_1} & X\\
+    T_0\ar[u]\ar[r] & T\ar[u]\ar[ur]\ar@{-->}[ul]
+   }\]
+   we need to check at most 1 dashed arrow, but then just look at the outer square, where
+   you get the result you want because $X\times_\X X\to X$ is \'etale.
+
+   $\Delta$ formally unramified $\Rightarrow DM$. Let $k$ be a field and let $y:\spec
+   k\to \X$. Then we need to find an \'etale morphism $U\to \X$ with $U$ an algebraic
+   space such that $U\times_{\X,y}\spec k$ is non-empty. Then take the disjoint union
+   over all points and that will be an \'etale cover.
+
+   Idea: start with some $X\to \X$ which is smooth. We'd like to take a slice of $X$
+   which \'etale covers $\X$. (1) Construct an \'etale morphism $f:X\to \X\times_S
+   \AA^n_S$ which factors $X\to \X$. This is where formally unramified is used. (2) find
+   appropriate $E\subseteq \AA^n_S$ \'etale over $S$. Take $U=f^{-1}(\X\times_S E)$, then
+   $U\to \X\times_S E$ and $\X\times_S E\to \X$ are \'etale.
+
+   (1) Let $X\to \X$ be a smooth surjection. Need to define $\Om^1_{X/\X}$.
+   \[\xymatrix{
+    Z'=Z\times_X Z\ar[d]\ar@<.5ex>[r]\ar@<-.5ex>[r]& Z\ar[r]^{p_2}\ar[d]^{p_1}\ar@{}[dr]|(.25)\pb & X\ar[d]\\
+    Z=X\times_\X X \ar@<.5ex>[r]\ar@<-.5ex>[r]&X\ar[r] & \X
+   }\]
+    We see that $\Om^1_{Z/X}$ comes with descent data relative to $p_2:Z\to X$ (because
+   both pullbacks are the sheaf of differentials of $Z'$ over $X\times_\X X$). We define
+   $\Om^1_{X/\X}$ to be the descended sheaf.
+
+   Remark: Note that you can also define $\Om^1_{X/\X}$ as the conormal sheaf of $X\to
+   X\times_\X X$, also by descent theory.
+
+   There is a map $\Om^1_{X/S}\to \Om^1_{X/\X}$ because of the remark above and the diagram
+   below.
+   \[\xymatrix{
+    X\ar[r]^\Delta \ar[dr]_{\Delta'} & X\times_\X X\ar[d]& \Delta^* I\\
+    & X\times_S X & \Delta^*\pi^* J
+   }\]
+   \begin{lemma}
+     This map $\Om^1_{X/S}\to \Om^1_{X/\X}$ is surjective. (in general, $\Om^1_{X/\X}$ need
+     not be locally generated by differentials of functions.)
+   \end{lemma}
+   \begin{proof}
+     We check that the pullback to $Z$ is surjective.
+     \[\xymatrix{
+      Z\ar[r]\ar[d]\ar@{}[dr]|(.25)\pb & X\times X\ar[d]\\
+      \X\ar[r]^\Delta & \X\times \X
+     }\]
+     and $Z\to X\times X$ is formally unramified (because $\Delta$ is). So we have that
+     $p_1^*\Om^1_{X/S}\oplus p_2^*\Om^1_{X/S}\to \Om^1_{Z/S}$ is surjective. Set
+     $\Om^1_{p_1}=\coker(p_1^*\Om^1_{X/S}\to \Om^1_{Z/S})=\Om^1_{Z/X}=p_2^*\Om^1_{X/\X}$.
+     \[\xymatrix{
+      Z\ar[r]^{p_2}\ar[d]_{p_1} & X\ar[d]\\
+      X\ar[r] & \X
+     }\]
+     So $p_2^*\Om^1_{X/S}\to p_2^*\Om^1_{X/\X}$ is surjective, and this is exactly the map
+     we were considering \anton{exercise}.
+   \renewcommand{\qedsymbol}{$\square_{\text{Lemma}}$}
+   \end{proof}
+   So we have the following diagram. We may assume $X$ is a scheme.
+   \[\xymatrix{
+    x'\ar@{|->}[r] & x\\
+    X_y\ar[r]\ar[d] & X\ar[d]\\
+    \spec k\ar[r]^y & \X
+   }\]
+    In a neighborhood of $x$, there exist $f_1,\dots, f_r\in \O_X$ such that images of
+    $df_1,\dots, df_r$ form a basis for the sheaf $\Om^1_{X/\X}$ (it is a locally free
+    sheaf; choose $f_i$ such that $df_i$ map to a basis for $\Om^1_{X/\X}(x)$, then they
+    form a basis because locally free). This gives a map to affine space.
+    \[\xymatrix{
+     X\ar[r]^f\ar[d] & \X\times_S \AA^r_S\ar[dl]\\
+     \X
+    }\]
+    \begin{lemma}
+      $f$ is \'etale.
+    \end{lemma}
+    \begin{proof}
+      If $\X$ were a scheme, this would be \cite[IV.17.11.1]{EGA}. To reduce to this
+      case, make a base change
+      \[\xymatrix{
+        X\ar[r]^f \ar[d] & \AA^r_\X \ar[dl] & X_W\ar@/_/[ll]\ar[r]_{f_W} & \AA^r_W\ar@/_/[ll]\\
+        \X & & W
+      }\]
+      $f_W$ is \'etale by EGA.
+   \renewcommand{\qedsymbol}{$\square_{\text{Lemma}}$}
+    \end{proof}
+ \end{proof}
+
+Recall that we are trying to prove that if $\X/S$ is an algebraic stack, then $\X$ is Deligne-Mumford if and only if $\Delta:\X\to\X\times_S \X$ is formally unramified. Last time we did $\Rightarrow$. For the other direction, let $k$ be a field and let $y:\spec k\to \X$ be a point. Then we want to produce an \'etale $U\to \X$ so that $U_y\neq\varnothing$. Last time we took a smooth presentation $X\to \X$ and we factored this map through an \'etale map $\pi:X\to \X\times_S \AA^r_S$ (this is where we used formally unramified).
+
+Claim: there exists a subscheme $E\subseteq \AA^r_S$ which is \'etale over $S$ such that if $U=\pi^{-1}(X\times_S E)$, $U_y\neq\varnothing$. Then we have a composition of \'etale morphisms $U\to \X\times_S E\to \X$, so it is \'etale.
+ 
+Let $k_0$ be the residue field of the image of $\spec k$ in $S$ and let $k_0^s$ be a separable closure of $k_0$. Consider the morphism $\pi_y:X\times_{\X,y}\spec k=X_y\to \AA^r_k=(\X\times_S \AA^r)\times_{\X,y}\spec k$. This is \'etale, so it has open image, so it contains $D(F)$, where $F\in k[x_1,\dots, x_r]$. Since $k_0^s$ is infinite, there exist $z_1,\dots, z_r\in k_0^s$ such that $F(z)\neq 0$. This implies that there exists a closed point $Q\in \AA^r_{k_0}$ with $\kappa(Q)$ finite separable over $k_0$ such that $Q$ is in the image of $\pi_y$ composed with $\AA^r_k\to \AA^r_{k_0}$.\anton{}
+\[\xymatrix{
+  \varnothing\neq Z_y\ar@{^(->}[r]\ar[dr] &X_y\ar[dr]\ar@{^(->}[r] & X\ar[d]\\
+  &\X_0\times_{k_0} Q \ar@{^(->}[r]\ar[d] & \X\times_S \AA^r_S \ar[d]\\
+  &\X_0 \ar@{^(->}[r]\ar[d]& \X\ar[d]\\
+  &\spec k_0\ar@{^(->}[r] & S
+}\]
+So we need to lift (extend, spread) $Q\subseteq \AA^r_{k_0}$ to a subscheme $E\subseteq \AA^r_S$ which is \'etale over $S$.
+
+We can assume $Q$ is a closed point because \dots oh, it's not important.
+\begin{lemma}
+ Let $A$ be a ring, let $x\in \spec A$ be a closed point, and let $k(x)\to k'$ be a finite \'etale map of algebras. Then there exists a morphism $\spec A'\to \spec A$ which is finite \'etale over its image such that $A'\otimes_A k(x)\cong k'$.
+\end{lemma}
+\begin{proof}
+ Can assume $k'$ is a field (it is a finite product of separable field extensions). So $k'=k(x)[t]/p(t)$, where $p(t)$ is monic. Let $\tilde p(t)\in A[t]$ be a monic lifting of $p(t)$, and consider $B=A[t]/\tilde p(t)$. Then $B$ is a finite flat $A$-algebra (because monic). To check \'etaleness at points, it is enough to check the fibers.
+ \[\xymatrix{
+  \spec B\ar[d]^g\\
+  \spec A
+ }\]
+ The above is \'etale at points lying over $x$. Let $Z\subseteq \spec B$ be the closed set where this morphism is not \'etale. Then $\spec B\times_{\spec A}g(Z)^c\to \spec A$ is finite \'etale over its image.
+\end{proof}
+For a non-closed point, apply the lemma to $\O_{S,\spec k_0}$. This gives you a finite \'etale $\spec A'\to \spec \O_{S,\spec k_0}$ (local ring, so it's image is everything) and then ``spread out''.
+
+This completes the proof of the whole theorem.
+
+\begin{remark}[Characterization of $\Om^1$ \anton{Random thing that should go somewhere}]
+ Let $T_0\subseteq T$ be a subscheme of an affine scheme defined by some nilpotent \anton{square-zero?} ideal $I$, let $f:Z\to W$ be a morphism of schemes, and consider the following diagram.
+ \[\xymatrix{
+  T_0\ar@{^(->}[d]_I \ar[r]^{x_0} & Z\ar[d]^f\\
+  T \ar@{-->}[ur] \ar[r] & W
+ }\]
+ The set of dashed arrows is a $\hom(x_0^*\W^1_{Z/W},I)$-torsor. This characterizes $\Om^1_{Z/W}$.
+
+\end{remark}
+

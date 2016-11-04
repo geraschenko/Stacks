@@ -1,0 +1,73 @@
+\sektion{37}{Push-forward of Quasi-coherent sheaves}
+
+Recall that we're trying to prove
+\begin{proposition}
+  Let $f:\X\to \Y$ be a quasi-compact and quasi-separated morphism of
+algebraic stacks, and let $F$ be quasi-coherent on $\X$. Then $f_*F$
+is quasi-coherent on $\Y$.
+\end{proposition}
+Last time we reduced to the case where $\Y=Y$ is a quasi-compact
+scheme.
+
+Choose a presentation $X\xrightarrow p \X$ such that $X\to Y$ is
+quasi-compact and quasi-separated. Let $X'=X\times_\X X$. Then
+\[\xymatrix{
+  X\times_\X X\ar[r]^{\text{qcmpt}}\ar[d] & X\times_Y X\ar[d]
+\ar[r]^{\text{qcmpt}} & Y\\
+  \X\ar[r]^\Delta & \X\times_Y \X
+}\]
+($g:X\to Y$) so $\eta:X'\to Y$ is also quasi-compact. Choose an
+\'etale surjection $W\to X'$ from a scheme so that $h:W\to Y$ is
+quasi-compact and quasi-separated (we could take it to be a disjoint
+union of affines). Then $(f_*F)|_Y=\ker(\xymatrix@-1pc{g_*F_X
+\ar@<.5ex>[r]\ar@<-.5ex>[r] & h_*F_W}) = \ker(\xymatrix@-1pc{g_*F_X
+\ar@<.5ex>[r]\ar@<-.5ex>[r] & \eta_*F_{X'}})$
+($\eta_*F_{X'}\hookrightarrow h_*F_W$).  This is because
+$(f_*F)(Y)=\Ga(\X_\liset,
+F)=Eq(\xymatrix@-1pc{\Ga(X,F_X)\ar@<.5ex>[r]\ar@<-.5ex>[r] &
+\Ga(X',F_{X'}})$ by some stuff we did last time (nontrivial).
+
+So $(f_*F)_Y$ is quasi-coherent.
+\[\xymatrix{
+  \tilde W \ar@<.5ex>[r]\ar@<-.5ex>[r]\ar[d] &\tilde X\ar[d]\ar[r]&
+\X'\ar[r]^{f'}\ar[d]_t & Y'\ar[d]_s^{sm}\\
+  W \ar@<.5ex>[r]\ar@<-.5ex>[r]& X\ar[r]&\X\ar[r]^f & Y
+}\]
+Then want the map $s^*(f_*F)_Y\to (f'_*t^*F)_{Y'}$ to be an
+isomorphism. We are using the lemma from last time that something in
+the restricted topos is the same as something else \anton{}. This
+follows because the formation of $f_*F$ for $f$ a quasi-compact
+quasi-separated morphism of schemes commutes with flat base change.
+
+This concludes the proof of the proposition.
+
+\begin{example}
+   Let $\X=BG$ over a field $k$. Then $\qco(\X)\cong Rep(G)$ and the
+functor $\Ga(\X,F)=F^G$. More generally, suppose $H\subseteq G$ is a
+normal closed subgroup scheme with quotient $Q$. Then we get a map
+$f:BG\to BQ$. If you have a $G$-torsor $P$ over some scheme, then you
+take $P\times^G Q$ (product with $Q$ and quotient by the diagonal
+action of $G$). Then we have
+  \[\xymatrix{
+    \qco(BG)\ar[r]^\sim \ar[d]_{f_*} & Rep(G)\ar[d]& M\ar@{|->}[d]\\
+    \qco(BQ)\ar[r]^\sim & Rep(Q)& M^H
+  }\]
+\end{example}
+\begin{warning}[Advertisement for derived categories and
+cohomological descent]
+  We can define $R^if_*F$ for some quasi-compact quasi-separated
+morphism $f:\X\to \Y$, but you have to be very careful. You'd like to
+say that $f_*$ of an injective is injective (or acyclic, something in
+abelian groups \anton{}), which uses that $f^*$ is exact.
+
+  Given $\X\xrightarrow f \Y\xrightarrow g \Z$, we want a spectral
+sequence $E^{p,q}_2=R^pg_*R^qf_*F\Rightarrow R^{p+q}(gf)_*F$. This is
+the Leray spectral sequence, and you really need that $f_*$ of an
+injective is acyclic, for which you want an exact left adjoint.
+Things will still work out for quasi-coherent stuff, but not for
+sheaves of abelian groups in general. Because of these difficulties,
+we'll postpone this discussion.
+
+  We have something $E^{p,q}_2=H^p(Q,H^q(H,M))\Rightarrow
+H^{p+q}(G,M)$.
+\end{warning}

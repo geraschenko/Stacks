@@ -1,0 +1,156 @@
+
+ 
+ \subsektion{Higher Direct Images of Proper Maps}
+
+ \begin{lemma}
+   Let $f:X\to Y$ be a morphism of topoi and assume that $\ab_X$ and $\ab_Y$ have
+   enough injectives (this always holds, actually). Then there is a spectral sequence
+   $E^{p,q}_2=H^p(Y,R^q\!f_*F)\Rightarrow H^{p+q}(X,F)$ for all $F\in \ab_X$.
+ \end{lemma}
+ \begin{proof}
+   $R^q\!f_*$ is the $q$-th derived functor of $f_*:\ab_X\to \ab_Y$, and $H^p$ is the
+   $p$-th derived functor of the global sections functor. Observe that we have a
+   factorization as shown, and $f_*$ takes injective objects to injective objects (Lemma
+   \ref{lec18L:preserve_injectives}).
+   \[\xymatrix{
+    \ab_X \ar[r]^{f_*} \ar[dr]_{\Ga(X,-)} & \ab_Y \ar[d]^{\Ga(Y,-)}\\
+    & \ab
+   }\]
+    There is a very general theorem (the \emph{Grothendieck spectral sequence},
+   \cite[XX.9.6]{Lang:Algebra}) that says that whenever you have a factorization $G\circ
+   F$ of a functor so that $F$ takes injective objects to $G$-acyclic objects, then you
+   get a spectral sequence $R^pG(R^qF)\Rightarrow R^{p+q}(G\circ F)$.
+ \end{proof}
+ \begin{lemma}
+   Let $f:X\to Y$ be an affine morphism of algebraic spaces. Then for any quasi-coherent
+   sheaf $F$ on $X$ and $q>0$ we have that $R^q\!f_*F=0$, where we think of
+   $f_*:\ab_{X_{et}}\to \ab_{Y_{et}}$.
+ \end{lemma}
+ \begin{proof}
+   Given $q>0$, consider the following statments.
+   \begin{enumerate}
+     \item[$(*)_q$] For every affine morphism $f:X\to Y$ of algebraic spaces and $F$
+     quasi-coherent on $X$, $R^s\!f_*F=0$ for all $1\le s\le q$.
+     \item[$(*)_q'$] For every affine scheme $X$ and every $F$ quasi-coherent on $X$,
+     $H^s(X_{et},F)=0$ for $1\le s\le q$.
+   \end{enumerate}
+   We claim that $(*)_q'$ implies $(*)_q$. This is because $R^s\!f_*F$ is the sheaf
+   associated to the presheaf $(Y'\to Y)\mapsto H^s(X\times_Y Y',F|_{X\times_Y Y'})$
+   \anton{exercise}. Thus it is enough to consider the case when $Y$ is affine, so
+   $(*)_q'\Rightarrow (*)_q$.
+
+   Now we prove that $(*)_q'$ holds by induction on $q$. For $q=1$, we are looking at
+   $H^1(X_{et},F)=Ext^1(\O_X,F)$ with $F$ quasi-coherent and $X$ an affine scheme. You
+   can think of the elements as isomorphism classes of extensions of $\O_X$-modules
+   \[
+    0\to F\to E\to \O_X\to 0.
+   \]
+   The point is that $\hom(\O_X,-)\cong \Ga(X,-)$, so they give the same derived functors
+   (whether you compute in $\O_X\mod$ or in $\ab$). Now the result is clear because $F$
+   and $\O_X$ are quasi-coherent, so $E$ is quasi-coherent. By the equivalence of
+   categories $\qco(X_{zar})\cong \qco(X_{et})$, we know that all such sequences are
+   split because we can compute the Zariski cohomology to be zero.
+
+   So we've proven $(*)_1'$, and therefore $(*)_1$. Now assume $(*)_q$. This implies that
+   for every affine morphism $f:X\to Y$ and every $F$ quasi-coherent on $X$, we have an
+   inclusion $H^{q+1}(Y,f_*F)\hookrightarrow H^{q+1}(X,F)$. To see this, look at the
+   spectral sequence $E_2^{s,t}=H^s(Y,R^t\!f_*F)\Rightarrow H^{s+t}(X,F)$.
+   \[\begin{xy}
+     (0,5) *+!UR{t}, (10,0) *+!UR{s},
+     (8,0) *+!D{H^{q+1}(Y,f_*F)}, (0,4) *++!L{H^0(Y,R^{q+1}f_*F)},
+     (0,3.5); (10,3.5) **@{.}; (6.5,3.5); (6.5,0) **@{.},
+     (3.25,2.1) *{\mbox{\Huge 0}},
+     (0,.7);(10,.7) **@{.},
+     (1.5,.35) *{\mbox{\Large $\ast$}},
+     (3.8,.35) *{\mbox{\Large $\cdots$}},
+     (6.15,.35) *{\mbox{\Large $\ast$}},
+     (0,.35) *++!R{0}, (0,2.1) *++!R{\mbox{\Large $\vdots$}},
+     (0,3.2) *++!R{q}, (0,4) *+!R{q+1},
+     (1.5,0) *++!U{0}, (3.8,0) *++!U{\mbox{\Large $\cdots$}},
+     (6.15,0) *++!U{q}, (8,0) *+!U{q+1},
+     \ar 0;(0,5)
+     \ar 0;(10,0)
+   \end{xy}\]
+   There is a natural map $H^{q+1}(Y,f_*F)\to H^{q+1}(x,F)$, and the kernel is the stuff
+   killed of as you run the spectral sequence. But you can see that you aren't killing
+   anything off because of all the zeros.
+
+   Now we'd like to show that $(*)_q\Rightarrow (*)_{q+1}'$. Take a class $\alpha\in
+   H^{q+1}(X_{et},F)$. We'd like to say that it is zero. To compute, we take an injective
+   resolution, take global sections and then take cohomology. There exists an \'etale
+   surjection $g:U\to X$ with $U$ an affine scheme such that $\alpha\mapsto 0\in
+   H^{q+1}(U_{et},F)$ \anton{This is because we have a resolution of sheaves!}. $F\mapsto
+   I^\udot$. $\tilde \alpha\in \Ga(X,I^{q+1})$ locally because this is a resolution.
+
+   Now consider the sequence
+   \[
+    0\to F \to g_*g^* F\to Q\to 0.
+   \]
+   Then we get a long exact sequence
+   \[
+    \underbrace{H^q(X,Q)}_{=0\text{ by }(*)_q'}\to H^{q+1}(X,F)\to H^{q+1}(X,g_*g^*F)
+    \hookrightarrow H^{q+1}(U,g^*F)
+   \]
+   and $\alpha\mapsto 0$ in $H^{q+1}(U,g^*F)$, so it is zero.
+ \end{proof}
+ \begin{lemma}
+   Let $X$ be a scheme, and let $\e:X_{et}\to X_{zar}$ be the natural morphism of topoi
+   (coming from the inclusion of sites). Then for every quasi-coherent sheaf $F$ on
+   $X_{et}$ we have $R^q\e_*F=0$ for all $q>0$.
+ \end{lemma}
+ \begin{proof}
+   $R^q\e_*F$ is the \'etale sheaf associated to the presheaf on $X_{zar}$ given by
+   $U\mapsto H^q(U_{et},F)$. It is enough to check on affine open subsets, and there they
+   are zero.
+ \end{proof}
+ \begin{lemma}
+   Let $X$ be a quasi-compact separated algebraic space. Then $\qco(X)$ has enough
+   injectives and for every injective $I\in \qco(X)$, we have $H^q(X,I)=0$ for $q>0$.
+ \end{lemma}
+ \begin{proof}
+   Let $\pi:U\to X$ be a quasi-compact \'etale surjection with $U$ a disjoint union of
+   affine schemes. By the case of schemes, $\qco(U)$ (we can be ambiguous about the
+   topology because they are equivalent) has enough injectives, and for injective $I_U\in
+   \qco(U)$, $\pi_*I_U$ is injective in $\qco(X)$ (since $\pi_*$ has an exact left
+   adjoint).
+
+   So for any $F\in \qco(X)$, choose an injection $\pi^*F\hookrightarrow I_U$, with
+   $I_U\in \qco(U)$ injective. Then you get
+   \[
+    F\hookrightarrow \pi_*\pi^* \hookrightarrow \pi_*I_U
+   \]
+   In fact, by taking $F$ to be injective, we see that any injective in $\qco(X)$ is a
+   direct summand of $\pi_*I_U$ for some injective $I_U\in \qco(U)$
+
+   So to prove the second statement, it is enough to note that for an injective $I\in
+   \qco(U)$, $H^q(X,\pi_*I)=H^q(U_{et},I)=H^q(U_{zar},I)=0$. The first equality is
+   because we have a spectral sequence $E_2^{p,q}=H^p(X,R^q\pi_* I)\Rightarrow
+   H^{p+q}(U,I)$. All of the $R^q\pi_*I=0$ for $q>0$ are zero because $X$ is separated,
+   so $\pi:U\to X$ is an affine morphism.
+ \end{proof}
+ \begin{lemma}
+   Let $f:X\to Y$ be a quasi-compact and separated morphism of algebraic spaces. Then for
+   every quasi-coherent $F$ on $X$, the sheaves $R^q\!f_*F$ are quasi-coherent on $Y$.
+ \end{lemma}
+ \begin{proof}
+   We're looking at the sheaf associated to the presheaf $(Y'\to Y)\mapsto H^q(X\times_Y
+   Y',F)$. To check quasi-coherence, we can look \'etale locally on $Y$, so we can assume
+   $Y$ is an affine scheme. So $\qco(X)$ has enough injectives. If $F$ happens to be
+   injective in $\qco(X)$, the $H^q(X\times_Y Y',F)$ are zero. Thus, to compute the
+   cohomology, we can choose an injective resolution over $X$ and push it forward. But we
+   know that push-forwards of quasi-coherent sheaves are quasi-coherent. Choose an
+   injective resolution $F\to I^\udot$ in $\qco(X)$. Then $R^q\!f_*F=\mathcal
+   H^q(f_*I^0\to f_*I^1\to \cdots)$.
+ \end{proof}
+ \begin{theorem}
+   If $f:X\to Y$ is a proper morphism of locally noetherian algebraic spaces and $F$ is
+   coherent on $X$, then $R^q\!f_*F$ are coherent on $Y$.
+ \end{theorem}
+ Recall that for now proper just means that \anton{}
+ \begin{proof}
+   Coherence is local on $Y$, so we can assume $Y$ is an affine scheme. Thus, there
+   exists a proper birational morphism $X'\to X$ so that $X'\to Y$ is projective.
+
+   Next we need that for every integral closed subspace of $X$, there is a coherent sheaf
+   supported on it.
+ \end{proof}

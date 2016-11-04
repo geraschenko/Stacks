@@ -1,0 +1,186 @@
+
+\subsektion{Proof: III}
+
+Recall that we have $\X$ an algebraic stack of finite type with
+finite diagonal over an noetherian affine base $S$. The goal is to
+get a coarse space $\X\to X$ with a bunch of properties. So far,
+we've done this if $\X$ admits a finite flat surjection from a
+quasi-projective scheme.
+
+We need three theorems.
+
+\begin{theorem}[A, Zariski's main theorem for stacks?]
+  Assume $\X$ admits a quasi-finite flat surjection $U\to \X$ with
+$U$ a quasi-projective $S$-scheme. Then there is an algebraic stack
+$\W$ over $S$ and a surjective separated \'etale morphism $\pi:\W\to
+\X$ which is representable by schemes (for $T$ a scheme, $\W\times_\X
+T$ is a scheme) and a closed immersion $Z\subseteq U\times_\X\W$ such
+that $Z\to \W$ is a finite flat surjection and such that
+  \begin{enumerate}
+   \item for every quasi-compact open substack $\W'\subseteq \W$, the
+preimage $Z'\subseteq Z$ is quasi-projective over $S$, and
+   \item for every algebraically closed field $k$ and $w\in \W(k)$,
+then $\aut_{\W(k)}(w)\to \aut_{\X(k)}(\pi(w))$ is an isomorphism (it
+is always an injection by representability of $\pi$).
+  \end{enumerate}
+\end{theorem}
+If $\X$ is quasi-compact, we get that $\W$ has a coarse moduli space
+$W$, and $\W\times_\X \W$ will also have a coarse moduli space $R$,
+and we'd like to show that $R\rightrightarrows W$ is an \'etale
+equivalence relation. The second condition is what will force $R$ to
+be \'etale.
+\begin{theorem}[B]
+  Let $\Y'\to \Y$ be a separated representable \'etale and
+quasi-compact morphism of algebraic stacks of finite type over $S$
+with finite diagonals. Assume there is a finite flat covering $U\to
+\Y$ with $U/S$ quasi-projective and for every algebraically closed
+field $k$ and $y'\in \Y'(k)$ mapping to $y\in \Y(k)$, the map
+$\aut_{\Y'(k)}(y')\to \aut_{\Y(k)}(y)$ is an isomorphism. Then $\Y'$
+admits a finite flat covering $U'\to \Y'$ with $U'/S$
+quasi-projective and the map on coarse spaces $Y'\to Y$ is \'etale.
+\end{theorem}
+This, together with the first theorem will say that $\W\times_\X \W$
+has a coarse space and the projections $R\rightrightarrows W$ are
+\'etale.
+\begin{theorem}[C]
+  Let $\X/S$ be an algebraic stack locally of finite type with finite
+diagonal. Then there is an open covering $\X=\bigcup \X_i$ such that
+each $\X_i$ admits a quasi-finite flat surjection $U_i\to \X_i$ with
+$U_i/S$ quasi-projective. (If $\X$ is DM, then you could replace
+``flat'' by \'etale.)
+\end{theorem}
+Now we start with a general $\X$. Apply Theorem C to reduce to the
+case where you have a quasi-finite flat surjection. Then we get
+$R\rightrightarrows W$ an \'etale equivalence relation and we win.
+
+Let's start with theorem A.
+\begin{proof}[Proof of Theorem A]
+  Let $\H$ (for Hilbert) be the stack over $S$ whose objects are
+triples $(T,x,Z)$ such that $T$ is an $S$-scheme, $x\in \X(T)$, and
+$Z\subseteq T\times_{x,\X} U$ is a closed subscheme (because it is
+quasi-finite, this is a quasi-finite separated $T$-scheme, so it is
+quasi-affine) flat over $T$. There is a natural forgetful map $\H\to
+\X$ given by $(T,x,Z)\mapsto (T,x)$ and we have that
+  \[\xymatrix{
+    \hilb_{T\times_\X U} \ar@{}[dr]|(.25)\pb \ar[r]\ar[d] & \H\ar[d]\\
+    T \ar[r] & \X
+  }\]
+  This implies that $\H$ is an algebraic stack with finite diagonal.
+Maybe a better notation for $\H$ would be $\hilb_{U/\X}$.
+
+  Define $\W'\subseteq \H$ to be the maximal open substack where
+$\H\to \X$ is \'etale. In general if you have a finite type morphism
+of schemes, the locus where the morphism is \'etale is an open set.
+You can do the same thing here.
+  \[\xymatrix{
+     & \H_T\ar[d] \ar[r] & \H\ar[d]\\
+    T'\ar@<.5ex>[r]\ar@<-.5ex>[r] & T\ar[r]^{sm} & \X
+  }\]
+
+  Define $I_\X$, the \emph{inertia stack}, to be
+  \[\xymatrix{
+   I_\X \ar[r]\ar[d] & \X\ar[d]^\Delta\\
+   \X\ar[r]^\Delta & \X\times \X
+  }\qquad\qquad
+  \xymatrix{
+   \aut_x \ar[r]\ar[d] & I_\X\ar[d]\\
+   T\ar[r]^x & \X
+  }\]
+  An automorphism in $I_\X$ is a pair of automorphisms in $\X$. Now
+define $I_\X'=I_\X\times_\X \W'$. Then we have that
+  \[\xymatrix@C-2pc{
+    I_{\W'} \ar[dr]\ar[rr]^j& & I_\X' \ar[dl]\\
+    & \W'
+  }\]
+  \begin{lemma}
+   $j$ is an open and closed immersion.
+  \end{lemma}
+  \begin{proof}
+   $I_{\W'}$ and $I_\X'$ are both finite over $\W'$. The map $j$ is
+also a monomorphism since $\W'\to \X$ is representable.
+   \[\xymatrix{
+     \aut_{(x,Z)}\ar[r] \ar[d] & \aut_x\ar[dl]\\
+     T\ar[r]_{(x,Z)}& \W'
+   }\]
+   To prove the lemma, it is enough to show that $j$ is \'etale. For
+this, look at the following picture.
+   \[\xymatrix{
+    I_{\W'}\ar[d]\ar[r]^{et} & I_\X' \ar[r]\ar[d] &
+\W\ar[d]_\Delta\ar[dr]\\
+    \W'\ar[r]^{et}\ar[dr]_{et} & \K \ar[r]\ar[d] & \W\times
+\W\ar[d]_{et} & \X\ar[dl]^\Delta\\
+    & \X\ar[r]^\Delta & \X\times \X
+   }\]
+  \end{proof}
+  Aside: if $k=\bar k$, $x\in \X(k)$, $Z\subseteq U\times_{\X,x}k$,
+then $\Aut(x,Z)$ is the set of automorphisms $\sigma:x\to x$ in
+$\X(k)$ such that $\sigma:U\times_{\X,x}k\to U\times_{\X,x}k$ is an
+automorphism over $Z$.
+
+  Let $I_{\X}''\subseteq I_\X '$ be the complement of $I_{\W'}$, and
+let $\W\subseteq \W'$ be the complement of the image of $I_\X''$ in
+$\W'$. Here we use the fact that $I_\X'$ is proper over $\W'$ and so
+$\I_\X''$ is also proper over $\W'$. The claim is that $\W$ works.
+  \[\xymatrix{
+   Z\ar@{^(->}[r] \ar[dr] & U\times_\X \W\ar[d]\\ & \W
+  }\]
+  We still need to show that $\W\to \X$ is surjective. Let $k$ be an
+algebraically closed field and fix $x\in \X(k)$. Consider $w\in
+\H(k)$ corresponding to
+  \[\xymatrix{
+    U\times_\X \spec k \ar[r]^\id \ar[dr] & U\times_{\X,x} \spec
+k\ar[d]\\
+    & \spec k
+  }\]
+  we have to show that something lies in the \'etale locus. Something
+about the identity not working for a \emph{quasi}-finite morphism.
+Let $V\to \X$ be a smooth surjection, and assume that $x$ comes from
+a point $v:\spec k\to V$ (since $k=\bar k$). Then we have
+  \[\xymatrix{
+    & \hilb_{P/\hat V} \sqcup (else)\ar@{=}[d]\\
+    w\in \hilb_{U\times_\X \spec k} \ar@{^(->}[r]\ar[d]&
+\hilb_{U\times_\X V} \ar[r]\ar[d]& \H\ar[d]\\
+    \spec k \ar[r]^v & V\ar[r] & \X
+  }\]
+  We can replaced $V$ by a completion (strict hensilization) at $v$.
+Now look at $U\times_\X \hat V=P\sqcup Q$ where $P\to \hat V$ is
+finite and $Q$ has empty closed fiber. Something with that top
+$\hilb$ because of Hilbert polynomial considerations. Moreover, that
+$\hilb$ is $\hat V\sqcup (rest)$, and our point lies in $\hat V$,
+which proves the result.
+\end{proof}
+\begin{proof}[Outline proof of Theorem B]
+  $\pi:\Y'\to \Y$ representable \'etale quasi-compact and $U\to \Y$
+finite flat with $U/S$ quasi-projective, and for all $y'\in \Y'(k)$,
+the map $\Aut(y')\to \Aut(\pi(y'))$ is an isomorphism.
+
+  (a) $\Y'$ admits a finite flat surjection $U'\to \Y'$ with $U'/S$
+quasi-projective. To see this,
+  \[\xymatrix{
+   U'\ar[r]\ar[d] & \Y'\ar[d]\\ U\ar[r] & \Y
+  }\]
+  $U'\to U$ \'etale quasi-compact so quasi-affine and quasi-affine
+over quasi-projective ($U$) is quasi-projective. \anton{}
+
+  (b) $Y'\to Y$ is \'etale. Idea of proof: you certainly have finite
+type since we're in the noetherian case, so it is enough to check
+formally \'etale. Now we need to write down what the complete local
+rings of $Y'$ and $Y$ look like at a point. Fix $y\in Y(k)$ with $k$
+algebraically closed, and fix a lifting $u\in U(k)$ of $y$, and let
+$y'\in Y'(k)$ mapping to $y$. It takes a little argument, but you can
+find $u'\in U'(k)$ mapping to $u$. Take $\hat \O_{Y,y}^{sh}$ (sh
+means strict hensilization; else think closed point and completion at
+local rings), it is $Eq(\hat \O^{sh}_{U,u}\rightrightarrows
+\prod_{\xi\in R(k), s(\xi)=u=t(\xi)} \hat \O^{sh}_{R,\xi})$ with
+$R=U\times_\Y U$. And we get $\hat \O_{Y,y'}^{sh} = Eq(\hat
+\O^{sh}_{U',u'}\rightrightarrows \prod_{\xi'\in R'(k),
+s(\xi')=u=t(\xi')} \hat \O^{sh}_{R',\xi'})$. The map between them is
+induced by maps on the terms in the equalizers, the map $\hat
+\O^{sh}_{U,y}\to \hat \O^{sh}_{U',y'}$ is an isomorphism and
+something on the product terms. We want that $\{\xi'\in
+R'(k)|s(\xi')=t(\xi')=u'\}\to \{\xi\in R(k)|s(\xi)=t(\xi)=u\}$ to be
+bijective. The first set is in bijection with $\aut_{\Y'}(y')$ and
+the second is in bijection with $\aut_{\Y}(y)$.
+\end{proof}
+
+

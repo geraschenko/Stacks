@@ -1,0 +1,140 @@
+\sektion{8}{Descent for \texorpdfstring{$\M_g$, $g\ge 2$}{M\_g, g>=2}}
+
+ \begin{definition}
+   For an integer $g$ and a scheme $S$, $\M_g(S)$ is the category whose objects are
+   smooth proper maps $\pi:C\to S$ all of whose geometric fibers are connected genus $g$
+   curves, and whose morphisms are isomorphisms over $S$.
+
+   For a morphism of schemes $X\to Y$, the category $\M_g(X\to Y)$ has objects pairs
+   $(C_X,\sigma)$, where $C_X\in \M_g(X)$ and $\sigma$ is an isomorphism
+   $\sigma:p_2^*C_X\xrightarrow\sim p_1^* C_X$, with the compatibility hexagon like the
+   one in the previous lecture. A morphism in this category, $(C_X',\sigma')\xrightarrow
+   \varepsilon (C_X,\sigma)$ is a morphism $\varepsilon:C_X'\to C_X$ such that the
+   following diagram commutes.
+   \[\xymatrix{
+    p_2^* C_X' \ar[r]^{p_2^* \varepsilon} \ar[d]_{\sigma'} & p_2^* C_X \ar[d]^{\sigma}\\
+    p_1^*C_X' \ar[r]^{p_1^*\varepsilon} & p_1^* C_X
+   }\]
+ \end{definition}
+ \begin{proposition} \label{lec08P:descent_Mg}
+   If $g\ge 2$ and $f:X\to Y$ is a quasi-compact fppf cover, then the pull-back functor
+   $f^*:\M_g(Y)\to \M_g(X\xrightarrow f Y)$, given by $C\mapsto (f^*C,\text{\rm can})$,
+   is an equivalence of categories.
+ \end{proposition}
+ The following lemma is the key. It is the only part of the proof that uses $g\ge 2$.
+ \begin{lemma}
+   If $g\ge 2$, then for any $(\pi:C\to S)\in \M_g(S)$, $\Om_{C/S}^{\otimes 3}$ is a
+   relatively very ample sheaf.\footnote{A sheaf $\E$ on $C$ is \emph{relatively
+   very ample} if there is an open cover of $S$ so that $\E$ is very ample over
+   each open set. This means that there is a closed immersion $C\hookrightarrow
+   \PP(\pi_*\E)$ (this is a twisted projective space over $S$).}
+ \end{lemma}
+ \begin{proof}
+   On fibers, the canonical sheaf is very ample by Riemann-Roch.\footnote{Let $K$ be the
+   canonical divisor and let $l(D)=\dim \Ga(\L(D))$. Riemann-Roch for curves
+   states that $l(D)-l(K-D)=\deg D+1-g$. $\L(D)$ is very ample if and only if
+   $l(D-P-Q)=l(D)-2$ for all points $P$ and $Q$ (see \cite[IV \S3]{Hartshorne}). If $\deg
+   D< 0$, then $l(D)=0$. Thus, if $\deg D>2g$, $\L(D)$ will be very ample. For
+   $g\ge 2$, $\deg 3K = 6g-6> 2g$, so the third tensor power of the canonical sheaf is
+   very ample.} We also have that $H^1(C,\Om_{C/S}^{\otimes 3})=0$ \anton{somehow}. By
+   \anton{something} from \cite[III \S9]{Hartshorne}, we get that $\Om_{C/S}^{\otimes 3}$
+   is relatively very ample.
+ \end{proof}
+ \begin{proof}[Proof of Proposition \ref{lec08P:descent_Mg}]
+   We need to show that the pull-back functor is fully faithful and essentially
+   surjective. By Proposition \ref{lec07C:morphisms_fppf_glue}, morphisms of pull-back
+   curves in $\M_g(X\to Y)$ ``glue'' to give morphisms of the originals in $\M_g(Y)$, so
+   $f^*$ is injective on $\hom$ sets. Since isomorphisms also glue in the fppf topology,
+   we have that $f^*$ is injective on objects. Thus, $f^*$ is fully faithful.
+
+   Now we show essential surjectivity. Let $(C_X,\sigma)\in \M_g(X\to Y)$. By the lemma,
+   $\Om_{C_X/X}^{\otimes 3}$ is relatively very ample. \anton{$\pi_*\Om_{C_X/X}$ is a
+   locally free sheaf, and this construction commutes with base change for some reason
+   \dots where do we use this?}. Let $E_X=\pi_*\Om_{C_X/X}^{\otimes 3}$. The isomorphism
+   $\sigma$ induces an isomorphism $\sigma_E:p_2^* E_X\xrightarrow\sim p_1^* E_X$. The
+   cocycle condition on $\sigma$ induces the cocycle condition for $\sigma_E$.
+   \[\xymatrix@R-1.5pc{
+      p_1^* E_X \xleftarrow[\sigma_E]{\sim} p_2^* E_X\\
+      p_1^*C_X \xleftarrow[\sigma]{\sim} p_2^* C_X \ar[r]
+      & X\times_Y X \\ \\
+      \llap{$E_X$\quad}C_X \ar[r] \ar@{<-}p+(-.4,1) \ar@{<-}p+(.4,1)
+      & X \ar@{<-}p+(-.4,1)^{p_1} \ar@{<-}p+(.4,1)_{p_2}
+   }\]
+    By descent for locally free sheaves (see Remark
+   \ref{lec07R:descent_ideals,algebras,loc_frees}), there is a locally free sheaf $E$ on
+   $Y$ which pulls back to $E_X$. It follows that $\PP E$ pulls back to $\PP E_X$.
+   Consider the following diagram.
+   \[\xymatrix{
+    p_1^* C_X = p_2^* C_X \ar@{^(->}[r]
+    & \PP E_X\times_{\PP E} \PP E_X \ar[r] \ar@<.5ex>[d]\ar@<-.5ex>[d]
+    & X\times_Y X \ar@<.5ex>[d]\ar@<-.5ex>[d] \\
+    C_X \ar@{^(->}[r] \ar@{<-}p+(-.3,1) \ar@{<-}p+(.3,1) \ar@{-->}[d]
+    & \PP E_X \ar[d]_{\mbox{\scriptsize\txt{fppf\\ qcompact}}} \ar[r] \ar@{}[dr]|(.25)\pb
+    & X \ar[d]^{\mbox{\scriptsize\txt{fppf\\ qcompact}}} \\
+    C \ar@{^(-->}[r]& \PP E \ar[r] & Y
+   }\]
+    The closed immersion of $C_X$ into $\PP E_X$ is the one induced by
+   $\Om_{C_X/X}^{\otimes 3}$. \anton{why do we get the equality of subschemes $p_1^* C_X =
+   p_2^* C_X$?} Let $\I_{C_X}$ be the quasi-coherent sheaf of ideals of $C_X$ within $\PP
+   E_X$. The equality of subschemes $p_1^*C_X=p_2^* C_X$ induces an isomorphism
+   $\sigma_\I:p_2^*\I_{C_X}\xrightarrow\sim p_1^* \I_{C_X}$ which satisfies the cocycle
+   condition. By descent for quasi-coherent sheaves of ideals along the quasi-compact
+   fppf cover $\PP E_X\to \PP E$, we have that $\I_{C_X}$ is the pull-back of some
+   quasi-coherent sheaf of ideals $\I_C$ on $\PP E$. Let $C$ be the subscheme defined by
+   $\I_C$. Then we have that $C$ pulls back to $C_X$. Since smoothness and properness
+   descend along fppf covers, $C\to Y$ is smooth and proper. For any geometric point $y$ in
+   $Y$, there is a corresponding geometric point $x$ in $X$, and the fiber $C_y$ is equal
+   to the fiber $(C_X)_x$, so it is a connected genus $g$ curve.
+ \end{proof}
+% Key fact: If we have $(\pi:C\to S)\in \M_g(S)$, then $(\Om^1_{C/S})^{\otimes n}$ is
+% relatively very ample on $C$ if $n\ge 3$. This is some exercise in Riemann-Roch. You
+% need to check that this is true on fibers, and that $H^1(C_{X/S},(\Om^1_{C/S})^{\otimes
+% n})=0$. \anton{why is this sufficient?}
+%
+% $\pi_*(\Om^1_{C/S})$ is a locally free sheaf on $S$,\anton{why?} and this commutes with base change
+% $S'\to S$.\anton{why?} Closed immersion over $S$, $C\hookrightarrow \PP(\pi_*(\Om_{C/S}^1)^{\otimes
+% n})$ (this is what it means for $(\Om^1_{C/S})^{\otimes n}$ to be very ample).
+%
+% The full faithfullness has already been shown. This was the statement that morphisms of
+% schemes can be defined locally in the fppf topology. We need to show that
+% $(C_X,\sigma)\in \M_g(X\to Y)$ comes from an object $C\in \M_g(Y)$.
+%
+% Let $E_X=\pi_{X*}(\Om^1_{C_X/X})^{\otimes 3}$ where $\pi_X:C_X\to X$. This is a locally
+% free sheaf on $X$. We have $\sigma_E:p_2^*E_X\xrightarrow\sim p_1^*E_X$ in the following
+% way
+% \[\xymatrix{
+%    p_1^*C_X\ar[dr] \ar@/^3ex/[rr]^{h_1} & p_2^* C_X \ar[d] \ar[r]_{h_2} & X\times_Y
+%    X\ar[d]\\
+%    & C_X \ar[r] & X
+% }\]
+% The cocycle condition follows from the cocycle condition for $\sigma$ \anton{what?}
+%
+% \begin{theorem}
+%   For locally free sheaves implies\anton{?} locally free sheaf $E$ on $Y$ inducing
+%   $(E_X,\sigma_E)$.
+% \end{theorem}
+% \[\xymatrix{
+%    X\times_Y X \ar@<.5ex>[d]\ar@<-.5ex>[d]
+%    & \PP E_X\times_{\PP E} \PP E_X \ar[l]
+%    \ar@<.5ex>[d]\ar@<-.5ex>[d] \ar@{}[r]|{=}& (X\times_Y X)\times_Y \PP E\\
+%    X \ar[d] & \PP E_X \ar[l] \ar[d]^{\scriptsize\txt{fppf\\ qcompact}} & C_X \ar@{_(->}[l]\\
+%    Y & \PP E \ar[l]
+% }\]
+% \def\I{\mathcal{I}}
+% So we get $\I\subseteq \O_{\PP E}$ inducing $(\I_X,$descent data$)$. Let $C\subseteq \PP
+% E$ be the subscheme defined by $\I$. $C_X = f^* C$ is compatible with descent data.
+% $C\in \M_g(Y)$: you want $C\to Y$ something ... check smoothness on fibers, make some
+% base change by $X\to Y$.
+
+ \begin{remark}
+   The moral is that when you want to talk about descent of anything, you do it via
+   descent of quasi-coherent sheaves. The key to this proof was the construction of a
+   canonical embedding of the curve into some projective space, so that we could use the
+   quasi-coherent sheaf of ideals.
+
+   For $g=0$, the anti-canonical sheaf is very ample, so essentially the same proof works
+   to prove descent for $\M_0$. However, for $g=1$, there is no canonical projective
+   embedding, and in fact the descent result doesn't hold! See Lecture Notes in
+   Mathematics 179, Raynaud, Faisceaux ample\dots. The counterexample has a normal base
+   of dimension at least 2.
+ \end{remark}

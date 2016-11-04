@@ -1,0 +1,153 @@
+\sektion{26}{Quotients by group actions}
+
+ The construction of the stackification of a prestack is difficult to work with.
+ Corollary \ref{lec25C:stackification<=>sheafification} tells us how to deal with the
+ stackification of a prestack in sets, but we want to understand other stackifications.
+ In practice, you guess what the stackification is, and then use the following lemma.
+ \begin{lemma} \label{lec26L:guess_stackification}
+   Let $\F\to \C$ be a prestack, let $\rho:\F\to \G$ be a morphism to a stack, and
+   assume that
+   \begin{enumerate}
+     \item for every $U\in \C$, the functor $\F(U)\to \G(U)$ is fully faithful, and
+     \item for every $U\in \C$ and every $x\in \G(U)$, there exists a covering $V\to U$
+     and $y\in \F(V)$ with a cartesian arrow $\rho (y)\to x$ over $V\to U$.
+   \end{enumerate}
+   Then the functor $\tilde \rho:\tilde \F\to \G$ is an equivalence.
+ \end{lemma}
+ \begin{proof}
+   (Essential surjectivity) Condition (1) implies $\rho$ is fully faithful by Lemma
+   \ref{lec21L:full_faithfulness_on_fibers}. Given $x\in \G(U)$, condition (2) produces
+   some cover $\pi:V\to U$ and some $y\in \F(V)$ with $\rho(y)=\pi^* x$. Since $\pi^*x$
+   comes with descent data with respect to $\pi$ and since $\rho$ is fully faithful, we
+   get descent data for $y$. Together with this descent data, $y$ gives an element of
+   $\tilde \F$ which maps to $x$.
+
+   (Full faithfulness) By Lemma \ref{lec21L:full_faithfulness_on_fibers}, it is enough to
+   check full faithfulness on fibers. Given $x,z\in \tilde \F(U)$, we can represent them
+   as elements $\xi,\zeta\in \F(V\to U)$ for some cover $V\to U$ (take a common
+   refinement if necessary). Then we have that $\hom_{\F(U)}(x,z)=\hom_{\F(V\to
+   U)}(\xi,\zeta)$,\footnote{Ok, so we should really replace $V$ by $V\times_U V$, but
+   that is confusing.}. By condition (1), $\hom_{\F(V\to U)}(\xi,\zeta)\cong
+   \hom_{\G(V\to U)}\bigl(\rho(\xi),\rho(\zeta)\bigr)$. The sheaf axiom for $\uhom$ tells
+   us that $\hom_{\G(V\to U)}\bigl(\rho(\xi),\rho(\zeta)\bigr)\cong
+   \hom_{\G(U)}\bigl(\tilde \rho (x),\tilde \rho (z)\bigr)$. Thus, the composition
+   $\hom_{\tilde\F(U)}(x,z)\to \hom_{\G(U)}\bigl(\tilde \rho (x),\tilde\rho (z)\bigr)$ is
+   a bijection.
+ \end{proof}
+
+ Let $\C=\sch/S$ with the \'etale topology, let $Y\to S$ be an algebraic space, and let
+ $G$ be a group space over $S$ acting on $Y$. Then we get the groupoid below, from which
+ we form the pre-stack $[Y_\udot]^{ps}$, which gives us the stack $[Y_\udot]$.
+ \[\begin{array}{l@{\qquad\qquad}l}
+   Y_0=Y,\qquad Y_1=Y\times G\\
+   s: Y\times G\to Y,\quad (y,g)\mapsto y &
+   \e:Y\to Y\times G,\quad y\mapsto (y,e)\\
+   t: Y\times G\to Y,\quad (y,g)\mapsto gy &
+   i:Y\times G\to Y\times G,\quad (y,g)\mapsto (gy,g^{-1})\\
+   \multicolumn{2}{l}{m:(Y\times G)\times_{s,Y,t}(Y\times G)\to Y\times G,\quad
+   \bigl((gy,h),(y,g)\bigr)\mapsto (y,hg)}
+ \end{array}\]
+ We'd like to get our hands on the stack $[Y_\udot]$, but we don't want to deal with the
+ stackification construction, so we guess the answer and use the lemma above.
+
+
+ \begin{definition}
+   Let $G$ be a group object in a site $\C$ (in which finite projective limits are
+   representable), let $X$ be an object in $\C$, and let $P\in \C/X$ have a $G$-action
+   over $X$. We say that $P$ is a \emph{$G$-torsor} over $X$ if it is locally trivial
+   (i.e.~if there exists a cover $X'\to X$ so that $X'\times_X P\cong X'\times G$).
+   \anton{Is this the right definition? everybody keeps saying the words ``acts
+   transitively'' on something}
+ \end{definition}
+ \begin{definition}
+   If $G$ is a group space and $Y$ is an algebraic space with a $G$-action, then $[Y/G]$
+   is defined to be the fibered category whose objects (over a scheme $U$) are diagrams
+   $U\leftarrow P\xrightarrow{\rho} Y$, where $P\to U$ is a $G$-torsor (which may be an
+   algebraic space)) and $\rho:P\to Y$ is a $G$-equivariant morphism, and whose morphisms
+   are diagrams as below, where $\tilde f:P'\to P$ is $G$-equivariant.
+   \[\xymatrix@R-1.5pc{
+    U'\ar[dd]_f & P'\ar[l]\ar[dd]_{\tilde f}\ar[dr]^{\rho'}\\ & & Y\\
+    U & P\ar[l]\ar[ur]_\rho
+   }\]
+    Note that $G$-equivariance of $\tilde f$ implies that the square is cartesian. In
+   particular, the fibers of $[Y/G]$ are groupoids.
+ \end{definition}
+ \begin{proposition}\label{lec26P:[Y/G]=stack}
+   If the diagonal morphism $G\to G\times G$ belongs to an effective descent class
+   (e.g.~if $G$ is a scheme), then $[Y/G]$ is a stack.
+ \end{proposition}
+ \begin{proof}
+   \anton{this proof is quick, does it need to be expanded?}
+   First note that if $G\to G\times G$ is in some effective descent class, then for any
+   $G$-torsor $P\to U$, $P\to P\times_U P$ belongs to the same effective descent class.
+   To see this, let $U'\to U$ be an \'etale cover of $U$, over which $P$ becomes trival.
+   Then observe that that the diagram below consists of two cartesian squares.
+   \[\xymatrix{
+    U'\ar[d] & U'\times G\ar[d]\ar[l] \ar[rr]^<>(.5){\id_{U'}\times \Delta_G}
+        & & U'\times G\times G \ar[d] \ar@{}[r]|<>(.5)\cong
+        &(U'\times G)\times_{U'}(U'\times G)\\
+    U & P\ar[l]\ar[rr]^<>(.5)\Delta & & P\times_U P
+   }\]
+    Now let $U'\to U$ be an \'etale cover, and let $U'\leftarrow P'\xrightarrow{\rho'} Y$
+   be an element of $[Y/G](U')$ together with descent data for the morphism $U'\to U$. By
+   descent for algebraic spaces (Theorem \ref{ApdxT:descent_alg_spaces}), $P'$ is the
+   pull-back of an algebraic space $P$ over $U$. Moreover, we get the descent of all the
+   diagrams that make $P'$ a $G$-torsor, so $P$ is a $G$-torsor over $U$. Finally, since
+   $h_Y$ is a sheaf on $\algsp$ with the \'etale topology, we get a $G$-equivariant
+   morphism $P\to Y$.
+ \end{proof}
+ \begin{proposition}
+   $[Y_\udot]\cong [Y/G]$.
+ \end{proposition}
+ \begin{proof}
+   We define a morphism of fibered categories $[Y_\udot]^{ps}\to [Y/G]$ by sending $y\in
+   Y(U)$ to the trivial torsor $U\times G\to U$ with the $G$-equivariant morphism
+   $U\times G\to Y$ given by $(u,g)\mapsto gy$. We see that $[Y_\udot]^{ps}(U)\to
+   [Y/G](U)$ is fully faithful with essential image equal to the subcategory of diagrams
+   $U\leftarrow P\to Y$ where $P$ is a trivial torsor \anton{exercise}. Since any torsor
+   is \'etale locally trivial, Lemma \ref{lec26L:guess_stackification} says that the
+   induced map $[Y_\udot]\to [Y/G]$ is an isomorphism.
+ \end{proof}
+
+% Define a morphism $[Y_\udot]^{ps}\to
+% [Y/G]$ in the following way. Well, $[Y_\udot]^{ps}(U)$ has objects $Y(U)$ and morphisms
+% $y'\to y$ are elements $g\in G(U)$ such that $y=gy'$.
+%
+% Given $y\in Y(U)$, we have the trivial torsor $U\times G\to U$, with $U\times G\to Y$
+% given by $(u,g)\mapsto gy$. This defines a morphisms of fibered categories
+% $[Y_\udot]^{ps}\to [Y/G]$. In fact, this gives you a functor $[Y_\udot]^{ps}(U)\to
+% [Y/G](U)$ (the category of diagrams like $U\leftarrow P\to Y$), and it is fully
+% faithful with essential image $U\leftarrow P\to Y$ with $P$ a trivial torsor
+% \anton{exercise}. Since any torsor is \'etale locally trivial, this proves that the
+% induced map $[Y_\udot]\to [Y/G]$ is an isomorphism by the lemma at the end of last
+% lecture.
+
+ \begin{example}
+   Let $Y$ be a scheme and let $G$ be a finite group which acts freely on $Y$. Then
+   $[Y/G]$ (the stack quotient) is isomorphic to $Y/G$ (the algebraic space quotient).
+   Define a map $\sigma:[Y/G]\to Y/G$ as follows. If $U$ is a scheme and $P$ is a
+   $G$-torsor over $U$ with $P\to Y$ $G$-equivariant, then we get a map $U=P/G\to Y/G$,
+   and this is natural in $P$ and $U$, so it gives us a map $\sigma$. To go in the other
+   direction, if we have $U\to Y/G$, then we get a $G$-torsor $U\times_{Y/G} Y$ over $Y$
+   with a $G$-equivariant projection to $Y$. That is, $Y/G\leftarrow Y\xrightarrow\id Y$
+   is an object in $[Y/G](Y/G)$.
+ \end{example}
+ \begin{example}
+   The non-free actions are more interesting. If $Y=X$, with the trivial
+   $G$-action, then we call $[Y/G]$ the \emph{classifying stack} $B_X G$.
+ \end{example}
+ A while back, we proved that if $\C$ is a category, then presheaves on $\C$ are
+ equivalent to categories fibered in sets. If $\F$ is any fibered category over $\C$ in
+ groupoids, you can define $\bar\F$ to be the presheaf given by $U\mapsto\{$iso-classes
+ in $\F(U)\}$. There is a morphism of fibered categories $\F\to \bar\F$ \anton{}. When is
+ this an equivalence? Given two objects, there must exist at most one arrow between them
+ in $\F(U)$ (i.e.~$\F$ is discrete). That is, there are no non-trivial automorphisms.
+
+ \begin{example}
+   In the case of $U\leftarrow P\xrightarrow\rho Y$, we need to check that there are no
+   non-trivial automorphisms $\alpha:P\to P$ such that $\rho\circ \alpha=\rho$. To check
+   that $\alpha$ must be the identity, we can replace $U$ by a cover and assume $P$ is
+   trivial; choose a section $s:U\to P$. Then $\alpha(s)=gs$ for some $g\in G(U)$. Then we
+   get $\rho(s)=\rho\alpha(s)=\rho(gs)=g\rho(s)$. But $G$ acts freely on $Y(U)$, so we get
+   that $g=\id$.
+ \end{example}

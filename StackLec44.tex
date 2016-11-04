@@ -1,0 +1,187 @@
+\sektion{44}{Brauer Groups and Gabber's Theorem}
+
+Today let's go back to gerbes.
+
+\underline{Brauer groups and quotient stacks}. Let $X$ be a scheme.
+An \emph{Azumaya algebra} on $X$ is a locally free sheaf of
+(non-commutative) $\O_X$-algebras $\A$ of finite rank such that
+\'etale locally on $X$, $\A\cong End(\V)$ for some vector bundle $\V$
+on $X$ (this implies that the center is $\O_X$). $\A\cong \A'$ if
+there exist vector bundles $\V$ and $\V'$ such that $\A\otimes_{\O_X}
+End(\V)\cong \A'\otimes_{\O_X}End{\V'}$. Giving a group structure of
+tensor product over $\O_X$, we get the Brauer group $Br(X)$.
+
+If you have an Azumaya algebra $\A$ of rank $n^2$ ($n$ is the rank of
+that local vector bundle), then you can define
+$P_\A=\isom(\A,M_{n\times n}(\O_X))$. This is a functor on
+$X$-schemes, it gives you $(\sch/X)^{op}\to \set$, given by $(f:T\to
+X)\mapsto $ the set of isomorphism $f^*\A\xrightarrow\sim M_{n\times
+n}(\O_T)$. This $P_\A$ is a $PGL_n$-torsor (the Scholem-Noether
+theorem tells you that all the automorphisms of $M_{n\times n}$ are
+given by conjugation by some matrix). From a $PGL_n$-torsor, we get
+the sequence
+\[
+  1\to \GG_m \to GL_n\to PGL_n\to 1
+\]
+from which we get a boundary map $H^1(X,PGL_n)\to H^2(X,\GG_m)$. This
+sends a torsor to the stack $[P_\A/GL_n]$, which is $\GG_m$-gerbe. In
+fact, this map lands in the torsion part of $H^2(X,\GG_m)$. The
+reason is
+\[\xymatrix{
+  1\ar[r] & \GG_m \ar[r] & GL_n \ar[r] & PGL_n\ar[r] & 1\\
+  1 \ar[r] & \mu_n \ar[r]\ar@{^(->}[u] & SL_n \ar[r]\ar@{^(->}[u]&
+PGL_n \ar[r]\ar@{=}[u] & 1
+}\]
+So the map factors through $H^2(X,\mu_n)$ which is torsion.
+
+We get a map $Br(X)\to H^2(X,\GG_m)_{tors}=:Br'(X)$ (cohomological
+Brauer group) given by $\A\mapsto [P_\A/GL_n]$. We should check that
+this is well-defined and a homomorphism, but we won't. It is not too
+hard to check that this is injective. Under some circumstances, there
+is no torsion \anton{normal and something?}
+\begin{theorem}[Gabber]
+  If $X$ has an ample sheaf (a little more general than
+quasi-projective), then this map is an isomorphism.
+\end{theorem}
+Consider the piece of the long exact sequence
+\[
+  H^1(X,GL_n)\to H^1(X,PGL_n)\to H^2(X,\GG_m)
+\]
+The first map is $\V\mapsto P_{End(\V)}$. From that we see that the
+kernel of the second map consists of \anton{}, which is the statement
+of injectivity of the map $Br(X)\to Br'(X)$ (you also have to say
+that if two Azumaya algebras are equivalent, then the torsors $P_\A$
+are isomorphic: if $\A$ and $\A'$ with $P_\A\cong P_{\A'}$, then we
+look at $P_\A^{-1}\wedge P_{\A'}$ and somehow show that
+$\A\simeq\A'$; this shouldn't be hard). The second map is
+$P_\A\mapsto \G_\A$.
+\[\xymatrix{
+  & \G_\A \ar[d]\\
+  T \ar[r]_f\ar[ur]^{\tilde f} & X
+}\]
+$\G_\A(T)$ is the category of pairs $(\V_T,\iota)$ with $\V_T$ a
+locally free rank $n$ on $T$ and $\iota:f^*\xrightarrow\sim
+End(\V_T)$. This is a $\GG_m$-gerbe.
+
+This means that there is a tautological locally free sheaf of rank
+$n$ on this gerbe. $\G_\A$ comes equipped with a canonical locally
+free sheaf $\V_\A$. To give a locally free sheaf on a stack is to
+give a locally free sheaf for every morphism in and for every
+diagram, an isomorphism of the two pull-backs. So take $\V_T$; if you
+have a morphism $T\to T'$, then you automatically get an isomorphism
+between $\V_T$ and the pullback of $\V_{T'}$.
+
+Let $\G\to X$ be a $\GG_m$-gerbe, and let $\F$ be a quasi-coherent
+sheaf on $\G$.
+\begin{proposition}
+  $\F$ has a canonical decomposition $\F\cong \bigoplus_{n\in \ZZ}
+\F^{(n)}$.
+\end{proposition}
+If $f:T\to \G$, then you get a sheaf $\F_T:=f^*\F$. This sheaf has an
+action of $\aut_f=\GG_m$, given by $u\in \GG_m$ acts by the
+2-morphism given by $\mu$ over $\id_T:T\to T$ over $\G$. Then we get
+a decomposition $\F_T\cong \bigoplus_{n\in \ZZ}\F_T^{(n)}$, with
+$u\in \GG_m$ acts on $\F_{T}^{(n)}$ by multiplication by $u^n$.
+
+\begin{definition}
+  A \emph{twisted sheaf on $\G$} (the standard terminology is ``a
+$\G$-twisted sheaf on $X$'') is a quasi-coherent sheaf $\F$ such that
+$\F=\F^{(1)}$. You should really specify the character \dots since
+we're working with $\GG_m$, we have the canonical character $(1)$.
+\end{definition}
+\begin{remark}
+  $\V_\A$ on $\G_\A$ is twisted. Because we defined the action as
+just multiplication.
+\end{remark}
+\begin{proposition}
+  Let $\alpha\in H^2(X,\GG_m)$ with associated gerbe
+$\pi:\G_\alpha\to X$. Then $\alpha\in Br(X)\subseteq H^2(X,\GG_m)$ if
+and only if $\G_\alpha$ admits a twisted locally free sheaf.
+\end{proposition}
+Reason: $(\Rightarrow)$ is already done by remark. $(\Leftarrow)$ if
+$\F_1=\F_1^{(n)}$ and $\F_2=\F_2^{(m)}$, then $\F_1\otimes \F_2 =
+(\F\otimes \F)^{(n+m)}$ (if $u$ acts by $u^n$ and $u^m$, then it acts
+on the tensor product by $u^{n+m}$). Also, $\F=\F^{(0)}$ if and only
+if $\pi^*\pi_*\F\to \F$ is an isomorphism (so the ones that are
+untwisted are just the sheaves on $X$).
+
+Say $\V$ on $\G$ is twisted. Then $\V\otimes \check\V=(\V\otimes
+\check \V)^{(0)}$ (because $u$ acts my multiplication by the inverse
+on $\check\V$), so $\pi_*End(\V)=\A$ is a locally free sheaf on
+$\O_X$-algebras on $X$ of finite rank. You check that if the gerbe is
+trival, then this gives you endomorphisms of the vector bundle, so
+this is an Azumaya algebra. You go through the definitions and check
+that $\G_\A\cong \G_\alpha$.
+\begin{remark}[Aside]
+  Given an $\A$, you get $End(\V_\A)\cong \pi^* \A$ as part of the
+data. If you start with $\pi:\G_\A\to X$, then you check that
+$\pi_*End(\V_\A)\cong \A$.
+\end{remark}
+To understand this theorem of Gabber, the best thing to do is read de
+Jong's proof.
+
+Idea of Gabber's Theorem:\\
+- Gabber's thesis is the case where $X$ is affine. If you search for
+Gabber on MathSciNet, then there aren't many choices, so you should
+find it easily.\\
+- Given $X$ quasi-projective over $S$ and $\alpha\in
+H^2(X,\GG_m)_{tors}$ you get $\G_\alpha\to X$. Zariski locally on $X$
+there is a twisted vector bundle on $\G_\alpha$ (by the affine case).
+We want to piece them together to get a global twisted sheaf. The
+proof of this is on deJong's web page. We don't have time to do that.
+
+Another way to think about this problem. What does it mean to have
+such a vector bundle.
+\begin{definition}
+  A stack $\X$ over $S$ is a \emph{quotient stack} if $\X\cong [Z/G]$
+where $Z$ is an algebraic space over $S$ and $G\subseteq GL_{n,S}$ is
+a subgroup scheme flat over $S$.
+\end{definition}
+\begin{proposition}
+  The following are equivalent for a stack $\X$.
+  \begin{enumerate}
+   \item $\X$ is a quotient stack.
+   \item there is a vector bundle $\V$ on $\X$ so that for every
+point $x:\spec k \to \X$, the action of the group scheme $\aut_x$ on
+the fiber $\V_x$ is faithful.
+  \end{enumerate}
+\end{proposition}
+Restatement: if $\alpha\in H^2(X,\GG_m)$, then $\alpha\in Br(X)$ if
+and only if the gerbe $\G_\alpha$ is a quotient stack. A twisted
+sheaf is an example of something where the automorphism group acts
+faithfully: $\V_x = \bigoplus \V_{\bbar x}^{(a_i)}$ and the
+$gcd(a_i)=1$. Certainly a twisted sheaf gives such a vector bundle,
+but the other direction is also true.
+
+The issue then is whether something is a quotient stack or not.
+\begin{theorem}
+  Let $k$ be a field, and let $\X$ over $k$ be a smooth
+Deligne-Mumford stack with finite diagonal, and generic stabilizer is
+trivial (there is an open set with no stabilizer). Then $\X$ is a
+quotient stack.
+\end{theorem}
+This doesn't treat the problem because for a gerbe you often don't
+have a generic stabilizer.
+
+Idea of proof: you want to produce a vector bundle and there is not
+much you can do. Let's look at the case where $k$ is characteristic
+zero and algebraically closed. Let $T_\X$ be the dual of $\Om^1_\X$.
+We claim first that it satisfies this proposition. You have the
+coarse space $\X\to X$. Then we have
+\[\xymatrix{
+  [U/\Ga]\ar[d]\ar[r] & \X\ar[d]\\
+  X'\ar[r] & X
+}\]
+where $\Ga$ is the stabilizer group of a point $x\in \X$. $\hat
+U=\spec k[[t_1,\dots, t_r]]$ has an action of $\Ga$ on it.
+$T_{\X,\hat U_x'}=\m/\m^2$. How do you get a decomposition when you
+have a smooth thing: look at $\hat \O_{U,x}\to \hat \O_{U,x}/\m^2$
+and find a section for $\m/\m^2$. Since we are in characteristic
+zero, something is semi-simple representation of $\Ga$. So you get
+$k[[\m/\m^2]]$ and something is trival because the action is fiathful.
+
+
+
+
+
+

@@ -1,0 +1,236 @@
+\sektion{16}{Relative Spec}
+
+ \begin{definition}
+   Let $X$ be an algebraic space (over some scheme $S$), and let $\A$ be a quasi-coherent
+   sheaf of algebras on $X$. Then we define $\Spec_X \A:(\sch/S)^{op}\to \set$ by
+   $T\mapsto \{(f,\iota)|f\in X(T), \iota\in \hom_{\O_T\text{-alg}}(f^\star\A, \O_T) \}$.
+   Since $f^\star \A$ and $\O_T$ are quasi-coherent, it doesn't matter if we think of
+   them as Zariski sheaves or \'etale sheaves when we talk about $\iota$. Note that we
+   have a ``projection'' $\Spec_X \A\to X$ given on the level of functors of points by
+   forgetting $\iota$.
+ \end{definition}
+ The projection $\Spec_X \A\to X$ is an affine morphism, and every affine morphism is
+ canonically of this form. \anton{I think this should be true}
+ \begin{proposition}
+   $\Spec_X \A$ is an algebraic space.
+ \end{proposition}
+ \begin{proof}
+   (1) $\Spec_X \A$ is an \'etale sheaf because $X$ is an \'etale sheaf and morphisms
+   like $\iota$ can be constructed locally in the \'etale topology (this is
+   descent for quasi-coherent sheaves of algebras in the \'etale topology).
+%   let $f:T\to X$, let
+%   $p:U\to X$ be an \'etale cover, and assume we have a morphism of $\O_{U\times_X
+%   T}$-modules $\tilde p^\star f^\star \A\cong \tilde f^\star p^\star \A\to \O_{U\times_X
+%   T}\cong \tilde p^\star \O_T$ which comes with descent data with respect to the \'etale
+%   cover $\tilde p:U\times_X T\to T$. Then we get a morphism $f^\star\A\to \O_T$ of
+%   $\O_T$ modules by descent for sheaves of modules (Corollary
+%   \ref{lec07C:descent_modules}).
+%   \raisebox{-1.5pc}{$\xymatrix{
+%     U\times_X T \ar[r]^{\tilde f} \ar[d]_{\tilde p} & U\ar[d]^p\\
+%     T\ar[r]^f & X
+%   }$}\qquad\qquad
+
+    (2) Let's check that the diagonal is representable. Let $T$ be a scheme, and let
+   $(h,\e)\times (h',\e')$ be a morphism from $T$ to $\Spec_X \A\times\Spec_X \A$.
+   In the diagram below, we define $P'$, $T'$, and $P$ so that all
+   squares are cartesian, and we choose the morphism $\Spec_X \A\to P'$ so that
+   $\Spec_X\A\to X$ is the canonical projection and $\Spec_X\A\to
+   \Spec_X\A\times\Spec_X\A$ is the diagonal. We wish to show that $P$ is a scheme. Note
+   that $T'$ is a scheme because $\Delta_X$ is representable. We will show that $P$ is a
+   closed subscheme of $T'$.
+   \[\xymatrix{
+    W \ar@{.>}[dr] \ar@{.>}@/^/[drr]_{r} \ar@{.>}@(r,ul)[drrr]^g \ar@{.>}@/_/[ddr]_{(f,\iota)}\\
+    & P \ar[r]\ar[d] & T'\ar[r]^s\ar[d] & T\ar[d]^{(h,\e)\times (h',\e')}\\
+    & \Spec_X (\A) \ar[r] & P' \ar[r]\ar[d] & \Spec_X \A \times \Spec_X \A \ar[d] \\
+    & & X\ar[r]^\Delta & X\times X
+   }\]
+    As functors, we have that
+   \begin{align*}
+     P':& W\mapsto \{(f,\iota_1,\iota_2)|f\in X(W), \iota_i:f^\star\A\to \O_W\}\hspace{-1em} & (f_1=f_2=f) \\
+     T':& W\mapsto \{g\in T(W)|hg=h'g\} & (f=hg=h'g, \iota_1=g^\star \e, \iota_2=g^\star \e')\\
+      P:& W\mapsto \{r\in T'(W)|r^\star s^\star \e=r^\star s^\star\e'\} & (g=sr,f=hg=h'g,\iota=g^\star\e=g^\star\e')
+   \end{align*}
+   \anton{do these need more explanation?}\\
+   Let $t = hs=h's:T'\to X$. The coequalizer of the two maps $\xymatrix@-.5pc{t^\star \A
+   \ar@<.5ex>[r]^<>(.5){s^\star\e} \ar@<-.5ex>[r]_<>(.5){s^\star\e'}& s^\star \O_T\cong \O_{T'}}$ is of the
+   form $\O_{T'}/\I$ for some quasi-coherent sheaf of ideals $\I$. The closed subscheme
+   of $T'$ corresponding to $\I$ has functor of points
+   \[
+    W\mapsto \{r\in T'(W)|\O_{T'}\to r_*\O_W\text{ factors through }\O_{T'}/\I\}.
+   \]
+    Since $\O_{T'}/\I$ was defined as the coequalizer of $s^\star \e$ and $s^\star \e'$,
+   this is exactly the functor of points of $P$. Thus, $P$ is the closed subscheme of
+   (the scheme) $T'$ defined by the quasi-coherent sheaf of ideals $\I$, so it is a
+   scheme.
+
+%   Since $\Delta_X$ is representable, $T'$ is a scheme, so we have
+%   that $P$ is a closed subscheme of $T'$. In particular, $P$ is a scheme.
+%
+%   Let's check that $P$ is the closed subscheme
+%
+%   Let $s$ be the morphism $T'\to T$, and let $\I$ be the quasi-coherent sheaf of ideals
+%   which equalizes the two maps $\xymatrix@-.5pc{\O_{T'}\ar[r]& s^\star h^\star
+%   \A\ar@<.5ex>[r]^<>(.5){s^\star\e}\ar@<-.5ex>[r]_<>(.5){s^\star\e'}& \O_{T'}}$. Then
+%   $P$ is the closed subscheme of $T'$ defined by $\I$ \anton{I think. I'm still trying
+%   to make sense of this explanation. The next paragraph is raw notes from class.}
+%
+%   , so it is enough to
+%   check $\Spec_X \A\to P'$ is representable. As a functor, $P'$ is given by $Y\mapsto
+%   \{(f,z_1,z_2)|f:Y\to X, z_j:f^\star\A\to \O_Y\}$. Over $T'$, we have a single map
+%   $f:T'\to X$ and two morphisms $\iota,\iota':f^\star\A\to \O_{T'}$. $P$ imposes the
+%   condition that $\iota=\iota'$. $P$ is the functor \anton{why does this take in a
+%   morphism to $T'$? It should just take in $W$.} $(g:W\to T')\mapsto
+%   \begin{cases}
+%     \ast & g^*\iota = g^*\iota': g^*f^* \A\to \O_W\\
+%     \varnothing & \text{else}
+%   \end{cases}$. To check this, we may work locally on $T'$ (by descent for closed
+%   subschemes), so we can assume $T'=\spec R$. Let $A=\Ga(T',f^*A)$, then we have
+%   $\xymatrix@-1pc{R\ar[r]& A\ar@<.5ex>[r]^{\iota^*}\ar@<-.5ex>[r]_{\iota'^*}& R}$. Then
+%   $P=\spec R/I$ where $I$ is the ideal generated by $\iota^*(a)-\iota'^*(a)$.
+%   \anton{should have done something with affines first}
+
+   (3) Let $\pi:U\to X$ be an \'etale cover of $X$. The calculation on the left verifies
+   that the diagram on the right is cartesian.
+   \[\hspace{-1em}
+   \begin{array}{cc}
+     \begin{array}[t]{l}
+       (\Spec_U \pi^\star \A)(W)= \bigl\{(g,\iota)|g\in U(W),
+           \iota:g^\star\pi^\star\A\to \O_W\bigr\}\\[.5ex]
+       \qquad= \bigl\{(f,\iota,g)|g\in U(W), (f,\iota)\in (\Spec_X\A)(W),
+           f=\pi g\bigr\}\\[.5ex]
+       \qquad= (U\times_X \Spec_X \A)(W)
+     \end{array} \qquad&
+     \xymatrix{
+     \Spec_U \pi^\star\A \ar[r]\ar[d]_{\tilde\pi}\ar@{}[dr]|(.25)\pb & U\ar[d]^\pi\\
+     \Spec_X \A \ar[r] & X}
+   \end{array}\hspace{-3pt}\]
+   On the other hand, $\Spec_U \pi^\star \A$ is the usual relative $\spec$ of the sheaf
+   of algebras $\pi^\star \A$ on $U$, so it is a scheme. Since $\pi$ is an \'etale
+   surjection, so is $\tilde \pi$.
+%   \[\xymatrix{
+%    \Spec_U \pi^*\A \ar[r]\ar[d] & U\ar[d]^\pi\\
+%    \Spec_X \A \ar[r] & X
+%   }\qquad\qquad\xymatrix{
+%    \Spec_R \A_R \ar@<.5ex>[d]\ar@<-.5ex>[d] \ar@<.5ex>[r]\ar@<-.5ex>[r] & R\ar@<.5ex>[d]\ar@<-.5ex>[d]\\
+%    \Spec_U \A_V \ar[r] \ar[d] & U\ar[d]^\pi \\
+%    \Spec_X \A \ar[r] & X
+%   }\]
+%   and observe that $(\Spec_U\A_U)(T) = \{(\bar f:T\to U, \iota: (\pi\circ \tilde f)^*
+%   \A\to \O_T)\}$ is a scheme, and observe that pullback of an \'etale surjection is an
+%   \'etale surjection. \anton{something with just the lower half and taking quotients}
+ \end{proof}
+ \begin{lemma}\label{lec16L:SteinFactorization_pullback}
+   If $g:X\to Y$ is a morphism of algebraic spaces, and $\A$ is a quasi-coherent sheaf of
+   algebras on $Y$, then $X\times_Y \Spec_Y \A\cong \Spec_X(g^\star \A)$.
+ \end{lemma}
+ \begin{proof}
+   For a test scheme $T$, we can compute
+   \begin{align*}
+     (X\times_Y \Spec_Y \A)(T)&= \{(x,f,\iota)|x\in X(T),f\in Y(T), f=gx,
+     \iota:f^\star\A\cong x^\star g^\star \A\to \O_T\}\\
+     &= \{(x,\iota)|x\in X(T), \iota:x^\star (g^\star \A)\to \O_T\}\\
+     &= (\Spec_X g^\star \A)(T)\qedhere
+   \end{align*}
+ \end{proof}
+ \begin{example}[Stein factorization]
+   Let $f:X\to Y$ be a separated quasi-compact morphism of algebraic spaces. We say that
+   $f$ is \emph{Stein} if the map $\O_Y\to f_*\O_X$ is an isomorphism. In general, for
+   any quasi-separated quasi-compact morphism $X\to Y$, there is a factorization $X\to
+   Z\to Y$, where $X\to Z$ is Stein and $Z\to Y$ is affine. Namely, we can take
+   $Z=\Spec_Y(f_*\O_X)$ (note that $f_*\O_X$ is quasi-coherent by Proposition
+   \ref{lec15P:q-sep,q-cmpt=>f_*F_qcoh}).
+   \[\xymatrix@R-1.5pc{
+    & Z'\ar[dr]^{\text{affine}}\ar@{-->}[dd]^{\exists!}\\
+    X \ar[ur]\ar[dr] & & Y\\
+    & \Spec_Y(f_*\O_X)\ar[ur]
+   }\]
+   \anton{I think} Stein factorization has the following universal property. If $X\to
+   Z'\to Y$ is any factorization such that $Z'\to Y$ is affine, then there is a unique
+   arrow $Z'\to \Spec_Y(f_*\O_X)$ making the diagram above commute. In particular, Stein
+   factorization is unique up to unique isomorphism.
+ \end{example}
+ \begin{remark} \label{lec16R:flat_extension_Stein}
+   Stein factorization behaves nicely with respect to flat base change. Let $X\to Z \to
+   Y$ be the Stein factorization of $f:X\to Y$, let $g:Y'\to Y$ be a flat morphism, and
+   let all the squares in the diagram below be cartesian.
+   \[\xymatrix{
+    X'\ar[r]\ar[d]_{\tilde g}\ar@/^2ex/[rr]^{f'} & Z'\ar[r]\ar[d] & Y'\ar[d]_g^{\text{flat}}\\
+    X \ar[r] \ar@/_2ex/[rr]_f & Z\ar[r] & Y
+   }\]
+    By \cite[III.9.3]{Hartshorne}, we have an isomorphism $f'_* \tilde \O_{X'}=f'_*\tilde
+   g^\star \O_X \cong g^\star f_*\O_X$. By Lemma
+   \ref{lec16L:SteinFactorization_pullback}, we have that $\Spec (g^\star f_*\O_X)\cong
+   \Spec_Y f_*\O_X \times_Y Y'= Z\times_Y Y'$. Thus, we have that $Z'$ is the Stein
+   factorization of $X'\to Y'$.
+ \end{remark}
+ \begin{example}[Scheme-theoretic image]
+   Let $f:X\to Y$ be a quasi-compact immersion of algebraic spaces. Let $\I=\ker(\O_Y\to
+   f_*\O_X)$. Then we define the \emph{scheme-theoretic image} of $X$ in $Y$ to be
+   $\Spec_Y (\O_Y/\I)$.
+ \end{example}
+ \begin{example}[$X\mapsto X_{red}$]
+   If $X$ is an algebraic space, then we can define
+   $\N_X\subseteq \O_X$ to be the sheaf of locally nilpotent elements. Define
+   $X_{red}=\Spec_X (\O_X/\N_X)$.
+
+   The functor $X\mapsto X_{red}$ is right adjoint to the inclusion of reduced algebraic
+   spaces into algebraic spaces.
+ \end{example}
+
+% Recall that if $X$ is an algebraic space, and $\A$ is a quasi-coherent sheaf of
+% $\O_X$-algebras, then we have $\Spec_X \A$, which is an algebraic space, and $\Spec_X
+% \A\to X$ which is an affine morphism. Here are some applications.
+%
+% \underline{Stein factorization}: Let $f:X\to Y$ be a separated quasi-compact morphism of
+% algebraic spaces. We say that $f$ is \emph{Stein} if the map $\O_Y\to f_*\O_X$ is an
+% isomorphism. In general, for any quasi-separated quasi-compact morphism $X\to Y$, there
+% is a factorization $X\to Y'\to Y$, where $X\to Y'$ is Stein and $Y'\to Y$ is affine.
+% Take $Y'=\Spec_Y(f_*\O_X)$.
+%
+% \underline{Scheme-theoretic closure}: Let $f:X\to Y$ be a quasi-compact immersion of
+% algebraic spaces. Let $\I=\ker(\O_Y\to f_*\O_X)$. Then we define the
+% \emph{scheme-theoretic closure} of $X$ in $Y$ to be $\Spec_Y (\O_Y/\I)$.
+%
+% \underline{$X\mapsto X_{red}$}: If $X$ is an algebraic space, then we can define
+% $\N_X\subseteq \O_X$ to be the sheaf of locally nilpotent elements. Define
+% $X_{red}=\Spec_X (\O_X/\N_X)$.
+%
+% The functor $X\mapsto X_{red}$ is right adjoint to the inclusion of reduced algebraic
+% spaces into algebraic spaces.
+%
+% \begin{definition}
+%   A quasi-coherent sheaf $\F$ on a locally noetherian algebraic space $X$ is
+%   \emph{coherent} if for all $U\in Et(X)$, the sheaf $\F_U$ is coherent.
+% \end{definition}
+
+ \begin{example}[Support of a sheaf]
+   Let $\F$ be a \anton{quasi-?}coherent sheaf on $X$, and let $\K=\ker\bigl(\O_X\to
+   \Hom_{\O_X}(\F,\F)\bigr)$. Then we define the \emph{support} of $\F$ to be
+   $\supp(\F)=\Spec_X(\O_X/K)$ (note that $\K$ and $\O_X/\K$ are quasi-coherent by Remark
+   \ref{lec15R:kernels,cokernels,etc._of_qcohs}).
+ \end{example}
+
+ \begin{remark}\anton{should this remark be scrapped?}
+   Alternatively, if $\F$ is coherent, we can define support as follows.
+   \[\xymatrix{
+      \supp(\F_R) \ar[r] \ar@<.5ex>[d]\ar@<-.5ex>[d] & R \ar@<.5ex>[d]\ar@<-.5ex>[d]\\
+      \supp(\F_U) \ar@{^(->}[r] & U\ar[d]\\
+      & X
+   }\]
+    $U=\spec A$, $M=\Ga(U,\F_U)$, then $\supp(\F_U) = V(\ann(M))$. To specify a
+   closed subspace, it is enough to specify a closed subscheme of each morphism from an
+   affine $U$ to $X$ in a compatible way. \anton{You have to check compatibility \dots
+   maybe this doesn't behave well with respect to localization if we only have
+   quasi-coherent \dots this works for coherent}
+   If $A\to A'$ is \'etale, then there is a natural map $\ann(M)\otimes_A A'\to
+   \ann(M\otimes_A A')$, which we wish to check is an isomorphism.
+   \[\xymatrix{
+      \ann(M) \ar[r]\ar[d] & A \ar[r]\ar[d] & \hom_A(M,M)\ar[d]\\
+      \ann(M\otimes_A A') \ar[r] & A'\ar[r] & \hom_{A'}(M\otimes_A A',M\otimes_A A')\\
+      \ann(M)\otimes_A A' \ar[r]\ar[u]^\wr & A' \ar[r]\ar[u]^\wr & \hom_A(M,M)\otimes_A A'\ar[u]^\wr\\
+   }\]
+   The bottom sequence is obtained from the top by tensoring with $A'$.
+ \end{remark}
+
+ Any construction that can be done locally in the \'etale topology \anton{something}. For
+ example $\Proj$, which we won't do.

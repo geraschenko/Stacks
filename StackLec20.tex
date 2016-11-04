@@ -1,0 +1,75 @@
+
+
+ \bigskip
+ %%%% %%%% %%%% %%%% %%%% %%%% %%%% %%%% %%%% %%%% %%%%
+ \subsektion{Underlying topological space of an algebraic space}
+
+ There is a topological space associated to an algebraic space. Let $X$ be an algebraic
+ space over a scheme $S$. A point of $X$ is a monomorphism $i:\spec k\to X$ with $k$ a
+ field. You shouldn't confuse this with a geometric point (where we take $k$ to be a
+ separably closed field), this is just a monomorphism of sheaves. If we take $k$ to be
+ separably closed field, it usually won't be a monomorphism of sheaves! You could drop
+ the monomorphism assumption if you change the equivalence relation to say there is a
+ third thing they map to. \anton{this definition would make some things easier}
+ \begin{example}
+   Let $X$ be a scheme. If we have any morphism $\spec k\to X$, this gives a point $x\in
+   X$ and embedding $k(x)\hookrightarrow k$. That is, the morphism always factors through
+   $\spec k(x)$. Given an inclusion of fields $k\hookrightarrow k'$, when is $\spec k'\to
+   \spec k$ a monomorphism? If and only if $k\to k'$ is an isomorphism \anton{exercise in
+   Galois theory}  What about inseparable extensions? To be a monomorphism, it must be a
+   monomorphism after base change. Look at $k'\to k'\otimes_k k'$.
+
+   Consider $k(t)$ and $k(t^{1/p})$, then we have $k(x)\to
+   k(t)[x,y]/(x^p=y^p=1)=k(x)[u]/(u^p=0)$ with $u=x-y$. We get two maps
+   $k(x)[u]/(u^p=0)\to k(x)[u]/(u^p=0)$, given by $u\mapsto u$ and $u\mapsto 0$, which
+   induce the same map. Therefore, it isn't a monomorphism.
+ \end{example}
+ We say that $i_1:\spec k_1\to X$ is equivalent to $i_2:\spec k_2\to X$ if there exists a
+ diagram
+ \[\xymatrix{
+    \spec k_1 \ar[r]^\sigma_{\sim} \ar[d]_{i_1} & \spec k_2 \ar[dl]^{i_2}\\
+    X
+ }\]
+
+ Then we take $|X|$ to be the set of points modulo equivalence. If $Y\subseteq X$ is a
+ closed subspace, then you get an inclusion $|Y|\subseteq |X|$, and we define the
+ topology on $|X|$ by declaring these subsets to be closed.
+
+ Key point: $|X|$ is functorial in $X$. This is not clear. If we have $X\to Y$ and $\spec
+ k\to X$ a monomorphism, there is no reason $\spec k\to Y$ should be a monomorphism. The
+ following lemma gives it to us. One then checks that the map is continuous.
+ \begin{lemma}
+   Let $f:\spec k\to Y$ be a map of algebraic spaces with $k$ a field. Then there exists
+   a unique (up the equivalence relation) point $i:\spec k'\to Y$ and factorization
+   \[
+    f: \spec k\xrightarrow g \spec k'\xrightarrow i Y
+   \]
+ \end{lemma}
+ \begin{proof}
+   This is annoyingly subtle. How do you know there are any points in $Y$ at all. You
+   know there is a dense open which has points, but blah.
+
+   First note that we can assume $Y$ is quasi-compact: Take any \'etale cover $U\to Y$,
+   then take a point in $U_k$ and see where it goes in $U$, and take a quasi-compact open
+   subset of $U$ and quotient by the relation. Choose $U\to Y$ an \'etale surjection with
+   $U$ a quasi-compact scheme. Let $Z_p$ be the disjoint union of spectra of residue
+   fields of images of $\spec k\times_Y U\to U$. Since $U$ is quasi-compact and \'etale,
+   the first is a finite union of points. Similarly, let $R_p$ be the disjoint union of
+   spectra of residue fields of images of $\spec k\times_Y (U\times_Y U)\rightrightarrows
+   U\times_Y U$. Then we see that $R_p=Z_1\times_{U,p_1} (U\times_Y U)$. So $R_p$ is a
+   finite \'etale equivalence relation on $Z_p$ (in fact, it is the induced relation).
+   Thus, the quotient $Z_p/R_p$, which is a scheme. We get a monomorphism
+   $Z_p/R_p\hookrightarrow Y$, and my construction we get a flat surjection $\spec k\to
+   Z_p/R_p$, so $Z_p/R_p$ is a spectrum of a field.
+ \end{proof}
+
+ $f:X\to Y$ is proper if it is of finite type, separated, and universally closed
+ (i.e.~for every $Y'\to Y$, the map $|Y\times_Y Y'|\to |Y'|$ is a closed map). Check from
+ the definition that this agrees with the working definition:
+ \begin{lemma}
+   If $X\to Y$ is separated of finite presentation and $X'\to X$ is a proper
+   representable surjection, then $X\to Y$ is proper if and only if $X'\to Y$ is proper.
+ \end{lemma}
+
+ If $X$ is given to you as a functor, the only way to check properness is with the
+ valuative criterion.

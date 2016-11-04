@@ -1,0 +1,145 @@
+\sektion{3}{Sheaves and Topoi}
+
+\begin{definition}
+ Let $\C$ be a category. A \emph{presheaf of sets} on $\C$ is a functor $F:\C^\circ\to \set$. If $\C$ is a site, then $F$ is a \emph{sheaf} on $(\C,Cov)$ if it is a presheaf such that for every object $X\in \C$ and every covering $\{X_i\to X\}\in Cov(X)$, the sequence
+ \[\xymatrix{
+  F(X)\ar[r] & \prod F(X_i)\ar@<+.5ex>[r]^<>(.5){pr_1^*} \ar@<-.5ex>[r]_<>(.5){pr_2^*}
+ & \prod F(X_i\times_X X_j) 
+ }\] 
+ is exact (an equalizer).\footnote{$\xymatrix{S\ar[r]^{j} & S'\ar@<.5ex>[r]^f \ar@<-.5ex>[r]_g& S''}$ is an equalizer if $f\circ j=g\circ j$ and any $h:X\to S'$ with $f\circ h=g\circ h$ uniquely factors through $j$. In $\set$, this just means that $j$ is an injection, with $\{s'\in S'|f(s')=g(s')\}=\im j$. In $\ab$, this means that $j$ is the kernel of $f-g$.}
+\end{definition}
+\begin{remark}
+ Notions of (pre)sheaves of groups, rings, modules, etc.~are given by replacing the target category $\set$ by $\catfont{Gp}$, $\catfont{Ring}$, $\catfont{Mod}$, respectivly. That is, for every $X$, $F(X)$ has the appropriate structure (of a group, for example), and the morphisms go to the appropriate kinds of morphisms. \anton{can you sheafify presheaves with an arbitrary category as a target?}
+\end{remark}
+\begin{example}
+ Let $X$ be a topological space, and let $\C$ be the small site on $X$. Then this is the usual sheaf condition.
+\end{example}
+The category of sheaves injects fully faithfully into the category of presheaves via the forgetful funtor.
+\begin{theorem}[Sheafification]
+  The forgetful functor from sheaves to presheaves has a left adjoint. In particular, if $F$ is a presheaf, there is a morphism to a sheaf $F\to F^a$ so that any morphism from $F$ to a sheaf factors uniquely through $F^a$.
+\end{theorem}
+\begin{proof}
+ Step 1: define the projection $F\to F^s$,\footnote{The ``s'' stands for ``separated'', which means that for every $X$ and every covering $\{X_i\to X\}$, the map $F(X)\to \prod F(X_i)$ is injective (the ``first half'' of the sheaf condition). You could make an intermediate category of separated presheaves. The ``a'' stands for ``associated'' sheaf.} where $F^s(X):=F(X)/\sim$, where $a,b\in F(X)$ are equivalent if there is a covering $\{X_i\to X\}$ such that $a$ and $b$ have the same image in each $F(X_i)$. Here we are forcing the injectivity part of the sheaf condition. If $Y\to X$ is a morphism, then any cover of $X$ pulls back to a cover of $Y$, and if two sections $a,b\in F(X)$ agree on an open cover of $X$, their images in $F(Y)$ will agree on the pulled-back cover. Thus, the dashed arrow in the following diagram is well defined, so $F^s$ is a functor.
+ \[\xymatrix{
+  F(X)\ar[r] \ar@{->>}[d] & F(Y)\ar@{->>}[d]\\
+  F^s(X) \ar@{-->}[r] & F^s(Y)
+ }\]
+ Step 2: define $F^s\to F^a$, where
+ \begin{align*}
+  F^a(X)=\Bigl\{&\bigl(\{X_i\to X\}, \{a_i\}\bigl)\Bigm| \\
+  &\{X_i\to X\}\in Cov(X), \{a_i\}\in
+  Eq\bigl(\xymatrix@-1pc{ \prod F^s(X_i)\ar@<.5ex>[r] \ar@<-.5ex>[r] & \prod F^s(X_i\times_X
+  X_j)}\bigl)\Bigr\}\Bigm/\sim
+ \end{align*}
+ where $\bigl(\{X_i\to X\},\{a_i\}\bigr)\sim \bigl(\{X_j'\to X\},\{a_j'\}\bigr)$ if for all $i$ and $j$, the images of $a_i$ and $a_i'$ in $F(X_i\times_X X_j')$ are equal. I leave it to you to check that it works (it's actually a lot of work).\footnote{If you try to just do step 2, you don't get a sheaf. For example, let $X=\{p,q\}$ have the discrete topology, and let $S$ be a set with $|S|>1$. If $F$ is the constant presheaf on $X$ associated to $S$, then $F^a(X)=S$ (a section on $p$ and a section on $q$ ``agree on the intersection'' only if they are equal because $F(\varnothing)=S$), but the sheafification should give you $S^2$ \anton{can you get an example that doesn't use the empty set in this way?}. But you do get a separated presheaf, so you could just do step 2 twice to get the sheafification.}
+\end{proof}
+We will see that sheafification arises naturally. For example, affine $(n+1)$-space is the functor $\AA^{n+1}:\sch^\circ\to \set$ given by $Y\mapsto \Ga(Y,\O_Y)^{n+1}$. In the homework (Exercise 1.3), you prove that $\AA^{n+1}\setminus \{0\}:\sch^\circ\to \set$ is given by $Y\mapsto\{(y_1,\dots, y_{n+1})|$for each $y\in Y$, not all $y_i$ are zero in $k(y)\}$. One might try to define projective space $\PP^n$ as the functor $\AA^{n+1}\setminus\{0\}/\GG_m$, given by $Y\mapsto (\AA^{n+1}\setminus \{0\})(Y)/\Ga(Y,\O_Y)^\times$, but it turns out this is not a sheaf; the correct definition of $\PP^n$ is the sheafification.
+
+\begin{definition}
+  A \emph{topos} is a category equivalent to the category of sheaves on a site.
+\end{definition}
+Grothendieck's insight is that the basic object of study is the topos, not the site. It is often useful to replace a site by another site with the same topos (in some appropriate sense). For example, if we use the Zariski topology, the category of sheaves on $\sch$ (the site of all schemes) is the same as the category of sheaves on $\aff$ (the site of affine schemes), which is perhaps easier to deal with. \anton{maybe this is a good place to talk about replacing a topology on a site by the finest topology that gives the same topos, and about the canonical site producing a given topos. maybe better after talking about continuous functors between sites}
+
+ \noindent \underline{Notation}: we use the following notation for topoi. Note that these
+ are \emph{topoi}, not sites.
+ \[\begin{tabular}{lll}
+   $\textbf{Top}_{cl}$ & ($X_{cl}$) & classical topos (of a topolocical space $X$)\\
+   $\sch_{zar}$& ($X_{zar}$) & (small) Zariski topos (of $X$)\\
+               & $X_{ZAR}$ & big Zariski topos of $X$ ($=(\sch/X)_{zar}$)\\
+   $\sch_{et}$ &($X_{et}$) & (small) \'etale topos (of $X$)\\
+               & $X_{ET}$ & big \'etale topos of $X$ ($=(\sch/X)_{et}$) \\
+   $\sch_\liset$& ($X_\liset$) & lisse-\'etale topos (of $X$)\\
+   $\sch_{fppf}$ &($X_{fppf}$) & (big) fppf topos (of $X$)
+ \end{tabular}\]
+
+ \begin{definition}
+   A \emph{morphism of topoi} $f:T\to T'$ is an isomorphism class of
+   triples\footnote{Originally, we defined a morphism to be \emph{a triple}, but if we do
+   that, we run into the problem that a continuous functor of (appropriate) sites doesn't
+   induce a well-defined morphism of topoi. This will be the topic of the next two
+   lectures.} $(f_*,f^*,\phi)$, where $f_*:T\to T'$, $f^*:T'\to T$ are functors,
+   and $\phi(F):\hom_T(f^*F',F)\xrightarrow{\sim} \hom_{T'}(F',f_* F)$ is an adjunction
+   between them. Also, $f^*$ must commute with finite projective limits.
+ \end{definition}
+ \begin{example}\label{lec03Eg:topological_spaces}
+   In the classical case, if $X\xrightarrow f X'$ is a continuous map of topological
+   spaces, we have $f^{-1}:\text{Opens}(X')\to \text{Opens}(X)$. If $F$ is a sheaf on
+   $X$, we define $(f_*F)(U'):=F\bigl( f^{-1}(U')\bigr)$. This has a left adjoint which
+   commutes with finite projective limits, as we will show next two lectures (Proposition
+   \ref{lec04T:left_adjoint} and Theorem \ref{lec05T:CommWithFiniteProjLimits})
+ \end{example}
+
+ \subsektion{Limits}
+
+ Let $\C$ be a category, and $F:I\to \C$ be a functor. For $X\in \C$ define $k_X:I\to \C$
+ to be the functor sending each object to $X$ and each morphism to $\id_X$. We define
+ $\varprojlim F:C\to \set$ as the functor given by $X\mapsto \nat(k_X,F)$. We are usually
+ interested in whether this functor is representable.
+ \begin{example}
+   Letting $I$ be different things, we can construct some familiar friends.
+   \begin{enumerate}
+     \item (equalizers) $I= (\cdot \rightrightarrows \cdot)$, with $F(I) =
+     \xymatrix@-1pc{X_1 \ar@<.5ex>[r]^{f_1}  \ar@<-.5ex>[r]_{f_2} & X_2 }$, we have
+     $\varprojlim F(X) = \{X\xrightarrow{g} X_1|f_1\circ g=f_2\circ g\}$. This functor is
+     represented by the equalizer of $f_1$ and $f_2$.
+     \item (products) $I$ is a set (i.e.~a category with only identity morphisms), and
+     $F(I)=\{X_i\}_{i\in I}$, then $\varprojlim F(X) = \bigl\{\{g_i:X\to X_i\}_{i\in
+     I}\bigr\}$. This functor is represented by the product $\prod_{i\in I} X_i$.
+     \item (fibred products) $I=(\cdot\rightarrow \cdot \leftarrow \cdot)$, with $F(I) =
+     X_1\xrightarrow{f_1} X_2\xleftarrow{f_3} X_3$. Then
+     \[
+     \varprojlim F(X) = \bigl\{ X_1\xleftarrow{g_1}X\xrightarrow{g_3} X_3\bigm| f_1\circ g_1=f_3\circ g_3\bigr\}.
+     \]
+     This functor is represented by the fibred product $X_1\times_{X_2}
+     X_3$.\qedhere
+   \end{enumerate}
+ \end{example}
+ \begin{lemma}\label{lec03L:limits_representable}
+   Let $\C$ be a category, then the following are equivalent.
+   \begin{enumerate}
+     \item Projective limits (resp.~finite projective limits) in $\C$ are representable.
+     \item Products (resp.~finite products) and equalizers are representable.
+     \item Products and fiber products (resp.~finite products and fiber products) are representable.
+   \end{enumerate}
+ \end{lemma}
+ \begin{proof}
+   $1\Rightarrow 2$ and $1\Rightarrow 3$ are immediate, as (finite) products, equalizers,
+   and fiber products are (finite) projective limits.
+
+   $2\Rightarrow 1$ Given $F:I\to \C$, define
+    \[
+   \varprojlim F = Eq\Bigl(\xymatrix{\prod_{i\in Ob(I)} F(i) \ar@<.5ex>[r]^<>(.5){p_1}
+   \ar@<-.5ex>[r]_<>(.5){p_2} & \prod_{u\in Mor(I)} F\bigl(\text{target}(u)\bigr)}\Bigr)
+   \]
+    where we need to define $p_1$ and $p_2$. Defining a morphism to a product is
+   equivalent to defining a morphism to each factor, so fix a morphism $u\in Mor(I)$. Let
+   $p_1:\prod_{i\in Ob(I)} F(i)\to F\bigl(\text{target}(u)\bigr)$ be projection onto the
+   target of $u$ and let $p_2:\prod_{i\in I}F(i) \to
+   F\bigl(\text{source}(u)\bigr)\xrightarrow{F(u)}F(\text{target}(u))$ be projection to the
+   source followed by $F(u)$.
+
+   $3\Rightarrow 2$ It is enough to observe that an equalizer is a fiber product over a
+   product: $Eq(\xymatrix@-1pc{X\ar@<.5ex>[r]^u \ar@<-.5ex>[r]_v & Y})$ is the limit of the
+   diagram $X\xrightarrow{(1,u)}X\times Y \xleftarrow{(1,v)} X$.
+ \end{proof}
+ \begin{proposition}
+   Let $T$ be a topos and $F:I\to T$, then $\varprojlim F$ is representable.
+ \end{proposition}
+ \begin{proof}
+   Recall that if $F:I\to T$, $\varprojlim F: X\mapsto \nat(k_X,F)$. By the lemma, it is
+   enough to check that equalizers and products are representable. To check these cases,
+   we can choose a site $\C$ whose category of sheaves is equivalent to $T$ (by
+   definition of a topos, there is such a site). We define a product $\prod_i F_i$ as
+   $U\mapsto \prod F_i(U)$, then we just have to check that this is a sheaf (this is left
+   as an exercise). Similarly, we can define
+    \[
+   Eq\Bigl(\xymatrix@-1pc{F_1\ar@<.5ex>[r]^f \ar@<-.5ex>[r]_g &
+   F_2}\Bigr)(U)=Eq\Bigl(\xymatrix{F_1(U)\ar@<.5ex>[r]^{f(U)} \ar@<-.5ex>[r]_{g(U)} &
+   F_2(U)}\Bigr)
+   \]
+    and check that this is a sheaf.
+ \end{proof}
+ \begin{remark}
+   The same proof shows that in the category $\hat \C$ of \emph{presheaves} on $\C$,
+   finite projective limits are representable.
+ \end{remark}

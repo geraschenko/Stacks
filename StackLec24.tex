@@ -1,0 +1,282 @@
+\sektion{24}{Stacks}
+
+ Let $\C$ be a site. For simplicity, assume that coproducts are representable in $\C$ (so
+ we can always replace coverings by a single map) \anton{does that follow from the axioms
+ of a site that a coproduct of maps in a cover is a cover?} Let $\F$ be a fibered
+ category over $\C$. Choosing some cleavage of $\F$ (one always exists by the axiom of
+ choice), we get a lax 2-functor $\F:\C^{op}\to \cat$. For a morphism $q:V\to U$ in
+ $\C$, we define $\F(U\to V)$ as in Definition \ref{lec07D:descent_category}.
+ \begin{definition}
+   A fibered category $\F$ is a \emph{stack over $\C$} if for every covering $q:V\to U$
+   in $\C$, the functor $\F(U)\to \F(V\to U)$, given by $u\mapsto (q^*u,\textrm{can})$,
+   is an equivalence of categories.
+ \end{definition}
+ \begin{remark}
+   For a morphism $q:V\to U$, the category $\F(V\to U)$ depends on the choice of cleavage
+   of $\F$, but it turns out that they are all equivalent. If you like, you can define a
+   stacks independent of cleavage in the following way. For a fibered category $\F\to
+   \C$, and a morphism $q:V\to U$, define $\F_c(V\to U)$ as the category of commuting
+   diagrams in $\F$ like in the picture below; all arrows are cartesian, lying over the
+   indicated arrows in $\C$, $\sigma$ is an isomorphism (as are the arrows in the fiber
+   over $V\times_U V\times_U V$ which are pullbacks of $\sigma$), and the ``equalities''
+   are the canonical isomorphisms (e.g.~$p_{23}^*p_1^*\cong p_{12}^*p_1^*$; if your
+   cleavage is a splitting, these are actual equalitites). The dotted arrows are dotted
+   to make the picture look less cluttered.
+%   \[\xymatrix{
+%      \F\ar[d] & z\ar[r]\ar@<1ex>[r]\ar@<-1ex>[r] \ar@{|->}[d]
+%       & y \ar@<.5ex>[r] \ar@<-.5ex>[r] \ar@{|->}[d] & x \ar@{|->}[d]\\
+%      \C & V\times_U V\times_U V \ar[r]\ar@<1ex>[r]\ar@<-1ex>[r]
+%       & V\times_U V \ar@<.5ex>[r] \ar@<-.5ex>[r] & V
+%   }\]
+   \[\xymatrix@!0{
+     & & & \circ \ar@{.>}[rrrr]|{\;23\;} \ar[dr] & & & &
+        \circ \ar[ddd]^\sigma_\wr \ar p+<5.4pc,-2.7pc>|{\;2\;}\\
+    & & \circ \ar@{.>}[rrrrru]|!{[ru];[rr]}{\hole\hole}|(.65){\;13\;}
+    \ar@{=}[ur] \ar[d] & &
+        \circ \ar@{.>}[rrrdd]|{\hole 23\hole} \ar@{=}[d]\\
+    \F \ar[dd]& & \circ \ar@{.>}[rrrrrd]|!{[rd];[rr]}{\hole\hole}|(.65){\;13\;}
+        \ar@{=}[dr] & &
+        \circ \ar@{.>}[rrruu]|!{[u];[drrr]}{\hole\hole}|{\hole 12\hole} \ar[dl]\\
+    & & & \circ \ar@{.>}[rrrr]|{\;12\;} & & & &
+        \circ \ar p+<5.4pc,2.7pc>|{\;1\;}|(1.1){\txt{$x$}}\\
+    \C& & & V\times_U V\times_U V
+        \ar@<1ex>[rrrr]^<>(.5){p_{23}}
+        \ar[rrrr]|<>(.5){p_{13}}
+        \ar@<-1ex>[rrrr]_<>(.5){p_{12}}
+      & & & & V\times_U V
+        \ar@<.5ex>[rrr]^<>(.5){p_2}\ar@<-.5ex>[rrr]_<>(.5){p_1}
+      & & & V
+   }\]
+    That is, $\F_c(V\to U)$ is the category of all $x\in \F(V)$ with all isomorphisms
+   between the pullbacks along the two projections, and all pullbacks along the other
+   projections which satisfy the cocycle condition. A choice of cleavage picks out some
+   full subcategory (which we called $\F(V\to U)$) of $\F_c(V\to U)$ which contains at
+   least one element from each isomorphism class. This inclusion is fully faithful and
+   essentially surjective (because any two pullbacks of an object are canonically
+   isomorphic), so it is an equivalence.
+
+   For an object $U\in \C$, define $\F_c(U)$ to be the category of diagrams
+%   \[\xymatrix{
+%      \F\ar[d] & z\ar[r]\ar@<1ex>[r]\ar@<-1ex>[r] \ar@{|->}[d]
+%       & y \ar@<.5ex>[r] \ar@<-.5ex>[r] \ar@{|->}[d]
+%       & x \ar[r] \ar@{|->}[d] & u\ar@{|->}[d]\\
+%      \C & V\times_U V\times_U V \ar[r]\ar@<1ex>[r]\ar@<-1ex>[r]
+%       & V\times_U V \ar@<.5ex>[r] \ar@<-.5ex>[r] & V \ar[r] & U
+%   }\]
+   \[\xymatrix@!0{
+     & & & \circ \ar@{.>}[rrrr]|{\;23\;} \ar[dr] & & & &
+        \circ \ar[ddd]^\sigma_\wr \ar p+<5.4pc,-2.7pc>|{\;2\;}\\
+    & & \circ \ar@{.>}[rrrrru]|!{[ru];[rr]}{\hole\hole}|(.65){\;13\;}
+    \ar@{=}[ur] \ar[d] & &
+        \circ \ar@{.>}[rrrdd]|{\hole 23\hole} \ar@{=}[d]\\
+    \F \ar[dd]& & \circ \ar@{.>}[rrrrrd]|!{[rd];[rr]}{\hole\hole}|(.65){\;13\;}
+        \ar@{=}[dr] & &
+        \circ \ar@{.>}[rrruu]|!{[u];[drrr]}{\hole\hole}|{\hole 12\hole} \ar[dl]\\
+    & & & \circ \ar@{.>}[rrrr]|{\;12\;} & & & &
+        \circ \ar p+<5.4pc,2.7pc>|{\;1\;}|(1.1){\txt{$x$}}="x"\\
+    \C& & & V\times_U V\times_U V
+        \ar@<1ex>[rrrr]^<>(.5){p_{23}}
+        \ar[rrrr]|<>(.5){p_{13}}
+        \ar@<-1ex>[rrrr]_<>(.5){p_{12}}
+      & & & & V\times_U V
+        \ar@<.5ex>[rrr]^<>(.5){p_2}\ar@<-.5ex>[rrr]_<>(.5){p_1}
+      & & & V \ar[rr] & & U
+      \ar|(1.1){\txt{$\;u$}} "x";"x"+<3.6pc,0pc>
+   }\]
+    Note that this category depends on
+   the morphism $V\to U$. $\F_c(U)$ is the category of all $u\in \F(U)$, all pullbacks
+   $x\in \F(V)$, all isomorphic pairs of pullbacks along the two projections, and all
+   pullbacks along the other projections which satisfy the cocycle condition. A choice
+   of cleavage picks out some full subcategory (isomorphic to $\F(U)$) with at least one
+   element in each isomorphism class. In particular $\F_c(U)$ is equivalent to $\F(U)$,
+   so it is independent (up to equivalence) of the morphism $V\to U$.
+
+   Now $\F$ is a stack if the functor $\F_c(U)\to \F_c(V\to U)$, given by forgetting $u$,
+   is an equivalence.
+ \end{remark}
+
+% Let $\C$ be a site, and assume (for simplicity, so we don't need to
+% worry about coverings being families \anton{really?}) that coproducts are representable
+% in $\C$. Let $(\F,\K)$ be a split fibered category over $\C$. Let $V\to U$ be a covering
+% in $\C$. Define $F(V\to U)$ to be a category with objects $(x,\sigma)$, where $x\in
+% F(V)$ and $\sigma:p_2^* x\xrightarrow\sim p_1^* x$ in $F(V\times_U V)$ with a cocycle
+% condition, and the morphisms are as before. Then $\F$ is a stack if the pullback
+% functor $F(U)\to F(V\to U)$ is an equivalence for every covering $V\to U$. That is, a
+% stack is a fibered category which satisfies descent. These play the role of sheaves.
+%
+%
+% Where we left off: $\C$ is a site in which coproducts exist. Let $p:\F\to \C$ be a
+% fibered category, and let $\K\subseteq \F$ be a splitting. Let $q:V\to U$ be a covering in
+% $\C$. Then we can define $\F(V\to U)$, whose objects are pairs $(x,\sigma)$, with $x\in
+% \F(V)$ and $\sigma:p_2^*x\xrightarrow p_1^*x$ in $\F(V\times_U V)$, with the usual
+% cocycle condition. The morphisms are $(x',\sigma')\to (x,\sigma)$ is a morphism
+% $\alpha:x'\to x$ in $\F(V)$ such that
+% \[\xymatrix{
+%    p_2^*x' \ar[r]^{\sigma'} \ar[d]_{p_2^*\alpha} & p_1^*x'\ar[d]^{p_1^*\alpha}\\
+%    p_2^* x \ar[r]^\sigma & p_1^*x
+% }\]
+% There is a functor $\F(U)\to \F(V\to U)$, given by $u\mapsto (q^*u,\text{can})$.
+% \begin{definition}
+%   $\F$ is a stack if for every covering $q:V\to U$, the functor $\F(U)\to \F(V\to U)$ is
+%   an equivalence.
+% \end{definition}
+%
+% Let's try to write the definition without a splitting. We should replace $\F(V\to U)$ by
+% $\F_{comp}(V\to U)$, the category of diagram with all arrows cartesian.
+% \[\xymatrix{
+%    z\ar[d]\ar@<1ex>[d]\ar@<-1ex>[d] & V\times_U V\times_U V \ar[d]\ar@<1ex>[d]\ar@<-1ex>[d]\\
+%    y \ar@<.5ex>[d] \ar@<-.5ex>[d] & V\times_U V \ar@<.5ex>[d] \ar@<-.5ex>[d]\\
+%    x & V
+% }\]
+%
+% If $\K\subseteq \F$ is a splitting, then $\F_{comp}(V\to U)$ is equivalent to $\F(V\to
+% U)$. If we have a pullback, then we get canonical isomorphisms $p_2^*x \xleftarrow\sim
+% y\xrightarrow\sim p_1^*x$, and we take $\sigma$ to be the composition.
+%
+% \anton{that awful diagram for the cocycle condition}
+%
+% The other way is easy: $\F(V\to U)\to \F_{comp}(V\to U)$ can be $(x,\sigma)\mapsto
+% (\xymatrix{p_1^*x \ar[r]|3 & p_2^* x \ar[r]^{\id}_\sigma|2 & x})$.
+%
+% There is no natural functor $\F(U)\to \F_{comp}(V\to U)$, so we should replace $\F(U)$
+% with $\F_{comp}(U)$, the category of diagrams with all arrows cartesian.
+% \[\xymatrix{
+%    z\ar[d]\ar@<1ex>[d]\ar@<-1ex>[d] & V\times_U V\times_U V \ar[d]\ar@<1ex>[d]\ar@<-1ex>[d]\\
+%    y \ar@<.5ex>[d] \ar@<-.5ex>[d] & V\times_U V \ar@<.5ex>[d] \ar@<-.5ex>[d]\\
+%    x \ar[d] & V \ar[d]\\
+%    u & U
+% }\]
+% $\F_{comp}(U)\to \F(U)$ is an equivalence.
+%
+% I won't want to worry about this too much, because as we saw, every fibered category is
+% equivalent to a split fibered category.
+
+ \begin{example}[Stacks generalize sheaves]
+   If $F:\C^{op}\to \set$ is a presheaf, then when is $F^{fib}$ is a stack? Recall that
+   objects in $F^{fib}$ are pairs $(U,x)$, where $x\in F(U)$, and morphisms $(U',x')\to
+   (U,x)$ are morphisms $f:U'\to U$ with $Ff(x)=x'$. Thus, we have that $F^{fib}(V\to U)
+   = \{(V,y)| Fp_2(y)=Fp_1(y) \text{ in }F(V\times_U V)\}$, and the pullback functor
+   $F^{fib}(U)\to F^{fib}(f:V\to U)$ is given by $(U,x)\mapsto \bigl(V,Ff(x)\bigr)$. This
+   is an equivalence if and only if $F(U)=F^{fib}(U)$ equalizes the two restrictions
+   $F(V)\rightrightarrows F(V\times_U V)$. That is, $F^{fib}$ is a stack if and only if
+   $F$ is a sheaf.
+%    if and only if $F$ is
+%   a sheaf. Recall that $F^{fib}$ is the category of pairs $(U,f\in F(U))$. From this we
+%   see that $F^{fib}(V\to U)=\{v\in F(V)|p_2^*v=p_1^*v \text{ in } F(V\times_U V)\}$, so
+%   we're just asking for exactness of $\xymatrix{F(U)\ar[r] & F(V)\ar@<.5ex>[r]
+%   \ar@<-.5ex>[r] & F(V\times_U V)}$. This roughly says that the 2-Yoneda embedding
+%   preserves sheaves?
+ \end{example}
+ \begin{example}
+   When we proved descent for $\qco$ and $\M_g$ (with $g\ge 2$ or $g=0$) in the fppf
+   topology on $\sch$, we described $\qco$ and $\M_g$ as lax 2-functors from $\sch^{op}$
+   to $\cat$ (i.e.~we implicitly chose cleavages). Now we can reinterpret Theorem
+   \ref{lec07T:descent_qcoh_sheaves} and Proposition \ref{lec08P:descent_Mg} as saying
+   that $\qco$ and $\M_g$ (with $g\ge 2$ or $g=0$) are stacks in the fppf topology on
+   $\sch$.
+%
+%   $\M_g\to \sch$ has objects pairs $(S,C/S)$, where $C$ is a genus $g$ curve over $S$
+%   and morphisms are cartesian diagrams
+%   \[\xymatrix{
+%    C'\ar[d]\ar[r] & C\ar[d]\\
+%    S'\ar[r] & S
+%   }\]
+%    For $g\ge 2$ or $g=0$, we proved that this is a stack over $\sch$ with the \'etale
+%   topology.
+ \end{example}
+ \begin{remark}
+   For $g=1$, we didn't prove a descent theorem for $\M_g$. If we modify the definition
+   of $\M_g$ to have objects $(S,C/S)$, where $C$ is a genus $g$ curve over $S$, where
+   $C$ is allowed to be an algebraic space (i.e.~doesn't have to be a scheme), then
+   descent is almost a tautology. \anton{I don't see this tautology yet} If $S=\spec k$,
+   then such a $C$ is actually a scheme (Problem set 5, problem 3).
+ \end{remark}
+
+ \begin{definition}\label{lec24D:uhom}
+   Let $\F$ be a fibered category with some choice of cleavage, and let $x,y\in \F(U)$.
+   The presheaf $\uhom(x,y):(\C/U)^{op}\to \set$ is defined by $(f:V\to U)\mapsto
+   \hom_{\F(V)}(f^*x,f^*y)$, and if $g:W\to V$ is a morphism over $U$, the restriction
+   map is given by
+   \[
+     \hom_{\F(V)}(f^*x,f^*y)\xrightarrow{g^*}
+     \hom_{\F(W)}(g^*f^*x,g^*f^*y)\underset{\text{can}}{\cong}
+     \hom_{\F(W)}\bigl((fg)^*x,(fg)^*y\bigr).
+   \]
+   Because we define restriction in this way, $\uhom(x,y)$ respects composition on the
+   nose, even if the cleavage you choose is not a splitting. Moreover, different
+   cleavages give canonically isomorphic presheaves.
+ \end{definition}
+ \begin{lemma}
+%   Given a covering $f:V\to U$ in $\C$, full faithfulness of the functor $\F(U)\to
+%   \F(V\to U)$ is equivalent to $\uhom(x,y)$ satisfying the sheaf axiom with respect to
+%   the cover $V\to U$. In particular, t
+   The following are equivalent.
+   \begin{enumerate}
+     \item For all $U\in \C$ and all $x,y\in \F(U)$, $\uhom(x,y)$ is a sheaf.
+     \item For every covering $V\to U$, $\F(U)\to \F(V\to U)$ is fully faithful.
+   \end{enumerate}
+%   Full faithfullness of $\F(U)\to \F(V\to U)$ is equivalent to $\uhom(x,y)$ being a sheaf
+%   on $\C/U$ for all $U\in \C$ and $x,y\in \F(U)$.
+ \end{lemma}
+ \begin{proof}
+%   Let $g:W\to U$ and $f:V\to U$ be objects in $\C/U$, let $p:W\to V$ be a covering
+%   of $V$ over $U$, and let $h$ be the morphism $W\times_V W\to V$.
+%
+   \underline{Observation}: Let $f:V\to U$ be a covering, and let $g=fp_1=fp_2:V\times_U
+   V\to U$. Then consider the following sequence.
+   \[\xymatrix@R-1pc{
+    \uhom(x,y)(U) \ar@{}[d]|{\parallel}\ar[r]
+     & \uhom(x,y)(V) \ar@{}[d]|{\parallel}\ar@<.5ex>[r]\ar@<-.5ex>[r]
+     & \uhom(x,y)(V\times_U V) \ar@{}[d]|{\parallel} \\
+    \hom_{\F(U)}(x,y) \ar[r]
+     & \hom_{\F(V)}(f^*x,f^*y) \ar@<.5ex>[r]\ar@<-.5ex>[r]
+     & \hom_{\F(V\times_U V)}(g^*x,g^*y)
+   }\]
+    An element $\phi\in \uhom(x,y)(V)$ whose restrictions along the two projections are
+   equal is exactly a morphism $(f^*x,\text{can})\to (f^*y,\text{can})$ in $\F(V\to U)$
+   (after unraveling the funny definition of restriction). Thus, exactness of the above
+   sequence (the sheaf axiom on $\uhom(x,y)$ with respect to the cover $V\to U$) is
+   equivalent to full faithfulness of $\F(U)\to \F(V\to U)$.
+
+   \mbox{$(1\Rightarrow 2)$} This follows immediately from the observation above.
+
+   \mbox{$(2\Rightarrow 1)$} Let $x,y\in \F(U)$, let $W\to U$ and $f:V\to U$ be objects in
+   $\C/U$, and let $W\to V$ be a covering over $U$. Then we want to verify the sheaf
+   axiom for $\uhom(x,y)$ with respect to the cover $W\to V$. But this is exactly the
+   sheaf axiom for $\uhom(f^*x,f^*y)$ with respect to the cover $W\to V$ in $\C/V$. By
+   the observation, this is equivalent to full faithfulness of $\F(V)\to \F(W\to V)$,
+   which is given to us by (2).
+%
+%   Given a covering in $\C/U$, like $W\xrightarrow p V\xrightarrow f U$, with $g=f\circ
+%   p$, the sheaf condition is exactness of
+%   \[\xymatrix{
+%    \hom_{\F(V)}(f^*x,f^*y)\ar[r]^{p^*} & \hom_{\F(W)}(g^*x,g^*y)
+%    \ar@<.5ex>[r]^{p_2^*}\ar@<-.5ex>[r]_{p_1^*} &
+%    \hom_{\F(W\times_V W)}(h^*x,h^*y)
+%   }\]
+%    where $h:W\times_V W\to V$. Let $\alpha$ be in the middle guy. Then we get
+%   $\alpha:p^*f^*x\to p^*f^*y$, and we get
+%   \[\xymatrix{
+%    p_1^*p^* f^* x\ar[r]^{p_1^*\alpha} \ar[d]_{\text{can}}^\wr & p_1^* p^* f^*
+%    y\ar[d]_{\text{can}}^\wr\\
+%    p_2^*p^*f^*x\ar[r]^{p_2^*\alpha} & p_2^*p^*f^*y
+%   }\]
+%   \anton{I don't follow this proof}
+ \end{proof}
+ Thus, we may reformulate the stack condition as the following conditions.
+ \begin{enumerate}
+   \item For every $U\in \C$ and every $x,y\in \F(U)$, $\uhom(x,y)$ is a sheaf. That is,
+   given two objects in the fiber over $U$ and a locally defined morphisms which should
+   glue, do glue.
+   \item (Effectivity of descent) Objects in $\F$ can be defined locally. That is, given
+   a cover $V\to U$ in $\C$, $\F(U)\to \F(V\to U)$ is essentially surjective.
+ \end{enumerate}
+ \begin{definition}
+   A fibered category $\F\to \C$ is a \emph{prestack} if for every $U\in \C$ and every
+   $x,y\in \F(U)$, $\uhom(x,y)$ is a sheaf.
+ \end{definition}
+ \begin{remark}
+   The terminology is unfortunate because ``prestack'' is not the generalization of
+   ``presheaf''; it is the generalization of ``separated presheaf''. The generalization of
+   ``presheaf'' is ``fibered category''.
+ \end{remark}

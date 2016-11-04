@@ -1,0 +1,409 @@
+\sektion{13}{Affine/(Finite \'Etale Relation) = Affine, Part I}
+
+% \renewcommand{\thesection}{13\hspace{-1.7ex}}
+% \sektion{and 14 \ Affine/(Finite \'Etale Equivalence) = Affine}
+% \renewcommand{\thesection}{13}
+% \gdef\sectionname{13 and 14\quad Affine/(Finite \'Etale Equivalence) = Affine}
+
+ For the next two lectures, we will fix the following setup. Let $U$ be an affine scheme,
+ and let $R\rightrightarrows U$ be a finite \'etale equivalence
+ pre-relation.\footnote{Actually, we really care about the case where $R$ is a relation.
+ The pre-relation approach is developed because it is interesting that Lemma
+ \ref{lec13L:SpecB_scheme_quotient} holds in that case. See Example
+ \ref{lec14Eg:Quot_by_finite_group}.} In particular, since $R$ is finite over an affine
+ scheme, it is affine. Let $X=U/R$ be the quotient sheaf ($X$ is an algebraic space by
+ Proposition \ref{lec12P:U/R_alg_space}). We define
+ $R'={R{}_{p_2}\!\!\underset{U}{\times}\!{}_{p_1}R}$, noting that $R'$ is affine as well.
+ \begin{warning}
+   If the morphism $R\to U\times U$ is not a monomorphism (i.e.~if $R$ is only a
+   \emph{pre}-relation), then it is not true that $R\cong U\times_X U$. However, there is
+   still a canonical morphism $r:R\to U\times_X U$. Let $\sigma:U\times_X U\to U\times_X
+   U$ be the morphism which switches the two factors. We will assume that the
+   pre-relation $R$ comes with a morphism $\bbar\sigma:R\to R$ making the diagram on the
+   left cartesian. In general, such a map need not exist, but in most cases we care
+   about, it is given to us. Note that pre-composing with $\bbar\sigma$ swaps the two
+   projections $p_1,p_2:R\to U$.
+   \[\raisebox{-1pc}{$\xymatrix{
+    R \ar[d]_r \ar[r]^{\bbar\sigma} \ar@{}[dr]|(.25)\pb
+    & R\ar[d]^r\\
+    U\times_X U\ar[r]_\sigma^\sim & U\times_X U
+   }$}\qquad\qquad
+   \xymatrix@R-1pc{
+    R' \ar[dd]_{`p_{12}\text{'}} \ar[rr]^{`p_{23}\text{'}} \ar@{-->}[dr] & & R \ar[d]^r\\
+     & U\times_X U\times_X U \ar[r]^<>(.5){p_{23}} \ar[d]_{p_{12}} \ar@{}[dr]_(.2)\pb &
+     U\times_X U \ar[d]^{p_1}\\
+    R \ar[r]^<>(.5)r & U\times_X U \ar[r]^<>(.5){p_2} & U
+   }\]
+    Furthermore, we can define $p_{12},p_{23}:R'\to R$ as shown in the diagram on the
+   right. Then we define $p_{13} = p_{23}\circ (\bbar\sigma\times\id):R\times_U R=R'\to
+   R$. \anton{Something is fishy here, $\bbar\sigma\times\id:R\times_{p_2,U,p_1}R\to
+   R\times_{p_1,U,p_1}R$}
+ \end{warning}
+ Let $U=\spec A_0$, $R=\spec
+ A_1$, and $R'=\spec A_2$. Let $\delta_i:A_1\to A_0$ (resp.~$\delta_i':A_2\to A_1$) be
+ the ring morphism corresponding to ``projecting out the $(i+1)\text{-th}$ component''.
+ Define the equalizer
+ $B=Eq(\xymatrix@-1pc{A_0\ar@<.5ex>[r]^{\delta_0}\ar@<-.5ex>[r]_{\delta_1} & A_1})$.
+ Below we have our picture in the category of commutative rings on the left and the
+ corresponding picture in the category of \'etale sheaves on $\sch$ on the right.
+ \[\begin{array}{c|c}
+    \textbf{CommRing}=\aff^{op} & \sch_{et}\\[1ex] \hline
+    \xymatrix@R-2.5pc{
+     & & \makebox[0pt]{exact\rule[-2pt]{0pt}{0pt}}\\
+    A_2 & A_1
+    \ar@<-1ex>[l]_<>(.5){\delta_0'}\ar[l]|<>(.5){\delta_1'}\ar@<1ex>[l]^<>(.5){\delta_2'}
+    & A_0 \ar@<-.5ex>[l]_{\delta_0} \ar@<.5ex>[l]^{\delta_1}
+    \hspace{-1.5ex}\makebox[0pt]{$\overbrace{\hspace{7.5pc}\rule[-1.25pc]{0pt}{2.5pc}}$}
+    \hspace{1.5ex} & B \ar[l]}
+    &
+    \raisebox{-2pc}{$\xymatrix@R-1pc{
+%    U\times_X U\times_X U \ar@{}[d]|{\parallel}& U\times_X U\ar@{}[d]|{\parallel} \\
+    R'
+    \ar@<1ex>[r]^<>(.5){p_{23}} \ar[r]|<>(.5){p_{13}} \ar@<-1ex>[r]_<>(.5){p_{12}}
+    & R
+      \ar@<.5ex>[r]^<>(.5){p_2} \ar@<-.5ex>[r]_<>(.7){p_1} \ar@(dr,dl)[rr]_g
+    & U \ar[r]^<>(.5)f & \spec B}$}\\ \hline
+    \xymatrix{
+    A_2 & A_1 \ar@<.5ex>[l]^{\delta_1'}\ar@<-.5ex>[l]_{\delta_0'}
+    \ar@{}[dr]|{\mbox{\scriptsize\txt{not\\ cart.}}} & A_0\ar[l]_{\delta_0}\\
+    A_1 \ar[u]^{\delta_2'} & A_0 \ar[u]^{\delta_1}
+    \ar@<.5ex>[l]^{\delta_1}\ar@<-.5ex>[l]_{\delta_0} & B \ar[l] \ar[u]}
+   &
+   \xymatrix{
+    \ar@{.>}[d]_{p_{12}}\ar@{.>}[r]^(.4){\bbar\sigma \times \id}& R'\ar[d]_{p_{12}}
+    \ar@<.5ex>[r]^<>(.5){p_{23}} \ar@<-.5ex>[r]_<>(.5){p_{13}}
+    & R \ar[r]^<>(.5){p_2} \ar[d]_{p_1}\ar@{}[dr]|{\mbox{\scriptsize\txt{not\\ cart.}}} & U \ar[d]\\
+    \ar@{.>}[r]^{\bbar\sigma}& R \ar@<.5ex>[r]^<>(.5){p_2} \ar@<-.5ex>[r]_<>(.5){p_1} & U \ar[r] & \spec B}
+ \end{array}\]
+  In the bottom right-hand diagram, we check that the top row is exact (by definition of
+ $R'$ and $p_{13}$)\anton{not clear at all when $R$ is a pre-relation}, and that the two
+ squares on the left (obtained by removing $p_{13}$ and $p_1$, or $p_{23}$ and $p_2$) are
+ cartesian: the ``top'' square is cartesian by definition of $R'$, and the ``bottom''
+ square can be obtained from the top square sticking on the cartesian square of dotted
+ arrows in the diagram. Since $\aff$ is a full subcategory of $\sch_{et}$, it follows
+ that the top row is exact in the diagram on the left, and the two left-most squares are
+ co-cartesian. Moreover, by the definition of $B$, the bottom row of the left-hand
+ diagram is exact.
+ \begin{warning}
+   $\sch_{et}$ is a strictly larger than $\aff$, so exactness of the bottom row of the
+   diagram on the left \emph{does not} imply exactness of the bottom row in the diagram
+   on the right. If that bottom row were exact, then we would have that $\spec B$ is
+   isomorphic to the quotient sheaf $X=U/R$. The main theorem of this lecture says that
+   this happens if $R$ is a relation.
+ \end{warning}
+
+ \begin{theorem} \label{lec13T:U/R_affine}
+   If $U$ is affine, and $R\rightrightarrows U$ is a finite \'etale equivalence relation,
+   then the algebraic space $X=U/R$ is isomorphic to the affine scheme $\spec B$.
+ \end{theorem}
+ \begin{proof}
+   By Lemmas \ref{lec13L:A0flat/B} and \ref{lec13L:A0integral/B}, $A_0$ is flat and
+   integral over $B$. By the going up theorem, it follows that $\spec A_0\to \spec B$ is
+   surjective, so $A_0$ is faithfully flat over $B$.
+   \[\xymatrix{
+   R=\spec A_1 \ar[r]^<>(.5){\sim} & \spec A_0\otimes_B A_0 \ar[r]^{et}\ar[d]\ar@{}[dr]|(.25)\pb
+   & \spec A_0 = U\ar[d]^{\text{f. flat}}\\
+   & \spec A_0\ar[r] & \spec B
+   }\]
+    By Lemma \ref{lec13L:A0xA0_isomorphic_A1}, $\delta_0\otimes \delta_1:A_0\otimes_B
+   A_0\to A_1$ is an isomorphism. Since the projection maps $R\to U$ are \'etale, we have
+   that $\spec A_0\otimes_B A_0\to \spec A_0$ is \'etale. By what \cite{Vistoli} claims
+   is \cite[IV.2.7.1]{EGA} \anton{but isn't quite, as far as I can tell}, \'etale-ness
+   descends along faithfully flat base extension. Thus, we now know that $\spec A_0\to
+   \spec B$ is an \'etale surjection.
+
+   By Lemma \ref{lec13L:SpecB_scheme_quotient}, the sequence $\xymatrix@-1pc{\spec A_1
+   \ar@<.5ex>[r]\ar@<-.5ex>[r] & \spec A_0\ar[r] & \spec B}$ is exact as a sequence of
+   schemes. We'd like to show that it is exact as a sequence of \'etale sheaves. Let $\F$
+   be an \'etale sheaf, and let $f:\spec A_0\to \F$ be a morphism of \'etale sheaves
+   which coequalizes $p_1$ and $p_2$. Then we would like to show that $f$ factors
+   uniquely through $\spec B$.
+   \[\xymatrix@C-.5pc{
+   \spec A_1 \ar@<.5ex>[r]^{p_2}\ar@<-.5ex>[r]_{p_1} & \spec A_0\ar[r] \ar[d]_f
+   & \spec B \ar@{-->}[dl]^{\exists \text{ unique?}} \\ & \F
+   }\qquad\qquad
+   \xymatrix@C-.5pc{
+    \F(\spec A_1) & \F(\spec A_0) \ar@<.5ex>[l]^{\F p_1}\ar@<-.5ex>[l]_{\F p_2}
+    & \F(\spec B) \ar[l]
+   }\]
+   By Yoneda's lemma, we may think of $f$ as an element of $\F(\spec A_0)$.
+   Since $\spec A_0\to \spec B$ is an \'etale cover and $\spec A_1\cong \spec
+   A_0\otimes_B A_0 = \spec A_0 \times_{\spec B} \spec A_0$, the sequence on the
+   right is exact by the sheaf axiom! This says exactly that $f$ factors uniquely through
+   $\spec B$. Thus, $\xymatrix@-1pc{R\ar@<.5ex>[r]\ar@<-.5ex>[r]& U\ar[r] & \spec B}$ is
+   exact as a sequence of \'etale sheaves, so $B\cong U/R$.
+ \end{proof}
+
+ \begin{lemma}\label{lec13L:loc_const_rank}
+   Let $R\rightrightarrows U$ be a finite \'etale equivalence pre-relation. Then the
+   ranks of the two projections are equal and locally constant.
+ \end{lemma}
+ \begin{proof}
+   \anton{I don't see what's happening here. ``The rank of an \'etale map is
+   locally constant, so it is constant on connected components of $U$''?}
+
+%   First we reduce to the case where the two projections $R\to U$ have constant rank $n$.
+   Let $W^{(n)}\subseteq U$ be the largest open where $p_1:R\to U$ has rank $n$. Let
+   $R'=U\times_X U\times_X U = (U\times_X U)\times_U (U\times_X
+   U)=R{}_{p_2}\!\underset{U}{\times}{}_{p_1}R$.
+   \[\xymatrix{
+    R'\ar[r]^{p_{23}}\ar[d]_{p_{12}}\ar@{}[dr]|(.25)\pb & R\ar[d]^{p_1}\\
+    R\ar[r]^{p_2} & U
+   }\qquad\qquad
+   \xymatrix{
+    R'\ar[r]^{p_{13}}\ar[d]_{p_{12}} \ar@{}[dr]|(.25)\pb & R\ar[d]^{p_1}\\
+    R\ar[r]^{p_1} & U }\] $p_2^{-1}(W^{(n)})$ is the locus where $p_{12}$ has rank $n$
+   (by the diagram on the left). By the diagram on the right, this is also
+   $p_1^{-1}(W^{(n)})$. This shows that $X=\coprod W^{(n)}/R_{W^{(n)}}$.
+ \end{proof}
+
+%   \smallskip
+%   Now we can assume the two projections $R\to U$ have constant rank $n$. Let $R' = \spec
+%   A_2$, $R=\spec A_1$, and $U=\spec A_0$. Let $\delta_0,\delta_1:A_0\to A_1$ correspond
+%   to $p_2$ and $p_1$, respectively, and let $\delta_i':A_1\to A_2$ correspond to the
+%   ``omit $i+1$'' projection (e.g.~$\delta_1'$ corresponds to $p_{13}:R'\to R$). Consider
+%   the diagram below on the left (the diagram on the right is $\spec$ of it).
+%%    Verify that
+%%   the top row is exact, and that if you remove the horizontal $\delta_0$ and $\delta_0'$
+%%   (resp.~$\delta_1$ and $\delta_1'$), you're left with a cartesian square.
+%   Define the equalizer
+%   $B=Eq(\xymatrix@-1pc{A_0\ar@<.5ex>[r]^{\delta_1}\ar@<-.5ex>[r]_{\delta_0} & A_1})$.
+%   \[\xymatrix{
+%    A_2 & A_1 \ar@<.5ex>[l]^{\delta_0'}\ar@<-.5ex>[l]_{\delta_1'} & A_0\ar[l]_{\delta_0}\\
+%    A_1 \ar[u]^{\delta_2'} & A_0 \ar[u]_{\delta_1}
+%    \ar@<.5ex>[l]^{\delta_0}\ar@<-.5ex>[l]_{\delta_1} & B \ar[l]
+%   }\qquad\qquad
+%   \xymatrix{
+%    R' = U\times_X U\times_X U \ar[d]_{p_{12}}
+%    \ar@<.5ex>[r]^<>(.5){p_{13}} \ar@<-.5ex>[r]_<>(.5){p_{23}} & U\times_X U
+%    = R \ar[r]^<>(.5){p_2} \ar[d]^{p_1} & U\\
+%    R= U\times_X U \ar@<.5ex>[r]^<>(.5){p_1} \ar@<-.5ex>[r]_<>(.5){p_2} & U \ar[r] & \spec
+%    B
+%   }\]
+%    Note that cartesian-ness of the squares and exactness of the top row in the diagram
+%   on the right imply cartesian-ness of the squares and exactness of the top row in the
+%   diagram on the left because having a universal property in $\sch_{et}$ is stronger
+%   than having the same universal property in $\aff$. However, exactness of the bottom
+%   row on the left \emph{does not} imply exactness of the bottom row on the right!
+%   (colimits in $\aff$ are generally not the same as colimits in $\sch_{et}$) We only
+%   get a natural map $U/R\to \spec B$.
+
+
+%   \underline{Goal}:We wish to show that the natural map $U/R\to \spec B$ is an
+%   isomorphism.
+
+%   We will achieve this goal by showing that $\spec B$ and $U/R$ have the same
+%   presentation as algebraic spaces. We will show that $B\to A_0$ is flat \anton{do we
+%   get this for free somehow?}. Then we will prove that $A_0$ is integral over $B$,
+%   proving that $B\to A_0$ is faithfully flat (it is quasi-compact for free). Then we
+%   prove that the natural map $A_0\otimes_B A_0\xrightarrow{\delta_0\otimes \delta_1}A_1$
+%   is an isomorphism. Since $R\to U$ are finite and \'etale, we get that $\spec A_0\to
+%   \spec B$ is finite and \'etale.
+%   \[\xymatrix{
+%    R=\spec A_1 \ar@{}[dr]|(.25)\pb \ar[d] \ar[r]^{\text{fin.}}_{\text{\'et}}
+%    & \spec A_0= U \ar[d]^{\mbox{\scriptsize \txt{f.flat\\ q-cmpt}}}\\
+%    U= \spec A_0 \ar[r]& \spec B
+%   }\]
+%    Finally, we will show that $\xymatrix@-1pc{\spec A_0\otimes_B
+%   A_0\ar@<.5ex>[r]\ar@<-.5ex>[r] & \spec A_0\ar[r] & \spec B}$ is exact as a sequence of
+%   sheaves. Then we have the following diagram of sheaves.
+%%   We are base changing by $A_0$. Then we know that $B\to A_0$ is finite
+%%   \'etale. Then we can think of $\spec B$ as an algebraic space. It is \'etale covered
+%%   by $\spec A_0\to B$, and we get
+%   \[\xymatrix@!0 @R=1.5pc @C=6pc{
+%    R=\spec A_1\ar[dd]_{\wr} \ar@<.5ex>[dr]\ar@<-.5ex>[dr]& & \spec B\\
+%     & \spec A_0\ar[ur]\ar[dr] \\
+%    \spec A_0\otimes_B A_0 \ar@<.5ex>[ur]\ar@<-.5ex>[ur]& & U/R \ar[uu]
+%   }\]
+%
+%   You'd like this map $\spec A_0\to \spec B$ is a quotient map in the category of ringed
+%   spaces. The following lemma implies at least that it is a closed map of topological
+%   spaces.
+ \begin{lemma} \label{lec13L:A0integral/B}
+   Let $A_0$ and $B$ be as in the setup. Then $A_0$ is integral over $B$.
+ \end{lemma}
+ \begin{proof}\anton{go through this}
+   Let $a\in A_0$. Let $P_{\delta_1}(T,\delta_0(a))=T^n-\sigma_1 T^{n-1} + \cdots
+   +(-1)^n \sigma_n$ be the characteristic polynomial of $\times \delta_0(a):A_1\to
+   A_1$, where $A_1$ is viewed as an $A_0$-module via $\delta_1$.
+
+   $\delta_0(P_{\delta_1}(T,\delta_0(a)))=P_{\delta_2'}(T,\delta_0'\delta_0(a))$ by the
+   bottom square being cartesian. Also, we have
+   $\delta_1(P_{\delta_1}(T,\delta_0(a)))=P_{\delta_2'}(T,\delta_1'\delta_0(a))$. Since
+   the top row is an equalizer, these two things are actually equal. Thus,
+   $\delta_0(\sigma_i)=\delta_1(\sigma_i)$ for every $i$. Thus, $\sigma_i\in B$. On the
+   other hand, by the Cayley-Hamilton Theorem tells us that
+   $\delta_0(a)^n-\delta_1(\sigma_1)\delta_0(a)^{n-1}+\cdots+(-1)^n
+   \delta_1(\sigma_n)=0$ in $A_1$. Since the $\sigma_i$ live in $B$, we get
+   $\delta_0\bigl(a^n-\sigma_1a^{n-1}+\cdots + \sigma_n\bigr)=0$. since $\delta_0$ is
+   \'etale surjective, it is faithfully flat, so it is injective by Lemma
+   \ref{lec06P:fflat_exact_sequence}, so we get that $a^n-\sigma_1a^{n-1}+\cdots +
+   \sigma_n=0$, so $a$ is integral, as desired.
+ \end{proof}
+ \begin{lemma}\label{lec13L:SpecB_set_quotient}
+   Let all notation be as in the setup of this lecture. Let $x,y\in U$ be points with
+   the same image in $\spec B$. Then there exists a $z\in R$ with $p_2(z)=x$ and
+   $p_1(z)=y$. That is $\spec B$ is \emph{set-theoretically} the quotient $\spec
+   A_0/R$.
+ \end{lemma}
+ \begin{proof}\anton{go over this}
+   Suppose not. Well, $x$ and $y$ are prime ideals in $A_0$. Then we know that $x$ is
+   distinct from $\delta_0^{-1}(t)$ for every $t\in A_1$ with $\delta_1^{-1}(t)=y$. For
+   such a prime $t$, $\delta_0^{-1}(t)\cap B=\delta_1^{-1}(t)\cap B = y\cap B=x\cap B$
+   because $B$ is the equalizer.
+
+   Since we have an integral morphism of rings, we can apply Cohen-Seidenberg (going
+   up), which implies that $x$ is not contained in $\delta_0^{-1}(t)$ for every prime
+   $t\subseteq A_1$ with $\delta_1^{-1}(t)=y$. By prime avoidance, there is an $a\in x$
+   such that $a$ is not in any $\delta_0^{-1}(t)$ (there are finitely many $t$ over $y$
+   because the morphisms $A_0\to A_1$ are finite). Then $\times \delta_0(a):A_1\to
+   A_1$, and we get $N_{\delta_1}(\delta_0(a))=\sigma_n$. Then $\delta_0(a)$ is not
+   contained in any of the $t$'s, so $N_{\delta_1}(\delta_0(a))\not\in y$. On the other
+   hand,
+   \[\xymatrix{
+     A_1 \ar[d]_{\times \delta_0(a)} \ar[r]^\Delta & A_1 \ar[d]^{\times a}\\
+     A_1\ar[r]^\Delta & A_0
+   }\]
+   $U\hookrightarrow R\subseteq U\times U$ contains the diagonal. The diagram commutes
+   as a diagram of $A_0$-modules ($A_1$ via $\delta_1$). This implies that $\sigma_n\in
+   B\cap x$.
+
+   So $\sigma_n\in B\cap x$ and $\sigma_n\not\in B\cap y$, which is a contradiction
+   because $B\cap y=B\cap x$.
+   \renewcommand{\qedsymbol}{$\square_\text{Lemma}$}
+ \end{proof}
+ \begin{corollary}\label{lec13C:SpecB_topological_quotient}
+   $\spec B$ is \emph{topologically} the quotient $\spec A_0/R$.
+ \end{corollary}
+ \begin{proof}
+   By Lemma \ref{lec13L:A0integral/B}, $A_0$ is integral over $B$. It follows from the
+   going up theorem that $f:\spec A_0\to \spec B$ is a closed surjective
+   map.\footnote{Let $\phi:B\to A_0$ be the ring map corresponding to $f$. Going up
+   directly tells us that $\spec A_0\to \spec B$ is surjective. Let $V(I)\subseteq
+   \spec A_0$ is a closed set (the set of all primes containing some ideal $I$), then
+   observe that $A_0/I$ is integral over $B/\phi^{-1}(I)$. Applying going up, we see
+   that every prime containing $\phi^{-1}(I)$ is in the image of $V(I)$. On the other
+   hand, the pullback of any prime containing $I$ contains $\phi^{-1}(I)$. Thus,
+   $f\bigl(V(I)\bigr) = V\bigl(\phi^{-1}(I)\bigr)$, which is closed.} Therefore, the
+   topology on $\spec B$ is induced from the topology on $\spec A_0$. Together with
+   Lemma \ref{lec13L:SpecB_set_quotient}, we get the result.
+ \end{proof}
+
+%   By the way, if $G$ acts on $A_0$, then $\sigma_n(a) = \prod_g g(a)$. We did the same
+%   sort of thing \dots we multiplied all elements equivalent under $R$. $A_1=\prod_g
+%   A_0$, and $\delta_0:a\mapsto (g(a))$ and $\delta_1:a\mapsto (a)$.
+
+% $g=f\circ p_1=f\circ p_2$, $f:\spec A_0\to \spec B$. The sequence
+% \[\xymatrix{
+%  \O_{\spec B}\ar[r] & f_*\O_{\spec A_0} \ar@<.5ex>[r]\ar@<-.5ex>[r]& g_* \O_{\spec
+%  A_1}
+% }\]
+ \begin{lemma}\label{lec13L:SpecB_scheme_quotient}
+   $\spec B$ is \emph{scheme theoretically} the quotient $\spec A_0/R$. That is, for
+   any morphism $\rho:\spec A_0\to T$ (where $T$ is a scheme) such that $\rho\circ
+   p_1=\rho\circ p_2$, there exists a unique morphism of schemes $\bar\rho:\spec B\to
+   T$ such that $\rho=\bar\rho\circ f$.
+ \end{lemma}
+ \begin{proof}
+   Let $g=f\circ p_1=f\circ p_2$. By the Corollary
+   \ref{lec13C:SpecB_topological_quotient}, we get a unique continuous map
+   $\bar\rho:\spec B\to T$. In order to make it into a morphism of schemes, we need a map
+   \[\xymatrix{
+    \bar\rho^{-1}\O_T\ar[dr] \ar@{-->}[r]^\exists & \O_{\spec B}\ar[d]\\
+    & f_*\O_{\spec A_0}\ar@<.5ex>[d]\ar@<-.5ex>[d] \\
+    & g_*\O_{\spec A_1}
+   }\]
+    The map exists and is unique because $B\to A_0\rightrightarrows A_1$ is
+   exact.\anton{explain} Finally, check that it is local, which we can check on $\spec
+   A_0$.\anton{explain}
+ \end{proof}
+%   So far, we've only used that diagram with the $\delta$'s, not that $R$ is an
+%   equivalence relation. This also works if taking quotient by a finite flat group-scheme
+%   (e.g.~a finite group) $G$ acting on $\spec A_0$ (not necessarily freely).
+%   \[\xymatrix{
+%    A_0\otimes \O_G\otimes \O_G & A_0\otimes \O_G \ar@<.5ex>[l] \ar@<-.5ex>[l] & A_0 \ar[l]\\
+%    A_0\otimes \O_G \ar[u]& A_0 \ar@<.5ex>[l] \ar@<-.5ex>[l] \ar[u]
+%   }\]
+%   The squares are cartesian as soon as you have an action, and the procedure above
+%   always gives you a categorical quotient ($G\times U\to U\times U$ need not be a
+%   monomorphism).
+
+ \begin{lemma} \label{lec13L:A0flat/B}
+   Let $A_0$ and $B$ be as in the setup. Then $A_0$ is flat over $B$.
+ \end{lemma}
+ \begin{proof}
+   We can check flatness locally on $B$. Thus, we can assume $B$ is local. By what
+   \cite{Vistoli} claims is \cite[IV.2.7.1]{EGA} \anton{}, it is enough to check flatness
+   after making a flat (and therefore faithfully flat, since $B$ is local) base change.
+   \[\xymatrix{
+    \spec A_1'\ar[d] \ar@<.5ex>[r]\ar@<-.5ex>[r] & \spec A_0' \ar[r] \ar[d]& \spec B'\ar[d]^{\text{\anton{faithfully?} flat}}\\
+    \spec A_1 \ar@<.5ex>[r]\ar@<-.5ex>[r] & \spec A_0 \ar[r] & \spec B
+   }\]
+    Thus, we can assume $B$ is local with infinite residue field \anton{if the residue
+   field is $k(p)$, take the separable closure and this extends to an extension of the
+   ring \dots strict hensilization?}. This implies that $A$ is semi-local. \anton{Lemma
+   \ref{lec13L:SpecB_set_quotient} implies that $A_0$ is finite over $B$ because $A_1$ is
+   finite over $A_0$ and multiple things over a point in $B$ differ by things in $A_1$}
+ \end{proof}
+
+% It remains to see the flatness of $A_0$ over $B$ and that $A_0\otimes_B A_0\to A_1$ is
+% an isomorphism.
+% \[\xymatrix{
+%  \spec A_1'\ar[d] \ar@<.5ex>[r]\ar@<-.5ex>[r] & \spec A_0' \ar[r] \ar[d]& \spec B'\ar[d]^{\text{flat}}\\
+%  \spec A_1 \ar@<.5ex>[r]\ar@<-.5ex>[r] & \spec A_0 \ar[r] & \spec B
+% }\]
+%  To check flatness, it is enough to check it after making a faithfully flat base
+% change. Thus, we can assume $B$ is local with infinite residue field \anton{if the
+% residue field is $k(p)$, take the separable closure and this extends to an extension
+% of the ring}. This implies that $A$ is semi-local. \anton{lemma 2 implies that $A_0$
+% is finite over $B$ because $A_1$ is finite over $A_0$ and multiple things over a point
+% in $B$ differ by things in $A_1$}
+ \begin{lemma}\label{lec13L:N_contains_a_basis}
+   Let $B$ be a local ring with infinite residue field, $i:B\to A$ a homomorphism of
+   semi-local rings sending $\m_B$ to the Jacobson radical\footnote{The intersection of
+   all maximal ideals.} of $A$. Let $M$ be a free $A$-module of rank $n$, and
+   $N\subseteq M$ a $B$-submodule which generates $M$ as an $A$-module. Then $N$
+   contains a basis for $M$ as an $A$-module.
+ \end{lemma}
+ \begin{proof}
+   By Nakayama, replace $B$ by $B/\m$, $A$ by $A/\r$, $M$ by $M/\r M$, and $N$ by
+   $N/(N\cap \r M)$. Now the result is an exercise (it's a Chinese remainder argument).
+   \anton{do this proof}
+ \end{proof}
+ \begin{lemma}\label{lec13L:A0xA0_isomorphic_A1}
+   Let $B$, $A_0$, and  $A_1$ be as in the setup. Then $\delta_0\otimes
+   \delta_1:A_0\otimes_B A_0\to A_1$ is an isomorphism.
+ \end{lemma}
+ \begin{proof} \anton{do this proof}
+   Apply Lemma \ref{lec13L:N_contains_a_basis} to $B=B$, $A=A_1$, $M=A_1$ (viewed as an
+   $A_0$-module via $\delta_1$), and $N=\delta_0(A_0)$. We need to check that $N$
+   generates $M$ as an $A_0$-module, which is the same as checking that $A_0\otimes_B
+   A_0\xrightarrow{\delta_0\otimes \delta_1} A_1$ is surjective. This is true because we
+   have an equivalence relation. We have that $\spec A_0\hookrightarrow \spec
+   A_0\otimes_B A_0$
+   \[\xymatrix{
+    A_0\otimes_B A_0\ar[r]^<>(.5){\delta_0\otimes \delta_1} & A_1\\
+    A_0\ar[u]^{a\mapsto a\otimes 1} \ar[ur]_{\delta_0}
+   }\]
+    $\spec A_0\to \spec A_1$ is proper because it is finite ... we get that $\spec
+   A_0\hookrightarrow \spec A_0\otimes_B A_0$ is a closed immersion.
+
+   Choose $a_1,\dots, a_n\in A_0$ so that $\delta_0(a_i)$ are a basis for $A_1$ (as a
+   module over $A_0$ via $\delta_1$), with $\varepsilon:\ZZ^n\to A_0$.
+   $i:B\hookrightarrow A_0$.
+   \[\xymatrix{
+    A_2 & A_1 \ar@<.5ex>[l]^{\delta_1'} \ar@<-.5ex>[l]_{\delta_0'} & A_0 \ar[l]_{\delta_0}\\
+    A_1\otimes_\ZZ \ZZ^n \ar[u]^\wr_{u_2}& A_0\otimes_\ZZ \ZZ^n \ar[u]_{u_1}^\wr
+    \ar@<.5ex>[l]^{\delta_0\otimes 1} \ar@<-.5ex>[l]_{\delta_1\otimes 1} & B\otimes_\ZZ \ZZ^n
+    \ar[u]_{u_0}^\wr  \ar[l]_{i\otimes 1}\\
+    & A_0 \ar[u] & B\ar[u] \ar[l]
+   }\]
+    The $u_i$ are what you think they are: $u_0=i\otimes \varepsilon$,
+   $u_1=\delta_1\otimes \delta_0\varepsilon$, $u_2=\delta_2'\otimes
+   \delta_0'\delta_0\varepsilon$. By construction, $u_1$ is an isomorphism. We threw in a
+   $\ZZ^n$ in the bottom, which doesn't affect the fact that the squares are
+   co-cartesian. Thus, $u_2$ is an isomorphism. Both rows are exact, so it follows that
+   $u_0$ is also an isomorphism. \anton{whoa} $A_0\otimes_B A_0 \to A_1$ is a surjective
+   map of free modules over $A_0$ of the same rank, so it is an isomorphism. The bottom
+   square is co-cartesian.
+ \end{proof}

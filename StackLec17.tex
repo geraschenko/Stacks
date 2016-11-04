@@ -1,0 +1,470 @@
+\sektion{17}{Separated, quasi-finite, locally finite type \texorpdfstring{$\Longrightarrow$}{=>} quasi-affine}
+
+ \begin{definition}
+   A morphism $f:X\to Y$ is of \emph{finite presentation} if it is locally of finite
+   presentation, quasi-compact and quasi-separated (i.e.~$X\to X\times_Y X$ is
+   quasi-compact). This is local on $Y$. \anton{given the corrected statement of the
+   theorem, should this definition still be here, or does it just get in the way?}
+ \end{definition}
+ \begin{definition}
+   A morphism $f:X\to Y$ is \emph{quasi-finite} if it is locally quasi-finite and
+   quasi-compact.
+ \end{definition}
+ \begin{definition}
+   A morphism $f:X\to Y$ is \emph{quasi-affine} if there exists a factorization
+   $X\hookrightarrow W\to Y$, where $X\hookrightarrow W$ is a quasi-compact open
+   immersion and $W\to Y$ is affine.
+ \end{definition}
+% \begin{theorem}\label{lec16T:stuff->quasi-affine}
+%   Let $f:X\to Y$ be a map of algebraic spaces which  is quasi-finite, of finite
+%   presentation, and separated. Then $f$ is quasi-affine.
+% \end{theorem}
+ \begin{theorem}\label{lec17T:stuff->quasi-affine}
+   Let $f:X\to Y$ be a separated, quasi-finite, locally of finite type morphism of
+   algebraic spaces, and let let $X\xrightarrow g Z=\Spec_Y( f_*\O_X) \xrightarrow h Y$
+   be the Stein factorization. Then $g$ is an open immersion. In particular,
+   $f$ is quasi-affine.
+ \end{theorem}
+ 
+ \begin{remark}
+     (David:) It is immediate that $g$ is at least injective, since by
+     (Hartshorne III.11) a Stein morphism has connected fibers and $f$
+     is quasi-finite.
+ \end{remark}
+ 
+ For $X$ and $Y$ schemes, this theorem is \cite[IV.18.12.12]{EGA}. This is Deligne's
+ version of Zariski's main theorem (the non-noetherian version). There is also some
+ theorem by Peskine and Szpirro that goes into the non-noetherian case.
+
+ In the course of proving the theorem, we will need to use the following result.
+ \begin{proposition}[{\cite[IV.18.12.3]{EGA}}]
+   Let $f:U\to Y$ be a morphism of schemes which is locally of finite type and separated,
+   and let $y\in Y$ be a point such that $f^{-1}(y)$ is discrete and finite. Then there
+   exists an \'etale morphism $Y'\to Y$ and a point $y'\in Y'$ mapping to $y$ such that
+   $U'=U\times_Y Y'=U_1'\sqcup U_2'$ such that $f'|_{U_1'}:U_1'\to Y'$ is finite and
+   $U_2'\cap f'^{-1}(y')=\varnothing$.
+ \end{proposition}
+ In some sense, this is Zariski's main theorem \anton{in what sense?}.
+%  \[\begin{pspicture}(-.3,-.1)(7,3.6)
+%    \pscurve(.5,3.3)(1.5,2.8)(.5,2.5) \uput[180](.5,3){$U_1'$}
+%    \pscurve(.5,2.1)(1.5,2)(2,2)
+%    \pscircle[fillstyle=solid, fillcolor=white](1.5,2){.5ex}
+%    \uput[180](.5,2){$U_2'$}
+%    \rput(1.2,1.4){$\left\downarrow \rule{0pt}{2.1ex} \right.$}
+%    \psccurve(.5,.5)(1.3,.8)(2,.5)(.5,.2)
+%    \uput[180](.5,.5){$Y'$}
+%    \rput(3,.5){$\xrightarrow{\hspace{2em}}$}
+%    \pscurve(4,3.5)(5.5,3)(4.2,2.3)(5.5,2)(6.5,2)
+%    \pscircle[fillstyle=solid, fillcolor=white](5.5,2){.5ex}
+%    \uput[0](6,3){$U$}
+%    \rput(5.3,1.5){$\left\downarrow \rule{0pt}{2.1ex} \right.$}
+%    \psccurve(4,.5)(5,1)(6.5,.5)(5,0)
+%    \uput[0](6.5,.5){$Y$}
+%    \psccurve[linestyle=dashed](4.5,.5)(5.5,.8)(6,.5)(5.5,.2)
+%    \psdots(1.5,.5)(5.5,.5)
+%    \uput[180](1.5,.5){$y'$} \uput[180](5.5,.5){$y$}
+%  \end{pspicture}\]
+  In the analytic topology, this is probably clear. \anton{finite in the analytic topology
+ means quasi-finite and proper}
+ \begin{remark}[Aside]
+   If $Y$ is noetherian and $y\in Y$, then consider $\hat \O_{Y,y}$.
+   \[\xymatrix{
+   \hat U_y \ar[r] & \spec \hat \O_{Y,y} \\
+   U_{y,n}\ar@{^(->}[u]\ar[r] & \spec (\hat \O_{Y,y},\m_Y^n) \ar@{^(->}[u]
+   }\]
+    This is how you break of the $U_1'$ \dots it is the projective limit of the
+   $U_{y,n}$s. You check that it is open and closed. This is some fancy version of
+   Hensel's lemma. If you haven't seen this kind of thing before, just think about the
+   complete case.
+ \end{remark}
+
+% \begin{remark}
+%   \[\xymatrix{
+%    X'\ar[r]\ar[d]\ar@/^2ex/[rr]^{f'} & Z'\ar[r]\ar[d] & Y'\ar[d]^{\text{flat}}\\
+%    X \ar[r] & Z\ar[r] & Y
+%   }\]
+%    If these squares are cartesian and $Z$ is the Stein factotization, then $Z'$ gives
+%   the Stein factorization of $f'$ because $f$ is quasi-compact (hidden in the assumption
+%   that it is quasi-finite), so it is quasi-separated.
+% \end{remark}
+ \begin{proof}[Proof of Theorem \ref{lec17T:stuff->quasi-affine}] The proof is done in a
+   series of steps.
+
+   \underline{Step 1: Reduce to $Y$ affine.} Let $Y'\to Y$ be an \'etale cover of $Y$ by
+   a scheme, and let $Y''\to Y'$ be an inclusion of an affine open subscheme. Then we get
+   the following diagram (all squares are cartesian).
+   \[\xymatrix{
+    X''\ar[r]^{g''}\ar[d] & Z''\ar[r]\ar[d] & Y''\ar@{^(->}[d]\\
+    X' \ar[r]^{g'}\ar[d] & Z'\ar[r]\ar[d] & Y'\ar@{->>}[d]^{et}\\
+    X\ar[r]^g & Z \ar[r] & Y
+   }\]
+    By Remark \ref{lec16R:flat_extension_Stein}, $Z'$ and $Z''$ are the Stein
+   factorizations of $X'\to Y'$ and $X''\to Y''$ respectively. Assume the theorem is true
+   when $Y$ is an affine scheme. Then we have that $g''$ is an open immersion for every
+   open affine $Y''$ in $Y'$. Since being an open immersion is stable (local on the base)
+   in the Zariski topology, we have that $g'$ is an open immersion. Finally, open
+   immersions descend along \'etale surjections \anton{where do we prove this?}, so $g$
+   is an open immersion.
+
+   \underline{Step 2a: Invoke \cite[IV.18.12.3]{EGA}.} Choose an \'etale cover $U\to X$
+   with $U$ a scheme so that $U\to Y$ is separated, quasi-finite, and locally of finite
+   type. Then in particular, $U$ is quasi-compact, so we can cover it by a finite number
+   of affine open sets. Thus, we may assume $U$ itself is affine. In particular, $U\to Y$
+   is of finite type. Applying \cite[IV.18.12.3]{EGA}, for any point $y\in Y$, we get an
+   \'etale morphism $Y'\to Y$ and a point $y'\in Y$ mapping to $y$ such that
+   $U'=U\times_Y Y'=U_1'\sqcup U_2'$, with $U_1'$ finite over $Y'$ and $U_2'$ not
+   intersecting the fiber of $y'$. Note that by taking an affine open neighborhood of
+   $y'$ in $Y'$, we can replace $Y'$ by an affine scheme, in which case $U'$ is also an
+   affine scheme.
+
+   Define $X_1'$ to be $U_1'/(U_1'\times_X U_1')$ and define $X_2'$ to be
+   $U_2'/(U_2'\times_X U_2')$.
+
+   \underline{Step 2b: $X_1'$ is a scheme and $X_1'\to X'$ is a closed immersion.} Note
+   that the projections $U_1'\times_{Y'}U_1'\rightrightarrows U_1'$ are finite because
+   $U_1'\to Y'$ is finite, and the projections are pullbacks of this morphism.
+   \[\xymatrix{
+   U'\times_{X'}U' \ar[r] \ar[d] & U_1'\times_{Y'}U_1' \ar[d]
+   \ar@<.5ex>[r]\ar@<-.5ex>[r] & U_1'\\
+   X' \ar[r]^<>(.5)\Delta & X'\times_{Y'}X'
+   }\]
+    Since $X\to Y$ is separated, $X\to X\times_Y X$ is a closed immersion, so $X'\to
+   X'\times_{Y'}X'$ is a closed immersion, so it is finite. It follows that
+   $U_1'\times_{X'} U_1'\to U_1'\times_{Y'}U_1'$ is finite, so the two projections
+   $U_1'\times_{X'}U_1'\rightrightarrows U_1'$ are finite. \anton{for some reason, this
+   is an \'etale equivalence relation} By Theorem \ref{lec13T:U/R_affine}, we have that
+   $X_1'$ is an affine scheme.
+
+   To see that $X_1'\to X'$ is a closed immersion, let $T$ be a scheme with a morphism to
+   $X'$. We are trying to show that $T\times_{X'}X_1'\to T$ is a closed immersion. But
+   $T\times_{X'}X_1'$ is the image of the morphism $g$ in the diagram on the left, so it
+   is enough to show that $g$ is closed.
+   \[\xymatrix{
+   U_1'\times_{X'} T \ar[d]\ar[r] \ar@/^3ex/[rr]^g & T\times_{X'}X_1'\ar[r] \ar[d]& T\ar[d]\\
+   U_1' \ar[r]& X_1' \ar[r] & X'
+   }\qquad\qquad\xymatrix{
+   U_1'\times_{X'} T \ar@/^3ex/[rr]^g \ar[d]\ar@{^(->}[r]  & U_1'\times_{Y'}T \ar[r]_<>(.5){\text{finite}} \ar[d]& T\\
+   X' \ar@{^(->}[r]& X'\times_{Y'}X'
+   }\]
+    Looking at the diagram on the right, we see that $U_1'\times_{X'}T\to
+   U_1'\times_{Y'}T$ is a closed immersion because $X'\to X'\times_{Y'}X'$ is, and we see
+   that $U_1'\times_{Y'}T\to T$ is finite (and therefore closed) because $U_1'\to Y'$ is
+   finite. Thus, $g$ is closed, so $T\times_{X'}X_1'\to T$ is a closed immersion.
+
+   Thus, we have shown that $X'=X_1'\sqcup X_2'$, with $X_2'\times_{Y'}y'=\varnothing$.
+   Since Stein factorization is stable under flat base change, we have that $Z'=Z\times_Y
+   Y'=Z_1'\sqcup Z_2'$, where $Z_i'$ is the stein factorization of $X_i'\to Y'$.
+
+   \underline{Step 3: $X\to Z$ is \'etale.} Being \'etale is local on $Z$ in the \'etale
+   topology. So for each $z\in Z$, it is enough to find an \'etale morphism $Z'\to Z$
+   (covering a neighborhood of $z$) so that $X\times_Z Z'\to Z'$ is \'etale at every
+   point in $Z'$ lying over $z$. For $z\in Z$, let $y\in Y$ be the image of $z$. Applying
+   Step 2, we find an \'etale morphism $Y'\to Y$ such that $X'=X_1'\sqcup X_2'$, with
+   $X_1'$ affine and $X_2'\times_{Y'}y'=\varnothing$. Thus, it is enough to show that
+   $X_1'\to Z_1'$ is \'etale. But $X_1'\to Y'$ is a separated, quasi-finite, locally of
+   finite type morphism of schemes, so \cite[IV.18.12.12]{EGA} tells us that $X_1'\to
+   Z_1'$ is an open immersion, so it is \'etale.
+
+   \underline{Step 4: Reduce to $Y=Z$.} It is straightforward to check that $X\to Z$ is
+   separated, quasi-finite, and of finite type, so we'll skip that.\footnote{By the way,
+   if we had started with the assumption that $X\to Y$ is locally of finite presentation,
+   we would \emph{not} get that $X\to Z$ is locally of finite presentation. Finite type
+   is really the right hypothesis.} \anton{I haven't checked it}
+
+   \underline{Step 5: $X\to Z$ is a monomorphism.}
+   Since $X\to Z$ is Stein, it is its own Stein factorization. Applying Step 2, we see
+   that for any point $z\in Z$, there is an \'etale cover of a neighborhood of $z$,
+   $Z'\to Z$, which can be taken to be affine, so that we get the diagram on the left
+   below. Replacing $Z'$ by the connected component containing $z'$, we get that
+   $X_2'=\varnothing$ (otherwise $Z'$ would be disconnected, as we saw at the end of Step
+   2b), so $X'=X_1'$. Thus, we have that $X'\to Z'$ is finite and an open immersion, so
+   it is an isomorphism.
+   \[\xymatrix{
+    X_1'\sqcup X_1' \ar[r] \ar[d] & Z'\ar[d] & z'\ar@{|->}[d]\\
+    X\ar[r] & Z & z
+   }\qquad\qquad\qquad
+   \xymatrix{
+    T'\ar@<.5ex>[r]^{a'}\ar@<-.5ex>[r]_{b'} \ar[d] & X'\ar[r]^\sim \ar[d]& Z'\ar[d]\\
+    T\ar@<.5ex>[r]^{a}\ar@<-.5ex>[r]_{b} & X\ar[r] & Z
+   }\]
+    Next we check that $X\to Z$ is a monomorphism. To do this, let $a,b:T\to X$ be two
+   morphisms from some scheme $T$ so that the compositions with $X\to Z$ are equal. For
+   any point $z\in Z$, we can find a $Z'\to Z$ so that $X'\xrightarrow\sim Z'$. It
+   follows that $a'=b'$. Since being equal is local in the \'etale topology, we get that
+   $a=b$, as desired.
+
+   Now we have that $X\to Z$ is an \'etale monomorphism. Let $W\subseteq Z$ be the (open)
+   image of $X$, then we claim that $X\cong W$ (which would prove that $X\to Z$ is an
+   open immersion). To see this, observe that $X$ and $W$ have isomorphic presentations
+   as algebraic spaces.
+   \[\xymatrix{
+    U\times_W U \ar@<.5ex>[r]\ar@<-.5ex>[r] & U\ar@{=}[d] \ar[r] & W\\
+    U\times_X U \ar@{}[u]|{\parallel\wr} \ar@<.5ex>[r]\ar@<-.5ex>[r] & U \ar[r] & X
+   }\]
+   The vertical isomorphism on the left follows from the fact that $X\to W$ is a
+   monomorphism.
+ \end{proof}
+
+
+%   By Remark \ref{lec16R:flat_extension_Stein}, we may assume $Y$ is an affine scheme.
+
+%   \begin{claim}
+%     $X\to Z$ is \'etale.
+%   \end{claim}
+%   It is enough to show that for every point $y\in Y$, there is an \'etale morphism
+%   $Y'\to Y$ and a point $y'\in Y'$ mapping to $y$ such that $U\times_Y Y'\to Z'$ is
+%   \'etale at every point of $U\times_Y Y'$ lying over $y'$. This really means that
+%   there is a neighborhood of each of these points. It is tempting to take completion at
+%   a point, but you cannot check finite presentation that way.
+%   \[\xymatrix{
+%    X\ar[r] & Z\ar[r] & Y\\
+%    & & y
+%   }\]
+%
+%   \begin{remark}
+%     Then $U\to Y$ is quasi-finite and of finite type.
+%   \end{remark}
+%%   Invoke \cite[IV.18.12.3]{EGA}, which says when you have a quasi-finite finite type
+%%   morphism of schemes, there is an \'etale morphism $Y'\to Y$ and a point $y'\in Y'$
+%%   mapping to $y$ such that $U'=U\times_Y Y'=U_1'\coprod U_2'\xrightarrow q Y'$ with
+%%   $U_1'\to Y'$ finite and $q^{-1}(y')\cap U_2'=\varnothing$. I don't know how to prove
+%%   this. In some sense, this is Zariski's main theorem. Note that $U'$ is affine.
+%%   \[\begin{pspicture}(-.3,-.1)(7,3.6)
+%%     \pscurve(.5,3.3)(1.5,2.8)(.5,2.5) \uput[180](.5,3){$U_1'$}
+%%     \pscurve(.5,2.1)(1.5,2)(2,2)
+%%     \pscircle[fillstyle=solid, fillcolor=white](1.5,2){.5ex}
+%%     \uput[180](.5,2){$U_2'$}
+%%     \rput(1.2,1.4){$\left\downarrow \rule{0pt}{2.1ex} \right.$}
+%%     \psccurve(.5,.5)(1.3,.8)(2,.5)(.5,.2)
+%%     \uput[180](.5,.5){$Y'$}
+%%     \rput(3,.5){$\xrightarrow{\hspace{2em}}$}
+%%     \pscurve(4,3.5)(5.5,3)(4.2,2.3)(5.5,2)(6.5,2)
+%%     \pscircle[fillstyle=solid, fillcolor=white](5.5,2){.5ex}
+%%     \uput[0](6,3){$U$}
+%%     \rput(5.3,1.5){$\left\downarrow \rule{0pt}{2.1ex} \right.$}
+%%     \psccurve(4,.5)(5,1)(6.5,.5)(5,0)
+%%     \uput[0](6.5,.5){$Y$}
+%%     \psccurve[linestyle=dashed](4.5,.5)(5.5,.8)(6,.5)(5.5,.2)
+%%     \psdots(1.5,.5)(5.5,.5)
+%%     \uput[180](1.5,.5){$y'$} \uput[180](5.5,.5){$y$}
+%%   \end{pspicture}\]
+%%   In the analytic topology, this is probably clear. \anton{how do you tell when a
+%%   morphism is finite in the analytic topology?}
+%%
+%%   \begin{remark}[Aside]
+%%     If $Y$ is noetherian and $y\in Y$, then consider $\hat \O_{Y,y}$.
+%%     \[\xymatrix{
+%%     \hat U_y \ar[r] & \spec \hat \O_{Y,y} \\
+%%     U_{y,n}\ar@{^(->}[u]\ar[r] & \spec (\hat \O_{Y,y},\m_Y^n) \ar@{^(->}[u]
+%%     }\]
+%%      This is how you break of the $U_1'$ \dots it is the projective limit of the
+%%     $U_{y,n}$s. You check that it is open and closed. This is some fancy version of
+%%     Hensel's lemma. If you haven't seen this kind of thing before, just think about the
+%%     complete case.
+%%   \end{remark}
+%
+%   Let $X_1'\subseteq X'$ be $U_1'/(U_1'\times_X U_1')$. Let $U_1'\times_X U_1'=R$.
+%   \begin{lemma}
+%     $X_1'$ is a scheme.
+%   \end{lemma}
+%   \begin{proof}
+%     Need to check that $U_1'\times_{X'}U_1' \rightrightarrows U_1'$ are finite. Then we
+%     apply the theorem from lecture 13. That is clear because we have
+%     \[\xymatrix{
+%     U'\times_{X'}U' \ar[r] \ar[d] & U_1'\times_{Y'}U_1' \ar[d]
+%     \ar@<.5ex>[r]\ar@<-.5ex>[r] & U_1'\\
+%     X' \ar@{^(->}[r]^\Delta & X'\times_{Y'}X'
+%     }\]
+%     Note that $\Delta$ is a closed immersion. The relation is automatically \'etale for
+%     some reason.
+%     \renewcommand{\qedsymbol}{$\square_{\text{Lemma}}$}
+%   \end{proof}
+%   \begin{lemma}
+%     $X_1'\hookrightarrow X'$ is also a closed immersion.
+%   \end{lemma}
+%   \begin{proof}
+%     \[\xymatrix{
+%     U_1'\times_{X'} T \ar[d]\ar[r] \ar@/^2ex/[rr]^g & \im g\ar[r] \ar[d]& Y\ar[d]\\
+%     U_1' \ar[r]& X_1' \ar[r] & X'
+%     }\]
+%     \[\xymatrix{
+%     U_1'\times_{X'} T \ar[d]\ar[r]  & U_1'\times_{Y'}T \ar[r]^{finite} \ar[d]& T\\
+%     X' \ar[r]& X'\times_{Y'}X'
+%     }\]
+%   \end{proof}
+%   This shows that $X'=X_1'\coprod X_2'$ where $X_2'\times_{Y'}y'=\varnothing$. This is
+%   empty because if we look at $U\to X'$, something happens \anton{}.
+%
+%   Let $X_i'\to Z_i' \to Y'$ be the Stein factorizations. Then $Z = Z_1'\coprod Z_2'$. It
+%   is enough to check that $X_1'\to Z_1'$ is \'etale. We are in the world of schemes and
+%   we know that this is an open immersion, so we're done. This is by
+%   \cite[IV.18.12.12]{EGA}. So $X\to Z$ is \'etale (it locally splits up as open
+%   immersions)
+%
+%   Let's finish the argument.
+%   \begin{lemma}
+%     $X\to Z$ is separated, quasi-finite, and of finite type.
+%   \end{lemma}
+%   \begin{proof}
+%     This is straight forward, so let's skip it. (By the way, if we started with finite
+%     presentation, we wouldn't get finite presentation, so finite type is the right thing
+%     to look at)
+%   \end{proof}
+%   Now repeat the argument for $X\to Z$, which is Stein. Pick a point $z\in Z$. We're
+%   trying to prove $X\to Z$ is an open immersion.
+%   \[\xymatrix{
+%    X_1'\coprod X_2' \ar[d] \ar[r]& Z'\ar[d]^{et} & z' \ar@{|->}[d]\\
+%    X \ar[r] & Z & z
+%   }\]
+%   If we take $Z'$ to be connected, then $X_2'=\varnothing$ (we showed that the stein
+%   factorization breaks up, and we've assumed $Z'$ is connected., so we get $X_1'\to Z'$
+%   finite and Stein, and one of them is a scheme, so it is an isomorphism by
+%   \cite[IV.18.12.12]{EGA}. (an open immersion which is finite is an isomorphism)
+%
+%   \begin{lemma}
+%     $X\to Z$ is a monomorphism.
+%   \end{lemma}
+%   \begin{proof}
+%   \[\xymatrix{
+%     & X' \ar[d] \ar[r]^\sim & Z' \ar[d]^{et}\\
+%    T\ar@<.5ex>[r]^a \ar@<-.5ex>[r]_b & X\ar[r] & Z
+%   }\]
+%   We need to show that $T\times_{a\times b,X\times_Z X,\Delta} X\to T$ is an
+%   isomorphism. Make a base change and then it is obvious.
+%   \end{proof}
+%   So now $X\to Z$ is an \'etale monomorphism. Let $W\subseteq Z$ be the image (it is
+%   open, by the way). We don't know yet that $X$ is a scheme.
+%   \[\xymatrix{
+%    U\times_W U \ar@<.5ex>[r]\ar@<-.5ex>[r] & U\ar@{=}[d] \ar[r] & W\\
+%    U\times_X U \ar[u]^\wr \ar@<.5ex>[r]\ar@<-.5ex>[r] & U \ar[r] & X
+%   }\]
+% \renewcommand{\qedsymbol}{$\square_{\text{Theorem \ref{lec17T:stuff->quasi-affine}}}$}
+% \end{proof}
+
+ \begin{corollary}\label{lec16C:sep,lqfin,lfp_over_scheme=scheme}
+   Let $f:X\to Y$ be a separated locally quasi-finite, locally of finite type
+   morphism, with $Y$ a scheme. Then $X$ is a scheme.
+ \end{corollary}
+ \begin{proof}
+   Let $\pi:U\to X$ be an \'etale cover by a scheme, and let $R=U\times_X U$. Let
+   $Y=\bigcup Y_i$ be an affine open cover of $Y$, and let $(f\circ
+   \pi)^{-1}(Y_i)=\bigcup_j U_{ij}$ be an affine open cover of the pre-image of $Y_i$.
+   Now we have that $X_{ij}=U_{ij}/R_{ij}$ is an open subspace of $X$.
+   \[\xymatrix{
+     R_{ij} \ar@<.5ex>[d]\ar@<-.5ex>[d] \ar[r]\ar@{}[dr]|(.25)\pb
+        & R \ar@<.5ex>[d]\ar@<-.5ex>[d]\\
+     U_{ij}\ar@{^(->}[r]^{open}\ar[d] & U\ar[d]\\
+     X_{ij}:=U_{ij}/R_{ij} \ar[r] & X
+   }\]
+    Note that $X_{ij}\to Y$ is quasi-compact for each $i$ and $j$, and it is still
+   separated, locally quasi-finite, and locally of finite type. In particular, it is
+   quasi-finite, so Theorem \ref{lec17T:stuff->quasi-affine} tells us that the morphisms
+   $X_{ij}\to Y$ are quasi-affine. That is, we have factorizations $X_{ij}\to W_{ij}\to
+   Y$, where $X_{ij}\to W_{ij}$ is are open immersions and $W_{ij}\to Y$ are affine.
+   Since the $W_{ij}$ are affine over a scheme, they are schemes. Since the $X_{ij}$ are
+   open subspaces of schemes, they are schemes. Thus, $X$ has an open cover by schemes,
+   so it is a scheme.
+%
+%    We saw earlier that $X=\bigcup X_i$, where $X_i\to X$ is open and $X_i\to Y$ is
+%   quasi-compact. So it is enough to consider the case when $X\to Y$ is quasi-compact. In
+%   this case, it follows from the theorem.
+%   \[\xymatrix{
+%     R_V \ar@<.5ex>[d]\ar@<-.5ex>[d] \ar[r] & R \ar@<.5ex>[d]\ar@<-.5ex>[d]\\
+%     V\ar@{^(->}[r]^{open}\ar[d] & U\ar[d]\\
+%     V/R_V \ar[r] & X
+%   }\]
+ \end{proof}
+% \begin{proof}[Proof of Theorem] put proof here
+%     %   First some reductions.
+%%
+%%   (1) it is enough to consider the case when $X$ and $Y$ are locally noetherian. For
+%%   schemes, this is essentially what the finite presentation assumption does.
+% \end{proof}
+%   First let's prove the theorem in the case when $Y$ is locally noetherian. Then $X$ is
+%   also locally noetherian. Take a Stein factorization $f:X\xrightarrow{g}
+%   \Spec_Y(f_*\O_X) \to Y$. We get that $g$ is an open immersion (or thats what we
+%   want?). We get this from the following variant of the theorem. Note that it is very
+%   important that the Stein factorization is canonical so that you can do descent!
+%
+%   \begin{theorem}[Theorem$'$]
+%     Let $f$ be as in Theorem. Also assume that $f$ is Stein an $Y$ is locally
+%     noetherian. Then $f$ is an open immersion.
+%   \end{theorem}
+%
+% Locally noetherian version of the theorem: $f:X\to Y$ separated quasi-finite and of finite
+% presentation, then take the Stein factorization $X\xrightarrow g Y'\xrightarrow h Y$,
+% then $g$ is an open immersion.
+%
+% Need to check that (1) $g$ is quasi-finite. This is local on $Y$, so we can assume $Y$
+% is quasi-compact. Let $U\to X$ be an \'etale cover with $U$ quasi-compact. Then we have
+% $U\to Y'\to Y$ is quasi-finite, so $U\to Y'$ is also quasi-finite. \anton{heuristically,
+% the fibers of $g$ are contained in the fibers of $f$, so they are finite. We are using
+% locally of finite presentation to ensure that the topology is discrete}
+% \[\xymatrix{
+%    X\times_{Y'} T \ar[r] \ar[d] \ar@{}[dr]|(.25)\pb & X\times_Y T\ar[d]\\
+%    Y'\ar[r]^{closed}_{immersion} & Y'\times_Y Y'
+% }\]
+% (2) $g$ is of finite presentation. Again choose a quasi-compact cover $U$ of $X$, so we
+% get a factorization $U\to Y'\to Y$. The composition is blah, so $U\to Y'$ is blah.
+%
+% (3) $g$ is separated
+% \[\xymatrix{
+%    X\ar[r] \ar[dr] \ar@/^2ex/[rr]^{closed} & X\times_{Y'}X \ar@{^(->}[r] \ar[d]& X\times_Y X
+%    \ar[d]\\
+%    & Y'\ar[r] & Y'\times_Y Y'
+% }\]
+%
+% This completes the reduction to something.
+%
+% May assume $Y$ is an affine scheme since the assertion is local on $Y$.
+%
+% We've reduced to: $Y$ is affine (noetherian (didn't do)), $f:X\to Y$ separated, of finite presentation,
+% quasi-finite, and Stein. Want that $f$ is an open immersion.
+%
+% \begin{remark}
+%   $Y'$ is noetherian. Choose a quasi-compact \'etale cover $R\rightrightarrows U\to X\to
+%   Y$. $R$ is also quasi-compact because $X\to Y$ is quasi-separated. Let $g:U\to Y$ and
+%   $h:R\to Y$. Then $f_*\O_X=Eq(g_*\O_U\rightrightarrows h_*\O_R)$.
+% \end{remark}
+% \begin{lemma}
+%   $f:X\to Y$ is flat.
+% \end{lemma}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Let's start over on last time. Just forget everything from then\dots it was wrong.
+% \begin{theorem}\label{lec17T:stuff->quasi-affine}
+%   Let $f:X\to Y$ be a separated, quasi-finite, locally of finite type morphism of
+%   algebraic spaces, and let let $X\xrightarrow g Z=\Spec_Y( f_*\O_X) \xrightarrow h Y$
+%   be the Stein factorization. \anton{The sheaf is quasi-coherent} Then $g$ is an open
+%   immersion. In particular, $f$ is quasi-affine.
+% \end{theorem}
+ \begin{warning}[Conrad, de Jong, Osserman, and Vakil]
+   Even if $X$ and $Y$ are noetherian, $Z$ may not be.
+   Let $k$ be a field, and let $E$ to be a genus 1 curve over $k$. Let $N$ be a degree
+   zero line bundle on $E$ which is not torsion, and let $P$ be a line bundle of degree
+   at least 3.
+   \anton{$\VV$ means some symmetric algebra}
+   \[\xymatrix{
+    X = T\times_E \VV(N)\ar[d]\ar@{^(->}[r] & \VV(P)\times_E \VV(N) = \VV(P\oplus N) \ar[dl]
+    \\ E
+   }\]
+    where $T=\VV(P)-\{0\}$. $X=\Spec_E (\bigoplus_{n\in \ZZ,m\ge 0}N^m\otimes P^n)$.
+   First we claim that $\Ga(X,\O_X)$ is not noetherian. $\Ga(X,\O_X) = \bigoplus_{n\in
+   \ZZ, m\ge 0} \Ga(E,N^m\otimes P^n)=R$. $H^0(E,N^m\otimes P^n)\neq 0$ if and only if
+   (1) $n>0$ or (2) $m=n=0$. $R$ has generators like in the picture\anton{}. It has a
+   maximal ideal $\m$ generated by the stuff above the line. This ideal is not finitely
+   generated! But we claim that this ring is quasi-affine.
+
+   \[\xymatrix{
+   & \spec R \ar[dr]\\
+    X\ar[d]\ar[ur] \ar@{^(->}[rr] & & \VV(M)
+    \\ T\ar[d]^\pi \ar@{}[r]|<>(.5){=}& \spec \bigoplus_{n\ge 0} \Ga(E,P^{\otimes n}) \setminus
+    \{0\} \ar@{^(->}[r] & A=\spec \bigoplus_{n\ge 0} \Ga(E,P^{\otimes n})
+    \\ E \ar[d] \ar@{}[r]|<>(.5){=}& \proj\bigoplus_{n\ge 0} \Ga(E,P^{\otimes n})\\
+    \spec k
+   }\]
+   Let $M$ on $A$ be a coherent sheaf restricting to $\pi^* N$. Some things here are open
+   immersions. $X$ is open in $\VV(M)$, and $\VV(M)$ is affine. The Stein factorization
+   goes through $\spec R$.
+ \end{warning}

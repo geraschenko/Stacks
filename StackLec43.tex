@@ -1,0 +1,176 @@
+\subsektion{More Cohomological Descent}
+
+Recall the setup. We have $\T_\udot\xrightarrow\e \T_\varnothing$,
+and we want to compute $R^i\e_*F_\udot$.
+
+If $I\in Ab(\T_\udot)$, then (1) each $I_k\in Ab(\T_k)$ is injective,
+and (2) $\e_*I$ (concentrated in degree zero) is quasi-isomorphic to
+$\e_*^0I_0 \to \e_*^1 I_1\to \cdots$, so there is no higher
+cohomology. By Lang, we have $E^{pq}_1=R^q\e^p_*F_p\Rightarrow
+R^{p+q}\e_*F$.
+
+\begin{example}[\v Cech cohomology]
+ What happens in the \v Cech cohomology situation. Let $X$ be a
+quasi-compact separated scheme, and let $X=\bigcup U_i$ a finite
+covering with each $U_i$ affine. Let $\F$ be quasi-coherent on $X$.
+Then the simplicial scheme we get is $\coprod U_i\to X$. The next
+step is $\coprod U_i\cap U_j$, then triple intersections (allowing
+$i=j$, by the way; this is how you get the sections); call this thing
+$U_\udot$. We're supposed to have a spectral sequence
+$E^{pq}_1=H^q(\coprod_{i_0\dots i_p}U_{i_0\dots i_p}, \F)\Rightarrow
+H^{p+q}(U_\udot  \F)$. The picture is
+
+ \anton{pictures}
+
+ For $q>0$, the whole thing is zero because you have an affine
+scheme. The bottom row is the \v Cech complex, except for this $i<j$
+issue. You get the complex by taking alternating sums. This
+simplicial abelian group (of 0th cohomologies) can be handled in 2
+ways; one of them (the normalized complex) is the usual \v Cech
+complex, and the other is what we have. There is some result that
+says that they are the same thing (give the same cohomlogy).
+\end{example}
+
+Let's say why injective objects look like what we've claimed they
+are. If you have an abelian sheaf in $Ab(\T_\udot)$. Then for every
+$n$, we have a restriction map $r_n:Ab(\T_\udot)\to Ab(\T_n)$. This
+is an exact functor (this is how you define exact sequences in
+$Ab(\T_\udot)$. It has a right adjoint $e_n:Ab(\T_n)\to
+Ab(\T_\udot)$, given by $(e_n F)_k= \prod_{\rho\in
+\hom_\Delta([k],[n])} \rho_* F$ ($\rho$ gives a map $\T_n\to \T_k$).
+Any functor with an exact left adjoint takes injectives to
+injectives, so $e_n$ does so. Thus, $e_n$ of an injective is
+injective.
+
+Given $F_\udot \in Ab(\T_\udot)$, choose for every $n$ and inclusion
+$F_n\hookrightarrow I_n$ where $I_n\in Ab(\T_n)$ is injective. Then
+$F_\udot \hookrightarrow \prod_n e_n(f_n(F_\udot))\hookrightarrow
+\prod_n e_n(I_n)$. A corollary of this is that every injective sheaf
+in $Ab(\T_\udot)$ is a direct summand of a sheaf of the form $\prod_n
+e_n(I_n)$, with the $I_n$ injective for each $n$.
+
+$\rho_*$ takes injectives to injectives (because exact left adjoint).
+Thus, each $e_n(I_n)$ is injective at each level, and since each
+injective is a summand of one of these, we've checked the first
+point. Also, it is possible to show this by showing that $r_n$ has an
+exact left adjoint, so it takes injectives to injectives.
+
+To check the second point for a direct sum, it is equivalent to check
+it for each summand. To check that $\e_*^0I_0\to \e_*^1I_1\to\cdots$
+has no higher cohomology, it is enough to consider $I_\udot = \prod_n
+e_n(I_n)$. Let $T_n:\Delta\to Ab$ be given by $[p]\mapsto
+\prod_{\hom_\Delta([p],[n])}\ZZ$. Let $\tilde T_n$ be the associated
+total complex. In this case, the sequence with the $\e_*^i$s is
+$(\e_*^nI_n)\otimes_\ZZ \tilde T$; you first push down to $[n]$ and
+then push down to $\varnothing$. But $\tilde T_n$ is a complex of
+abelian groups, it computes cellular homology of the standard
+$n$-simplex, which is zero, so the tensor product is isomorphic to
+$\e_*^n I_n$.
+
+Let's now take $\X$ to be an algebraic stack. Let $X\to \X$ be a
+smooth surjection with $X$ and algebraic space. Then we get
+$X_\udot$, which is a simplicial algebraic space. Now you have to be
+a little careful. Remember we're thinking about $\X_\liset$. We'd
+like to say we get an augmentation $X_{\udot \liset}\to \X_\liset$,
+but the lisse-\'etale topos is not functorial; for example
+$\Delta:X\to X\times_\X X$ doesn't give a morphism of topoi. However,
+we do get $X_{\udot \liset}^+\to \X_\liset$ (the $+$ means restrict
+to $\Delta^+$); somehow all these maps are smooth, so we're ok. We
+also have morphisms of topoi $X_{\udot \liset}^+\to X_{\udot et}^+$
+and $X_{\udot et}\to X_{\udot et}^+$. A sheaf of
+$\O_{\X_\udot}$-modules in $X_{\udot et}$ (for each $i$, the sheaf on
+$X_i$ is an $\O_{X_i}$-modules in a compatible way) is quasi-coherent
+if each $F_i$ on $X_i$ is quasi-coherent and the transition maps
+$X(\sigma)^\star F_i\to F_j$ is an isomorphism for every $\sigma$ a
+morphism in $\Delta$. Similarly, we can talk about quasi-coherent
+sheaves on the other topoi.
+\begin{theorem}
+  $\qco(X_{\udot \liset}^+)$, $\qco(\X)$, $\qco(X_{\udot et}^+)$, and
+$\qco(X_{\udot et})$ are all equivalent (by the maps above), and the
+map $\qco(\X)\to \qco(X_{\udot et})$ is the natural restriction.
+\end{theorem}
+Note that at least for this subject, you don't need to worry about
+the degeneracy maps.
+
+The good statement is that there is an equivalence of derived
+categories $\D^+_{qcoh}(\X)\to \D^+_{qco}(X_{\udot et})$. Concretely,
+you can always choose presentations
+\[\xymatrix{
+  X_\udot \ar[r]^{f_\udot}\ar[d] & Y_\udot\ar[d]\\
+  \X\ar[r]^f & \Y
+}\qquad\qquad\xymatrix{
+ \D(X_{\udot et})\ar[d]^\wr \ar[r]^{Rf_{\udot*}} & D(Y_{\udot
+et})\ar[d]^\wr\\
+\D^+_{qcoh}(\X)\ar[r]^{Rf_*} & \D^+_{qcoh}(\Y)
+}\]
+The upshot is (cohomological descent) that you can compute the
+cohomology of a stack by a spectral sequence
+$E^{pq}_1=H^q(X_p,F|_{X_p})\Rightarrow H^{p+q}(\X,F)$. This is the
+general tool for computing cohomology of artin stacks.
+\begin{example}
+  Let $\X=B_kG$ (let's say $G$ is a finite group). Then we have
+  \[\xymatrix{
+    G\times G \ar@3{->}[r] & G\ar@2{->}[r] & \spec k \ar[r] & B_kG\\
+    Map(G\times G,F) & Map(G,F)\ar@3{->}[l] & F\ar@2{->}[l]
+  }\]
+  (and the other arrows). If $F$ is a sheaf on $BG$ (i.e.~a
+representation of $G$), then we get the second row. That bottom row
+is the standard complex computing group cohomology. The derived
+functors of invariants are computed by this second row.
+\end{example}
+So cohomology of a stack is a mixture of group cohomology and regular
+old cohomology.
+\begin{example}[special case]
+  Take $G=\ZZ/p$ and $k=\FF_p$. Then $H^i(G,k)\cong \FF_p$ for each
+$i\ge 0$. So we see that $H^*(BG,\O_{BG})$ is unbounded.
+\end{example}
+\begin{definition}
+  Let $\X$ be a Deligne-Mumford stack over some noetherian $S$ with
+finite diagonal. We call $\X$ \emph{tame} if for every algebraically
+closed field $k$ and $x\in \X(k)$, the order of $\aut_{\X(k)}(x)$ is
+invertible in $k$.
+\end{definition}
+Think of $\M_{1,1}$ outside of characteristic 2 and 3.
+
+In this case, look at the coarse space $\pi:\X\to X$.
+\begin{proposition}
+  For any quasi-coherent sheaf $\F$ on $\X$, $R^i\pi_*\F=0$ for $i>0$
+\end{proposition}
+\begin{corollary}
+  $H^p(\X,\F)=H^p(X,\pi_*\F)$.
+\end{corollary}
+In particular, for an algebraic space, there is an integer so that
+cohomology vanishes after a certain point \anton{we proved it by
+taking a dense open scheme and do some kind of induction\dots there
+should be some assumption like finite type over a field}
+
+\begin{proof}[Proof of Proposition]
+  The result is \'etale local on $X$. We can assume $\X=[U/\Ga]$
+where $U\to \X$ is finite and $\Ga$ is the stabilizer group of some
+point. The assumption that it is tame means that $\Ga$ has order
+which is invertible in $\X$ (again taking an \'etale map if needed).
+Then a quasi-coherent sheaf on $\X$ is the same thing as an
+$\O_U$-module $F$ with a lifting of the $\Ga$ action to $F$.
+
+  We have $(M,$action$)\mapsto M^\Ga$, which is an $A$-module. So
+we're really just computing group cohomology. But group cohomology
+over a field where the order of the group is invertible is zero for
+higher stuff. $\frac{1}{|\Ga|}\sum_{\gamma\in\Ga} \gamma$ is a
+projector from $M$ to $M^\Ga$.
+\end{proof}
+
+Often when you do algebraic geometry, you'll see stamements like
+``quotient singularities are as good as smooth''. Quotient
+singularity means you're locally the quotient of a smooth thing by a
+finite group. If $X$ has quotient singularities, it means that it
+looks like the coarse space of a smooth DM stack. It is clear that
+the coarse space of a smooth DM stack has only quotient
+singularities. If you have only quotient singularities and you're
+over $\QQ$, then there is some DM stack whose coarse space is the
+thing you started with. You can prove lots of things about $\X$ from
+its coarse space. In characteristic $p$, this is unknown; bummer.
+
+The problem is: given an $X/k$ with $k$ even algebraically closed of
+characteristic $p$, with quotient singularities, produce a smooth DM
+stack with $X$ as its coarse space. This would be very interesting if
+somebody solves it.

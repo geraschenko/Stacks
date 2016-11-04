@@ -1,0 +1,135 @@
+\sektion{5}{When \texorpdfstring{$f^*$}{f*} commutes with finite limits}
+
+ \begin{theorem} \label{lec05T:CommWithFiniteProjLimits}
+   If $f:\C'\to \C$ is continuous and finite projective limits are
+   representable in $\C'$, then $f^*$ commutes with finite projective limits. In
+   particular, $f:T\to T'$ is a morphism of topoi in this case.
+ \end{theorem}
+ \begin{proof}\anton{this proof needs to be completed and cleaned up}
+   By the same argument used to prove Lemma \ref{lec03L:limits_representable}, it is
+   enough to show that $f^*$ commutes with products of two sheaves (and thus finite
+   products) and equalizers.
+
+%   To say that finite projective limits exist is the same as saying that finite products
+%   and fiber products exist \anton{by lemma blah; note that it works for ``finite''
+%   everywhere}, which is the same as saying that finite products and equalizers exist. If
+%   $F:I\to T$ is a functor and $I$ is finite, you can write $\varprojlim F = Eq\bigl(\prod_{i\in
+%   I}F(i)\rightrightarrows \prod_{u\in Mor(I)} F(target(u))\bigr)$. Thus, it is enough to
+%   check that $f^*$ commutes with fiber products and products of two sheaves (therefore
+%   finite products of sheaves).
+
+   Recall that $f^*F = (\hat f^* F)^a$. One can check that $-^a$ commutes with finite
+   projective limits,\footnote{It doesn't commute with infinite products, by the way.} so
+   it is enough to show that $\hat f^*:\hat \C\to \hat \C'$ commutes with finite products
+   and equalizers.
+
+   (Products) If $F_1,F_2\in \hat \C$, and $U'\in \C'$. Recall the definition of $\hat
+   f^*$ from the proof of Proposition \ref{lec04T:left_adjoint}. We have
+    \[\xymatrix@R-1.5pc{
+     \hat f^*(F_1\times F_2)(U') \ar@{}[d]|{\parallel} & (\hat f^* F_1\times \hat f^*
+     F_2)(U') \ar@{}[d]|{\parallel}\\
+     \raisebox{-2em}{$\underset{U'\to f(U)}{\varinjlim}F_1(U)\times F_2(U)$} \ar[r]^<>(.5)\Ga &
+     \raisebox{-2em}{$\Bigl(\underset{U'\to f(U_1)\hspace{-3ex}}{\varinjlim}F_1(U_1)\Bigr)\times \Bigl(
+     \underset{U'\to f(U_2)\hspace{-3ex}}{\varinjlim}F_2(U_2)\Bigr)$} }\] where $\Ga$ is
+   defined in the obvious way.\footnote{By the universal properties of $\varinjlim$, it
+   is enough to define a map from each $F_1(U)\times F_2(U)$ to some $F_1(U_1)$ and some
+   $F_2(U_2)$. Take $U_1=U_2=U$, and then take the obvious projections.} First we check
+   injectivity. If $\sigma=\bigl(U'\to f(U),s_1\in F_1(U),s_2\in F_2(U)\bigr)$ and $\tau
+   = \bigl(U'\to f(V),t_1\in F_1(V),t_2\in F_2(V)\bigr)$. If $\Ga(\sigma)=\Ga(\tau)$,
+   then there is a diagram
+   \[\xymatrix{
+    U' \ar[r]\ar[d] & f(U_1) \ar[d] \ar[dl]\\
+    f(U) & f(V) }\qquad\qquad
+    \xymatrix{
+    U' \ar[r]\ar[d] & f(U_2) \ar[d] \ar[dl]\\
+    f(U) & f(V) }
+   \]
+   such that $s_1,t_1$ have the same image in $F(U_1)$ and the images of $s_2,t_2$ are
+   the same in $F(U_2)$.\anton{if you take a limit over a \emph{filtering} category, then it
+   commutes with limits? something is fishy; what is it} We'd like to say that we can
+   take $U_1$ and $U_2$ to be the same.
+
+   We have the diagram
+   \[\xymatrix{
+    U_3 \ar[d]\ar[dr]\\
+    U_1\ar[d] & U_2 \ar[dl]\\
+    U\times V
+   }\]
+   That is, we can find some $U_3$ so that blah\anton{}. For surjectivity, you use the
+   existence of products.
+
+   (Equalizers) Say we have
+   $\xymatrix{F_1\ar@<.5ex>[r]^h \ar@<-.5ex>[r]_g & F_2}$, then we are looking at
+   \[\xymatrix @R-1pc{
+    \hat f^* Eq\Bigl(F_1 \underset{g}{\overset{h}{\rightrightarrows}} F_2\Bigr)(U')
+    \ar@{}[d]|{\parallel}
+    &
+    Eq\Bigl(
+    \hat f^* F_1 \underset{\hat f^*g}{\overset{\hat f^*h}{\rightrightarrows}} \hat f^* F_2
+    \Bigr)(U')
+    \ar@{}[d]|{\parallel}
+   \\
+    \raisebox{-2em}{$\underset{U'\to f(U)}{\varinjlim} Eq\Bigl( F_1(U)
+   \underset{g(U)}{\overset{h(U)}{\rightrightarrows}} F_2(U)\Bigr)$} \ar[r]
+   &
+    \raisebox{-2em}{$ Eq\Bigl( \underset{U'\to f(U)}{\varinjlim}F_1(U)
+   \underset{\hat f^*g(U')}{\overset{\hat f^*h(U')}{\rightrightarrows}} \underset{U'\to
+   f(U)}{\varinjlim}F_2(U)\Bigr)$}
+   }\]
+    Same sort of arguments to show that this is a bijection.
+ \end{proof}
+ There are lots of sites that have the property that finite projective limits exist.
+ \begin{example}
+   $\sch$ has finite projective limits (because we have finite products and fiber
+   products). Thus, all big sites have finite projective limits.
+ \end{example}
+ \begin{example}
+   The small \'etale site has finite projective limits. We know how to produce products
+   and fiber products
+    \[\xymatrix{
+    Z\ar@{^(->}[r] \ar[dr] & U_1 \ar@<.5ex>[r] \ar@<-.5ex>[r] \ar[d] & U_2 \ar[dl]\\ & X
+   }\]
+   The equalizer need not be smooth even if the two maps are smooth, but if the two maps
+   are \'etale, then so is the equalizer.
+ \end{example}
+ \begin{example}
+   If $X$ is a scheme, then we get $X_\text{lis-et}\xrightarrow{\varepsilon} X_{et}$ is a
+   morphism of topoi, and $\varepsilon_*$ is exact, so you can compute cohomology in
+   either topos.
+ \end{example}
+
+ \subsektion{Faithfully flat descent}
+ If $Y\to X$ is a morphism of schemes, then we get a functor of points
+ $h_Y:(\sch/X)^{op}\to \set$ which is a presheaf. The main point is the following.
+ \begin{theorem}
+   $h_Y$ is a sheaf in the fppf topology (and therefore also in the \'etale topology).
+ \end{theorem}
+ By the Yoneda embedding, we have $(\sch/X)\hookrightarrow (\sch/X)_{et}=X_{ET}$. We will
+ define \emph{algebraic space} to be an object in $X_{ET}$ which is more general than a
+ scheme, but in which you can still do geometry (i.e.~where you can redo EGA).
+
+% \begin{tabular}{ll}
+%   $X_{zar}$ & small Zariski topos\\
+%   $X_{ZAR}$ & big Zariski\\
+%   $X_{et}$ & small \'etale topos\\
+%   $X_{ET}$ & big \'etale topos\\
+%   $X_\text{lis-et}$ & small lisse-\'etale topos\\
+%   $X_{fppf}$ & big fppf topos
+% \end{tabular}
+
+ \begin{definition}
+   A morphism of schemes $f:X\to Y$ is \emph{flat} if for all $x\in X$ the map
+   $\O_{Y,f(x)}\to \O_{X,x}$ is flat. It is \emph{faithfully flat} if it is flat and
+   surjective. A map of rings $A\to B$ is \emph{faithfully flat} if the map of spectra
+   $\spec B\to \spec A$ is.
+ \end{definition}
+ Key case: $Y=\AA^1_\ZZ$ is flat over $X=\spec \ZZ$.Then
+ \[\xymatrix{
+ h_Y(\spec A)\ar[r] \ar@{}[d]|{\parallel} &
+ h_Y(\spec B)\ar@{}[d]|{\parallel} \ar@<.5ex>[r] \ar@<-.5ex>[r] &
+ h_Y(\spec B\otimes_A B) \ar@{}[d]|{\parallel}\\
+ A\ar[r] &
+ B \ar@<.5ex>[r]^{b\mapsto b\otimes 1} \ar@<-.5ex>[r]_{b\mapsto 1\otimes b} &
+ B\otimes_A B
+ }\]
+ If \anton{iff?} $A\to B$ is faithfully flat, then the bottom sequence is exact.

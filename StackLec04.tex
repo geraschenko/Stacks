@@ -1,0 +1,118 @@
+\sektion{4}{Continuous functors between sites}
+
+ Recall that if we have a map of topoi $f:T\to T'$, this means that we have functors
+ $f_*:T\to T'$ and $f^*:T'\to T$, together with an adjunction
+ $\phi:\hom_T(f^*F,G)\xrightarrow{\sim} \hom_{T'}(F,f_*G)$, and $f^*$ commutes with
+ finite projective limits. That is, the natural map $f^* (\varprojlim F)\to
+ \varprojlim(f^*F)$ is an isomorphism. Heuristically, a ``continuous map of sites''
+ should induce a map of topoi.
+
+ \begin{definition}
+   Let $\C$ and $\C'$ be sites. A functor $f:\C'\to \C$ is \emph{continuous} if
+   \begin{enumerate}
+     \item for every $X'\in \C'$ and every $\{X_i'\to X'\}\in Cov_{\C'}(X')$,
+     we have $\{f(X_i')\to f(X')\}\in Cov_{\C}\bigl(f(X')\bigr)$, and
+     \item $f$ commutes with fiber products when they exist in $\C'$.
+   \end{enumerate}
+ \end{definition}
+ Let $T$ and $T'$ be the categories of sheaves of $\C$ and $\C'$, respectively. Then
+ given a continuous functor $f$, we get a functor $f_*:T\to T'$ defined by $F\mapsto
+ \bigl(X'\mapsto F(f(X'))\bigr)$.\footnote{If you like to think about topological spaces,
+ you should think of $f$ as the map on open sets (which pulls open sets back)
+ corresponding to a map of topological spaces. See Example
+ \ref{lec03Eg:topological_spaces}.} We need to check that this satisfies the sheaf axiom:
+ let $\{X_i'\to X'\}\in Cov_{\C'}(X')$, then we have
+  \[
+   \xymatrix{
+    f_*F(X') \ar[r] \ar@{}[d]|{\parallel} & \prod_i f_*F(X_i') \ar@{}[d]|{\parallel}\ar@<.5ex>[r] \ar@<-.5ex>[r] &
+    \prod_{i,j} f_*F(X_i'\times_{X'} X_j') \ar@{}[d]|{\parallel}\\
+    F(f(X')) \ar[r] & \prod_i F(f(X_i'))\ar@<.5ex>[r] \ar@<-.5ex>[r] & \prod_{i,j}
+    F\bigl(f(X_i')\times_{f(X')}f(X_j')\bigr)}
+ \]
+  where the last vertical equality follows from the fact that the continuous functor $f$
+ commutes with projective limits when they exist. The bottom sequence is exact since $F$
+ is a sheaf, so the top sequence is also exact. Thus, $f_*F$ is a sheaf.
+ \begin{example}
+   Recall the fppf, \'etale, and Zariski topologies on $\sch$, then the following
+   identity functors are continuous:
+   $\text{Zariski site}\xrightarrow{\id} \text{\'etale site}\xrightarrow{\id} \text{fppf
+   site}$. These induce functors on topoi
+   $\sch_{Zar} \xleftarrow{\id_*} \sch_{et} \xleftarrow{\id_*} \sch_{fppf}$.
+ \end{example}
+
+ \begin{proposition} \label{lec04T:left_adjoint}
+   Let $f:\C'\to \C$ be continuous, then the functor $f_*:T\to T'$ has a left adjoint
+   $(f^*,\phi)$.
+ \end{proposition}
+ \begin{proof}
+   Note that $f_*$ is obtained by restricting the functor $\hat f_*:\hat \C'\to \hat \C$
+   defined by $(\C^\circ\xrightarrow{F}\set)\mapsto (\C'^\circ\xrightarrow{f^\circ}
+   \C^\circ\xrightarrow{F} \set)$. It is enough to show that $\hat f_*$ has a left adjoint
+   $\hat f^*$ because then $F\mapsto (\hat f^* F)^a$ is a left adjoint to $f_*$:
+   \begin{align*}
+    \hom_{T} \bigl ( (\hat f^*F)^a,G\bigr) &= \hom_{\hat \C} (\hat f^*F,G) & \text{(universal property of $-^a$)}\\
+        &= \hom_{\hat \C'}(F,\hat f_* G) = \hom_{T'}(F,f_*G).
+   \end{align*}
+   Let $F$ be a presheaf on $\C'$, and let $U\in \C$. Then we define
+   \[
+    \hat f^*F(U) = \varinjlim_{U\to f(U')} F(U').\footnote{To do this precisely,
+      define a category $I_U$ whose objects are pairs $\bigl(U',U\to f(U')\bigr)$ and
+      whose morphisms $\bigl(U_1',U\to f(U_1')\bigr)\xrightarrow{g} \bigl(U_2',U\to
+      f(U_2')\bigr)$ are morphisms $g:U_2'\to U_1'$ in $\C'$ such that the diagram
+      \raisebox{2ex}{$\xymatrix@!0 @R=2ex @C=2.5pc{
+       & U\ar[dl] \ar[dr]\\ f(U_2') \ar[rr]_{f(g)} & & f(U_1')
+      }$} commutes.
+
+      Now define $F_U:I\to \set$ by $\bigl(U',U\to f(U')\bigr)\mapsto F(U')$. Then we
+    have $\varinjlim F_U := \nat(F_U,k_-)$. Since this is a direct limit of sets, it is
+    represented by a set, and that is the set we want to define $\hat f^*F(U)$ to be. }
+   \]
+   It is a messy exercise to check that this gives you an adjoint. \anton{it isn't too bad}
+ \end{proof}
+ So a continuous functor $f:\C'\to \C$ induces an adjoint pair $(f^*,f_*,\phi)$.
+ Unfortunately, $f^*$ need not commute with finite projective limits, as is illustrated
+ by the following example.
+ \begin{example}
+   Let $k$ be a field. Take $X=\AA^1_k$ and $Y=\spec k$. Consider $f:Y\hookrightarrow X$,
+   the inclusion of the origin. Recall that $\text{Lis-Et}(X)$ has objects smooth
+   $X$-schemes and coverings are \'etale coverings. Then we get a functor
+   $\text{Lis-Et}(X)\xrightarrow{f} \text{Lis-Et}(Y)$ given by $(U\to X)\mapsto
+   (U\times_X Y\to Y)$. This is a continuous functor: if $\{U_i\to U\}\in Cov(U)$, then
+   $\{U_i\times_X Y\to U\times_X Y\}\in Cov (U\times_X Y)$ because the pull-back of an
+   \'etale morphism is \'etale. However, $f^*$ does not commute with finite projective
+   limits.
+
+   Let $\O_X(U\to X) = \Ga(U,\O_U)$. This is a presheaf on $\text{Lis-Et}(X)$, and in
+   fact it is a representable sheaf, represented by $\AA^1_X\to X$. If you go through the
+   adjunction, you'll see that $f^*\O_X$ is represented by $\AA^1_Y$:
+   \begin{align*}
+%     \hom(h_{\AA^1_Y},G) &= G(\AA^1_Y) &\text{(always)}\\
+     \hom(h_{\AA^1_X},f_*G) &= f_*G(\AA^1_X) & \text{(Yoneda's Lemma)} \\
+     &= G(\AA^1_Y). & (\AA^1_X\times_X Y = \AA^1_Y)
+   \end{align*}
+   We have that $X = \spec k[t]$. We have a map $\times t: \O_X\to \O_X$ which is
+   injective (if $k[t]\to R$ is flat, then multiplication by $t$ is injective on $R$, in
+   particular if it is smooth). When you pull this map back to $f^*\O_X=\O_Y$, we get
+   $\times t:\O_Y\to \O_Y$ which is the zero map because $V\to \spec
+   k\xrightarrow{t=0}\spec k[t]$ \anton{}.
+
+   So we have that $Eq(\xymatrix@-1pc{\O_X\ar@<.5ex>[r]^{\times t} \ar@<-.5ex>[r]_0 & \O_X}) =
+   \{0\}$ by $Eq(\xymatrix@-1pc{\O_Y\ar@<.5ex>[r]^{\times t} \ar@<-.5ex>[r]_0 & \O_Y}) =
+   \O_Y$, so this $f^*$ doesn't commute with projective limits.
+ \end{example}
+ \begin{remark}
+   This is kind of bad. Why not think about $\sch/X$ with \'etale topology? \anton{then
+   something} If you look at $\sch/X$ with the Zariski topology, then something behaves
+   badly.
+
+   Note that if we look at the Lis-Lis site, then you still have the same problem ... we
+   didn't use anything about the coverings being \'etale.
+ \end{remark}
+ \begin{theorem}
+   If $f:\C'\to \C$ is continuous and finite projective limits are
+   representable in $\C'$, then $f^*$ commutes with finite projective limits.
+ \end{theorem}
+ \[\xymatrix{
+    Z\ar@{^(->}[r] \ar[dr] & U_1 \ar@<.5ex>[r] \ar@<-.5ex>[r] \ar[d] & U_2 \ar[dl]\\ & X
+ }\]
+ The equalizer need not be smooth even if the two maps are smooth.

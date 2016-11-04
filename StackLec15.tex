@@ -1,0 +1,269 @@
+\sektion{15}{Quasi-coherent Sheaves on Algebraic Spaces}
+
+ I cheated you a while back about descent for quasi-compact mono-morphisms, so I made it
+ an exercise. Part (c) of that exercise should refer to this class. It is \'etale descent
+ for separated quasi-finite morphisms of finite presentation.
+
+ The remaining goals for algebraic spaces:
+ \begin{itemize}
+   \item an algebraic space which is quasi-finite over a scheme is a scheme.
+   \item Chow's lemma for algebraic spaces.
+ \end{itemize}
+ First we need some theory about quasi-coherent sheaves.
+ \begin{definition}[Small \'etale site on an algebraic space]
+   For an algebraic space $X$, we define $Et(X)$ to be the site whose objects
+   are \'etale morphisms $X'\to X$, where $X'$ is a scheme, whose morphisms are
+   $X$-morphisms, and where a covering of $X'\to X$ is a collection $\{X_i'\to X'\}$ such
+   that $\coprod X_i'\to X'$ is surjective.
+
+   We denote the topos associated to this site by $X_{et}$, and we define the sheaf
+   $\O_X(X'\to X)=\Ga(X',\O_{X'})$ to be the \emph{structure sheaf} on the site.
+%   \anton{exercise: prove that this is a sheaf ... we've done it for
+%   schemes.
+ \end{definition}
+ \begin{remark}
+   Consider the site $\widetilde{Et}(X)$, whose objects are \'etale morphisms $X'\to X$,
+   where $X'$ is just some algebraic space, whose morphisms are $X$-morphisms, and where
+   a covering of $X'\to X$ is a collection $\{X_i'\to X'\}$ such that $\coprod X_i'\to
+   X'$ is surjective. Note that $Et(X)$ is a full subsite of $\widetilde{Et}(X)$. Since
+   every algebraic space can be \'etale covered by a scheme, a sheaf on
+   $\widetilde{Et}(X)$ is determined by its values on $Et(X)$ (in particular, we can
+   extend the structure sheaf to all of $\widetilde{Et}(X)$). Thus, the two sites yield
+   the same topos, $X_{et}$.
+ \end{remark}
+ \begin{remark}\label{lec15R:morphisms_of_etales_is_etale}
+   Any morphism in $Et(X)$ is \'etale. Let $X'$ and $X''$ be schemes \'etale over $X$,
+   and let $U\to X$ be an \'etale surjection from a scheme. Let $U'$ and $U''$ be
+   obtained by base extension. Then $U'$ and $U''$ are \'etale schemes over a scheme $U$,
+   so any morphism $U''\to U'$ over $U$ must be \'etale. Since \'etale-ness is stable in
+   the \'etale topology, $X''\to X'$ is \'etale.
+   \[\raisebox{4pc}{$\xymatrix{
+    & U'' \ar[dr]|!{[r];[d]}\hole \ar[dl]\ar[r] & U'\ar[dl] \ar[d]\\
+    X'' \ar[dr] \ar[r] & X' \ar[d] & U\ar@{->>}[dl]^{et}\\
+    & X
+   }$}\qedhere\]
+ \end{remark}
+ \begin{definition}
+   An $\O_X$-module $\F$ is \emph{quasi-coherent} if
+   \begin{enumerate}
+     \item for every $X'\to X$ \'etale, with $X'$ a scheme, the sheaf $\F_{X'}$ (obtained
+     by restricting to the small Zariski site on $X'$) is quasi-coherent, and
+     \item for every $X$-morphism $f:X''\to X'$ of schemes \'etale over $X$, the natural
+     map $f^\star\F_{X'}\to \F_{X''}$ is an isomorphism.
+%     \footnote{\anton{ (actually, 2 implies 1)
+%     \begin{proof}
+%     Let $X=\spec R$, and let $M=\Ga(X,F)$. $F$ is quasi-coherent if $\tilde M\to F$. It is
+%     enough to check that for every special open $D(f)\subseteq \spec R$. We'd like the
+%     following map to be an isomorphism $M\otimes_R R_f\to F(D(f))$. we only know something
+%     on stalks. Maybe this isn't true.
+%     \end{proof}}}
+   \end{enumerate}
+   A quasi-coherent $\O_X$-module $\F$ is said to be \emph{coherent} if $\F_{X'}$ is
+   coherent for each $X'$.
+ \end{definition}
+ \begin{remark} \label{lec15R:kernels,cokernels,etc._of_qcohs}
+   The kernel, cokernel, and image of any morphism of quasi-coherent sheaves on $X$ is
+   quasi-coherent. Any extension of quasi-coherent sheaves is quasi-coherent. If $X$ is
+   locally noetherian, then the same is true for coherent sheaves. \anton{check this}
+ \end{remark}
+
+
+%% \anton{Is the following Lemma worth including?}
+ \begin{lemma}\label{lec15L:qco_equivalence}
+   If $X$ is a scheme, then the category $\qco(X_{et})$ of quasi-coherent
+   $\O_{X_{et}}$-modules is equivalent to the category $\qco(X_{zar})$ of quasi-coherent
+   $\O_{X_{zar}}$-modules.
+ \end{lemma}
+ \begin{proof}
+   Given $G\in \qco(X_{zar})$, we get $G_{fppf}\in \qco(X_{fppf})$ as in  Proposition
+   \ref{lec07P:qcoh_equivalence}. Note that every quasi-coherent $\O_{X_{fppf}}$-module
+   is a quasi-coherent $\O_{X_{et}}$-module (we're just restricting to a smaller category
+   and a coarser topology), so we get that $G_{fppf}\in \qco(X_{et})$ (when we restrict
+   to the \'etale topos, we'll call the sheaf $G_{et}$). Conversely, given $\G\in
+   \qco(X_{et})$, we have that $\G_X\in \qco(X_{zar})$.
+
+   For a quasi-coherent Zariski sheaf $G$, Proposition \ref{lec07P:qcoh_equivalence}
+   tells us that $G\cong (G_{et})_X$. For a quasi-coherent \'etale sheaf $\G$, one
+   verifies that $\G\cong (\G_X)_{et}$: given an \'etale map $f:Y\to X$,
+   $(\G_X)_{et}(Y\to X)=\Ga(Y,f^\star\G_X)\cong \Ga(Y,\G_Y) = \G(Y\to X)$, where the
+   isomorphism in the middle follows from the fact that $f^\star\G_X\cong  \G_Y$, which
+   follows from quasi-coherence of $\G$.
+ \end{proof}
+ \begin{lemma}[``Quasi-coherence is \'etale-local'']
+ \label{lec15L:quasi-compact_etale_local}
+   Let $X$ be an algebraic space and let $U\twoheadrightarrow X$ be an \'etale cover by a
+   scheme $U$. Then a sheaf $\F$ of $\O_X$-modules is quasi-coherent if and only if
+   the restriction to the small \'etale site on $U$, $\F|_U$, is quasi-coherent.
+ \end{lemma}
+ \begin{proof}
+    If $\F$ is a quasi-coherent $\O_X$-module, then $\F|_U$ is quasi-coherent because for
+    any \'etale morphism $Y\to U$, $(\F|_U)_Y = \F_Y$.
+
+    If $\F|_U$ is quasi-coherent and $X\to X$ is \'etale, with $X'$ a scheme, then
+    $\F|_{X'\times_X U}$ is a quasi-coherent sheaf which
+%    \anton{for some
+%    reason}\footnote{\anton{Is it true that for an \'etale surjection $g:Y'\to Y$, the
+%    natural map $g^*\F_Y\to \F_{Y'}$ is always an isomorphism (for any \'etale sheaf
+%    $\F$)? It is true that $g^{-1} \F|_Y\to \F|_{Y'}$ is an isomorphism because any
+%    \'etale map to $Y$ factors \'etale-locally through $Y'$. In fact, this argument shows
+%    that for an \'etale surjection $Y'\to Y$, $Y_{et}$ and $Y'_{et}$ are equivalent
+%    categories, and since the structure sheaf pulls back to the structure sheaf (see
+%    remark \ref{lec15R:etale_pullbacks}), the same sheaves are $\O_Y$-modules.}}
+    is the restriction of $\F|_{X'}$ along the projection map. Since $X'\times_X U\to X'$
+    is an \'etale surjection, and because of Lemma \ref{lec15L:qco_equivalence}, Theorem
+    \ref{lec07T:descent_qcoh_sheaves} tells us that $\F|_{X'}$ is a quasi-coherent
+    sheaf. In particular, $\F_{X'}=(\F|_{X'})_{X'}$ is a quasi-coherent sheaf, and for
+    any $X$-morphisms of schemes $f:X''\to X'$ (which is necessarily \'etale by Remark
+    \ref{lec15R:morphisms_of_etales_is_etale}) $f^\star\F_{X'}\to \F_{X''}$ is an
+    isomorphism.
+%    If $g:Y'\to Y$ is a morphism over $X$, then we get an isomorphism of
+%    quasi-coherent sheaves $\tilde g^* \F_{Y'\times_X U}\to \F_{Y\times_X U}$, which
+%    descends to an isomorphism $g^*\F_{Y'}\to \F_Y$.
+%    \[\xymatrix{
+%      X'\times_X R \ar@<.5ex>[d]\ar@<-.5ex>[d] \ar[r] & R \ar@<.5ex>[d]\ar@<-.5ex>[d]\\
+%      X'\times_X U \ar[d]_{\pi}\ar[r] & U\ar@{->>}[d]^{et}\\
+%      X' \ar[r]^{et} & X
+%    }\]
+%     \anton{what I got from office hours: $\F|_{X'\times_X U}$ is a quasi-coherent
+%    $\O_{X'\times_X U}$-module, and it comes with descent data because it is the
+%    restriction of $\F|_{X'}$. It follows that $\F_{X'\times_X U}$ is a quasi-coherent
+%    Zariski sheaf which comes with descent data. By descent for quasi-coherent sheaves,
+%    we get some quasi-coherent sheaf $F$ on $X'$ which pulls back to $\F_{X'\times_X U}$.
+%    Then we can make the associated sheaf $F_{et}$, which is an \'etale quasi-coherent
+%    sheaf on $X'$. The claim is that $F_{et}$ is isomorphic to $\F|_{X'}$. It is enough
+%    to check this \'etale locally (because these are \'etale sheaves). So it is enough to
+%    check that $\F|_{X'\times_X U}\cong \F_{et}|_{X'\times_X U} = (\pi^*_{zar}F)_{et}$.
+%    How do you check this?}
+ \end{proof}
+
+ \subsektion{Pullbacks of quasi-coherent sheaves}
+
+ Recall the discussion from Lecture 7 in the section about descent for sheaves of
+ modules. A morphism of algebraic spaces $f:X\to Y$ induces a morphism of
+ topoi $(f_*,f^*):X_{et}\to Y_{et}$ and an adjoint pair $(f_*,f^\star):\O_X\mod\to
+ \O_Y\mod$. If $f$ is \'etale, then $f^*$ and $f^\star$ are given by restricting to the
+ small \'etale site on $X$ (Remark \ref{lec07R:easy_pullbacks}).
+
+%  If we have a morphism of algebraic
+% spaces $f:X\to Y$. Then we get a functor $\widetilde{Et}(Y)\to \widetilde{Et}(X)$ given
+% by $(Y'\to Y)\mapsto (X\times_Y Y'\to X)$ \anton{we need the tildes because the product
+% may not be a scheme}. Since finite projective limits are representable in \anton{both},
+% we get a morphism of topoi $f:X_{et}\to Y_{et}$, with $f^{-1}\O_Y\to \O_X$.
+
+% If $F$ is any $\O_Y$-module, then define $f^*F = f^{-1}F\otimes_{f^{-1}\O_Y}\O_X$ (do
+% the tensoring open by open, and then sheafify).
+ \begin{lemma}
+   Let $f:X\to Y$ be a morphism of algebraic spaces. If $\F$ is a quasi-coherent
+   $\O_Y$-module, then $f^\star\F$ is a quasi-coherent $\O_X$-module.
+ \end{lemma}
+ \begin{proof}
+   By Lemma \ref{lec15L:quasi-compact_etale_local} we may replace $X$ by an \'etale
+   cover. Thus, we may assume $X$ is a scheme. Moreover, if $g:Y'\to Y$ is an \'etale
+   cover of $Y$ by a scheme, then we have
+   \[\xymatrix{
+     X\times_Y Y' \ar[d]_{\tilde g} \ar[r]^<>(.5){\tilde f} & Y'\ar@{->>}[d]_{et}^g\\
+     X \ar[r]^f & Y
+   }\]
+    Since $g$ is \'etale, $g^\star\F$ is just the restriction of $\F$ to the small
+   \'etale site on $Y'$, so it is quasi-coherent. If we could prove that $\tilde f^\star$
+   of a quasi-coherent sheaf is quasi-coherent, then we would have that $\tilde f^\star
+   g^\star\F\cong \tilde g^\star f^\star\F$ is quasi-coherent. Since $\tilde g$ is an
+   \'etale cover, Lemma \ref{lec15L:quasi-compact_etale_local} tells us that $\tilde
+   g^\star f^\star F$ is quasi-coherent if and only if $f^\star\F$ is quasi-coherent.
+   Thus, we've reduced to the case where $X$ and $Y$ are schemes.
+
+%    We may assume we have a factorization
+%   $X\xrightarrow{f'} Y'\xrightarrow{g} Y$ where $Y'$ is a scheme and $g$ is \'etale. So
+%   it is enough to consider the case when $X$ and $Y$ are schemes (since $g$ will induce
+%   an isomorphism of sheaves by definition of quasi-coherence).
+   \[\xymatrix{
+    Et(X) & Et(Y) \ar[l]\\
+    Op(X)\ar@{^(->}[u] & Op(Y)\ar@{^(->}[u] \ar[l]
+   }\qquad\qquad
+   \xymatrix{
+    X_{et} \ar@<.5ex>[d]^{\e_{X*}} \ar@<-.5ex>[r]_{f_{et*}}
+    & Y_{et}\ar@<-.5ex>[d]_{\e_{Y*}} \ar@<-.5ex>[l]_{f_{et}^*} \\
+    X_{zar} \ar@<.5ex>[u]^{\e_{X}^*} \ar@<.5ex>[r]^{f_{zar*}} &
+    Y_{zar} \ar@<-.5ex>[u]_{\e_{Y}^*} \ar@<.5ex>[l]^{f_{zar}^*}
+   }\qquad\qquad
+   \xymatrix{
+    \O_{X_{et}}\mod \ar@<.5ex>[d]^{\e_{X*}} \ar@<-.5ex>[r]_{f_{et*}}
+    & \O_{Y_{et}}\mod\ar@<-.5ex>[d]_{\e_{Y*}} \ar@<-.5ex>[l]_{f_{et}^\star} \\
+    \O_{X_{zar}}\mod \ar@<.5ex>[u]^{\e_{X}^\star} \ar@<.5ex>[r]^{f_{zar*}} &
+    \O_{Y_{zar}}\mod \ar@<-.5ex>[u]_{\e_{Y}^\star} \ar@<.5ex>[l]^{f_{zar}^\star}
+   }\]
+    The diagram on the left is an obviously commutative diagram of continuous\footnote{It
+   is clear that these functors take coverings to coverings and commute with fiber
+   products.} functors of sites (all of which have finite projective limits). These
+   functors induce the commutative diagram of morphisms of topoi in the middle (the inner
+   and outer squares commute). This gives us the inner commutative square on the right,
+   and the outer commutative square is obtained by looking at the left adjoints.
+
+%    The above is a commutative diagram
+%   of topoi because $Op(X)\hookrightarrow Et(X)$. To check commutativity, it is enough to
+%   check that the lower-stars agree (then the adjoints are also the same).
+%   $(g_*F)(W\subseteq Y)=F(g^{-1}(W))$.
+
+   So we have $\e_X^\star \circ f_{zar}^\star \cong f_{et}^\star\circ \e_Y^\star$. Note
+   that the construction $F\mapsto F_{et}$ is exactly given by $F\mapsto \e^*F$. By the
+   equivalence of categories in Lemma \ref{lec15L:qco_equivalence}, it follows that an
+   \'etale sheaf $\F$ on $Y$ is quasi-coherent if and only if $\F_Y$ is quasi-coherent
+   and $\F\cong \e_Y^\star \F_Y$. Thus, we have $f^\star_{et} \F \cong f^\star_{et}
+   \e^\star_Y \F_Y \cong \e^\star_X(f^\star_{zar} \F_Y)$, which is quasi-coherent because
+   we're taking the usual scheme pullback followed by $\e_X^\star$, which preserves
+   quasi-coherence.
+ \end{proof}
+ \begin{remark}
+   The last part of the proof gives us a recipe for how to compute $f^\star\F$. Let $V\to
+   Y$ and $U\to X$ be \'etale, and assume we have a factorization
+   \[\xymatrix{
+    U \ar[r]^{\tilde f} \ar[d]_{et} & V\ar[d]^{et}\\
+    X\ar[r]^f & Y
+   }\]
+    The proof shows us that $f_{et}^\star \F\cong \e^\star_Y(f_{zar}^\star \F_Y)$.  It
+   follows that $(f^\star \F)_U = \tilde f^\star_{zar} (\F_V)$. \anton{somehow}
+
+   You can always get a factorization like this (for some $V$) after replacing $U$ by an
+   \'etale cover; then something about quasi-coherent sheaves behaving nicely with
+   respect to \'etale covers gives you $(f^\star\F)_U$. \anton{}
+ \end{remark}
+
+ \begin{proposition} \label{lec15P:q-sep,q-cmpt=>f_*F_qcoh}
+   Let $f:X\to Y$ be a quasi-compact and quasi-separated\/\footnote{This means that the
+   diagonal map over $Y$, $X\to X\times_Y X$ is quasi-compact.} morphism of algebraic
+   spaces. Then for every quasi-coherent $\O_X$-module $\F$, the sheaf of $\O_Y$-modules
+   $f_*\F$ is quasi-coherent.
+ \end{proposition}
+ \begin{proof}
+   It is \'etale local on $Y$, so we may assume $Y$ is an affine scheme. Cover $X$ with
+   some scheme $V$ so that $V\to Y$ is quasi-compact, then choose an affine \'etale cover
+   $U$ of $V$. Then let $R=U\times_X U$; this is also quasi-compact because we have the
+   following diagram, and we know that $\Delta$ is quasi-compact (so $R\to U\times_Y U$
+   also is) and $U\times_Y U$ is affine.
+   \[\xymatrix{
+    R \ar[r] \ar[d] \ar@{}[dr]|(.25)\pb & U\times_Y U \ar[d] \\
+    X \ar[r]^<>(.5)\Delta & X\times_Y X
+   }\qquad\qquad\raisebox{-1.5pc}{$\xymatrix{
+    R\ar@<.5ex>[r]\ar@<-.5ex>[r] \ar@(ur,ul)[rrr]^h
+    & U\ar[r] \ar@/_3ex/[rr]_g & X\ar[r]^(.4)f & Y
+   }$}\]
+    Let $g:U\to Y$ and $h:R\to Y$ \anton{for some reason, these are both quasi-compact
+   and quasi-separated \dots it is easy for $g$, but what about $h$?}. Then
+   $f_*\F=Eq\bigl(g_* (\F|_U) \rightrightarrows h_*(\F|_R)\bigr)$ because
+   $U\twoheadrightarrow X$ is a covering (this is the sheaf axiom when you uncoil it.
+   This is similar to Display \ref{lec07Eq:sheaf_axiom}). Thus, it is enough to show that
+   $g_*(\F|_U)$ and $h_*(\F|_R)$ are quasi-coherent because an equalizer of
+   quasi-coherent sheaves is quasi-coherent. So it is enough to consider the case where
+   both $X$ and $Y$ are schemes. In that case, the result follows from the usual result
+   for schemes, and the following claim, which says roughly that $f_{et*}$ agrees with
+   $f_{zar*}$ for quasi-coherent sheaves.
+
+   \underline{Claim}: if $\F$ is a quasi-coherent sheaf on $X$, then
+   $f_{et*}\F\cong\e^\star_Y({f_{zar}}_* \F_X)$. To see this, recall that
+   $\e_{Y}^\star$ and $\e_{Y*}$ are inverses when restricted to the subcategories of
+   \emph{quasi-coherent} sheaves, with $\e_{X*}\F=\F_X$ and $\e_X^\star F=F_{et}$. Then
+   we compute that $f_{et*}\F \cong \e_Y^\star \e_{Y*}f_{et*}\F\cong \e_Y^\star
+   (f_{zar*}\e_{X*}\F)=\e_Y^\star (f_{zar*}\F_X)$.
+%    because push-forward commutes with \'etale
+%   base change. \anton{do this}
+ \end{proof}

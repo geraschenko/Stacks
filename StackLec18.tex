@@ -1,0 +1,112 @@
+\sektion{18}{Chow's Lemma.}
+
+
+ Today we'll prove Chow's lemma for algebraic spaces. In the interest of time, we'll
+ cheat by quoting the following big theorem from scheme theory, and showing that it works
+ for algebraic spaces.
+ \begin{theorem}[{\cite[5.2.2]{Raynaud-Gruson}}] \label{lec18T:RGblow-up}
+   Let $X$ be a quasi-compact and quasi-separated scheme, $U\subseteq P$ a quasi-compact
+   open subscheme of a scheme $P$, and $f:X\to P$ a morphism of schemes of finite
+   presentation which is flat over $U$. Then there exists a blow-up $P'\to P$ supported
+   on $P\setminus U$ such that the strict transform of $X$, $X'\to P'$, is flat.
+ \end{theorem}
+ The \emph{strict transform} $X'$ is the scheme-theoretic closure of the pre-image of $U$
+ (i.e.~of the morphism $X\times_P U\hookrightarrow X\times_P P'$). Note that strict
+ transform makes sense for algebraic spaces as well.
+ \begin{proof}[Proof when $X$ is an algebraic space.]
+   Let $\tilde X\to X$ be an \'etale cover, with $\tilde X$ a quasi-compact separated
+   $P$-scheme. Let $P'\to P$ be a blow-up supported on $P\setminus U$, and let $\tilde
+   X'$ be the strict transform of $\tilde X$.
+   \[\xymatrix{
+      \tilde X\times_P U \ar[r]\ar[d] & \tilde X\times_P P'\ar[d]^{et}\\
+      X\times_P U \ar[r] & X\times_P P'
+   }\qquad\qquad\qquad
+   \xymatrix{
+      \tilde X'\ar[d] \ar[r]\ar@{}[dr]|(.25)\pb & X' \ar[d]\ar[r] & P'\ar[d]\\
+      \tilde X\ar[r] & X\ar[r] & P
+   }\]
+    The diagram on the left is cartesian (simply by abstract non-sense). Scheme-theoretic
+   closure commutes with \'etale base change \anton{basically because quasi-coherent
+   sheaves of ideals pull back, right?}, so the strict transform $\tilde X$ is isomorphic
+   to the product of the strict transform $X'$ with $\tilde X$ over $X$. That is, the
+   left square of the right diagram is cartesian. Now applying the theorem in the case of
+   schemes, we get that $\tilde X'\to P'$ is flat. But flatness is \'etale local and
+   $\tilde X'\to X'$ is an \'etale cover, so $X'\to P'$ is flat, as desired.
+ \end{proof}
+
+ \begin{theorem}[Chow's Lemma]
+   Let $S$ be a quasi-compact scheme and $X$ a separated algebraic space of finite
+   presentation over $S$ (in particular, $X$ is quasi-compact). Then there exists a proper
+   birational $S$-morphism from a scheme $X'\to X$ with $X'$ quasi-projective over $S$.
+ \end{theorem}
+ Note that proper is a stable property morphisms (by what \cite{Vistoli} claims is
+ \cite[IV.2.7.1]{EGA}), so it makes sense for a morphism from a scheme to an algebraic
+ space to be proper. The map is birational in the sense of Remark
+ \ref{lec12R:non-stable_properties} (birationality descends along \'etale covers).
+
+ \begin{proof}
+   By Corollary \ref{lec14C:sep_algsp->dense_subscheme}, we may choose a dense
+   open subspace $U\subseteq X$ with $U$ a scheme. By Chow's lemma for schemes, we may
+   assume $U$ is quasi-projective over $S$ (maybe by shrinking) \anton{why is $U\to S$
+   quasi-compact?}. Thus, we have immersions $U\hookrightarrow X$ and
+   $U\hookrightarrow \PP^n_S$, so we get an immersion $U\hookrightarrow \PP^n_S\times_S
+   X$.
+  % \[\xymatrix{
+  %    U\ar@{^(->}[r]\ar@{^(->}[d] & X\\
+  %    \PP^n_S
+  % }\qquad\qquad
+  % \xymatrix{
+  %    & X\times_S \PP^n_S\\
+  %    U\ar@{^(->}[r] \ar@{^(->}[ur] & X
+  % }\]
+   \[\xymatrix{
+      & & U \ar@{^(->}[d] \ar@{^(->}[dr]\\
+      X'\ar[r] & X_1 \ar[r]^{\text{strict}}_{\text{trans}} \ar[d]^{\pi'}_{\text{flat}} &
+      X_0\ar[d]_{\pi}\ar@{^(->}[r]^<>(.5){cl} &
+      \PP^n_S\times_S X \ar@{}[dr]|(.25)\pb \ar[d]\ar[r] & X\ar[d]\\
+      & P'\ar[r]^{\text{blow}}_{\text{up}} & P\ar@{^(->}[r]^{cl} & \PP^n_S \ar[r] & S
+   }\]
+    Let $X_0$ be the scheme-theoretic closure of $U$ in $X\times_S \PP^n_S$, and let $P$
+   be the scheme-theoretic closure of $U$ in $\PP^n_S$. Since $\PP^n_S\times_S X\to X$ is
+   proper and closed immersions are proper, $X_0\to X$ is a proper birational map
+   (birational because $X_0$ and $X$ are both birational to $U$). Moreover, note that
+   $P\to S$ is projective. Both $X_0$ and $P$ are birationally equivalent to $U$, so
+   $\pi$ is birational. Since $\pi$ is an isomorphism on the image of $U$, it is flat
+   there, so we may apply Theorem \ref{lec18T:RGblow-up} to get a blow-up $P'\to P$
+   supported on $P\setminus U$ so that the strict transform $X_1$ of $X_0$ is flat over
+   $P'$. Note that $X_1\to X_0\times_P P'$ is a closed immersion, so it is proper, and
+   $X_0\times_P P'\to X_0$ is proper (because $P'\to P$ is proper), so $X_1\to X_0$ is
+   proper, so $X_1\to X$ is proper and birational.
+
+   On the pre-image of $U$, $\pi'$ is the same as $\pi$ (an isomorphism). Since
+   $\pi'$ is flat, the fibers of $X_1$ over $P'$ are all zero-dimensional, so they are all
+   finite (since $X_1\to P'$ is of finite presentation\anton{}). By Corollary
+   \ref{lec16C:sep,lqfin,lfp_over_scheme=scheme}, $X_1$ is a scheme. By Chow's lemma for
+   schemes, \anton{have we verified the hypotheses?} There is some scheme $X'$
+   quasi-projective over $S$, with $X'\to X_1$ proper birational. Then note that $X'\to
+   X$ is also proper birational.
+ \end{proof}
+ \begin{remark}
+   You can get away without applying Chow's lemma for schemes a second time. Blow-ups are
+   projective (since they are defined as Proj of a sheaf of graded algebras), so $P'\to
+   S$ is projective. We have that $\pi':X_1\to P'$ is flat and birational. One can check
+   that this implies that $\pi'$ is an open immersion, so it is quasi-projective. Thus,
+   we could have actually taken $X'=X_1$.
+ \end{remark}
+
+% So after blowing up on $P$, we can assume that $\pi:X\to P$ is also flat. This implies
+% that that $\pi$ is an open immersion: it is an exercise if you know that $X$ is a
+% scheme; to check that $X$ is a scheme, it is enough to check that $X\to P$ is
+% quasi-finite \anton{by that corollary!}. So let $\tilde X\to X$ be an \'etale cover with
+% $\tilde X$ quasi-compact and separated over $P$. Then $\tilde X\to P$ is again a flat
+% morphism of finite presentation of schemes which is quasi-finite over a dense open in
+% $P$ (such a morphism must be quasi-finite because you know how the dimensions of the
+% fibers behave under flat morphisms).  This implies that $\tilde X\to P$ is quasi-finite,
+% which implies that $\pi$ is quasi-finite. \anton{say back in lec 16 that finite means
+% locally of finite presentation.} Thus, $X$ is a scheme.
+%
+% By the way, once you know it is a scheme, you can just apply Chow's lemma for schemes.
+
+ What you can prove for schemes which are not quasi-projective always involves using
+ Chow's lemma to reduce to the quasi-projective case. This kind of shows that everything
+ you can do for schemes, you can do for algebraic spaces.

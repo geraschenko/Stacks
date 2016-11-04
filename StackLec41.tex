@@ -1,0 +1,169 @@
+
+\subsektion{Proof: IV}
+
+Recall that we have an Artin stack $\X/S$ of finite type with finite
+diagonal (and we were doing the case where $S$ is noetherian). We
+sketched how to construct a coarse moduli space.
+
+\begin{theorem}[C]
+  $\X=\bigcup \X_i$ with each $\X_i$ admitting a quasi-finite flat
+covering.
+\end{theorem}
+This is the only theorem we haven't talked about \dots it is a slice
+argument in \cite[3]{SGA} and we've done something similar earlier.
+
+Then take a really nice \'etale cover $\W$ of $\X$ which has a coarse
+space, and show that $\W\times_\X \W$ has a coarse space which is an
+\'etale equivalence relation.
+
+Today we'll talk more about the construction of the coarse space.
+
+\begin{theorem}
+  Let $\X/S$ finite type with finite diagonal and assume $\X$ is
+Deligne-Mumford. Then for every geometric point $\bbar x:\spec k\to
+\X$ ($k$ separably closed), there exists an \'etale neighborhood
+$X'\to X$ of the image of $\bbar x$ in the coarse space $X$ such that
+$\X\times_X X'\cong [U/\Ga_{\bbar x}]$ where $U$ is a finite
+$X'$-scheme and $\Ga_{\bbar x}=\aut_{\X(k)}(\bbar x)$. This is why
+people say DM stacks are like orbifolds \dots they locally look like
+the quotient by the stabilizer group at that point.
+\end{theorem}
+\begin{proof}
+  We can assume $\X$ is quasi-compact (everything is local on the
+coares space, and if the coarse space is quasi-compact, then so is
+$\X$). Choose an \'etale quasi-compact surjection $U\to \X$. Then
+$U\to X$ is quasi-finite, separated, and of finite type, so we can
+choose a base change $X'\to X$ an \'etale neighborhood of $\bbar x$
+(this includes a lifting of $\bbar x$ to $X'$) such that $U\times_X
+X'=P\sqcup T$ such that $P\to X'$ is finite and $T\times_{X'}\spec
+k=\varnothing$.
+
+  Replace $X$ by $X'$. Replacing $\X$ by the image of $P$, we can
+assume there is a finite \'etale covering $P\to \X\to X$. $\X\to X$
+is proper surjective and $P\to X$ is proper, thne $P\to \X$ is proper
+(finite for some reason \anton{$P\to X'$ is finite}). The lemma for
+schemes: $Z_1\xrightarrow f Z_2 \xrightarrow Z_3$ with $g$ separated
+and surjective and $gf$ proper, then $f$ is proper.
+
+  \[\xymatrix{
+    \coprod P^i_{\bbar x} \ar[r]\ar[d]& \X_{sh} \ar[d]\ar[r] & \spec
+\O_{X,\bbar x}^{sh}\ar[d]\\
+    P\ar[r] & \X\ar[r] & X 
+  }\]
+  with $P^i_{\bbar x}$ strictly hensilian and local. So after further
+replacing $X$ by an \'etale covering, we can assume that we only get
+one $P_{\bbar x}:=P\times_X \spec \O_{X,\bbar x}^{sh}$ which is
+strictly hensilian and local.
+  \[\xymatrix{
+    \coprod_\Ga P_{\bbar x}=R_{\bbar x}\ar@<.5ex>[r]\ar@<-.5ex>[r]
+&P_{\bbar x} \ar[r] & \X_{sh} \ar[r] & \spec \O_{X,\bbar x}^{sh}
+  }\]
+  Looking at just closed points, a closed point in $R_{\bbar x}$ is
+an automorphism of a point in $P_{\bbar x}$. You see the group
+structure from the groupoid structure.
+
+  The group structure on $\Ga_{\bbar x}$. We have
+  \[
+   \bigl(\coprod_{\Ga_{\bbar x}} P_{\bbar
+x}\bigr)\times_{p_2,P_{\bbar x}, p_1}\bigl(\coprod_{\Ga_{\bbar x}}
+P_{\bbar x}\bigr) \to \bigl(\coprod_{\Ga_{\bbar x}} P_{\bbar x}\bigr)
+  \]
+  The second projection $R_{\bbar x}\xrightarrow{p_2} P_{\bbar x}$
+defines an action of $\Ga_{\bbar x}$ on $P_{\bbar x}$ which doesn't
+have to act trivially.
+
+  So we see that $[P_{\bbar x}/\Ga_{\bbar x}]=\X_{sh}\to \spec
+\O_{X,\bbar x}^{sh}$. Something is obtained by some limit, so somehow
+you get the theorem.
+\end{proof}
+\begin{remark}
+  If $\X\to X$ is \'etale, then \'etale locally on $X$ (with notation
+as above), $\X=X\times B\Ga$ for some finite group $\Ga$. If the map
+$\X_{sh}\to \spec \O_{X,\bbar x}^{sh}$ is \'etale, then $P_{\bbar
+x}\to \spec \O_{X,\bbar x}^{sh}$ is an isomorphism (something about
+strictly hensilian local rings) so the two projections must be equal.
+\end{remark}
+\begin{example}
+  $\M_{1,1,S}$, then the coarse space is $\AA^1_{j,S}$ (even if 6 is
+not invertible). Note that we haven't actually shown yet that
+$\M_{1,1,S}$ has finite diagonal, so we don't yet know that the
+coarse space exists. Let's first show finite diagonal. Take elliptic
+curves with some level structure, then it will be finite flat over
+$\M_{1,1,S}$. In the case when $3\in \O_S^\times$ (then take the open
+subset where 2 is invertible and glue), $V=\Spec_S
+(\O_S[\mu,\w][1/(\mu^3-1)]/(\w^2+\w+1))$. This classifies elliptic
+curves $E$ with an isomorphism $\sigma: (\ZZ/3)^2\xrightarrow\sim
+E[3]$ (the 3-torsion of $E$). The universal curve over it is
+$X^3+Y^3+Z^3=3\mu XYZ$, and the basis for the 3-torsion is
+$p=[1,0,-1]$, $q=[-1,\w,0]$.
+
+  We have $V\to \M_{1,1,S}=[V/GL_2(\FF_3)]$. Now we clearly have
+finite diagonal. This implies that the coarse space $M_{1,1,S}$ is
+relative spectrum over $S$ of the $GL_2(\FF_3)$-invariants in $\O_V$.
+I think its pretty hard to show that this is $\AA^1_{j,S}$ (by the
+way, $j=\bigl(3\mu(\mu^3-2^3)/(\mu^3-1)\bigr)^3$). Let's do it
+another way.
+
+  Consider the case when $S=\spec k$. Then $\pi:\M_{1,1,k}\to
+M_{1,1,k}$ and we have a map $j:\M_{1,1,k}\to \AA^1_k$, so we get a
+map $h:M_{1,1,k}\to \AA^1_k$. We want $h$ to be an isomorphism. We
+know that $M_{1,1,k}$ is a geometrically normal curve because you are
+taking invariants of a smooth curve by a finite group \'etale
+locally, so the quotient is normal. $h$ induces a bijection on
+$\Om$-valued points for every algebraically closed field $\Om$. That
+implies that $h$ is an isomorphism.
+
+  Again. (something about coarse spaces commuting with flat base
+change. You can see that $M_{1,1,k}$ is proper over $\AA^1$ because
+$V$ is finite over the line. We know that $j$ and $\pi$ are proper,
+$\pi$ is surjective, which implies that $h$ is proper, and for some
+reason finite. Since coarse spaces commute with flat base change, we
+can assume $k=\bar k$.
+
+  Something is bad
+  \[\xymatrix{
+    k(j^{1/p})[\e]/\e^p \ar[r]\ar[d] & k(j^{1/p})\ar[d]\\
+    k(j^{1/p})\ar[r] & k(j)
+  }\]
+  \anton{somebody should explain this to me}
+
+  Now take the case where we have an artinian local ring $R$ with
+residue field $k$ and let $S=\spec R$. Say $J\subseteq R$ is a square
+zero ideal which is annihilated by the maximal ideal of $R$, and say
+$R_0=R/J$. Then we have over $\M_{1,1,R}$
+  \[
+    J\otimes \O_{\M_{1,1,k}}\to \O_{\M_{1,1,R}}\to
+\O_{\M_{1,1,R_0}}\to 0
+  \]
+  But we get exactness on the left by tensoring the following with
+$\O_{\M_{1,1,R}}$
+  \[
+   0\to J\to R\to R_0\to 0
+  \]
+  Now on $\AA^1_R$ we get a sequence
+  \[
+   0\to J\otimes_k j_*\O_{\M_{1,1,k}}\to j_*\O_{\M_{1,1,R}} \to
+j_*\O_{\M_{1,1,R_0}}
+  \]
+  \[\xymatrix{
+    0\ar[r] & J\otimes_k j_*\O_{\M_{1,1,k}}\ar[r] &
+j_*\O_{\M_{1,1,R}} \ar[r] & j_*\O_{\M_{1,1,R_0}} \\
+    0\ar[r] & J\otimes \O_{\AA^1_k} \ar[u]\ar[r] & \O_{\AA^1_R}
+\ar[u]\ar[r] & \O_{\AA^1_{R_0}} \ar[r] & 0
+  }\]
+  By induction we can assume the outer two are isos so the middle one
+is an iso.
+
+  In general to check that $\O_{\AA^1_{j,S}}\to j_*\O_{\M_{1,1,S}}$
+is an isomorphism reduce to the case of artinian local.
+
+
+
+\end{example}
+$\M_{g}$ also has finite diagonal. If $R$ is a complete discrete
+valuation ring and $C_1,C_2\in \M_g(R)$, then any isomorphism
+$\sigma_\eta:C_{1,\eta}\xrightarrow\sim C_{2,\eta}$ ($\eta$ the
+generic point) over $\spec k$ extends uniquely to an isomorphism
+$C_1\xrightarrow\sim C_2$. One way to do this is to say $C_1$ is the
+minimal regular model of the generic guy.
+

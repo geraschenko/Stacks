@@ -1,0 +1,204 @@
+\sektion{29}{Hilb and Quot}
+
+ Recall that last time we saw that $\M_{1,1}$ was algebraic over $\ZZ[1/6]$. We did this
+ by finding some open subset $U\subseteq \AA^2$ which was invariant under the $(4,6)$
+ $\GG_m$ action on $\AA^2$. And we saw that $\M_{1,1}\cong [U/\GG_m]$. In general, you
+ don't have such a delicate analysis, but this is the way to show algebraicity. You use
+ the Hiblert scheme or the Quot functor.
+
+ \underline{Aside on the Quot functor}. (Grothendieck, Seminars Boubaki, 1960/61, no.
+ 221) Let $f:X\to S$ be a separated morphism of finite presentation. Let $\L$ be
+ relatively ample on $X$, and let $P\in \QQ[z]$ (the Hilbert polynomial). Also, fix a
+ quasi-coherent sheaf $\F$ on $X$. Then we can define $\quot^P(\F/X/S):(\sch/S)^{op}\to
+ \set$ by $(S'\to S)\mapsto \Bigl\{\F_{S'}\twoheadrightarrow \G| \F_{S'}$ the pullback of
+ $\F$ to $X_{S'}=X\times_S S'$, $\G$ quasi-coherent and locally finitely presented
+ (basically coherent), $\G$ has support proper over $S'$, and for every $s'\in S'$, the
+ Hilbert polynomial (makes sense because may as well replace $X$ by the support\anton{I
+ missed some stuff}) of $\G_{S'}=\G|_{X_{S'}}$ is equal to $P\Bigr\}/\cong$, where
+ isomorphism is
+ \[\xymatrix{
+    \F_{S'}\ar@{->>}[r]\ar@{->>}[dr] & \G_1\ar[d]_\wr^f\\
+    & \G_2
+ }\]
+ Such an iso is unique if it exists because of surjectivity.
+ \begin{theorem}[Grothendieck]
+   If $\F$ is locally finitely presented, $\quot^P(\F/X/S)$ is a quasi-projective
+   $S$-scheme (projective if $X\to S$ is proper).
+ \end{theorem}
+ In fact, you get a nice projective embedding into a Grassmanian.
+ \begin{remark}
+   If $\F=\O_X$, then $\quot^P(\F/X/S)$ is usually written $\hilb^P_{X/S}$, the
+   \emph{Hilbert scheme}.
+ \end{remark}
+ \begin{example}[Hartshorne's comment]
+   Suppose $\F=\bigoplus \O_X$, then we can take $\G$ to be a quotient of any one of
+   them, so it looks like we'll get an infinite disjoint union. Maybe the theorem only
+   holds if $\F$ is locally finitely presented.
+ \end{example}
+ \begin{remark}
+   If $f:X\to S$ is locally finitely presented and separated morphism of algebraic
+   spaces, and $\F$ is quasi-coherent on $X$, then we can still define $\quot(\F/X/S)$.
+   The ample part is only used for the Hilbert polynomial part. This is an algebraic
+   space and is quasi-proper (satisfies the valuative criterion, but may not be finite
+   something \anton{}) if $X\to S$ is proper.
+ \end{remark}
+ \begin{example}
+   If $g\ge 2$, then $\M_g$ is algebraic. The idea is the same as for $\M_{1,1}$. Put
+   some extra structure to get something representable by a scheme and then quotient out
+   the extra structure. If $(\pi:C\to S)\in \M_g(S)$, then one can show (by Riemann-Roch)
+   \begin{itemize}
+     \item $(\Om^1_{C/S})^{\otimes 3}$ is relatively very ample.
+     \item $V_C=\pi_*(\Om_{C/S}^{1})^{\otimes 3}$ has rank $5(g-1)$.
+     \item $\pi_*(\Om^1_{C/S})^{\otimes n}$ has rank $(2n-1)(g-1)$ for $n\ge 3$.
+   \end{itemize}
+   This stuff implies that for all $s\in S$, the Hilbert polynomial of $C_s$ is
+   $P=(6z-1)(g-1)$ (here $\L=(\Om^1_{C/S})^{\otimes 3}$) because $n=3z$. You have to
+   compute the dimension of $H^0(\L^{\otimes m})= (6m-1)(g-1)$.
+
+   Let $\tilde \M_g$ be the functor $\sch^{op}\to \set$ given by $S\mapsto
+   \{(C/S,\sigma:\PP^{5g-6)}\xrightarrow\sim \PP V_C)\}/\cong$, where
+   $(C_1,\sigma_1)\cong (C_2,\sigma_2)$ if there is an isomorphism $i:C_1\xrightarrow\sim
+   C_2$ over $S$ such that
+   \[\xymatrix{
+    \PP^{5g-6}\ar[r]^{\sigma_1}\ar[dr]_{\sigma_2} & \PP V_{C_1}\ar[d]^{i} & C_1 \ar@{_(->}[l]\ar[d]^i\\
+    & \PP V_{C_2} & C_2 \ar@{_(->}[l]
+   }\]
+   There is at most one such isomorphism because some stuff has to respect embeddings.
+   Concretely, they are equivalent if the images of the curves in $\PP^{5g-6}$ are
+   equal.
+
+   Thus, we see that we get a subfunctor $j:\tilde \M_g\hookrightarrow
+   \hilb^{(6z-1)(g-1)}_{\PP^{5g-6}}$. Let $P=(6z-1)(g-1)$.
+   \begin{lemma}
+     Let $X\hookrightarrow \PP^{5g-6}$ (a morphism over $S$) be an $S$-valued point of
+     $\hilb^P_{\PP^{5g-6}}$. Then the set of points $s\in S$ for which $X_s$ is a smooth
+     genus $g$ curve is an open set. This lemma is true without anything about $5g-6$;
+     genus is constant in a flat family.
+   \end{lemma}
+   \begin{proof}
+     (1) the condition that $X\to S$ is smooth is open in $S$. After some reduction, you
+     can assume $S$ and $X$ are noetherian, so the set of points where stuff is not
+     smooth is closed, and $X\to S$ is proper, so the image in $S$ is closed.
+
+     (2) the semi-continuity theorem implies that the set of points where the fiber is
+     geometrically connected is open.
+
+     Now after shrinking on $S$, we can assume $X\to S$ is smooth proper with
+     fibers geometrically connected.
+
+     (3) $X_s$ smooth geometrically connected and the Hilbert polynomial is $(6z-1)(g-1)$
+     implies that $X_s$ is a genus $g$ curve.
+   \end{proof}
+   \anton{Hartshorne: you need that some embedding is given by the tri-canonical system,
+   so it looks like $\tilde \M_g$ is a closed subset of this open thing}
+   \begin{corollary}
+     $\tilde \M_g$ is represented by an open subscheme of $\hilb^P_{\PP^{5g-6}}$.
+   \end{corollary}
+   \textbf{To be corrected}
+
+   Then we want to say that $\M_g\cong [\tilde\M_g/PGL_{5g-6}]$ (quotient out by the
+   choice of the isomorphism $\sigma$). We have a map $\tilde \M_g\to \M_g$, given by
+   $(C,\sigma)\mapsto C$. By uniqueness of isomorphisms, this gives a morphism of fibered
+   categories. This induces a morphism of fibered categories
+   \[
+   [\tilde
+   \M_g/PGL_{5g-6}]^{ps}\to \M_g.\tag{$\ast$}
+   \]
+   \begin{lemma}
+     This map induces an isomorphism $[\tilde \M_g/PGL_{5g-6}]\xrightarrow\sim \M_g$.
+   \end{lemma}
+   \begin{proof}
+     It is enough to show that $(\ast)$ is fully faithful, because it is clear that every
+     point is locally in the image (we can always locally choose a basis for the locally
+     free sheaf). Equivalently, given $(C_1,\sigma_1)$ and $(C_2,\sigma_2)$ in $\tilde
+     \M_g(S)$ and an isomorphism $\iota:C_1\to C_2$, there is a unique $h\in PGL_{5g-6}(S)$
+     such that
+     \[\xymatrix{
+      \PP^{5g-6} \ar[d]_h \ar[r]^{\sigma_1} & \PP V_{C_1} \ar[d]_\wr^\iota\\
+      \PP^{5g-6} \ar[r]^{\sigma_2} & \PP V_{C_2}
+     }\]
+     and we see that there is no choice for $h$, it has to be the composition.
+   \end{proof}
+ \end{example}
+
+ \begin{definition}
+   An algebraic stack $\X$ over $S$ is \emph{Deligne-Mumford} if there exists an \'etale
+   surjection $U\to \X$ with $U$ a scheme. (sometimes people require the diagonal to be
+   finite).
+ \end{definition}
+ \begin{remark}
+   $\M_{1,1}$ and $\M_g$ are Deligne-Mumford. The way we've done things, it looks like it
+   might be hard to show this. We'll see that an algebraic stack $\X$ is Deligne-Mumford
+   if and only if ``objects have no infinitesimal automorphisms''. It is a purely
+   deformation-theoretic thing. For the $\M_g$ and $\M_{1,1}$ cases, this will follow
+   from the fact that $H^0(C,T)=0$.
+ \end{remark}
+
+ Corrected proof that $\M_g$ is algebraic.
+
+ It is still correct that $\M_g$ is represented by a locally closed subscheme of the
+ Hilbert scheme, but this is hard (it requires knowledge of the relative Picard
+ functor)\anton{there are some diagrams about this in Ed's notes, but I don't understand
+ them}. The following argument will bypass this.
+
+ Let $S$ be a fixed base scheme. Let $X$ be quasi-projective, flat, and finitely
+ presented over $S$, and let $Y$ be quasi-projective and finitely presented over $S$. We
+ define the functor $\uhom(X,Y):(\sch/S)^{op}\to \set$ by $(S'\to S)\mapsto
+ \hom_{S'}(X_{S'},Y_{S'})$.
+ \begin{proposition}
+   $\uhom(X,Y)$ is a scheme.
+ \end{proposition}
+ \begin{proof}
+   To give an element of $\hom_{S'}(X_{S'},Y_{S'})$, it is enough to give its graph (a
+    subscheme of $X_{S'}\times_{S'}Y_{S'}=(X\times_S Y)_{S'}$), so we get a morphism
+   $\uhom(X,Y)\to \hilb_{X\times_S Y}$, given by $(f:X_{S'}\to Y_{S'})\mapsto
+   \Ga_f\subseteq (X\times_S Y)_{S'}$. Note that $\Ga_f$ is proper and flat over the base
+   since $X$ is projective and flat \anton{}, so $\Ga_f$ is a point of the Hilbert
+   scheme. Also, $Y$ is \anton{something}
+
+   Claim: This identifies $\uhom(X,Y)$ with an open subscheme of $\hilb_{X\times_S Y}$.
+   To see this, stare that the following diagram.
+   \[\xymatrix{
+    \Ga\ar@{^(->}[r]\ar[dr] & (X\times_S Y)\times_S \hilb_{X\times_S Y}\ar[r]\ar[d] & X\times_S
+    \hilb_{X\times_S Y}\ar[dl]\\
+    & \hilb_{X\times_S Y}
+   }\]
+   \anton{I haven't thought about this yet.}
+ \begin{lemma}
+   Let $f:\Ga\to X$ be a morphism of proper, flat, finitely presented $S$-schemes. Then
+   there is an open set $U\subseteq S$ so that a morphism $S'\to S$ factors through $U$
+   if and only if $\Ga_{S'}\to X_{S'}$ is an isomorphism.
+ \end{lemma}
+ \begin{proof}
+   There is a fiber-wise criterion for being \'etale \cite[IV.17.8.2]{EGA}, which implies
+   that if $\gamma\in \Ga$ is a point with image $s\in S$, then $\Ga_S\to X_S$ is \'etale
+   at $\gamma$ if and only $\Ga\to X$ is \'etale at $\gamma$.
+
+   Let $Z\subseteq \Ga$ be the closed subset where $f$ is not \'etale, and replace $S$ by
+   the complement of the (closed) image of $Z$ in $S$ ($\Ga$ is proper over the base).
+   This reduces to the case where $f$ is proper and \'etale (and therefore finite
+   \'etale). Such a morphism has a rank, which we want to be 1. Let $W\subseteq X$ be the
+   open and closed \anton{} subset where $rk(f_*\O_\Ga)>1$, and take $U$ to be the
+   complement of the image of $W$ in $S$.
+ \renewcommand{\qedsymbol}{$\square_\text{Lemma}$}
+ \end{proof}
+ \end{proof}
+
+ Define $\M_g'$ to be the category of pairs $(C,\tau)$, where $\pi:C\to S$ is a genus $g$ curve over $S$ and $\tau:\O_S^{5(g-1)}\xrightarrow\sim V_C=\pi_*(\Om^1_{C/S})^{\otimes 3}$ is an isomorphism; the morphisms are what you expect. Define a morphism $\M_g'\to \hilb_{\PP^{5g-6}}$ by taking $(C,\tau)$ to the closed subscheme of $\PP_S^{5g-6}$ corresponding to the closed immersion $j_\tau:C\xhookrightarrow{\text{can}} \PP V_C\xrightarrow[\sim]{\PP\tau} \PP_S^{5g-6}$, or $\bigl(C,(\Om^1_{C/S})^{\otimes 3})\hookrightarrow \bigl(\PP V_C,\O_{\PP V_C}(1)\bigr)\xrightarrow\tau \bigl(\PP_S^{5g-6},\O(1)\bigr)$ \anton{I don't think this is clearer}
+ 
+ Given $\pi:C\to S$, what is $\{\tau:\O_S^{5g-5}\xrightarrow\sim V_C\}$? It is close to $\{(j,\iota)|j:C\hookrightarrow \PP^{5g-6},\iota:j^\star\O(1)\xrightarrow\sim (\Om^1_{C/S})^{\otimes 3}\}$. In fact, there is a map $\tau\mapsto (j_\tau,\text{can})$. You can go in the other direction: given $(j,\iota)$, you get a map by the adjunction
+ \[\xymatrix{
+   \O_X^{5g-5}\ar[r]\ar@{.>}[d] & \pi_*j^*\O_{\PP^{5g-6}}(1)\ar[d]^\iota\\
+   V_C\ar@{}[r]|<>(.5){\mbox{$=$}} & \pi_*(\Om^1_{C/S})^{\otimes 3}
+ }\]
+ Let $T$ be the total space of the $\GG_m$-torsor of isomorphisms, and let $\Phi$ be the fiber product shown ($\Phi$ classifies $(C/S,j,\iota)$)
+ \[\xymatrix{
+  \Phi\ar[r]\ar[d]\ar@{}[dr]|(.25)\pb & \uhom(C_U,T)\ar[d]\\
+  U\ar[r]^\id & \uhom(C_U,C_U)
+ }\qquad\qquad \xymatrix{
+  T\ar[r] & C_U \ar@{^(->}[r]^{j_U}\ar[d] & \PP^{5g-6}_U\ar[dl]\\
+  \Phi\ar[r] & U\ar@{}[r]|<>(.5){\mbox{$\subseteq$}} & \hilb_{\PP^{5g-6}}
+ }\]
+ More precisely, $\Phi$ is the functor $S\mapsto \{(C/S,j:C\hookrightarrow \PP^{5g-6},\iota:j^\star\O(1)\xrightarrow\sim (\Om^1_{C/S})^{\otimes 3})\}$ and $U$ is the funct $S\mapsto (C/S,j)$.
+
+ To get $\M_g$: $\M_g'$ has an action of $GL_{5g-5}$. Say $g\in GL_{5g-5}$, then we define $g\cdot (C/S,\tau:\O^{5g-5}_S\xrightarrow\sim V_C)=(C/S,\tau\cdot g:\O_S^{5g-5}\xrightarrow\sim V_C)$

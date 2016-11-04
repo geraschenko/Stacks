@@ -1,0 +1,168 @@
+
+\subsektion{Proof: II}
+
+\[\xymatrix{
+  \spec A_2\ar@<.5ex>[r]\ar@<-.5ex>[r] & \spec A_1\ar[r]& \X\ar[r]
+\ar@/^/[rr]^\eta & \spec A_0 \ar@{-->}[r] & Y
+}\]
+
+Recall that we have a stack $\X$ and a finite flat $\spec A_1\to \X$
+and $\spec A_2=\spec A_1\times_\X \spec A_1$. We also have $\spec
+A_0$, which is the invariants. We fix a morphism $\eta:\X\to Y$ and
+we'd like to show there is a unique $\spec A_0\to Y$. Here, $Y$ is a
+quasi-separated algebraic space. Last time we proved uniqueness.
+\begin{theorem}
+  Let $\X$ be of finite type over $S$ with finite diagonal. Assume
+there is a finite flat surjection $U\to \X$ with $U$ a scheme and
+such that for all $x\in U$ the finite set $s(t^{-1}(x))$ is contained
+in an affine. Then there is an open covering $\X=\bigcup \X_i$ such
+that each $\X_i$ admits a finite flat covering by an affine scheme.
+Here $s,t:R=U\times_\X U\rightrightarrows U$.
+\end{theorem}
+We'll prove this in a bit, but first let's use it to see existance of
+the map $\spec A_0\to Y$.
+\begin{remark}
+  This implies that there is a universal map to schemes $\X\to X$.
+Namely, you take the universal thing for each $\X_i$ and glue.
+Another way to think of it: $X$ is the quotient of $U$ by $R$ in the
+category of ringed spaces.
+\end{remark}
+Given $U\to Y$ \'etale quasi-compact (reduce to the case $Y$ is
+quasi-compact), we make the fiber product
+\[\xymatrix{
+  & & \X_R \ar@<.5ex>[d]\ar@<-.5ex>[d]\ar[r] &
+Q'\ar@<.5ex>[d]\ar@<-.5ex>[d]\ar[r] & R\ar@<.5ex>[d]\ar@<-.5ex>[d]\\
+  & V\ar[d]_{et\ qcmpt}\ar[r]^{\text{fin\ flat}} &
+\X_U\ar[d]\ar@/^/[rr] \ar[r] & Q\ar[d]\ar[r] & U\ar[d]\\
+  \spec A_2\ar@<.5ex>[r]\ar@<-.5ex>[r] & \spec A_1\ar[r]& \X\ar[r]
+\ar@/^/[rr]^\eta & \spec A_0 \ar@{-->}[r] & Y
+}\]
+Find $Q$ and $Q'$ by theorem. $V\to \spec A_1$ \'etale and
+quasi-compact implies it is quasi-affine which implies that any
+finite set of points is contained in an affine.
+
+To show: $Q\to \spec A_0$ is \'etale surjective and $Q'\to
+Q\times_{\spec A_0}Q$ is an isomorphism. Then $Q'\rightrightarrows Q$
+is an algebraic space presentation for $\spec A_0$. Then you get your
+arrow $\spec A_0\to Y$. In fact, if $Q\to \spec A_0$ is \'etale, then
+it follows that $Q'\to Q\times_{\spec A_0}Q$ is an isomorphism:
+$Q'\to Q\times_{\spec A_0}Q$ is also \'etale because $Q'\to Q$ and
+the projections are \'etale. Then it is enough to check that for
+every algebraically closed $k$, the map $Q'(k)\to Q(k)\times_{(\spec
+A_0)(k)}Q(k)$ is bijective (this is a property of \'etale morphisms
+\cite[I.5.7]{SGA}). But we know that $Q'(k)=|\X(k)|\times_{Y(k)}R(k)
+= |\X(k)|\times_{Y(k)}U(k)\times_{Y(k)}U(k)$, and we have that
+$Q(k)\times_{(\spec A_0)(k)}Q(k) =
+(|\X(k)|\times_{Y(k)}U(k))\times_{(\spec
+A_0)(k)=|\X(k)|}(|\X(k)|\times_{Y(k)}U(k))$, which is equal to the
+previous guy.
+
+Surjectivity of $Q\to \spec A_0$ is clear \anton{}, so we just need
+to check it is \'etale.
+
+$Q\to \spec A_0$ is of finite type, so it is enough to check that it
+is formally \'etale. This can be checked after base change along flat
+morphisms $\spec A_0'\to \spec A_0$. Check that everything commutes
+with finite flat base change on $A_0$. (We're using the noetherian
+hypothesis of $Q$ and $\spec A_0$ over $S$.)
+
+Upshot: it is enough to consider the case when $A_0$ is complete and
+local with algebraically closed residue field.
+
+Now we have $\spec A_1\to \spec A_0$ is finite, so $A_1$ is also
+complete with algebraically closed residue field. Each something of
+$A_1$ surjects onto $\spec A_0$, so it surjects onto $\X$. Thus, we
+may assume $A_1$ is complete local and $A_0\to A_1$ induces an
+isomorphism on residue fields.
+\[\xymatrix{
+ \spec A_1\ar[r] & \X\ar[r] & \spec A_0
+}\]
+So we have
+\[\xymatrix{
+  \coprod \spec k \ar[r]^\id\ar@{^(->}[d]& \spec k
+\ar@{=}[r]\ar@{^(->}[d] & \spec k\ar@{^(->}[d] \ar[r]^u & U\ar[d]\\
+  \coprod \spec A_2^{(i)}=\spec A_2 \ar@<.5ex>[r]\ar@<-.5ex>[r]&
+\spec A_1\ar[r] \ar@/_/[rr]_\eta \ar@{-->}[rru]^{\exists !} & \spec
+A_0 \ar[ur]_{\exists!} & Y
+}\]
+Let $u\in U(k)$ be a lifting of $\eta|_{\spec k}$. Something about a
+map from $A_2$ to $U$, so something. Now we are in the situation
+\[\xymatrix{
+  & & \X_U \ar[d]\ar[r] & Q\ar[d]\ar[r]\ar@{}[dr]|(.25)\pb & U\ar[d]\\
+  \spec A_2\ar@<.5ex>[r]\ar@<-.5ex>[r] & \spec A_1\ar[r]& \X\ar[r] &
+\spec A_0\ar[r] & Y
+}\]
+\begin{theorem}
+  $\X/S$ finite type finite diagonal, with $U\to \X$ finite flat
+surjection such that for all $x\in U$ the orbit $s(t^{_1}(x))$ is
+contained in an affine. Then there is a cover $\X=\bigcup \X_i$ such
+that each $\X_i$ admit a finite flat surjection from an affine scheme.
+\end{theorem}
+Let $\X^{(n)}\subseteq \X$ be substack such that $T\to \X$ factors
+through $\X^{(n)}$ if and only if $T\times_\X U\to T$ has rank $n$.
+We see that $\X=\coprod \X^{(n)}$. Now we can assume that $U\to \X$
+has constant rank.
+
+$\xymatrix{R=U\times_\X U \ar@<.5ex>[r]^s\ar@<-.5ex>[r]_t & U}$. A
+subset $F\subseteq U$ is \emph{invariant} if for all $x\in F$ and
+$y\in R$ such that $t(y)=x$ we have that $s(y)\in F$.
+\begin{example}
+  If $\X=[U/G]$ then $R=U\times G\rightrightarrows U$. In this case,
+$F$ is invariant if it really is invariant under the group action.
+\end{example}
+\begin{lemma}
+  Let $F\subseteq U$ be a subset. then $F^{inv}=s(t^{-1}(F))$ is
+invariant.
+\end{lemma}
+We'll omit the proof (it isn't hard).
+
+Note: if $Z_1\subseteq Z_2\subseteq U$ and $Z_2$ is invariant, then
+$Z_1^{inv}\subseteq Z_2$. \anton{better: $Z_2^{inv}=Z_2$}
+
+Say $W\subseteq U$ is an open subset with complement $F$. Then the
+\emph{saturation} of $W$ is defined to be $W'=U\setminus
+F^{inv}\subseteq W$. Note that this is the maximal invariant subset
+of $W$.
+
+Idea: if $W\subseteq U$ is invariant and $\W\subseteq \X$ is its
+image ($T\to \X$ factors through $\W$ if and only if $W\times_\X T\to
+T$ is surjective), then $\W\times_\X U=W$.
+
+We have to show that we can cover $U$ by invariant affine opens. That
+is, we need to show that for every $x\in U$, there is an invariant
+affine open $W\subseteq U$ containing $x$. Then the image will be an
+open substack of $\X$ which admits a finite flat covering by an
+affine.
+
+Why is the original problem not easy: take an affine $W$ around $x$
+and look at its image. Well, then the map $W$ to its image is not
+finite.
+
+Let $V\subseteq U$ be any affine containing $s(t^{-1}(x))$. Then we
+can take $V'\subseteq V$, in which we can find a $D(f)$ in there
+(with $f\in \Ga(V,\O_V)$, and we end up with $s(t^{-1}(x))\subseteq
+D(f)'\subseteq D(f)\subseteq V'\subseteq V$. The claim is that
+$W=D(f)'$ is affine. It will turn out that $D(f)'=D(f\cdot
+Norm_S(t^*f))$
+
+$Z(f):= V'\setminus D(f)$. $s,t:V'\times_\X V'\to V'$, and
+$t^{-1}(Z(f))$ is the set of points where $t^*f$ is zero. By the way,
+if $h:Y\to X$ is finite (flat), then $h_*\O_Y$ is a locally free
+sheaf of algebras of finite rank. If $\alpha\in h_*\O_Y$, then
+$Norm_h(\alpha)\in \O_X$ is $\det (\alpha)$.
+
+We've now prove the existence of the coarse moduli space when you
+have a finite flat covering by a scheme.
+
+Next time:
+\begin{theorem}
+  $\X/S$ finite type finite diagonal. Then there is an algebraic
+stack $\W/S$ and surjective separated \'etale morphism $\W\to \X$
+which is representable by schemes and admits a finite flat surjection
+$Z\to \W$ so that $Z$ has good proerties.
+\end{theorem}
+The idea is to start with $\X$, find a $\W\to \X$ \'etale which has a
+coarse space $W$. Then hope that $\W\times_\X \W$ has a coarse space
+$R$ and that $R\rightrightarrows U$ is an \'etale equivalence
+relation. Then we can define the coarse space $X$ as the quotient.
+

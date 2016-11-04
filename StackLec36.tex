@@ -1,0 +1,97 @@
+\sektion{36}{Quasi-coherent sheaves on algebraic stacks}
+ 
+Recall that last time we defined the lisse-\'etale topos $\Liset(\X)$ for an algebraic stack $\X$. We started proving the following.
+\begin{proposition}
+  If $f:\X\to \Y$ is a morphism of algebraic stacks and $G$ is a quasi-coherent sheaf on $\Y$, then $f^\star G$ is quasi-coherent on $\X$.
+\end{proposition}
+\begin{proof}
+  $f^\star G$ is the sheaf associated to the presheaf $(U\to \X)\mapsto \lim_{I_{(U,u)}} g^\star G_V(U)$. The objects of $I_{(U,u)}$ are diagrams 
+ \[\xymatrix{
+  U\ar[r]^g\ar[d]_u & V\ar[d]^v_{}="a"\\
+  \X\ar[r]_f^{}="b" & \Y
+  \ar@{=>}^{g^\flat} "b";"a"
+ }\]
+ and morphisms $V\to V'$ are diagrams
+ \[\xymatrix{
+  & V'\ar[d]_\pi \ar@/^3ex/[dd]^{v'}_{}="d"\\
+  U\ar[d]_u\ar[r]^g \ar[ur]^{g'}& V\ar[d]_v="b"^{}="c"\\
+  \X\ar[r]^{}="a"& \Y
+  \ar@{=>} "a";"b" \ar@{=>} "c";"d"
+ }\]
+
+ (1) all morphisms in the limit are isomorphisms: $g^\star G_V= g'^\star \pi^\star G_V \xrightarrow\sim g'^\star G_{V'}$. If $I_{(U,u)}$ were filtering, this would imply that for any object $D_{V_0}$ the map $g^\star G_{V_0}\to \lim_{I_{(U,u)}} g^\star G_V$ is an isomorphism.
+\begin{example}
+ Say $V$ is a vector space and let $\alpha$ be an automorphism. Then the limit of the diagram $\xymatrix{V\ar@<.5ex>[r]^\alpha \ar@<-.5ex>[r]_\id & V}$ is $V/(\alpha(v)-v)$
+\end{example}
+The claim is that the functor $F:I_{(U,u)}\to \ab$ given by $D_V\mapsto g^\star G_V(U)$ factors though $\bbar I_{(U,u)}$ whose objects are the same as the objects of $I_{(U,u)}$ and where all the morphisms have been crushed together (so there is either one morphism or no morphisms between two objects).
+
+If the claim holds, then $\lim_{I_{(U,u)}}F = \lim_{\bbar I_{(U,u)}} \bbar F$ where $\bbar F:\bbar I_{(U,u)}\to \ab$ is the factorization.
+
+$\hom_{\ab}(\lim_{I_{(U,u)}} F,M)=\hom_{\ab^{I_{(U,u)}}} (F,M) = \hom_{\ab^{\bbar I}} (\bbar F,M)$.
+
+Proof of claim:
+\[\xymatrix{
+ & V\ar@<.5ex>[d] \ar@<-.5ex>[d]\\
+ U\ar[d]\ar[ur]^{g_1} \ar[r]^{g_2} & V_2\ar[d]\\
+ \X \ar[r] & \Y
+}\]
+We want the following arrows to be equal
+\[\xymatrix@R-1pc{
+ & g_1^* p_1^* G_{V_2}\ar[dr]\\
+ g_2^\star G_{V_2}\ar[ur]^@{~}\ar[dr]_@{~} & & g_1^* G_{V_1}\\
+ &g_1^*p_2^* G_{V_2}\ar[ur]
+}\qquad\qquad\xymatrix{
+ & Z\ar[r]\ar[d] \ar@{}[dr]|(.25)\pb & V_1\ar[d]\\
+ U\ar[r]^2 \ar@/^3pc/[rru]^{g_1}\ar[ur] & V_2 \ar[r]^\Delta & V_2\times_\Y V_2
+}\]
+$\xymatrix{g_2^*G_{V_2}\ar@<.5ex>[r]\ar@<-.5ex>[r] & g_2^* \Delta^* G_{V_2\times_\Y V_2} = g_1^* (p_1,p_2)^* G_{V_2\times_\Y V_2}\ar[r] & g_1^* G_{V_1}}$. So we need to show that the two maps $\xymatrix{g_2^* G_{V_2}\ar@<.5ex>[r]\ar@<-.5ex>[r] & g_2^* \Delta^* G_{V_2\times_\Y V_2}}$ are equal and we have $\phi_\Delta:g_2^*\Delta^* G_{V_2\times_\Y V_2}\xrightarrow\sim g_2^* G_{V_2}$ (because $G$ quasi-coherent), and the compositions are the identity, so the two maps must be equal.
+\end{proof}
+\begin{remark}
+ In the locally noetherian case, we see that $f^\star$ takes coherent sheaves to coherent sheaves.
+\end{remark}
+
+\begin{proposition}
+  Let $f:\X\to \Y$ be a quasi-compact and quasi-separated
+  ($\Delta:\X\to \X\times_\Y \X$ is quasi-compact) morphism, and let $F$
+  be quasi-coherent on $\X$. Then $f_* F$ is quasi-coherent on $\Y$.
+\end{proposition}
+\begin{proof}
+ Reduction to the case when $\Y=Y$ is a quasi-compact algebraic space.
+
+ Let $Y\to \Y$ be a smooth morphism. Then we defined $F(Y)=\Ga(\X|_{f^{-1}Y},F)$.
+ \begin{lemma}
+  Let $\pi:\Z\to \X$ be a smooth representable morphism and let $F$ a sheaf on $\X_\liset$. Then $\Ga(\X|_\Z,F)=\Ga(\Z_\liset, \pi^\star F)$. Here $\X|_\Z$ is what? $\Z$ is a sheaf ($h_\Z$) on $\X_\liset$ \anton{object are triangles $U\to Z\to X$ with 2-morphism}. On the right side, you have an inclusion $\Liset(\Z)\to \Liset(\X)$
+ \end{lemma}
+ The site $\Liset(\X)|_\Z$ has objects $(U,z:U\to \Z)$ such that $U$ is an algebraic space and $\pi\circ z:U\to \X$ is smooth (this is bigger than $\Liset(\Z)$. The morphisms $(U',z')\to (U,z)$ are triangles
+\[\xymatrix{
+ U'\ar[r]^f_{}="b" \ar[dr]_{z'}^{}="a" & U'\ar[d]^z\\
+ & \Z
+ \ar@{=>} "a";"b"
+}\]
+ Then $\X|_\Z$ is the topos associated to $\Liset(\X)|_\Z$.
+
+ So there is a natural map $\Ga(\X|_\Z,F)\to \Ga(\Z,F)$, which we want to check is a bijection.
+ \begin{proof}
+  This is a bijection because if $Z\to \Z$ is a smooth surjection, then \'etale locally any morphism $U\to \Z$ factors through $Z$.
+  \[\xymatrix{
+   & Z\ar[d]& \alpha_Z\\
+   U\ar[r]_u \ar[ur]^{\tilde u} & \Z
+  }\]
+  If $\tilde u$ exists, then you have to choose $\tilde u^*\alpha_Z$. This guy doesn't depend on the choice of lifting. If $\tilde u_1,\tilde u_2:U\to Z$ are two liftings, then we have
+\[\xymatrix{
+  & Z\times_\Z Z \ar@<.5ex>[d]\ar@<-.5ex>[d] \\
+  U \ar[ur]^\gamma \ar[dr] & Z\ar[d]\\
+ & \Z
+}\]
+Then we have that $\tilde u_1^* \alpha_Z=\gamma^*p_1^* \alpha_Z=\gamma^* \alpha_{Z\times_\Z Z}$. That shows that the map is surjective and it also shows that it is injective because of something \anton{}
+ \end{proof}
+Let's finish the reduction to the case of a quasi-compact $Y$. We know that if $Y\to \Y$, then $(f_*F)_Y=(f_{Y*}F|_{\X\times_\Y\X})_Y$ with $f_Y:\X\times_\Y Y \to Y$. Then we still have to check something cartesian.
+\[\xymatrix{
+ Y\ar[d] & Y\times_\Y Y'\ar[l]_{p_1} \ar[d]^{p_2} \ar[r]^{\Ga_g} & Y'\ar[dl]^\id\\
+\Y & Y'\ar[l]
+}\]
+$g^*(f_*F)_Y = \Ga_g^*p_1^*(f_*F)_Y\xrightarrow\sim \Ga_g^*(f_*F)_{Y\times_\Y Y'}\to (f_*F)_{Y'}$ want to be an isomorphism. $\Ga_g^* p_2^* (f_* F)_{Y'}= (f_* F)_{Y'}$ and the first guy maps to the third guy isomorphically and the second guy is equal to the last guy.
+
+Upshot: Enough to consider $\Y$ a quasi-compact scheme
+
+\end{proof}

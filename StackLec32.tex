@@ -1,0 +1,200 @@
+\sektion{32}{Properties of algebraic stacks}
+
+%  $\mu$-gerbes to cohomology classes. We got confused before. There are two points.
+% 
+%  (1) if $\mu$ is an injective abelian sheaf and $\G$ is a $\mu$-gerbe, then $\G$ is
+%  trivial. Choose an \'etale surjection $X'\to X$ and $s'\in \G(X')$. Then consider the
+%  functor $F:(\sch/X)^{op}\to \set$ given by $(V\to X)\mapsto \{(s,\iota)|s\in
+%  \G(V),\iota:p^*s\xrightarrow\sim s'\text{ in } \G(X'_V)\}/\sim$, where
+%  $(s_1,\iota_1)\sim (s_2,\iota_2)$ if there is a $\delta:s_1\to s_2$ in $\G(V)$ so that
+%  $\iota_1=\iota_2\circ p^*\delta$.
+%  \begin{remark}
+%    $\delta$ is unique if it exists because $\mu(V)\to \mu(X'_V)$ is injective (because
+%    $X_V'\to V$ is a covering and $\mu$ is a sheaf. This implies that $F$ is a sheaf, and
+%    in fact a $p_*\mu/\mu$-torsor (we saw this last time). This implies that $F$ is
+%    trivial, so $\G$ is trivial
+%  \end{remark}
+% 
+%  (2) if $\mu$ is arbitrary, then choose $\mu\hookrightarrow I$ with $I$ injective. Then
+%  $\G\times^\mu I$ is trivial and we have a map $j:\G\to \G\times^\mu I$. Fix $s_0\in
+%  \G(\G\times^\mu I)(X)$ and define $P:(\sch/X)^{op}\to \set$ by $(V\to X)\mapsto \{(s\in
+%  \G(V),\iota:j(x)\xrightarrow\sim s_0\text{ in } \G\times^\mu I(V))\}$. Then $P$ is an
+%  $I/\mu$-torsor. Then you get a map $H^1(X,I/\mu)\to H^2(X,\mu)$. You have the map
+%  $\G\mapsto \partial(P)$.
+% 
+%  \begin{proposition}
+%    Let $\mu\to X$ be a smooth (commutative) group scheme. Then any $\mu$-gerbe is
+%    algebraic.
+%  \end{proposition}
+%  We need the following lemma.
+%  \begin{lemma}
+%    Any $\mu$-torsor is an algebraic space with finite type diagonal.
+%  \end{lemma}
+%  \begin{proof}
+%    We have to check representability of the diagonal and the \'etale cover. Say $P\to X$
+%    is a $\mu$-torsor. Consider the diagonal, and let $T$ be a scheme.
+%    \[\xymatrix{
+%     Z\ar[r]\ar[d] & T\ar[d]^{(p_1,p_2)}\\
+%     P\ar[r]^<>(.5)\Delta & P\times_X P
+%    }\]
+%    The $p_1$ defines a trivialization $\mu_T\xrightarrow P_T$. This identifies $p_2$
+%    with an element $g\in \mu(T)$. Let $Z$ be the fiber product
+%    \[\xymatrix{
+%     Z\ar[r]\ar[d] & T\ar[d]^g\\
+%     T\ar[r]^e & G_T
+%    }\qquad\qquad
+%    \xymatrix{
+%     Z\ar[r]\ar[d] & T\ar[d]\\
+%     G_T\ar[r]^<>(.5)\Delta & G_T\times_T G_T
+%    }\]
+%    Since $G_T$ is locally of finite presentation, something is. $X\to S$ locally of
+%    finite presentation implies that $X\to X\times_S X$ is quasi-compact and of finite
+%    type. It requires an argument, but we won't give it here.
+% 
+%    The \'etale cover: choose a trivialization of $P$ over some \'etale cover $X'\to X$
+%    and take $\mu\times_X X'\cong P\times_X X'\to P$.
+%  \end{proof}
+%  \begin{proof}[Proof of Proposition]
+%    Let $T$ be a scheme
+%    \[\xymatrix{
+%     \isom(s_1,s_2)\ar[r]\ar[d]& T\ar[d]^{(s_1,s_2)}\\
+%     \G\ar[r]^\Delta & \G\times \G
+%    }\]
+%     $\isom$ is a $\mu$-torsor, so by the lemma it is an algebraic space, which implies
+%    representability of the diagonal
+% 
+%    Smooth surjection. Find $X'\to X$ \'etale so that $\G(X')$ is non-empty, and let $s'$
+%    be an object.
+%    \[\xymatrix{
+%     X'\ar[d]\\
+%     [X'/\mu]\ar@{}[r]|{=}& B_{X'}\mu\ar@{}[r]|{=} &\G\times_X X' \ar[r]\ar[d] & X'\ar[d]^{et} \ar@/_/[l]_{s'}\\
+%     & & \G\ar[r] & X
+%    }\]
+%    To check that the map $X'\to [X/\mu]$ is smooth, check that for any $T$ and let $P$ be
+%    a $\mu$-torsor.
+%    \[
+% %   \xymatrix{
+% %    X'\ar[d] & Z\ar[l]\ar[d] & \mu_{X'} & Z'\ar[d]\ar@/_/[ll]\\
+% %    [X'/\mu] & T\ar[l]_P & X\ar@/^/[ll]^{P_0} & T'\ar@/^/[ll]\ar[l]
+% %   }
+%    \xymatrix @!0 @C+1pc{
+%     & Z\ar[rr]\ar[dd]|\hole& & X'\ar[dd]\\
+%     Z'\ar[rr]\ar[dd]\ar[ur] & & \mu_{X'}\ar[dd]\ar[ur]\\
+%     & T\ar[rr]|\hole^(.3){P} & & [X'/\mu]\\
+%     T'\ar[rr]\ar[ur] & & X \ar[ur]_{P_0}
+%    }\]
+%  \end{proof}
+
+ \underline{Properties of algebraic stacks over $S$}.
+
+ By \emph{a presentation} of an algebraic stack $S$, we mean a smooth surjective morphism
+ $X\to \X$, with $X$ an algebraic space.
+
+ Let $\P$ be a property of algebraic spaces over $S$ which is local in the smooth
+ topology (if $X'\to X$ is a smooth cover, then $X$ has $\P$ if and only if $X'$ has
+ $\P$), then an algebraic stack $\X$ over $S$ \emph{has $\P$} if there exists a
+ presentation $X\to \X$ where $X$ has $\P$.
+ \begin{example}
+   Locally noetherian, reduced, normal, regular, characteristic $p$, etc.
+ \end{example}
+ This is coarser than \'etale locally (e.g.~dimension is no good)
+ \begin{remark}
+   If an algebraic stack has $\P$, then for every presentation $X'\to \X$, $X'$ has $\P$.
+   \[\xymatrix{
+    X\times_\X X'\ar[r]\ar[d] & X\rlap{$\quad\P$}\ar[d]\\
+    X'\ar[r] & \X
+   }\]
+   All morphisms are smooth surjections, so we can push $\P$ around like we did before.
+ \end{remark}
+ \begin{definition}
+   $\X$ over $S$ is \emph{quasi-compact} if there exists a presentation $X\to \X$ with
+   $X$ quasi-compact.
+ \end{definition}
+ \begin{definition}
+   Say $\X$ is an algebraic stack over $S$. An open (resp.~closed, resp.~locally closed)
+   substack of $\X$ is a fully faithful substack $\Y\subseteq \X$ such that $\Y\to \X$ is
+   representable by an open (resp.~closed, resp.~locally closed) immersion.
+ \end{definition}
+ \begin{lemma}
+   Let $\Y\to \X$ be a representable morphism of stacks with $\X$ algebraic. Then $\Y$ is
+   algebraic.
+ \end{lemma}
+ Aside: $\M_{g,n}\to \M_g$ is representable because for any $T$,
+ \[\xymatrix{
+    C\times_T\cdots\times_T C\ar@{}[r]|<>(.5){\txt{$\supseteq$}} & U\ar[d] \ar[r] & T\ar[d]\\
+    & \M_{g,n} \ar[r] & \M_g
+ }\]
+ Then you get that $\M_{g,n}$ is algebraic.
+ \begin{proof}
+   Claim: $\Delta:\Y\to \Y\times_\X \Y$ is representable.
+   \[\xymatrix{
+    P\ar[r]\ar[d] & T\ar[d]\\
+    \Y\ar[r]  & \Y\times_\X \Y
+   }\qquad\qquad
+   \xymatrix{
+    P\ar[r]\ar[d]& T\ar[d]\\
+   \Y\times_\X T\ar[r]^<>(.5)\Delta & (\Y\times_\X T)\times_T (\Y\times_\X T)
+   }\]
+   so $P$ is a scheme.
+
+   For the smooth surjection, choose a presentation $X\to \X$, then let $Y=\Y\times_\X
+   X$, which is an algebraic space which smoothly surjects onto $\Y$.
+ \end{proof}
+ \begin{lemma}
+   Let $\Z\xrightarrow g \Y \xleftarrow f \X$ be a diagram of algebraic stacks. Then the
+   stack $\X\times_\Y \Z$ is algebraic.
+ \end{lemma}
+ \begin{proof}
+   Representability of the diagonal:
+   \[\xymatrix{
+    I=\isom\bigl((x_1,z_1,\iota_1),(x_2,z_2,\iota_2)\bigr)\ar[r]\ar[d]& T\ar[d]^{(x_1,z_1,\iota_1)\times (x_2,z_2,\iota_2)}\\
+    \X\times_\Y\Z\ar[r]& (\X\times_\Y \Z)\times (\X\times_\Y \Z)
+   }\]
+   Where $x_i\in\X(T)$, $z_i\in \Z(T)$ and $\iota_i:f(x_i)\xrightarrow\sim g(z_i)$. An
+   isomorphism between two such collections of data is a pair
+   $(\rho_x,\rho_z):(x_1,z_1,\iota_1)\to (x_2,z_2,\iota_2)$, where
+   $\rho_x:x_1\xrightarrow\sim x_2$ in $\X(T)$ and $\rho_z:z_1\xrightarrow\sim z_2$ in
+   $\Z(T)$ such that
+   \[\xymatrix{
+    f(x_1)\ar[r]^{\rho_x}\ar[d]_{\iota_1} & f(x_2)\ar[d]^{\iota_2}\\
+    g(z_1)\ar[r]^{\rho_z} & g(z_2)
+   }\]
+    So we see that $I$ is the equalizer of $\isom_\X(x_1,x_2)\times
+   \isom_\Z(z_1,z_2)\rightrightarrows \isom(f(x_1),g(z_2))$
+
+   Smooth surjection. Choose a presentation $Y\to \Y$ and choose $Z\to Y_\Z$ be a smooth
+   surjection\anton{I didn't quite catch how you get this}.
+   \[
+%    \xymatrix@!0{
+%     & & & & X\ar[dd]\\  \\
+%     & & & & Y_\X\ar[dd]\ar[dr]\\
+%     & & & & & \X\ar[dd]\\
+%     Z\ar[rr]& & Y_\Z\ar[dr] \ar[rr] & & Y\ar[dr]\\
+%     & Z'\ar@{.>}[rr]& & \Z\ar[rr] & & \Y
+%    }
+   \xymatrix@!0{
+    & & & & X\ar[dd]\\
+    & & & & & \X\ar[dd]\\
+    & & & & Y_\X\ar[dd]\ar[ur]\\
+    & Z'\ar[rr]^{sm} & & \Z \ar[rr]|\hole & & \Y\\
+    \llap{$Z'\times_{\Z}Y_\Z=\;$}Z\ar[ur]\ar[rr] & & Y_\Z \ar[rr]\ar[ur] & & Y\ar[ur]
+   }\]
+    Then $Z\times_Y X\to \Z\times_\Y \X$ is a smooth surjection.
+ \end{proof}
+ Let $\P$ be a property of morphisms of algebraic spaces which is local on source and
+ target in the smooth topology.
+ \[\xymatrix{
+    X''\ar[r]^{f'}\ar[dr]_{f''}& X'\ar[r]\ar[d]\ar@{}[dr]|(.25)\pb & X\ar[d]^f\\
+    & Y'\ar[r]^q & Y
+ }\]
+ If $q$ and $p$ ar smooth surjections then $f$ has $\P$ if and only if $f''$ has $\P$.
+ \begin{definition}
+   A morphisms of algebraic stacks $f:\X\to \Y$ has $\P$ if there exists a diagram
+   \[\xymatrix{
+    X'\ar[r]^{P'}\ar[dr]_{f'}&\X'\ar[r]\ar[d] & \X\ar[d]^f\\
+    & Y\ar[r]^Q & \Y
+   }\]
+   $P',Q$ presentations, then $f'$ has $\P$.
+ \end{definition}
+ So we can talk about surjective, universally open, locally of finite presentation
+ (resp.~type), flat, smooth.

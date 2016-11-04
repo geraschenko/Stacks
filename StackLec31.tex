@@ -1,0 +1,253 @@
+\sektion{31}{Gerbes}
+
+It may look like everything is a quotient of a variety by some group action, but this is not the case. Gerbes are the next examples of stacks.
+
+% The next example will be gerbs. Suppose $X$ is a scheme, and $\mu$ is a sheaf of abelian groups on $X_{ET}$. Then a \emph{$\mu$-gerb over $X$} is a stack $\F$ over $(\sch/S)_{et}$ and for every $x\in \F$, and isomorphism $\iota_x:\mu\to \aut_x$\footnote{If we have $x\in \F(U\to X)$, then $\aut_x=\isom(x,x)$. We mean an isomorphism between the restriction of $\mu$ and $\aut_x$.} such that
+%  \begin{itemize}
+%    \item \'etale locally on $X$, there is an object of $\F$,
+%    \item any two objects of $\F$ are locally isomorphic,
+%    \item for every arrow $y\to x$ in $\F(U)$, the diagram
+%    \[\xymatrix{
+%     \mu\ar[d]_{\iota_x} \ar[dr]^{\iota_y} \\
+%     \aut_x \ar[r]_\sim & \aut_y
+%    }\]
+%  \end{itemize}
+%  An isomorphism of gerbs is an isomorphism of stacks which is compatible with stuff.
+%  \begin{theorem}
+%    There is a natural bijection $\{\mu\text{-gerbs}/X\}/\cong$ with $H^2(X_{ET},\mu)$.
+%    Furthermore, if $\mu$ is a smooth (flat is enough if we take the flat topology on $X$)
+%    group scheme, then any $\mu$-gerb is algebraic. \anton{if you throw out the algebraic
+%    part, it is a theorem about any site}
+%  \end{theorem}
+%  You might look at $H^2(X_{ET},\GG_m)$. The elements correspond to gerbs, which are
+%  algebraic stacks. It is not in general true that the things you get are nice quotients.
+
+
+\begin{definition}
+ Let $\mu$ be a sheaf of abelian groups on a site $\C$. A \emph{$\mu$-gerbe} is a stack in groupoids $\F$ over $\C$ and for each $x\in \F$ an isomorphism $\iota_x:\mu\xrightarrow\sim \aut_x$ such that
+ \begin{enumerate}
+   \item locally there is an object in $\F$ (i.e.~for any object $X\in \C$, there is a cover $X'\to X$ such that $\F(X')$ is non-empty),
+   \item any two objects of $\F$ are locally isomorphic, and
+   \item for any morphism $y\to x$ in $\F(U)$ (automatically an isomorphism since $\F$ is fibered in groupoids), the diagram on the left commutes.
+   \[\xymatrix @R-.5pc @C-1pc{
+    & \mu\ar[dl]_{\iota_y} \ar[dr]^{\iota_x}\\
+    \aut_x \ar[rr]^\sim & & \aut_y
+   }\qquad\qquad\qquad\xymatrix @R-.5pc @C-1pc{
+    & \mu\ar[dl]_{\iota_x} \ar[dr]^{\iota'_{f(x)}}\\
+    \aut_x \ar[rr]^\sim & & \aut_{f(x)}
+   }\]
+ \end{enumerate}
+ A \emph{morphism of $\mu$-gerbes} is a morphism of stacks $f:\F\to \F'$ such that the diagram on the right commutes.
+\end{definition}
+\begin{remark}
+ We could make the above definition for a sheaf of (not necessarily abelian) groups $\mu$. However, if $f:x\to y$ is a morphism in the gerbe (over some $S$, say) and $g\in\mu(S)$, then condition (3) implies that the following diagram commutes.
+ \[\xymatrix{
+  x\ar[r]^g\ar[d]_f & x\ar[d]^f\\
+  y\ar[r]^g & y
+ }\]
+ On the other hand, we could take $y=x$, so $f$ is some other element of $\mu(S)$. Then commutativity of the diagram gives us that $fg=gf$, so $\mu$ is abelian.
+\end{remark}
+% \begin{example}
+%  If $\mu$ is a sheaf of abelian groups on $\C$, then $\tors(\mu)$ is a $\mu$-gerbe.
+%  
+%  \anton{old stuff}Let $G$ be a smooth abelian group scheme over $X$. Then define the category $TORS(G)$ to have objects $(X'\to X,P\to X')$, where $P$ is a $G$-torsor over $X'$, and morphisms diagrams
+%  \[\xymatrix{
+%   Q\ar[d]\ar[r] & P\ar[d]\\
+%   X''\ar[r] & X'
+%  }\]
+%  where $Q\to P$ is $G$-equivariant (in particular, the square is cartesian). $TORS(G)=BG$.
+%  \anton{this example needs to be generalized; replace $G$ with $\mu$}
+% \end{example}
+\begin{lemma}\label{lec31L:mapGerbes=equiv}
+  Any morphism of $\mu$-gerbes $f:\G_1\to \G_2$ is an equivalence.
+\end{lemma}
+\begin{proof}
+ (Full faithfulness) By Lemma \ref{lec21L:full_faithfulness_on_fibers} it is enough to check full faithfulness on fibers. We want the natural map $\isom_{\G_1}(x,y)\to \isom_{\G_2}\bigl(f(x),f(y)\bigr)$ to be an isomorphism for every pair $x,y\in\G_1(U)$. Since $\G_1$ and $\G_2$ are $\mu$-gerbes, both of these $\isom$ sheaves are $\mu$-torsors ($\aut_y\cong \mu\cong \aut_{f(y)}$ acts on the right), and the morphism is $\mu$-equivariant (because $f$ is a morphism of gerbes), so it must be an isomorphism by Lemma \ref{lec31L:mapGerbes=equiv}.
+
+ (Essential surjectivity) First recall that taking pullbacks along morphisms commutes with $f$ (this is just because a morphism of fibered categories sends cartesian arrows to cartesian arrows). Given any object $x\in \G_2(U)$, there is some cover $h:V\to U$ such that $\G_1(V)$ is non-empty; let $y\in \G_1(V)$. Since any two objects in $\G_2$ are locally isomorphic, we may assume that $f(y)\cong h^*x$ (possibly replacing $V$ by a further cover). Then we have that $f(p_i^*y)\cong p_i^*h^*x$, where $p_i:V\times_U V\to V$ are the projections. Since $hp_1=hp_2$, we have that $p_2^*h^*x\cong p_1^*h^*x$. By full faithfulness, we have an isomorphism $\sigma:p_2^*y\xrightarrow\sim p_1^*y$. Similarly, we see that $\sigma$ satisfies the usual cocycle condition. Since $\G_1$ is a stack, there is an object $z\in \G_1(S)$ such that $y\cong h^*z$. Note that $f(z)$ is specified by the same descent data as $x$, so since $\G_2$ is a stack, we have that $x\cong f(z)$.
+\end{proof}
+\begin{lemma}[The fundamental example]
+ If $\mu$ is a sheaf of abelian groups on a site $\C$, then the automorphism sheaf of a $\mu$-torsor $P\to X$ is naturally isomorphic to $\mu$. In particular, $\tors(\mu)$ is a $\mu$-gerbe over $\C$.
+\end{lemma}
+\begin{proof}
+ If $f:X\times \mu\to X\times \mu$ is an automorphism of the trivial torsor over $X$, then for a test object $T\in \C$, we have a $\mu(T)$-equivariant map $X(T)\times \mu(T)\to X(T)\times \mu(T)$ over $X(T)$. Such a map is given by addition of an element of $\mu(T)$. Thus, the automorphism sheaf of the trivial torsor is naturally isomorphic to $\mu$.
+
+ It follows that the automorphism sheaf $\aut_P$ is locally isomorphic to $\mu$, and the naturality of this isomorphism implies that it comes with descent data. By descent for sheaves, we see that $\aut_P$ is naturally isomorphic to $\mu$.
+\end{proof}
+\begin{remark}
+ Let $\F$ is a $\mu$-gerbe with a global section $\alpha$. For any object $y\in \F(U)$, consider the sheaf $\isom(\alpha_U,y)$ on $U$. Note that there is a right action of $\aut_y\cong \mu$. Since $\F$ is a gerbe, there is some cover $h:V\to U$ so that $\alpha_V$ and $h^*y$ are isomorphic. Such an isomorphism induces an isomorphism of sheaves $\isom(\alpha_U,y)\times_U V=\isom(\alpha_V,h^*y)\cong V\times \mu$. Thus, $\isom(\alpha_U,y)$ is a $\mu$-torsor over $U$. We get a morphism of gerbes $\F\to \tors(\mu)$ sending $y\in \F(U)$ to the torsor $\isom(\alpha_U,y)\to U$. By Lemma \ref{lec31L:mapGerbes=equiv}, this is an equivalence of gerbes.
+
+ Since every gerbe locally has a section, we may think of a $\mu$-gerbe as a fibered category which is locally equivalent to the category of $\mu$-torsors. Therefore, we refer to $\tors(\mu)$ as the \emph{trivial $\mu$-torsor}.
+\end{remark}
+
+Next we'll show that $\mu$-gerbes on a site $\C$ are parameterized by $H^2(\C,\mu)$. But first, we need the following lemma. 
+\begin{lemma}
+ If $\mu$ is an injective sheaf of abelian groups over a site $\C/X$, then any $\mu$-gerbe $\G$ is trivial (i.e.~$\G(X)\neq\varnothing$). \anton{I don't see how to make this lemma work on a site without a terminal object}
+\end{lemma}
+\begin{proof}
+ We may assume $\G$ has a splitting. Choose a cover $f:Z\to X$ so that $\G(Z)$ is non-empty. Let $z\in \G(Z)$. Consider the functor $F:(\C/X)^{op}\to \set$ given by $(h:V\to X)\mapsto \{(v,\iota)|v\in \G(V), \iota:p_Z^*z\xrightarrow\sim p_V^*v$ in $\G(Z\times_X V)\}/\sim$, where $(v_1,\iota_1)\sim(v_2,\iota_1)$ if there exists $\delta:s_2\to s_1$ in $\G(V)$ such that $\iota_1=p_V^*\delta\circ \iota_2$. Note that if such a $\delta$ exists, then it is unique: if $\delta,\delta':v_2\to v_1$ with $p_V^*\delta=\iota_1\iota_2^{-1}=p_V^*\delta'$, then we have that $\delta'\delta^{-1}\in \hom_{\G(V)}(v_1,v_1)\cong \mu(V)$ restricts to the trivial element $p_V^*\delta'p_V^*\delta^{-1}\in \hom_{\G(Z\times_X V)}(p_V^*v_1,p_V^*v_1)\cong \mu(Z\times_X V)$, but $Z\times_X V\to V$ is a cover, so by the sheaf axiom on $\mu$, we get $\delta=\delta'$.
+ \[\xymatrix@!0 @R=4pc @C=6pc{
+   Z\times_X V \ar[d]_{p_Z}\ar[r]^<>(.5){p_V} & V\ar[d]^h\\
+   Z\ar[r]^f & X
+ }\qquad\qquad
+ \begin{xy}<1pc,0pc>:
+   \ar (-1,0) *+{p_Z^*z}="Z"; (-1,-4) *+{z}
+   \ar (2,1.3) *+{p_V^*v_2}="V2"; (6,1.3) *+{v_2}="v2"
+   \ar (2,-1.3) *+{p_V^*v_1}="V1"; (6,-1.3) *+{v_1}="v1"
+   \ar^{\iota_2} "Z";"V2"
+   \ar_{\iota_1} "Z";"V1"
+   \ar@{.>}^\delta "v2";"v1"
+   \ar@{.>}^{p_V^*\delta} "V2";"V1"
+ \end{xy}\]
+ It suffices to show that $F(\id_X)\neq \varnothing$. We will do this by showing that $F$ is a torsor under an acyclic sheaf.
+
+ First we must show that $F$ is a sheaf. Let $V'\to V$ be a cover, and let $V''=V'\times_V V'$. (Injectivity) Let $(v_1,\iota_1),(v_2,\iota_2)\in F(V)$ have the same image in $F(V')$. Then there is some $\delta':v_2'\to v_1'$ in $\G(V')$ such that $\iota_1'=p_{V'}^*\delta'\circ\iota_1'$. By the uniqueness of $\delta$, we have that $p_2^*\delta'=p_1^*\delta'$. Since $\G$ is a (pre)stack, we get that $\delta'$ is the pullback of some $\delta:v_2\to v_1$ in $\G(V)$ such that $\iota_1=p_V^*\delta\circ\iota_2$. (Exactness in the middle) Similarly, if $(v',\iota')\in F(V')$ such that there is some $\delta'':p_2^*v'\to p_1^*v'$ in $\G(V'')$ with $p_1^*\iota'=p_{V''}^*\delta''\circ p_2^*\iota'$. The uniqueness of $\delta$ implies the usual cocycle condition. Since $\G$ is a stack, we get that $(v',\iota')$ is the pullback of some $(v,\iota)\in F(V)$.
+
+ Next observe that we have an action of $f_*\mu$ on $F$. Given an element $(v,\iota)\in F(V)$, an element $g\in f_*\mu(V)=\mu(Z\times_X V)\cong \hom_{\G(Z\times_X V)}(p_V^*v,p_V^*v)$ acts by $g\cdot (v,\iota) = (v,g\circ\iota)$. Note that the stabilizer of $(v,\iota)$ is exactly the image of $\mu(V)$ in $f_*\mu(V)$. That is, $(v,g\circ \iota)\sim (v,\iota)$ exactly when $g\in f_*\mu(V)=\mu(Z\times_X V)$ is the restriction of an element of $\mu(V)$. Also note that the action of $f_*\mu(V)$ on $F(V)$ is transitive if: given any pair $(v_1,\iota_1),(v_2,\iota_2)\in F(V)$, we have the isomorphism $\iota_1\iota_2^{-1}:p_V^*v_2\xrightarrow\sim p_V^*v_1$, so we may always represent an element of $F(V)$ as $(v_0,\iota)$, where $v_0\in \G(V)$ is fixed; now transitivity follows immediately from the isomorphism $f_*\mu(V)\cong \hom_{\G(Z\times_X V)}(p_V^*v_0,p_V^*v_0)$. Finally, there is some cover $Y\to Z$ so that $F(Y)$ is non-empty ($\G$ is a gerbe, so $p_1^*z$ and $p_2^*z$ must be isomorphic over some cover), so $F$ is a $f_*\mu/\mu$-torsor (Proposition \ref{lec30P:altdef_torsor}).
+
+ Since $\mu$ is injective, $\hom(-,\mu)$ is exact. Also, $f^*$ is exact because it commutes with finite projective limits \anton{here we're using that $f^*:\O\mod\to f^*\O\mod$ is left adjoint to $f_*$ and commutes with finite projective limits, and that $f^*\ZZ=\ZZ$ (constant sheaf)}, so $\hom(-,f_*\mu)\cong\hom(f^*-,\mu)$ is exact, so $f_*\mu$ is injective. It follows that $f_*\mu/\mu$ is acyclic. By Theorem \ref{lec30T:H^1(mu)<->mu-torsors}, any torsor under an acyclic sheaf is trivial, so $F$ has a global section.
+\end{proof}
+
+\begin{theorem}
+ Let $\mu$ be a sheaf of abelian groups on a site $\C$. There is a bijection between isomorphism (equivalence) classes of $\mu$-gerbes over $\C$ and $H^2(\C,\mu)$.
+\end{theorem}
+\begin{proof}
+ $\bigl(H^2(\C,\mu)\to \{\mu$-gerbes$\}\bigr)$ Choose an injective resolution $\mu\to I^\udot$, where the $I^i$ are sheaves of abelian groups on $\C$. Let $K=\ker(I^2\to I^3)$, so we have the exact sequence of sheaves
+ \[
+  0\to \mu \xrightarrow j I^0\xrightarrow{d_0} I^1\xrightarrow{d_1} K\to 0.
+ \]
+ Let $\alpha\in \Ga(\C,K)$ represent a class in $H^2(\C,\mu)$. Define $\G_\alpha$ as the category with objects pairs $(V,\gamma)$, where $V\in \C$ and $\gamma\in I^1(V)$ with $d_1\gamma=\alpha_V$, and a morphism $(V',\gamma')\to (V,\gamma)$ is an $X$-morphism $g:V'\to V$ and an element $\sigma\in I^0(V)$ such that $d_0\sigma=g^*\gamma-\gamma'$.
+ \begin{claim}
+   $\G_\alpha$ is a stack.
+ \end{claim}
+ \begin{proof}
+  First we check that $\G_\alpha$ is a prestack. Given $V\in \C$ and $\gamma_1,\gamma_2\in I^1(V)$, we have that $\isom\bigl((V,\gamma_1),(V,\gamma_2)\bigr)=\{\sigma\in I^0|d_0(\sigma)=\gamma_2-\gamma_1\}$ is a sheaf on $V$ because it is the following fibered product of sheaves on $V$.
+  \[\xymatrix{
+   \isom(\gamma_1,\gamma_2) \ar[d]\ar[r]\ar@{}[dr]|(.25)\pb & \ast\ar[d]^{\gamma_1-\gamma_2}\\
+   I^0|_V\ar[r]^{d_0} & I^1|_V
+  }\]
+
+  The hard part is to check effectivity of descent. Let $h:V\to U$ be a cover in $\C$. An object in $\G_\alpha(V\to U)$ is of the form $(\gamma,\sigma)$ where $\gamma\in I^1(V)$ (with $d_1\gamma=\alpha_V$) and $\sigma\in I^0(V\times_U V)$ such that $d\sigma=p_2^*\gamma-p_1^*\gamma$ and $p_{13}^*\sigma=p_{12}^*\sigma+p_{23}^*\sigma$. Given such an object, we want to find $(\e,\delta)$ with $\e\in I^1(U)$ and $\delta\in I^0(V)$ with $d\e=\alpha_U$, $d_0\delta=h^*\e-\gamma$ and $d\sigma=p_2^*d_0\delta-p_1^*d_0\delta$ (compatibility of descent data).
+  \[\xymatrix{
+   p_2^*\gamma \ar[r]^{d\sigma} \ar[d]_{p_2^* d_0\delta} & p_1^*\gamma\ar[d]^{p_1^* d_0\delta}\\
+   p_2^*h^*\e \ar@{}[r]|<>(.5){\mbox{$=$}} & p_1^*h^*\e
+  }\]
+  Note that for any morphism $f:T\to U$, we can pull the descent data $(\gamma,\sigma)$ back to $V\times_U T$ to get an object $(\gamma_T,\sigma_T)$ in $\G_\alpha(h_T:V\times_U T\to T)$. Define $F:(\C/U)^{op}\to \set$ by
+ \begin{align*}
+   T\mapsto\bigl\{(f,\e_T,\delta_T)\bigm|f&\in U(T),\ \e_T\in I^1(T),\ \delta_T\in I^0(V\times_{U,f} T),\\
+   & d\e_T=\alpha_T,\ d_0\delta_T=h_T^*\e_T-\gamma_T,\text{ and } d\sigma_T=p_2^*d_0\delta_T-p_1^*d_0\delta_T\bigr\}.
+ \end{align*}
+ \anton{It is enough to specify $\delta_T$ satisfying the condition $d\sigma_T=p_1^*d^0\delta_T-p_2^*d^0\delta_T$, because then it follows from the definition of $\sigma$ and the sheaf condition on $I^0$ that $d^0\delta_T +\gamma_T$ is the restriction of some $\e_T$ satisfying $d\e_T=\alpha_T$. I think $F$ is a sheaf by the same sort of fiber product trick}
+ 
+ For an element $\lambda\in I^0(T)$, we define $\lambda\cdot (f,\e_T,\delta_T)=(f,\e_T+d\lambda,\delta+h_T^*\lambda)$, so $F$ has an action of $I^0$ over $U$.
+%  The calculation on the right verifies that the diagram on the left is cartesian.
+%  \[\xymatrix{
+%   V\times I^0\ar[d]\ar[r] & F\ar[d]\\
+%   V\ar[r]^h & U
+%   }\qquad\qquad\begin{array}[t]{r@{\:}l}
+%    (V\times_U F)(T)&= \bigl\{\bigl(v\in V(T),f,\e_T,\delta_T\bigr)\bigm| hv=f \bigr\}\\
+%    &= \anton{}
+%  \end{array}\]
+
+ \anton{This paragraph is the one I'm confused about}
+ In fact, $F$ is an $I^0$-torsor over $U$. To see this, it is enough to show that $I^0(T)$ acts simply transitively on $F(T)$ when $F(T)$ is non-empty. Given $(\e,\delta)$ and $(\e',\delta')$, we'd like to find a $\lambda$ so that $\lambda\cdot (\e,\delta)=(\e',\delta')$. If such a $\lambda$ exists, we have $h_T^*\lambda=\delta'-\delta$, so $\lambda$ is unique ($h_T^*$ is injective because $h_T$ is a cover and $I^0$ is a sheaf). We know that $(p_2^*-p_1^*)\bigl(d(\delta-\delta')\bigr)= d\sigma_T-d\sigma_T =0$, but this doesn't show that $(p_2^*-p_1^*)(\delta-\delta')=0$.
+ \anton{now what?}
+
+ But $I^0$-torsors are parameterized by $H^1(\C/U,I^0)$, which is trivial because $I^0$ is injective. Thus, $F$ is the trivial torsor; in particular, it has a global section. This proves effectivity of descent.
+ \renewcommand{\qedsymbol}{$\square_{\text{Claim}}$}
+ \end{proof}
+ In fact, $\G_\alpha$ is a $\mu$-gerbe:
+ \begin{enumerate}
+   \item it is \'etale locally non-empty (because $d_1$ is a surjective map of \'etale
+   sheaves),
+   \item any two objects are locally isomorphic (use the resolution to see this
+   \anton{}),
+   \item we will see compatibility of the $\iota_\alpha$ later. $\aut_{(\e,\delta)}=\{\delta'|d\delta'=0\}\cong\mu$.
+ \end{enumerate}
+ 
+ $\G_\alpha$ is independent of the choice of representative within the cohomology class. If $\alpha,\alpha'\in K$ represent the same cohomology class, with $d\gamma_0=\alpha'-\alpha$, then we get a map $\G_{\alpha}\to \G_{\alpha'}$, given by $(V,\gamma)\mapsto (V,\gamma+\gamma_0)$ (note that $d\gamma=\alpha$, so $d(\gamma+\gamma_0)=\alpha+\alpha'-\alpha=\alpha'$). By the lemma, the two gerbes are isomorphic.
+
+ $\G_\alpha$ is independent of the choice of resolution. To see this, let $J^\udot$ be another resolution of $\mu$. Let $\alpha_I\in \ker(I^2\to I^3)$ and $\alpha_J\in\ker(J^2\to J^3)$ represent the same cohomology class. Then we get a morphism of complexes $I^\udot\to J^\udot$ inducing the identity on cohomology (by the usual arguments with injective resolutions). Changing $\alpha_J$ to something within the same class (so not changing $\G_{\alpha_J}$), we may assume that the map $I^2\to J^2$ maps $\alpha_I$ to $\alpha_J$. From the definition of $\G_\alpha$, this induces a morphism $\G_{\alpha_I}\to \G_{\alpha_J}$, which must be an isomorphism by the lemma.
+
+ \medskip
+ $\bigl(\{\mu$-gerbes$\}\to H^2(\C,\mu)\bigr)$ Let $\G$ be a $\mu$-gerbe. Include $\mu$ into an injective abelian sheaf $\mu\hookrightarrow I$. Define $\G\times^\mu I$ to be the stack associated to the prestack whose objects are objects in $\G$ and morphisms are elements of $\uhom_\G(x,y)\times^\mu I=\uhom_\G(x,y)\times I/\sim$, where $(g\circ\zeta,\iota)\sim (\zeta,\iota-g)$ for $g\in \mu$. Define composition as $(\zeta,i)\circ (\e,j)=(\zeta\circ \e,i+j)$. To check that this is well defined, let $g, g'\in \mu$. Then we have
+ \begin{align*}
+  (g \zeta, i)\circ (g'\e,j)&=(g\zeta g'\e,i+j) &\text{(definition)}\\
+  &=(gg'\zeta\e,i+j) & \text{(gerbe axiom 3)}\\
+  &=\bigl((g+g')\zeta\e,i+j\bigr) &\text{(that's how group actions work)}\\
+  &\sim (\zeta\e,i+j-g-g') = (\zeta,i-g)\circ (\e,j-g')
+ \end{align*}
+ Anyway, we get that $\G\times^\mu I$ is an $I$-gerbe. Since $I$ is injective, $\G\times^\mu I$ is trivial, so there is some section $s_0\in (\G\times^\mu I)(X)$. Moreover, we have a map $j:\G\to \G\times^\mu I$. Define $P_{s_0}:(\sch/X)^{op}\to \set$ by $(V\to X)\mapsto \{(s\in \G(V),\iota:j(x)\xrightarrow\sim s_0\text{ in } \G\times^\mu I(V))\}$. Then $P$ is an $I/\mu$-torsor. From the short exact sequence
+ \[
+  0\to \mu\to I\to I/\mu\to 0
+ \]
+ we get a map $\partial:H^1(X,I/\mu)\to H^2(X,\mu)$. You have the map $\G\mapsto \partial(P_{s_0})$ (recall that $I/\mu$-torsors are parameterized by $H^1(X_{ET},I/\mu)$).
+
+ Exercise: Show that this is inverse to the map $H^2(X_{ET},\mu)\to \{\mu\text{-gerbes}\}$ from last time. \anton{}
+\end{proof}
+
+\begin{remark}[Aside on non-abelian cohomology]
+ We have only defined cohomology for sheaves of abelian groups, but suppose that for a non-abelian sheaf of groups $\mu$, we \emph{define} $H^1(\C/X,\mu)$ to be the isomorphism classes of $\mu$-torsors. Note that $H^1(\C/X,\mu)$ no longer has a group structure, but it is a pointed set (the distinguished element is the trivial torsor). Suppose you have an exact sequence of sheaves of groups
+ \[
+  1\to G_1\to G_2\to G_3\to 1
+ \]
+ in which $G_1$ is abelian, but $G_2$ and $G_3$ need not be abelian. Then we expect an exact sequence
+ \[
+  H^1(\C/X,G_1)\to H^1(\C/X,G_2)\to H^1(\C/X,G_3)\xrightarrow\partial H^2(\C/X,G_1).
+ \]
+ A $G_1$-torsor $P\to X$ is taken to the $G_2$-torsor $P\times^{G_1}G_2:=P\times G_2/\sim$, where $(pg_1,g_2)\sim(p,g_1g_2)$ for $g_1\in G_1$. Similarly, we see how to take a $G_2$-torsor to a $G_3$-torsor.\anton{is it easy to see exactness?}
+
+ The boundary map $\partial$ is more interesting. Let $P\to X$ be a $G_3$-torsor. From this we want to obtain a $G_1$-gerbe. Define $\partial P$ to be the category (fibered over $\C/X$) whose objects are triples $(V,\tilde P,\iota)$, where $V\to X$ is an object over $X$, $\tilde P\to V$ is a $G_2$-torsor, and $\iota: \tilde P\times^{G_2}G_3\to P$ is a $G_3$-equivariant morphism over $V\to X$. A morphism $(V',\tilde P',\iota')\to (V,\tilde P,\iota)$ is a $G_2$-equivariant morphism $f:\tilde P' \to \tilde P$ such that the following diagram commutes.
+ \[\xymatrix@!0 @R+1pc @C+1pc{
+  \tilde P'\times^{G_2}G_3\ar[dd] \ar[drr]_{f\times^{G_2}G_3}\ar[rrr]^{\iota'} & & & P\ar[dd]\\
+  & & \tilde P\times^{G_2}G_3 \ar[ur]_\iota \ar[dd]\\
+  V'\ar[drr]_{\bar f} \ar[rrr]|(.6667)\hole & & & X\\
+  & & V\ar[ur]
+ }\]
+ \anton{check that this is a stack} It is clear that if $P$ is trivial over $V\to X$, then $\partial P(V)$ is non-empty. Similarly, it is clear that any two objects are locally isomorphic.
+ 
+ Given an automorphism $f$ of such a $(V,\tilde P,\iota)$, we have that $f$ is an automorphism of $\tilde P$, so it is given by an element of $G_2$, and $f\times^{G_2}G_3=\id$. It follows that the image of $f$ (as an element of $G_2$) is trivial in $G_3$, so $f$ is given by an element of $G_1$. It is clear that this isomorphism $\aut_{(V,\tilde P,\iota)}\cong G_1$ is natural.
+
+ \anton{how to check exactness}
+
+ Upshot: Consider the sequence
+ \[
+  1\to \GG_m\to GL_n\to PGL_n\to 1
+ \]
+ Then we have an exact sequence
+ \[
+  H^1(\C/X,GL_n)\to H^1(\C/X,PGL_n)\to H^2(\C/X,\GG_m)=:Br'(X).
+ \]
+ An element of $H^1(\C/X,GL_n)$ is the same as a vector bundle on $X$. One direction: if $\E$ is a vector bundle, then the corresponding $GL_n$-torsor is $\isom\bigl(\End(\O_X^n),\End(\E)\bigr)$. Anyway, we get a map $\bigcup_n \{PGL_n\text{-torsors}\}/(\End \E\sim 0)\hookrightarrow H^2(X,\GG_m)$.
+\end{remark}
+
+\begin{proposition}
+ Let $G$ be a smooth (commutative) group scheme over a scheme $X$. Then any $G$-gerbe $\G$ \anton{in any topology?} is algebraic.
+\end{proposition}
+\begin{proof}
+ (Representability of the diagonal) Let $T$ be a scheme
+ \[\xymatrix{
+  \isom(s_1,s_2)\ar[r]\ar[d]& T\ar[d]^{(s_1,s_2)}\\
+  \G\ar[r]^\Delta & \G\times \G
+ }\]
+ $\isom(s_1,s_2)$ is a $G$-torsor, so by Lemma \ref{lec30C:G-torsor=>AlgSp} it is an algebraic space.
+
+ (Smooth cover) Find $X'\to X$ \'etale so that $\G(X')$ is non-empty, and let $s'$ be an object.
+ \[\xymatrix@R-.5pc{
+  X'\ar[d]\\
+  [X'/G]\ar@{}[r]|{=}& B_{X'}G\ar@{}[r]|{=} &\G\times_X X' \ar[r]\ar[d] & X'\ar[d]^{et} \ar@/_/[l]_{s'}\\
+  & & \G\ar[r] & X
+ }\]
+ To check that the map $X'\to [X/G]$ is smooth, check that for any $T$ and let $P$ be a $G$-torsor.
+ \[
+%   \xymatrix{
+%    X'\ar[d] & Z\ar[l]\ar[d] & G_{X'} & Z'\ar[d]\ar@/_/[ll]\\
+%    [X'/G] & T\ar[l]_P & X\ar@/^/[ll]^{P_0} & T'\ar@/^/[ll]\ar[l]
+%   }
+ \xymatrix @!0 @C+1pc{
+  & Z\ar[rr]\ar[dd]|\hole& & X'\ar[dd]\\
+  Z'\ar[rr]\ar[dd]\ar[ur] & & G_{X'}\ar[dd]\ar[ur]\\
+  & T\ar[rr]|\hole^(.3){P} & & [X'/G]\\
+  T'\ar[rr]\ar[ur] & & X \ar[ur]_{P_0}
+ }\]
+\end{proof}

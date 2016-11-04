@@ -1,0 +1,340 @@
+\sektion{E}{Exercises and solutions}
+ 
+\subsektion{Exercise set 1}
+\begin{exercise}[1.1]
+ If you have never done so, prove Yoneda's lemma: The association $X\to h_X$ defines a fully faithful functor from $\C$ to the category of functors $\C\to \set$.
+\end{exercise}
+\begin{solution}
+ Before we prove the theorem, let's state it slightly more generality.
+ \begin{theorem*}[Yoneda's Lemma]
+  For any functor $F:\C^\circ\to \set$, there is a natural bijection ${\rm Nat}(h_X,F)\cong F(X)$. In particular, taking $F=h_Y$, we see that the functor $h_{-}:\C\to \fun(\C^\circ,\set)$ is a fully faithful embedding of categories.
+ \end{theorem*}
+ \begin{proof}
+  Given $\eta\in \nat(h_X,F)$, we have $\eta(X):\hom(X,X)\to F(X)$, so we get an element $a=\eta(X)(\id_X)\in F(X)$. Conversely, given $a\in F(X)$, we define a natural transformation $\eta$ by taking $f\in h_X(Y)=\hom(Y,X)$ to $\eta(Y)(f):=(Ff)(a)$. Check that these are inverses, and that the bijection is natural in $F$ and $X$. The following diagram should help:
+  \[\raisebox{5.5pc}{$\xymatrix @C=10pc @R=4pc{
+  \id_X \ar@{|->}[d] \ar@{}[dr]|(0.06){
+     \xymatrix @!0 @R=3pc @C=6.5pc{
+     \hom(X,X)\ar[d]_{- \circ f} & F(X) \ar[d]^{Ff}\\
+     \hom(Y,X) \ar[r]^(.6){\eta(Y)} & F(Y)}
+  } & a\ar@{|->}[d]\\
+  f \ar@{|->}[r] & (Ff)(a)
+  }$}\qedhere\]
+  \anton{maybe this should be done in two steps: (1) We say a functor $G\colon \C^\circ\to \set$ has a \emph{universal point} $y\in G(Y)$ for some object $Y$ if for any $x\in G(X)$, there is a unique morphism $f\colon X\to Y$ such that $Gf(y)=x$. If $y\in G(Y)$ is a universal point, then for any functor $F$, $\nat(G,F)\cong F(Y)$. (2) $h_X$ has the universal point $\id_X\in h_X(X)$}
+ \end{proof}
+\end{solution}
+
+\begin{exercise}[1.2]
+  (a) Let $n\ge 1$ be an integer and let $GL_n:\sch^\circ\to \set$ be the functor sending
+  a scheme $Y$ to the set $GL_n\bigl(\Ga(Y,\O_Y)\bigr)$. Prove that $GL_n$ is a
+  representable functor.\\
+  (b) Let $X$ represent $GL_n$. Prove that the group structure on
+  $GL_n\bigl(\Ga(Y,\O_Y)\bigr)$ induces morphisms
+  \[
+     m:X\times X\to X,\quad i:X\to X,\quad e:\spec \ZZ\to X
+  \]
+  such that the following diagrams commute:
+  \[\hspace*{-1em}
+   \xymatrix{\spec \ZZ \times X \ar[r]^<>(.5){e\times \id} \ar@{=}[dr] & X\times X \ar[d]^m \\ & X}
+   \quad
+   \xymatrix{X\times \spec \ZZ \ar[r]^<>(.5){\id\times e} \ar@{=}[dr] & X\times X \ar[d]^m \\ & X}
+   \quad
+   \xymatrix{
+    X\times X\times X \ar[r]^<>(.5){m\times \id} \ar[d]_{\id\times m} & X\times X\ar[d]^m\\
+    X\times X \ar[r]^<>(.5)m & X
+   }\]
+  \[
+   \xymatrix{X\ar[r]^<>(.5){i\times \id}\ar[d] & X\times X \ar[d]^m\\ \spec \ZZ \ar[r]^<>(.5)e & X}
+   \qquad\qquad
+   \xymatrix{X\ar[r]^<>(.5){\id\times i}\ar[d] & X\times X \ar[d]^m\\ \spec \ZZ \ar[r]^<>(.5)e & X}
+  \]
+\end{exercise}
+\begin{solution}
+  (a) Let $Z=\spec \bigl(\ZZ[x_{11},\dots, x_{nn},y]/(1-y \det X)\bigr)$, where $X$ is the
+  matrix with $(i,j)$-th entry $x_{ij}$. The claim is that $Z$ represents $GL_n$. To see
+  this, note that
+  \[\hom_{\sch} (Y,Z) \cong \hom_\catfont{Ring}\Bigl(\frac{\ZZ[x_{11},\dots,
+  x_{nn},y]}{(1-y \det X)}, \Ga(Y,\O_Y)\Bigr) \cong GL_n\bigl(\Ga(Y,\O_Y)\bigr).\]
+
+  (b)  The functor $GL_n(-)$ factors through $\catfont{Gp}$, so $GL_n(-)\simeq\hom(-,X)$ is a group object in the category $\fun(\sch^\circ,\set)$, i.e.~it has maps like $m$, $i$, and $e$, satisfying the diagrams above, with $\spec \ZZ$ replaced by the final object, $\hom(-,\spec \ZZ)$. Since the Yoneda embedding is a fully faithful, we have that $X$ is a group object in $\sch$, as desired.
+\end{solution}
+
+\begin{exercise}[1.3]
+  (a) Let $\AA^n\setminus \{0\}:\sch^\circ\to \set$ be the functor sending
+  a scheme $Y$ to the set of $n$-tuples $(y_1,\dots, y_n)$ of sections $y_i\in
+  \Ga(Y,\O_Y)$ such that for every point $y\in Y$ the images of the $y_i$ in $k(y)$ are
+  not all zero. Show that $\AA^n\setminus \{0\}$ is representable.\\
+  (b) Let $(\AA^n\setminus \{0\})/\GG_m:\sch^\circ\to \set$ be the functor
+  sending a scheme $Y$ to the quotient of the set $(\AA^n\setminus\{0\})(Y)$ by the
+  equivalence relation $(y_1,\dots, y_n)\sim (y_1',\dots, y_n')$ if there exists a unit
+  $u\in \Ga(Y,\O_Y^\times)$ such that $y_j=uy_j'$ for all $j$. Show that $(\AA^n\setminus
+  \{0\})/\GG_m$ is not representable.
+\end{exercise}
+\begin{solution}
+  (a) Something like ``an open subfunctor of a representable functor is representable''.
+  You can check explicitly that this is represented by the open subscheme of $\AA^n$
+  obtained by removing the closure of the point $(x_1,\dots, x_n)$ (note that this point
+  isn't closed!).
+
+  (b) Call the functor in question $F$. A representable functor is a sheaf on the
+  Zariski site because morphisms glue and morphisms which agree locally agree globally.
+  We will show that $F$ is not representable by showing it is not a sheaf.
+
+  Let $k$ be a field, and let $U=\spec k[x]$ and $V=\spec k[1/x]$ be the usual open sets
+  in $\PP^1_k$. We have that $\Ga(\PP^1_k,\O_{\PP^1_k})=k$, so
+  $F(\PP^1_k)=(k^n\setminus\{0\})/k^\times$. We have sections $[x:1:\cdots:1]\in F(U)$
+  and $[1:1/x:\cdots:1/x]\in F(V)$ which are not restrictions of global sections on
+  $\PP^1_k$ (because every global section can be represented by an $n$-tuple in $k$).
+  However, on the intersection $\spec k[x,1/x]$, the two sections agree. Therefore, $F$
+  is not a sheaf, so it is not representable.
+
+  \smallskip
+  Ishai's solution (sketch): $\AA^n\smallsetminus \{0\}$ is the functor $Y\mapsto
+  \{\O_Y^n\twoheadrightarrow \mathcal{L}, \varphi:\mathcal{L}\cong \O_Y\}$. The functor
+  $F$ is $Y\mapsto \{\O_Y^n\twoheadrightarrow \mathcal{L},\text{ with }\mathcal{L}\cong
+  \O_Y,\text{ but you don't care how}\}$. Since there are sheaves which are locally
+  trivial but not globally trivial, this functor is not a sheaf. The sheafification is
+  represented by $\PP^{n-1}$, and it is $Y\mapsto \{\O_Y^n\twoheadrightarrow
+  \mathcal{L},\text{ with } \mathcal{L}\text{ invertible}\}$ \dots this approach is
+  discussed in Hartshorne's section on morphisms to projective space.
+\end{solution}
+
+\begin{exercise}[1.4]
+  Let $\catfont{Top}$ be the category of topological spaces with morphisms being continuous maps. Let $F:\catfont{Top}^\circ\to\set$ be the functor sending a topological space $S$ to the collection $F(S)$ of all its open sets.\\
+  (a) Endow $\{0,1\}$ with the coarsest topology in which the subset $\{1\}\subset \{0,1\}$ is closed. Show that the open sets in this topology are $\varnothing$, $\{0\}$, and $\{0,1\}$.\\
+  (b) Show that $\{0,1\}$ with the above topology represents $F$.\\
+  (c) Let $\catfont{HausTop}\subseteq \catfont{Top}$ denote the full subcategory of Hausdorff topological spaces. Show that the restriction $F|_\catfont{HausTop}:\catfont{HausTop}^\circ\to \set$ is not representable.
+\end{exercise}
+\begin{solution}
+  (a) $\varnothing$ and $\{0,1\}$ will be open in any topology, and $\{0\}$ must be open for $\{1\}$ to be closed, so these three sets must be open. On the other hand, these three sets form a topology, so this is the coarsest such topology.
+
+  (b) Given any continuous map $f:S\to \{0,1\}$, we get an open set $f^{-1}(0)\subseteq S$. Conversely, given any open set $U\subseteq S$, the function $f_U$ given by $f_U(U)=0$ and $f_U(S\setminus U)=1$ is continuous, so $F(S)\cong\hom(S,\{0,1\})$. It wasn't specified what $F$ did on morphisms, but the most obvious thing is to pull back open sets along morphisms, as is done by $\hom(-,\{0,1\})$.
+
+  (c) Assume $F_\catfont{HausTop}$ is represented by a Hausdorff space $X$. Since the 1-point Hausdorff space $\ast$ has two open sets, $|\hom(\ast,X)|=|X|=2$. Since $X$ is Hausdorff, it must be a 2-point set with the discrete topology. Let $I$ be the unit interval, then there are only two elements of $\hom(I,X)$ since $I$ is connected, but I has an uncountable number of open sets, a contradiction. Thus, $F_\catfont{HausTop}$ is not representable.
+\end{solution}
+
+\begin{exercise}[1.5]
+  Another proof that $\M_{1,1}$ is not representable.\\
+  (a) Let $k$ be a field and $k\hookrightarrow \bbar k$ an algebraic closure. Show that
+  if $F$ is a representable functor then the map $F(\spec k)\to F(\spec \bar k)$ is
+  injective.\\
+  (b) Let $D> 1$ be an integer. Show that the two elliptic curves over $\QQ$
+  \[
+     E_1: y^2=x^3+x,\quad E_2:y^2=x^3+Dx
+  \]
+  are isomorphic over $\overline \QQ$, but not over $\QQ$. From this and (a), conclude that
+  the functor $\M_{1,1}$ defined in class is not representable.
+\end{exercise}
+\begin{solution}
+  (a) Let $f:\spec \bar k\to \spec k$ be the obvious map. Assume $F\simeq \hom(-,X)$ and
+  that $g,h:\spec k\to X$ are two morphisms such that $g\circ f=h\circ f$, i.e.~two
+  elements of $F(\spec k)$ that map to the same element of $F(\spec \bar k)$. Let $\spec
+  R$ be an open affine neighborhood of the image of $g\circ f=h\circ f$. Then the images
+  of $g$ and $h$ lie in $\spec R$, and we have that $f^\sharp\circ g^\sharp =
+  f^\sharp\circ h^\sharp:R\to k\xhookrightarrow{f^\sharp}\bar k$. Since $f^\sharp$ is an
+  injection, we must have that $g^\sharp=h^\sharp$, so $g=h$. Thus, $F(\spec k)\to
+  F(\spec \bar k)$ is injective.
+
+  (b) If $D$ is a fourth power, then you can do some change of coordinate operations to show
+  that $E_1\cong E_2$. Since everything is a fourth power in $\overline \QQ$, the two are
+  isomorphic over $\overline \QQ$.
+
+  Something shows that they are not isomorphic over $\QQ$, like looking at torsion points,
+  perhaps after reducing at some prime dividing $D$.
+\end{solution}
+
+
+\subsektion{Exercise set 2}
+\begin{exercise}[2.1]
+  For a set $S$, let $\Aut(S)$ denote the group of bijections $S\to S$. An \emph{action}
+  of a group $G$ on $S$ is defined to be a homomorphism $G\to \Aut(S)$. Let $G$ be a
+  group and define $BG$ to be the category with one object $*$ and with
+  $\hom(*,*)=G$.\\
+  (a) Show that if $F$ is a presheaf on $BG$ then $F(*)$ admits a natural action of $G$.\\
+  (b) Show that the induced functor $($presheaves on $BG)\to ($sets with $G$-action$)$,
+  given by $F\mapsto F(\ast)$, is an equivalence of categories.
+\end{exercise}
+
+\begin{exercise}[2.2]
+  (a)\\
+  (b)\\
+  (c)\\
+  (d)
+\end{exercise}
+
+\begin{exercise}[2.3]
+  (a)\\
+  (b)\\
+  (c)\\
+  (d)
+\end{exercise}
+
+\begin{exercise}[2.4]
+  Let $\C$ be a site with associated topos $\T$, and let $X\in \C$ be an object. Assume
+  that the functor of points $h_X$ is a sheaf.\\
+  (a) Show that the topology on $\C$ induces a topology on $\C/X$.\\
+  (b) Show that the category of sheaves on $\C/X$ is equivalent to $\T/h_X$. In
+  particular, $\T/h_X$ is a topos.\\
+  (c) Define $j^*:\T\to \T/h_X$ by sending $F$ to $F\times h_X$ with the projection to
+  $h_X$. Show that $j^*$ commutes with finite projective limits and has a right adjoint
+  $j_*$, given by $(j_*G)(Y)=\hom_{\T/h_X}(h_Y^a\times h_X,G)$. In particular, there is
+  a morphism of topoi $j:\T/h_X\to \T$.
+\end{exercise}
+\begin{solution}
+  (a) Let $\C$ be a site, let $\D$ be category, and let $F:\D\to \C$ be a functor which
+  respects fiber products, then we can declare $\{Y_i\to Y\}$ to be a covering of an
+  object $Y\in \D$ if $\{FY_i\to FY\}$ is a covering of the object $FY\in \C$. It is
+  immediate to verify that this satisfies the axioms of a Grothendieck topology. In our
+  case, we take $F$ to be the forgetful functor $\C/X\to \C$.
+
+  (b) Given a sheaf $F:\C^\circ\to \set$, with a morphism of sheaves $\eta:F\to h_X$, we
+  can define a sheaf $\tilde F$ on $\C/X$ by $(f:U\to X)\mapsto \eta(U)^{-1}(f)$. To
+  make sense of this, note that $\eta(U):F(U)\to h_X(U)$, and $f\in h_X(U)$, so $\tilde
+  F(f:U\to X)$ is a subset of $F(U)$. One can then check that $\tilde F$ is a presheaf
+  (functor) and satisfies the sheaf axiom.
+
+  Conversely, if $G:(\C/X)^\circ\to \set$ is a sheaf on $\C/X$, then we can define
+  a sheaf $G':\C\to \set$ by $U\mapsto \coprod_{f\in h_X(U)}G(f:U\to X)$, with the
+  natural projection to $h_X(U)$. Again, one checks that $G'$ is a sheaf and $G'\to h_X$
+  is a morphism of sheaves.
+
+  I've swept it under the rug, but you can define what these two operations do to
+  morphisms of sheaves (it is the obvious thing), and they are inverse (up to
+  isomorphism), so we get the desired equivalence of categories.
+
+  (c) Note that for an object
+  $(G\to h_X)\in \T/h_X$ and a sheaf $F\in \T$, we have that $\hom_{T/h_X}(G\to
+  h_X,j^*F)=\hom_{\T}(G,F)$. That is, $j^*$ is right adjoint to the forgetful functor
+  $\C/X\to \C$, so it commutes with all projective limits.
+
+  \anton{prove that $j_*$ is right adjoint to $j^*$}
+\end{solution}
+
+\subsektion{Exercise set 3}
+\begin{exercise}[3.1]
+  For a scheme $S$ let $\M_0(S)$ denote the category whose objects are smooth proper
+  morphisms $C\to S$ all of whose geometric fibers are smooth connected curves of genus
+  0. For an fppf and quasi-compact cover $X\to Y$ define the category $\M_0(X\to Y)$ as
+  in class. Show that the pullback functor $\M_0(Y)\to \M_0(X\to Y)$ is an equivalence
+  of categories (hint: consider the dual of the canonical sheaf).
+\end{exercise}
+\begin{solution}
+  The dual of the canonical bundle is a functorial choice of relatively very ample
+  sheaf. Then the proof of descent for $\M_g$ ($g\ge 2$) works word for word.
+\end{solution}
+
+\begin{exercise}[3.2]
+  Let $f:X\to Y$ be a faithfully flat morphism of locally noetherian schemes.\\
+  (a) Show that a quasi-coherent sheaf $F$ on $Y$ is coherent if and only if $f^\star F$
+  on $X$ is coherent.\\
+  (b) Show that a quasi-coherent sheaf $F$ on $Y$ is locally free of finite rank if and
+  only if $f^\star F$ is locally free of finite rank.\\
+  (c) Prove that the pullback functor $\qco(Y)\to \qco(X\to Y)$ identifies the category
+  of coherent (resp.~locally free of finite rank) sheaves on $Y$ with the fully
+  subcategory of $\qco(X\to Y)$ consisting of pairs $(E_X,\sigma)$, where $E_X$ is
+  coherent (resp.~locally free of finite rank).
+\end{exercise}
+\begin{solution}
+  Being coherent (resp.~locally free of finite rank) is local, so we may take open affines
+  $V=\spec A\subseteq Y$ and $U=\spec B\subseteq f^{-1}(V)\subseteq X$.
+
+  If $F$ is coherent (resp.~locally free of finite rank), then it is $\tilde M$ for some
+  $A$-module $M$ which is finitely generated (resp.~free of finite rank). Then it is clear
+  that $f^\star F=(M\otimes_A B)^\sim$ is coherent (resp.~locally free of finite rank).
+
+  If $F=\tilde M$ is quasi-coherent on $V$, and $f^\star F=(M\otimes_A B)^\sim$ is coherent
+  (resp.~locally free of finite rank) on $U$. Then $M\otimes_A B$ is finitely generated
+  (resp.~free of finite rank). Let $\{\sum_j m_{ij}\otimes b_{ij}\}_i$ be a finite
+  (resp.~finite free) set of generators for $M\otimes_A B$. It is enough to check locally
+  that $M$ is finitely generated \anton{is this true? No! Take the $k[x]$-module
+  $M=\bigoplus_{a\in k} k[x]/(x-a)$ for some $k=\bar k$} (resp.~free of finite rank
+  (Ex.~II.5.7)). Let $\mathfrak p \in \spec A$ and let $\mathfrak P\in \spec B$ lie over
+  $\mathfrak p$. Then $B_\mathfrak P$ is faithfully flat over $A_\mathfrak p$ \anton{is
+  this true?}.Thus, we may assume that $B$ is faithfully flat over $A$.
+
+  (coherence) The map $A^N\to M$, given by $1_{ij}\mapsto m_{ij}$ is
+  surjective after tensoring with $B$, so it is surjective, so $M$ is finitely
+  generated over $A$.
+
+  (loc.~free)
+
+  (c)  Let $\P$ be any property of quasi-coherent sheaves so that for any fppf cover
+  $f$, $F$ has $\P$ if and only if $f^\star F$ does.
+
+  A $\P$ sheaf on $Y$ pulls back to some $E_X$ which is $\P$ on $X$. Conversely, assume
+  $E_X$ is $\P$. By the equivalence of categories, it is $f^\star F$ for some $F$ on
+  $Y$. Then $F$ (the image of $E_X$ under the equivalence) is also $\P$.
+\end{solution}
+
+\begin{exercise}[3.3]
+  For a scheme $Y$ let $\aff(Y)$ denote the category whose objects are affine
+  $Y$-schemes and whose morphisms are $Y$-morphisms. For a morphism of schemes $X\to Y$
+  let $\aff(X\to Y)$ denote the category whose objects are pairs $(Z_X,\sigma)$, where
+  $Z_X\in \aff(X)$ and
+  \[
+     \sigma:Z_X\times_{X,\textrm{pr}_1} (X\times_Y X)\to
+     (X\times_Y X)\times_{\textrm{pr}_2,X} Z_X
+  \]
+  is an isomorphism of $X\times_Y X$-schemes satisfying a cocycle condition on
+  $X\times_Y X\times_Y X$.\\
+  (a) Write out precisely the cocycle condition in this case.\\
+  (b) Prove that if $X\to Y$ is a quasi-compact fppf cover then the pullback functor
+  $\aff(Y)\to \aff(X\to Y)$ is an equivalence of categories.
+\end{exercise}
+\begin{solution}
+  (a) To save ink, we use the usual notation: write $Z_X\times_{X,\textrm{pr}_1}(X\times X)$
+  as $p_1^* Z_X$, and similarly define $p_2^* Z_X$. Then $\sigma$ is an isomorphism
+  $p_1^*Z_X\to p_2^*Z_X$. The cocycle condition is that following diagram must commute.
+  \[\xymatrix @R-1pc @C-1pc {
+   &
+   p_{13}^*p_1^*Z_X \ar[rr]^{p_{13}^*\sigma} \ar@{=}[dl] & &
+   p_{13}^*p_2^*Z_X \ar@{=}[dr]
+   &
+   \\
+   p_{12}^*p_1^*Z_X \ar[dr]_{p_{12}^*\sigma} & & & &
+   p_{23}^*p_2^*Z_X \\
+   &
+   p_{12}^*p_2^*Z_X \ar@{=}[rr] & &
+   p_{23}^*p_1^*Z_X \ar[ur]_{p_{23}^*\sigma}\\
+  }\]
+
+  (b)  An affine $X$-scheme is $\Spec\A$ for some quasi-coherent sheaf of
+  $\O_X$-algebras $\A$. Use descent for quasi-coherent sheaves of algebras.
+\end{solution}
+
+\begin{itemize}
+\item[(4)] \textit{Let $B$ be a base scheme, $d\ge 1$ an integer, and fix a projective
+$B$-scheme $P$ with an ample line bundle $L$. For a $B$-scheme $Y$, let $\M_g(P,d)(Y)$
+denote the category whose objects are pairs $(C,f)$, where $C\to Y$ is an object of
+$\M_g(Y)$ and $f:C\to P$ is a morphism such that the restriction of $f^*L$ to each
+geometric fiber of $C\to Y$ is an ample sheaf of degree $d$. A morphism $(C',f')\to
+(C,f)$ is a morphism $\varepsilon:C'\to C$ in $\M_g(Y)$ (so an isomorphism $C'\to C$ over
+$Y$) such that $f\circ \varepsilon=f'$.}
+
+\item [(4a)] \textit{For a morphism of schemes $X\to Y$ define the category
+$\M_g(P,d)(X\to Y)$.}
+
+Objects in $\M_g(P,d)(X\to Y)$ are pairs $\bigl((C,f),\sigma\bigr)$, where $(C,f)\in
+\M_g(P,d)(X)$ and $\sigma$ is an isomorphism $p_2^*(C,f)\xrightarrow\sim p_1^*(C,f)$
+satisfying the usual cocycle condition. A morphism $\bigl((C,f),\sigma\bigr)\to
+\bigl((C',f'),\sigma'\bigr)$ is a morphism $\varepsilon:(C,f)\to (C',f')$ such that the
+following diagram commutes.
+\[\xymatrix{
+   p_2^*(C,f) \ar[d]_\sigma \ar[r]^{p_2^*\varepsilon} & p_2^*(C',f') \ar[d]^{\sigma'}\\
+   p_1^*(C,f) \ar[r]^{p_1^*\varepsilon} & p_1^*(C',f')
+}\]
+
+\item[(4b)] \textit{Prove that for an fppf quasi-compact cover $X\to Y$ pullback defines
+an equivalence $\M_g(P,d)(Y)\to\M_g(P,d)(X\to Y)$.}
+
+If $f^*L$ some fixed tensor power of it had to be relatively \emph{very} ample, then the
+proof of descent for $\M_g$ would carry over.
+
+\end{itemize}
+
+\subsektion{Exercise set 4}
+
+\subsektion{Exercise set 5}
+
+\subsektion{Exercise set 6}
+
+\subsektion{Exercise set 7}

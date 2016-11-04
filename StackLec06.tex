@@ -1,0 +1,221 @@
+\sektion{6}{Representable functors are fppf sheaves}
+
+% I'll be out of town Wednesday and Friday, so there won't be any lectures. We'll try to
+% make them up later. The discussion should still happen (to talk about problem set 2, I
+% suppose).
+
+The main result for today is Theorem  \ref{lec06T:hXfppfsheaf}, that representable functors are sheaves in the fppf topology.
+
+Recall the following three propositions. The first one is standard, and the other two are in EGA.
+\begin{proposition}
+ Let $A\to B$ be a ring morphism. Then the following are equivalent.
+ \begin{enumerate}
+  \item $A\to B$ is faithfully flat.
+  \item A sequence of $A$-modules $M'\to M\to M''$ is exact if and only if $M'\otimes_A B\to M\otimes_A B\to M''\otimes_A B$ is exact.
+  \item A homomorphism $M'\to M$ of $A$-modules is injective if and only if $M'\otimes_A B\to M\otimes_A B$ is injective.
+  \item $B$ is flat over $A$ and $\bigl(M\otimes_A B=0 \Longrightarrow M=0\bigr)$.
+ \end{enumerate}
+\end{proposition}
+\begin{proposition}[{\cite[IV.1.10.4]{EGA}}]\label{lec06P:flfp=>open}
+ A flat morphism that is locally of finite presentation is open.
+\end{proposition}
+\begin{proposition}[{\cite[\anton{somewhere in IV}]{EGA}}]\label{lec06P:ffqc_induced_topology}
+ If $f:X\to Y$ is faithfully flat and quasi-compact, then a subset $U\subseteq Y$ is open if and only if $f^{-1}(U)\subseteq X$ is open (i.e.~$Y$ has the induced topology).
+\end{proposition}
+The following corollary allows us to deal fppf morphisms.
+\begin{corollary}\label{lec06C:fppf->qcmpt_cover}
+ Let $f:X\to Y$ be faithfully flat and locally of finite presentation, and let $Y=\bigcup_i U_i$ be a Zariski open covering, with each $U_i$ affine. Then for each $i$, there is a Zariski covering $f^{-1}(U_i)=\bigcup_j V_{ij}$ with $V_{ij}$ quasi-compact and $f(V_{ij})=U_i$.
+\end{corollary}
+\begin{proof}
+ Let $p\in f^{-1}(U_i)$, and let $W_{ip}\subseteq f^{-1}(U_i)$ be an affine open neighborhood of $p$. Given any open affine set $W_{iq}\subseteq f^{-1}(U_i)$, $f(W_{iq})$ is open by proposition \ref{lec06P:flfp=>open}. Since $U_i$ is affine, it is quasi-compact, so we can choose a finite set $\{W_{iq_k}\}_{k=1}^n$ so that the $f(W_{ip})\cup \bigcup_k f(W_{iq_k})=U_i$. Now we can define $V_{ip}:= W_{ip}\cup \bigcup_k W_{iq_k}$. Since $V_{ip}$ is a finite union of affines, it is quasi-compact. Furthermore, $p\in V_{ip}$, so $\{V_{ip}\}_{p\in f^{-1}(U_i)}$ covers $f^{-1}(U_i)$.
+\end{proof}
+\anton{a flat morphism satisfying the conclusion of this corollary is said to be \emph{fpqc}}
+% \begin{remark}[Dfn of fppf topology]
+%   If $S$ is a scheme, then take objects $S$-schemes, with morphisms $S$-morphisms.
+%   $\{X_i\to X\}\in Cov(X)$ if each $X_i\to X$ is flat and locally of finite
+%   presentation, and $\coprod X_i\to X$ is surjective. You can check that if you only
+%   work with affine schemes over $S$, then you get the same topos, so that might be a
+%   good way to avoid technical issues.
+% \end{remark}
+\begin{proposition}\label{lec06P:fflat_exact_sequence}
+ If $f:A\to B$ is faithfully flat, then the following sequence is exact.
+ \[\xymatrix{
+  A\ar[r]^f & B \ar@<-.5ex>[rr]_<>(.5){b\mapsto 1\otimes b} \ar@<.5ex>[rr]^<>(.5){b\mapsto
+ b\otimes 1} & & B\otimes_A B }\]
+\end{proposition}
+\begin{proof}
+ We use the following trick. Since $B$ is faithfully flat over $A$, exactness of the sequence in question is equivalent to exactness of the sequence obtained by tensoring with $B$.
+ \[\xymatrix{
+ B\ar[rr]^<>(.5){b'\mapsto 1\otimes b'} & &
+ B\otimes_A B \ar@<.5ex>[rrr]^<>(.5){b\otimes b'\mapsto b\otimes 1\otimes b'}
+              \ar@<-.5ex>[rrr]_<>(.5){b\otimes b'\mapsto 1\otimes b\otimes b'} & & &
+ B\otimes_A B\otimes_A B
+ }\]
+ The first map is injective because the multiplication map $m:B\otimes_A B\to B$ is a section. Now we check exactness in the middle: if the two maps from $B\otimes_A B$ agree on some element, $\sum b_i\otimes b'_i$, then we have $\sum b_i\otimes 1\otimes b'_i= \sum 1\otimes b_i\otimes b'_i$. Applying $1\otimes m$, we get $\sum b_i\otimes b'_i = \sum 1\otimes b_ib'_i = 1\otimes \sum_i b_ib'_i$, so the original element $\sum b_i\otimes b'_i$ is in the image of the first map, proving exactness in the middle.
+%   To check exactness in the middle, we use the following trick. For any faithfully flat
+%   morphism $A\to A'$, we have the following diagram.
+%   \[\xymatrix@R-1pc{
+%    A\otimes_A A' \ar@{}[d]|{\wr\parallel} \ar[r]
+%    & B\otimes_A A'\ar@<.5ex>[r] \ar@<-.5ex>[r] \ar@{}[d]|{\wr\parallel}& (B\otimes_A B)\otimes_A A' \ar@{}[d]|{\wr\parallel}\\
+%    A'\ar[r] & B\otimes_A A' \ar@<.5ex>[r] \ar@<-.5ex>[r] & (B\otimes_A A')\otimes_{A'}(B\otimes_A
+%    A') }
+%   \]
+%    Since $A'$ is faithfully flat over $A$, exactness of the sequence in question is
+%   equivalent to exactness of the top row, which is equivalent to exactness of the bottom
+%   row.
+%
+%   Thus, you can assume there is a $g:B\to A$ such that $A\to B\xrightarrow{g} A$ is
+%   the identity (take $A'=B$, then we get $B\to B\otimes_A B\xrightarrow{\Delta}
+%   B$).\anton{what?}
+%
+%   exactness in the middle: Let $b\in B$ with $e_1(b)=1\otimes b = b\otimes 1=e_2(b)$. We
+%   claim that $b=fg(b)$. Inside $B\otimes_A B$, we have assumed that $1\otimes b=b\otimes
+%   1$. Applying $g\otimes 1$ to get to $A\otimes_A B\cong B$ (via $f$), these elements
+%   are sent to $b$ and $fg(b)$, respectively, so $fg(b)=b$.
+\end{proof}
+\begin{remark}[Faithfully flat extensions] \label{lec06R:fflat_extensions}
+ We will use the above trick again. The fact that we could tensor with $B$ and get multiplication, as section of $B\to B\otimes_A B$, effectively makes it so that we can \emph{assume} we have a section of $A\to B$. Sometimes, we'll base extend by an fppf cover and get a section for some map, but to save writing we'll say that you can assume the original map has a section. Here is how the above argument would look:
+
+ Base extending by $B$, we may assume we have a section $g$ of $f$; in particular, $f$ is injective. Let $b\in B$ with $1\otimes b = b\otimes 1$. Applying $fg\otimes \id$, we have that $b=fg(b)$, so $b$ is in the image of $f$, proving exactness in the middle.
+\end{remark}
+\begin{corollary}\label{lec06C:fflat_affine_condition}
+ If $V\to U$ is a faithfully flat map of affine schemes, and $X$ is an affine scheme, then the sequence $h_X(U)\to h_X(V)\rightrightarrows h_X(V\times_U V)$ is exact.
+\end{corollary}
+\begin{proof}
+ Let $U=\spec A$, $V=\spec B$, and $X=\spec R$. By Proposition \ref{lec06P:fflat_exact_sequence}, we have the exact sequence $A\to B\rightrightarrows B\otimes_A B$, and we wish to show exactness of the sequence $\hom(R,A)\to \hom(R,B) \rightrightarrows \hom(R,B\otimes_A B)$.
+
+ Since $A$ injects into $B$, two maps from $R$ to $A$ which agree in $B$ are the same. If $f:R\to B$ satisfies $1\otimes f(r)=f(r)\otimes 1$, then $f(r)$ lies in $A$, so $f$ is obtained from a map $R\to A$.
+\end{proof}
+\begin{lemma}\label{lec06L:zariski+affine_condition=>fppf_sheaf}
+ Let $F:\sch^{op}\to \set$ be a presheaf satisfying the following conditions.
+ \begin{enumerate}
+  \item $F$ is a sheaf in the big Zariski topology.
+  \item If $V\to U$ is a faithfully flat morphism of affine schemes, then the sequence $F(U)\to F(V)\rightrightarrows F(V\times_U V)$ is exact.
+ \end{enumerate}
+ Then $F$ is a sheaf for the fppf topology.
+\end{lemma}
+\anton{if you remove the word ``faithfully'' from the second condition, then you can conclude that $F$ is a sheaf in the fpqc topology}
+\begin{remark}
+  The following proof also works if you work over some scheme $X$.
+\end{remark}
+\begin{proof}[Proof of Lemma \ref{lec06L:zariski+affine_condition=>fppf_sheaf}]
+  Let $\{U_i\to U\}\in Cov_{fppf}(U)$, and let $V=\coprod U_i$, then we have the diagram
+  \[\xymatrix@R-1pc{
+    F(U)\ar[r] \ar@{}[d]|{\parallel} & F(V) \ar@<.5ex>[r] \ar@<-.5ex>[r] \ar[d]^(.45){\wr} &
+    F(V\times_U V) \ar[d]^(.45)\wr\\
+    F(U) \ar[r] & \prod_i F(U_i) \ar@<.5ex>[r] \ar@<-.5ex>[r]& \prod_{i,j} F(U_i\times_U
+    U_j)
+  }\]
+   where the vertical isomorphisms follow from the fact that $F$ is a Zariski sheaf.
+  Thus, it is enough to consider coverings consisting of a single morphism $\{V\to U\}$.
+
+  \underline{Note}: If $\{U_i\to U\}\in Cov(U)$ is a finite set of maps with $U_i$ and
+  $U$ affine, then $V=\coprod U_i$ is also affine. The top sequence is exact by
+  assumption, so the sheaf condition (exactness of the bottom sequence) is verified.
+
+  For a general (single element) fppf covering $f:V\to U$, choose a Zariski cover
+  $V=\bigcup V_i$ with $V_i$ quasi-compact and $f(V_i)=U_i$ affine (we can do this by
+  Corollary \ref{lec06C:fppf->qcmpt_cover}). Write each $V_i=\bigcup_a V_{ia}$ as a
+  finite union of affines. Then consider the following diagram.
+  \[\hspace*{-3ex}
+  \xymatrix@!0 @R=3.5pc @C=10pc{
+   F(U)\ar[r]^<>(.5)\gamma \ar[d]^\delta
+   & F(V) \ar@<.5ex>[r] \ar@<-.5ex>[r] \ar[d]_\varepsilon
+   & F(V\times_UV) \ar[d]\\
+   \prod_iF(U_i) \ar@<.5ex>[d] \ar@<-.5ex>[d] \ar[r]^<>(.5)\beta
+   & \prod_i \prod_a F(V_{ia})\ar@<.5ex>[d] \ar@<-.5ex>[d] \ar@<.5ex>[r] \ar@<-.5ex>[r]
+   & \prod_{i} \prod_{a,b} F(V_{ia}\times_U V_{ib})\\
+   \prod_{i,j} F(U_i\cap U_j) \ar[r]^<>(.5)\alpha
+   & \prod_{i,j}\prod_{a,b} F(V_{ia}\cap V_{jb})
+  }\quad
+  \xymatrix@!0 @R=3.5pc @C=4pc{
+   h\ar@{|->}[d] \ar@{|.>}[r]
+   & *++[o][F-]{x} \ar@{|->}[d] \ar@/^/@{|->}[r] \ar@/_/@{|->}[r]
+   & y \ar@{|->}[d] \\
+   e \ar@{|->}p+(-.3,-1) \ar@{|->}p+(.3,-1) \ar@{|->}[r]
+   & d \ar@/^/@{|.>}[r] \ar@/^/@{|.>}[r] \ar@/_/@{|.>}[r] \ar@/_/@{|->}[d] \ar@/^/@{|->}[d]
+   & c\\
+   f=f' \ar@{|.>}[r] & g
+  }\hspace*{-2em}\]
+  The $U_i$ cover $U$ and the $V_{ia}$ cover $V$ in the usual Zariski sense. Since $F$
+  is a Zariski sheaf, the two vertical columns are exact. For a fixed $i$, the $V_{ia}$
+  are a finite number of affines which cover the affine $U_i$, so by the note, the
+  middle horizontal sequence is exact. We wish to show that the top sequence is exact.
+
+  Since $\beta\circ \delta$ is injective, we must have that $\gamma$ is injective.
+  Observe that this shows that $F$ is separated in the fppf topology. In particular,
+  since $\{V_{ia}\cap V_{jb}\to U_i\cap U_j\}_{a,b}\in Cov_{fppf}(U_i\cap U_j)$,
+  $\alpha$ must be injective!
+
+  Now we check exactness at $F(V)$ by a diagram chase, illustrated above.\footnote{\label{lec06:footnote_on_chasing}The
+  starting object is circled. A solid arrow indicates that an object at one end is
+  defined by the object at the other end. A dotted arrow indicates that commutativity of
+  the diagram forces the two objects to be related as described. For example, we know
+  (by commutativity of the diagram) that both horizontal maps take $d$ to $c$;
+  therefore, by exactness of the middle row, $d$ defines the element $e$.} Let $x\in
+  F(V)$ be taken to $y\in F(V\times_U V)$ by both maps. Then $d$ must be taken by both
+  maps to $c$, so by exactness of the middle row, it comes from some $e$. Since $d$ is
+  the image of $x$, it is taken to some $g$ by both maps. The two images $f$ and $f'$
+  must both be taken to $g$; since $\alpha$ is injective, we must have $f=f'$.
+  Therefore, $e$ must be the image of some $h\in F(U)$. Since $\varepsilon$ is injective
+  and $\varepsilon(x)=d=\varepsilon\circ \gamma(h)$, we get $\gamma(h)=x$.
+\end{proof}
+\begin{theorem}\label{lec06T:hXfppfsheaf}
+  Let $X$ be a scheme. Then $h_X:\sch^{op}\to \set$ is a sheaf for the fppf
+  topology.
+\end{theorem}
+\begin{proof}
+  (Affine case) First assume that $X$ is affine. Combining Lemma
+  \ref{lec06L:zariski+affine_condition=>fppf_sheaf} with Corollary
+  \ref{lec06C:fflat_affine_condition}, we have that $h_X$ is a sheaf in the fppf
+  topology.
+
+  (General case) Now let $X$ be any scheme. Write $X=\bigcup X_i$ as a union of open
+  affine subschemes. By Lemma \ref{lec06L:zariski+affine_condition=>fppf_sheaf}, it is
+  enough to consider an fppf covering of the form $t:V\to U$, where $U$ and $V$ are
+  affine.
+
+  We have to check the exactness of
+  \[\xymatrix{
+  h_X(U)\ar[r]^\alpha & h_X(V)\ar@<.5ex>[r] \ar@<-.5ex>[r] & h_X(V\times_U V).
+  }\]
+   First we do injectivity. Suppose $f,g\in h_X(U)$ are identified by $\alpha$. Then we
+  have $\xymatrix@-1pc{V\ar[r]^t & U \ar@<.5ex>[r]^f \ar@<-.5ex>[r]_g & X}$ with
+  $ft=gt$. In particular, the maps of sets must agree; since $t$ is surjective, $f$ and
+  $g$ must be set-theoretically equal. Now consider $U_i=f^{-1}(X_i)=g^{-1}(X_i)$. By
+  the affine case, $f|_{U_i}=g|_{U_i}$ scheme-theoretically. Therefore, we get $f=g$.
+
+  Now we check exactness in the middle. We will denote the forgetful functor to $\sch\to
+  \textbf{Top}$ by $|\cdot|$. Let $f\in h_X(V)$ with $fp_1=fp_2$: $\xymatrix@-.5pc{
+  V\times_U V \ar@<.5ex>[r]^<>(.5){p_1} \ar@<-.5ex>[r]_<>(.5){p_2} & V\ar[r]^f& X}$.
+  Applying the forgetful functor, we get the diagram
+  \[\xymatrix{
+   |V\times_U V| \ar@{-->}[r] \ar@(ur,u)[rr]^{|p_1|} \ar@(dr,d)[rr]_{|p_2|}
+   & |V|\times_{|U|}|V| \ar@<.5ex>[r]^<>(.5){\pi_1} \ar@<-.5ex>[r]_<>(.5){\pi_2}
+   & |V| \ar[dr]_{|t|} \ar[r]^{|f|} & |X|\\
+   & & & |U|\ar@{.>}[u]_{h}
+  }\]
+   The dashed arrow exists by the universal property of $|V|\times_{|U|}|V|$. For some
+  reason, we have that $|f| \pi_1=|f| \pi_2$ \anton{why?}. If $v_1$ and $v_2$ are
+  two points in $V$ which lie over the same point in $U$, then $(v_1,v_2)\in
+  |V|\times_{|U|}|V|$, and we get $f(v_1)=|f| \pi_1(v_1,v_2)=|f|
+  \pi_2(v_1,v_2)=f(v_2)$. Thus, we get a well-defined map $h:|U|\to |X|$ given by
+  $u\mapsto f\bigl(t^{-1}(u)\bigr)$. By Proposition \ref{lec06P:ffqc_induced_topology},
+  the topology on $U$ is induced by $t$, so $h$ is continuous.
+
+  Let $V_i=f^{-1}(X_i)$ and $U_i=h^{-1}(X_i)$. Then $V_i\to U_i$ are fppf coverings. By
+  the affine case, we have (unique) morphisms of schemes $h_i:U_i\to X_i$ so that
+  $f|_{V_i}=h_i\circ t|_{V_i}$. Covering the intersections $X_i\cap X_j$ by affines and
+  using the uniqueness, we have that the $h_i$ agree on intersections $U_i\cap U_j$.
+  Therefore, we get a morphism of schemes $h:U\to X$ so that $f=h\circ t$.
+%
+%   i.e.~defines the same map $V\times_U V\to X$. $U$ has the induced topology, so you get
+%   a continuous map $h:|U|\to X$. Now we have to define a map on structure sheaves.
+%   $U_i=h^{-1}(X_i)\to X_i$ is an honest morphism by the affine case.
+%   \[
+%      f^{-1}(X_i)\times_{U_i} f^{-1}(X_i)\rightrightarrows f^{-1}(X_i) \to U_i \to X
+%   \]
+%   Over each $U_i$, we get a map $h^{-1}\O_X|_{U_i}\to \O_{U_i}$. By uniqueness, they agree
+%   on overlaps, so we get a map of ringed spaces $(U,\O_U)\to (X,\O_X)$. Checking locally,
+%   we see that it is a map of schemes.
+ \end{proof}

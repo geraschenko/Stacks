@@ -1,0 +1,241 @@
+\sektion{11}{Algebraic spaces}
+
+We replace $\aff$ by $\sch$, and the Zariski topology is replaced by the \'etale topology.
+
+\begin{definition}
+ An \emph{algebraic space} over $S$ is a functor $X:(\sch/S)^{op}\to \set$ such that
+ \begin{enumerate}
+  \item $X$ is a sheaf on the big \'etale topology on $S$,
+  \item $\Delta:X\to X\times_S X$ is representable, and
+  \item there exists an $S$-scheme $U\to S$ and a surjective \'etale morphism $U\to X$ (surjective as a map of sheaves).\footnote{\'Etale and surjective are stable properties, so this means that for every scheme $V$ and every morphism $V\to X$, the fiber product $V\times_X U$ is representable (by a scheme), and the morphism of schemes $V\times_X U\to V$ is \'etale and surjective.}
+ \end{enumerate}
+\end{definition}
+\begin{remark}
+ In the definition of a separated scheme, representablity of $\Delta$ follows from existence of the covering $\{h_{X_i}\to F\}$. You still need the closedness of $\Delta$.
+
+ Let $U=\coprod X_i$, and let $R=U\times_F U\subseteq U\times U$. If you require something something\anton{}, then you get condition 2.
+\end{remark}
+\begin{remark}
+ In \cite{Knutson}, $\Delta$ is assumed to be quasi-compact. If $X$ is an algebraic space, we have an \'etale covering $U\to X$. Let $R=U\times_X U$, then $R$ defines an equivalence relation on $U$, so we can take the sheafification of $\bigl(T\to U(T)\bigr)/\sim$, and we get $X$ back. If you assume $\Delta$ is quasi-compact, then you can start with some equivalence relation and form an algebraic space this way.
+\end{remark}
+
+If you replace \'etale with Zariski, you get schemes back out of the definition (i.e.~you don't get anything new). If you use flat topology instead of \'etale, you don't get a new notion. \anton{somewhere, you should mention that algebraic spaces are fppf sheaves, talk about Artin's fppf slice theorem, and that you don't get a more general notion by considering ``algebraic spaces in the fppf topology''}
+
+\begin{example}
+ (Not necessarily separated) schemes are algebraic spaces.
+\end{example}
+
+ \subsektion{Quotients by free actions of finite groups}
+
+ Let $X$ be a separated scheme over $S$, and let $G$ be a finite group acting freely on
+ $X$ over $S$. The action is an $S$-morphism $G\times X\to X\times_S X$, given by
+ $(g,x)\mapsto \bigl(g(x),x\bigr)$.\footnote{By $G\times X$, we may the disjoint union of
+ $|G|$ copies of $X$, labeled by elements of $G$.} Note that the morphism $X\cong g\times
+ X\to X\times X$ is the diagonal morphism followed by an isomorphism ($g$ acting on the
+ first factor). Since $X$ is separated, the diagonal map is a closed immersion. We can
+ encode the statement that the action is free by saying that the map $G\times X\to
+ X\times_S X$ is a closed immersion (i.e.~it is a union of closed immersions that don't
+ interfere with each other).
+ \begin{definition}
+   $[X/G]$ is the sheafification of the presheaf on $(\sch/S)_{et}$ given by $Z\mapsto
+   X(Z)/G$.
+ \end{definition}
+ Let $F=[X/G]$. The quotient map $X\to F$ is a \emph{$G$-bundle} in the following sense.
+ If $Y$ is some $S$-scheme, then given a morphism $y:Y\to F$, we can form the
+ pullback.
+ \[\xymatrix{
+  P_y=X\times_F Y  \ar[d] \ar[r] \ar@(ur,ul)_G \ar@{}[dr]|(.25)\pb
+  & X \ar[d]\\
+  Y\ar[r]^y & F }\] The pull-back $P_y$ has a $G$-action induced by the $G$-action on
+ $X$. Moreover, $P_y(Z)$ is either empty or it has a simple transitive $G$-action.
+ \anton{It seems like the $G$ action should be free \emph{over $Y$} (not over $S$ unless
+ $Y$ is separated), but I don't think it should be transitive ... maybe it's transitive
+ on geometric fibers or something} To see that the action \emph{over $Y$} is free,
+ observe that the map
+ \[\xymatrix@R-1.5pc{
+    G\times P_y \ar[r] \ar@{}[d]|{\parallel\wr} & P_y\times_Y P_y \ar@{}[d]|{\parallel\wr} \\
+    G\times X\times_F Y\ar[r] & X\times_F Y\times_Y X\times_F Y \ar@{}[r]|<>(.5){\cong} &
+    (X\times_S X)\times_F Y
+ }\]
+  is the product of a closed immersion and the identity map, so it is a closed immersion.
+ \anton{presumably this works even though the product is over $F$, which may not be a
+ scheme}\anton{If we were looking at the action over $S$, it would be the product of a
+ closed immersion and $\Delta_Y$, which may not be a closed immersion.}
+
+ It is an exercise in descent to show that $P_y$ is actually represented by a scheme.
+ \anton{I don't see where there is a descent argument}
+ \begin{definition}
+   A \emph{$G$-torsor} over $Y$ is a scheme $P$ \anton{it must be a scheme, yes?} with a
+   finite \'etale covering $P\to Y$ together with a $G$-action on $P$ over $Y$ such that
+   $G$ acts simply transitively on geometric fibers. This last condition is equivalent to
+   the statement that $G\times P\to P\times_Y P$, $(g,p)\mapsto \bigl(g(p),p\bigr)$ is an
+   isomorphism.\anton{why are these equivalent?}\footnote{\anton{If we weren't working in
+   the \'etale topology, then could we allow $G$ to not be discrete and get a more
+   general definition?}} A morphism of $G$-torsors is a $G$-equivariant morphism over
+   $Y$. The \emph{trivial $G$-torsor} is $G\times Y$.
+ \end{definition}
+ \begin{lemma}
+   If $Y$ is a scheme, and $P\to Y$ is a $G$-torsor, then the natural map $[P/G]\to Y$ is
+   an isomorphism.
+ \end{lemma}
+ So far, we have shown that a morphism $y:Y\to [G/X]=F$ produces a $G$-torsor $P_y\to Y$
+ and a $G$-equivariant morphism $P_y\to X$. Conversely, given a $G$-torsor $P\to Y$ and a
+ $G$-equivariant morphism $P\to X$, we get an induced morphism $Y=[P/G]\to [X/G]=F$.
+ These constructions are inverse, so $[X/G](Y)$ is in bijection with isomorphism classes
+ of $G$-torsors over $Y$ with $G$-equivariant maps to $X$.
+
+ By the way, given a $G$-torsor $P$ over $Y$ and a $G$-equivariant map to $X$, you get a
+ closed immersion $P\hookrightarrow Y\times_S X$. This is a closed immersion because the
+ action of $G$ on $X$ is free. \anton{I don't see why this is a closed immersion} \anton{
+ \emph{This} is where we use freeness of the $G$-action on $X$; it is important in the
+ proof of the upcoming lemma. Is this also where we use separatedness of $X$?} Two such
+ pairs (torsor, morphism to $X$) are isomorphic exactly when they produce the same closed
+ subscheme of $Y\times_S X$.
+
+ \medskip
+ \begin{remark}
+   There exist non-quasi-projective schemes and free actions such that the quotient is
+   not representable by a scheme. However, the following theorem tells us that the
+   quotient \emph{is} always an algebraic space.
+ \end{remark}
+ \begin{lemma}
+   $F=[X/G]$ is an algebraic space. \anton{later, we'll prove that if we have finite
+   stabilizers, then you get an algebraic space}
+ \end{lemma}
+ \begin{proof}
+   (1) $F$ is defined as a sheafification, so it is a sheaf.
+
+   (2) We wish to show that the diagonal is representable. Given a map $g:Y\to F\times_S
+   F$, we form the pull-back.
+   \[\raisebox{1.5pc}{$\xymatrix{
+    Z \ar[d]\ar[r] \ar@{}[dr]|(.25)\pb & Y\ar[d]^g\\
+    F\ar[r]^<>(.5)\Delta & F\times_S F
+   }$}\qquad
+   Z(T\xrightarrow f Y) = \begin{cases}
+     \ast & f^*P_1=f^*P_2\subseteq T\times X\\
+     \varnothing & \text{otherwise}
+   \end{cases}
+   \]
+    We will show that $Z$ is represented by a closed subscheme of $Y$.\footnote{ We are
+   actually showing that $\Delta_F$ is a closed immersion, so $F$ will be a
+   \emph{separated} algebraic space.} Note that $g$ is the same as a choice of two
+   $G$-torsors over $Y$, call them $P_1$ and $P_2$. We get associated closed immersions
+   $j_i:P_i\hookrightarrow Y\times_S X$. Choose an \'etale cover $Y'\to Y$ so that $P_1$
+   pulls back to the trivial $G$-torsor (for example, take $Y'=P_1$). Then we have a
+   section $s:Y'\to P_1'$.
+   \[\xymatrix{
+    Z'\ar[r]\ar[d]\ar@{}[dr]|(.25)\pb & Y'\ar[d] & y\ar@{|->}[d]\\
+    P_2'\ar@{^(->}[r]& Y'\times X & j_1'\bigl(s(y)\bigr)
+   }\]
+    Since $Z'\to Y'$ is a base extension of a closed immersion, it is a closed immersion,
+   so $Z'$ is associated to some quasi-coherent sheaf of ideals $\I_{Z'}$ on $Y'$. For
+   some reason \anton{}, $\I_{Z'}$ comes with descent data, so by descent for
+   quasi-coherent sheaves of ideals,\footnote{Note that the \'etale topology is coarser
+   than the fppf topology. i.e.~every \'etale cover is an fppf cover, so the descent
+   theorem applies.} it is the pull-back of some quasi-coherent sheaf of ideals $\I_Z$ on
+   $Y$. For some reason, this is the sheaf of ideals associated to $Z$ \anton{why should
+   $Z'$ have anything to do with $Z$?}. Thus, $Z$ is a closed subscheme of $Y$; in
+   particular, it is a scheme.
+
+%   Since a closed
+%   subscheme is given by a quasi-coherent sheaf of ideals, we can use descent and check
+%   that some sheaves \anton{} agree locally in the \'etale topology. So we can replace
+%   $Y$ by some \'etale cover, so we may assume $P_1$ is trivial (e.g.~take the cover
+%   $P_1\to Y$). Then we get a section $Y\to P_1$. Then $G\times Y\xrightarrow\sim P_1$ is
+%   given by $(g,y)\mapsto g(s(y))$. In this case, we get
+%   \[\xymatrix{
+%    Z\ar[r]\ar[d]\ar@{}[dr]|(.25)\pb & Y\ar[d] & y\ar@{|->}[d]\\
+%    P_2\ar@{^(->}[r]^{\text{closed}} & Y\times X & j_1(s(y))
+%   }\]
+%    we get the closed immersion because of something \anton{if you drop some separated
+%   hypothesis, you still get representability by a scheme, but the descent is trickier.}
+
+   (3) Observe that $X\to F$ is \'etale surjective. This is just the fact that for every
+   $y:Y\to F$, $P_y$ is a scheme and $P_y\to Y$ is \'etale and surjective (noting also
+   that an \'etale surjection of schemes translates into a surjection of sheaves).
+ \end{proof}
+ \begin{remark}
+   If you drop the assumption that $X$ is separated, $Z$ is still represented by a
+   scheme, but the descent is trickier.
+ \end{remark}
+
+ \subsektion{A quotient by a non-free action}
+
+ Let $\PP=\PP_\CC^3$, with coordinates $Y_0$, $Y_1$, $Y_2$, and $Y_3$. \anton{where do we
+ use that we are working over $\CC$?} Consider the conics
+ \begin{gather*}
+   C_0: Y_0Y_1+Y_1Y_2 + Y_2Y_0=Y_3=0\\
+   C_1: Y_0Y_1+Y_1Y_3+Y_3y_0=Y_2=0
+ \end{gather*}
+ The points of intersection $C_0\cap C_1$ are $P_0=[1,0,0,0]$ and $P_1=[0,1,0,0]$. The
+ involution $\sigma: (Y_0,Y_1,Y_2, Y_3)\mapsto (Y_1,Y_0,Y_3,Y_2)$ switches the
+ conics and the two intersection points.
+
+ Let $X_i$ be the scheme given by blowing up $C_i$ and the blowing up $C_{1-i}$. Over
+ $\PP\smallsetminus\{P_0,P_1\}$, $C_0$ and $C_1$ don't intersect, so it doesn't matter in
+ which order you blow up. Thus, we get open subsets $U_i\subseteq X_i$, with $U_0\cong
+ U_1$. Obtain $Z$ by gluing $X_0$ and $X_1$ along $U_0\cong U_1$. Observe that the action
+ of $\sigma$ lifts to $Z$. One can check that $Z$ is not quasi-projective.
+
+% So we
+% get open subsets $U_i\subseteq X_i$ of the points lying over $\PP-P_{3-i}$. Over
+% $\PP-\{P_1,P_2\}$, it doesn't matter which order you blow up, so $X_1$ and $X_2$ are
+% isomorphic over this set. So we can make a scheme $Z$ by gluing $U_2$ and $U_2$ along
+% the inverse images of $\PP-\{P_1,P_2\}$. We still have the action of $\sigma$ on $Z$.
+%
+% Fact: $Z$ is not quasi-projective. We'd like to take the quotient, so that we don't get
+% a scheme, but we do get an algebraic space. We have to be careful because $\sigma$ has
+% fixed points. You can still take the sheaf quotient, but you have to be more careful.
+
+ Define $[Z/\sigma]$ as the sheafification of the presheaf on $(\sch/\spec \CC)_{et}$ given
+ by $Y\mapsto Z(Y)/\sigma$. One can check that this sheaf is is not a scheme, but is an
+ algebraic space. One can also check that $[Z/\sigma]$ can be obtained in the following
+ way. \anton{As far as I can tell, we don't check these things.}
+
+ The fixed points of $\sigma$ lie over points of the form $[0,0,1,-1]$, $[0,0,1,1]$,
+ $[1,1,\alpha,\alpha]$, or $[1,-1,\alpha,-\alpha]$. We have an open cover $Z=Z_1\cup
+ Z_2$, where $Z_1$ is obtained by deleting points lying over $C_1$ and $C_2$, and let
+ $Z_2$ is the open subset where $\sigma$ acts freely. One can show that $Z_1$ is a
+ quasi-projective scheme. By some theorem from invariant theory, the quotient
+ $[Z_1/\sigma]$ is a scheme. One checks that $[Z_2/\sigma]$ is an algebraic space. Then
+ $[Z/\sigma]$ can be obtained by gluing $[Z_1/\sigma]$ to $[Z_2/\sigma]$ along $[Z_1\cap
+ Z_2/\sigma]$. \anton{Note that gluing algebraic spaces along isomorphic open
+ sub-algebraic spaces produces an algebraic space: the sheaf condition is trivial, the
+ representability probably follows from gluing schemes, and the disjoint union of the two
+ \'etale covers forms an \'etale cover.}
+
+ \subsektion{Quotients by relations}
+
+ Let $U$ and $R$ be schemes, and let $R\to U\times U$ be a morphism such that
+ the image of $R(Y)\to U(Y)\times U(Y)$ is an equivalence relation for every scheme $Y$.
+ Then define $U/R$ as the sheafification of the presheaf on $\sch_{et}$ given by
+ $Y\mapsto U(Y)/\sim_R(Y)$. This will sometimes be an algebraic space, as we will see in
+ the next lecture (Proposition \ref{lec12P:U/R_alg_space}).
+
+ \begin{example}
+   Let $U=\spec k[x,y]/(xy)$, the union of the axes in the affine plane. There is an
+   involution $\sigma:U\to U$ induced by swapping $x$ and $y$. Let $R$ be the closed
+   subscheme of $U\times U$ which is the union of the diagonal and the graph of $\sigma$.
+   We'll show later (in the proof of Theorem \ref{lec13T:U/R_affine}) that $U/R$ is $\spec
+   \bigl(k[x,y]/(xy)\bigr)^\sigma = \spec k[x+y]$, which is the affine line $\AA^1_k$.
+ \end{example}
+ \begin{example}
+   Let $U$ and $\sigma$ be as in the previous example. Let $R=U\sqcup
+   (U\smallsetminus\{0\})$, and consider $R\xrightarrow{\Delta\sqcup \Ga(\sigma)} U\times
+   U$, where $\Ga(\sigma)$ is the graph of $\sigma$ (minus the point at the origin). Then
+   $U/R$ is an algebraic space, and $U\to [U/R]$ is an \'etale cover by Proposition
+   \ref{lec12P:U/R_alg_space}. Note that the $k$ points of $[U/R]$ are the same as those
+   of $\AA^1_R$, but $U/R$ cannot be $\AA^1_k$ because there is no \'etale cover $U\to
+   \AA^1_k$. In particular, note that the dimension of the tangent space of $U/R$ at
+   the origin is 2.
+ \end{example}
+
+% Let $A_1=\spec \CC[s]$ and $A_2=\spec \CC[x]$. Let $U$ be obtained by gluing the two at
+% the origin (it looks like an X). Make an equivalence relation $R\subseteq U\times U$ by
+% taking the diagonal together with $A_1'\cup A_2'$ without the origin. We have two maps
+% $\pi_1,\pi_2:R\to U$, given by $\pi_1:A_i'\to A_i$ and $\pi_2:A_i'\mapsto A_{3-i}$. This
+% gives an equivalence relation on $U$. Let $F=[U/R]$. This is an algebraic space; it
+% looks like the affine line, but at the origin, you have two tangent directions!
+% Exercise: if $F$ were a scheme, it would have to be the affine line, but it isn't
+% because we removed that origin. For example, $U\to F$ must be \'etale, and $U\to \AA^1$
+% is not \'etale.

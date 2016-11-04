@@ -1,0 +1,114 @@
+\sektion{38}{Keel-Mori}
+
+
+\subsektion{Coarse moduli spaces}
+Since the first day, we've talked about the $j$-invariant
+$\M_{1,1}\to \AA^1_j$. (1) This is universal for maps to schemes in
+the sense that for any $\M_{1,1}\to Z$, there is a unique
+factorization through $\AA^1_j$. (2) if $k$ is an algebraically
+closed field, then $|\M_{1,1}(k)|\xrightarrow{\sim} \AA^1_j(k)$.
+
+In general, the analogue of $\AA^1_j$ will be called a \emph{coarse
+moduli space}.
+
+Say $S$ is a scheme and $\X$ is an algebraic stack over $S$
+\anton{why not any stack? something about relative coarse moduli
+spaces} with finite diagonal. Recall that $\Delta:\X\to \X\times_S
+\X$ is finite if for any $(x_1,x_2):T\to \X\times_S \X$,
+$\isom(x_1,x_2)\to T$ is finite (in particular, $\isom(x_1,x_2)$ is a
+scheme). Quasi-finite is not enough, but maybe you can relax this
+slightly to say that the $\aut_x$ are finite.
+
+All the hypothesis in the paragraph above should go below the
+definition.
+\begin{definition}
+  A \emph{coarse moduli space} for $\X$ over $S$ is a morphism
+$\pi:\X\to X$ where $X$ is an algebraic space over $S$ such that
+  \begin{enumerate}
+   \item $\pi$ is universal for morphisms to algebraic spaces:
+   \item if $k$ is algbraically closed, then the map $|\X(k)|\to
+X(k)$ is bijective.\qedhere
+  \end{enumerate}
+\end{definition}
+\begin{remark}
+  $\pi:\X\to X$ is unique up to unique isomorphism (you only need
+property 1 for this).
+\end{remark}
+\begin{theorem}[Keil-Mori (1997 in annals), Conrad (in his web page)]
+  With the above assumptions, there exists a coarse moduli space
+$\pi:\X\to X$ ($\X$ need not be Deligne-Mumford). Additionally,
+  \begin{enumerate}
+   \item $X$ is separated over $S$ and if $S$ is locally noetherian,
+then $X$ is locally of finite type over $S$.
+   \item $\pi$ is proper (we haven't defined this yet)
+   \item if $X'\to X$ is a flat morphism of algebraic spaces, then
+$\X'=\X\times_X X'\to X'$ is a coarse moduli space for $\X'$.
+  \end{enumerate}
+\end{theorem}
+This theorem was folklore for a long time, then it was written
+without proof in places. Keil and Mori proved it in the noetherian
+case. Usually, once you prove something in the noetherian case, you
+can get it in general, but there is no reason for that to be true
+here because of the following warning.
+\begin{warning}
+  The formation of coarse moduli space \emph{does not} commute with
+arbitrary base change, only with flat base change.
+\end{warning}
+What if you drop the finiteness assumption on the diagonal. You have
+to throw out condition (2) \anton{for some reason}. For example, it
+seems like the coarse moduli space for $[\AA^1_k/\GG_m]$ should be
+$\spec k$. This satisfies condition (1), but the proof breaks
+horribly.
+
+We'll give the proof in the locally noetherian case. The proof in
+general is along the same lines, but more technical.
+
+Idea: start with your stack $\X$. First (we'll do it last) go to the
+case where there exists a quasi-finite flat surjection $U\to \X$.
+This isn't too bad (in \cite[III]{SGA}). The really subtle step is to
+then go to the case where you have a \emph{finite} flat surjection
+$U\to \X$. Back when we talked about Stein factorization, we had some
+sort of argument like if we have $U\to X$ quasi-finite, you pick a
+point $x\in X$ and you can find an \'etale neighborhood $V$ su that
+$P\coprod U\to V$ is quasi-finite and finitely presented over $V$.
+Then we reduce to the case where there exists a finite flat
+surjection $\spec A_1\to \X$ (in \cite[III]{SGA}). This case, we've
+essentially done. Many of the technical lemmas are also in
+\cite[III]{SGA}.
+
+What does it mean to be proper?
+\begin{definition}
+  If $f:\X\to Y$ is a morphism from an algebraic stack to a scheme,
+then $f$ is \emph{closed} if for every closed substack $\Z\subseteq
+\X$, the image of $\Z$ in $Y$ is closed. By the image, we mean take
+all the field-valued points in $\Z$ and they give you field-valued
+points in $Y$, and that set is the image; equivalently, cover $\Z$ by
+a scheme and look at the image in $Y$. A morphism of algebraic stacks
+$f:\X\to \Y$ is \emph{universally closed} if for every morphism $Y\to
+\Y$ with $Y$ a scheme, the morphism $\X\times_\Y Y\to Y$ is closed.
+$f:\X\to \Y$ is \emph{proper} if it is separated (diagonal is proper
+\anton{does this actually make sense?}), finite type, and universally
+closed.
+\end{definition}
+If $\pi:\X\to X$ is a coarse moduli space and $\pi$ is proper, then
+$\pi^{-1}:OpenSet(X)\to OpenSubstack(\X)$ is bijective. Reason: say
+$\U\subseteq \X$ is an open substack, then the claim is that
+$\pi(\U)$ is open in $X$ and $\pi^{-1}(\pi(\U))=\U$. Complement of
+$\U$: take a presentation $p:\tilde X\to \X$, then
+\[\xymatrix{
+  \tilde U'\ar@<.5ex>[d]\ar@<-.5ex>[d]\ar@{^(->}[r] & \tilde
+X'\ar@<.5ex>[d]\ar@<-.5ex>[d]  & \tilde Z'\ar@{_(->}[l]
+\ar@<.5ex>[d]\ar@<-.5ex>[d]\\
+  \tilde U\ar@{^(->}[r]\ar[d] & \tilde X\ar[d]^p & \tilde
+Z\ar@{_(->}[l] \ar@{.>}[d]\\
+  \U\ar@{^(->}[r]\ar[d] & \X\ar[d] & \Z\ar@{_(.>}[l]\ar@{.>}[d]\\
+  U\ar[r] & X & Z\ar@{_(->}[l]
+}\]
+where $Z$ is the complement of $U$ with the reduced structure.
+Formation of maximal reduced subscheme commutes with smooth base
+change, so $Z$ descends. $\pi$ proper so $\pi(\Z)\subseteq X$ is
+closed. The claim is that $\pi^{-1}(\pi(\Z))_{red}=\Z$. This is
+because $|\X(k)|\to X(k)$ is bijective. $\tilde U$ is an algebraic
+space because $\U\to \X$ is representable.
+
+In some sense, the coarse moduli space is a universal homeomorphism.

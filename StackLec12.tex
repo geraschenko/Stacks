@@ -1,0 +1,308 @@
+\sektion{12}{Properties of Algebraic Spaces. \'Etale Relations.}
+
+Today we'll make precise some definitions of things we saw in the previous lecture. We're always working over some base scheme $S$.
+
+% \anton{The following lemma and remark should be moved to the properties of sheaves lecture and combined into a single lemma.}
+% \begin{lemma}\label{lec12L:prod_schemes_over_alg_space}
+%  Let $X$ be an \'etale sheaf with representable diagonal, and $f_1:Z_1\to X$ and $f_2:Z_2\to X$ be two morphisms from schemes. Then $Z_1\times_X Z_2$ is a scheme. In particular, the product of schemes over an algebraic space is a scheme.
+% \end{lemma}
+% \begin{proof}
+%  Verify that the following diagram is cartesian.
+%  \[\xymatrix{
+%   Z_1\times_X Z_2 \ar[r] \ar[d] \ar@{}[dr]|(.25)\pb & Z_1\times Z_2 \ar[d]^{f_1\times f_2}\\
+%   X\ar[r]^\Delta &X\times X
+%  }\]
+%  Since $\Delta$ is representable and $Z_1\times Z_2$ is a scheme, $Z_1\times_X Z_2$ is a scheme.
+% \end{proof}
+% \begin{remark}
+%  The converse is also true: for a sheaf $X$, if $Z_1\times_X Z_2$ is always a scheme, then the diagonal of $X$ is representable. To see this, let $f\colon T\to X\times X$ be a morphism from a scheme $T$. Composing with the two projections, we get two morphisms $T\to X$, which induce a morphism $T\times T\to X\times X$, through which $f$ factors. In the diagram below, all squares are cartesean.
+%  \[\xymatrix{
+%   T\times_{X\times X} X \ar@{}[dr]|(.25)\pb \ar[r] \ar[d]& T \ar[d]^{\Delta_T}\\
+%   T\times_X T \ar[r] \ar[d] \ar@{}[dr]|(.25)\pb& T\times T \ar[d]^{(p_1\circ f)\times(p_2\circ f)}\\
+%   X\ar[r]^-{\Delta_X} & X\times X
+%  }\]
+%  By hypothesis, $T\times_X T$ is a scheme, and $\Delta_T$ is representable (because the category of schemes has products), so $T\times_{X\times X} X$ is a scheme.
+% \end{remark}
+
+ \begin{definition} \label{lec12D:alg_space_has_P}
+   Let $\P$ be a property of schemes which is stable in the \'etale topology. Then an
+   algebraic space $X$ \emph{has property $\P$} if there exists an \'etale surjection
+   $U\to X$ where $U$ is a scheme with property $\P$.
+ \end{definition}
+ For example, we can talk about algebraic spaces being locally noetherian, reduced,
+ regular, purely $n$-dimensional, normal, or pretty much any property of schemes which is
+ not a global property.
+ \begin{definition} \label{lec12D:rep_morph_has_P}
+   Let $\P$ be a property of morphisms of schemes which is stable in the \'etale
+   topology, and let $f:X\to Y$ be a representable morphism of algebraic spaces. Then
+   \emph{$f$ has $\P$} if there is an \'etale cover $V\to Y$ such that $V\times_Y X\to V$
+   has property $\P$.
+ \end{definition}
+ For example, we can talk about representable morphisms of algebraic spaces being closed
+ immersions, open immersions, proper, etc.
+ \begin{definition}\label{lec12D:any_morph_has_P}
+   Let $\P$ be a property of morphisms of schemes which is stable and local on domain in
+   the \'etale topology, and let $f:X\to Y$ be a morphism of algebraic spaces. Then
+   \emph{$f$ has $\P$} if there exist \'etale covers $v:V\to Y$ and $u:U\to X$ such that
+   the projection $U\times_Y V\to V$ has $\P$ (note that $U\times_Y V$ is a scheme by
+   Lemma \ref{lec12L:prod_schemes_over_alg_space}).
+   \[\xymatrix{
+    U\times_Y V \ar[rr]^\P \ar[d] \ar@{}[drr]|(.25)\pb & & V \ar[d]^v \\
+    U\ar[r]^u & X\ar[r]^f & Y
+   }\]
+ \end{definition}
+ For example, we can talk about morphisms of algebraic spaces being \'etale, flat,
+ smooth, surjective, etc.
+ \begin{remark}
+   If $f:X\to Y$ is representable and $\P$ is stable and local on domain, then
+   Definitions \ref{lec12D:rep_morph_has_P} and \ref{lec12D:any_morph_has_P} will produce
+   the same notion. To see this, take $U=X\times_Y V$ and apply the following remark.
+ \end{remark}
+ \begin{remark}\label{lec12R:exists_etale<=>any_map}
+   In the above three definitions, we always say that there exists some \'etale cover(s)
+   so that something happens. In fact, this is equivalent to the (apparently stronger)
+   statement that for \emph{every} morphism(s), that thing happens.
+   \[\begin{tabular}{c}
+    \xymatrix{
+    U\times_X U' \ar[r] \ar[d] & U \rlap{\ \ $\P$}\ar@{->>}[d]^{et}\\
+    U' \ar[r] & X
+   }\hspace*{3em}\\
+   \xymatrix@!0 @C+1.5pc {
+    X\times_Y V \ar[dd]^{\tilde f}_\P \ar[rr] & & X \ar[dd]|\hole^(.7)f\\
+    & \bullet \ar[ul] \ar[rr] \ar[dd]^(.7){\bar f} & & X\times_Y V' \ar[dd]^{\hat f} \ar[ul] \\
+    V\ar@{->>}[rr]^(.7){et}|\hole & & Y\\
+    & \bullet \ar[rr] \ar[ul] & & V' \ar[ul]
+   }\end{tabular}\qquad
+   \raisebox{4pc}{$\xymatrix@!0 @C+1pc{
+    \bullet \ar@(ur,ul)[rrrr]^h \ar[ddd]\ar[rr]& & U\times_Y V \ar[dd]|\hole \ar[rr]^<>(.35)\P
+        & & V\ar@{->>}[ddd]_(.7)v^(.7){et}|!{[dl];[dr]}\hole\\
+    & \bullet \ar[ul] \ar[rrrr]^{\tilde h} \ar[ddd] & & & & \bullet \ar[ddd] \ar[ul]\\
+    & & U \ar@{->>}[d]_u^{\,et}\\
+    U'\ar[rr]|\hole^(.7){u'} & & X\ar[rr]^f & & Y\\
+    & U'\times_Y V' \ar[ul]\ar[rrrr]^{\hat h} & & & & V'\ar[ul]_{v'}
+   }$}
+   \]
+    In the top left diagram, $U$ has $\P$ (a stable property of schemes). Note that
+   $U\times_X U'\to U'$ is an \'etale surjection. By stability of $\P$ (the ``stable under
+   base extension'' part of stability), $U\times_X U'$ has $\P$. Again by stability (the
+   ``descends along covers'' part), $U'$ has $\P$.
+
+%   Note also that any \'etale map $Z\to W$ can be completed to an \'etale cover
+%   (e.g.~$\{Z\to W, W\xrightarrow\id W\}$ is an \'etale cover).
+
+   In the bottom left diagram $\tilde f$ is $\P$ (a stable property of morphisms of
+   schemes). Every square in sight is cartesian (it isn't important exactly what the
+   bullets are), all the horizontal maps are \'etale and surjective. Since $\P$ is stable
+   under pull-backs, $\bar f$ is $\P$. Since $\P$ descends along covers, $\hat f$ is also
+   $\P$.
+
+   In the right diagram, $\P$ is stable and local on domain. All the squares are
+   cartesian (never mind what the bullets are), all the long vertical maps are \'etale
+   and surjective. Since $\P$ is local on domain, $h$ is $\P$. Since $\P$ is stable under
+   pull-backs, $\tilde h$ is $\P$. Since $\P$ descends along covers, $\hat h$ is $\P$.
+ \end{remark}
+ \begin{corollary}[to Remark \ref{lec12R:exists_etale<=>any_map}]
+   If $\P$ is a stable property of objects (resp.~stable property of morphisms,
+   resp.~stable local on domain property of morphisms) in the \'etale topology on the
+   category of schemes, then $\P$ is a stable property of objects (resp.~stable property
+   of morphisms, resp.~stable local on domain property of morphisms) in the \'etale
+   topology in the category of algebraic spaces.
+ \end{corollary}
+ \begin{proof}
+    This is a straightforward exercise given the remark.
+ \end{proof}
+ \begin{remark}\label{lec12R:non-stable_properties}
+   In fact, we can make sense of an algebraic space or a morphism of algebraic spaces
+   having property $\P$ even if $\P$ is not stable. It is enough for $\P$ to descend
+   along \'etale covers. In that case, $\P$ will descend along \'etale covers of
+   algebraic spaces as well.
+
+   This definition allows us to talk about an algebraic space
+   being quasi-compact or a morphism of algebraic spaces being dominant.
+ \end{remark}
+
+ \begin{proposition}
+   The subcategory $\algsp/S \subseteq (\sch/S)_{et}$ is closed under finite projective
+   limits.
+ \end{proposition}
+ \begin{proof}
+   By Lemma \ref{lec03L:limits_representable}, it is enough to check that products and
+   fiber products are representable.
+   \[\begin{tabular}{cc}
+     \hspace{4em} \text{(Products)} \hspace{4em} & \text{(Fiber Products)}\\
+     \xymatrix{
+       P\ar[r] \ar[d] & X_1\\
+       X_2 & }
+    &\xymatrix{
+       P\ar[r] \ar[d] & X_1\ar[d]\\
+       X_2\ar[r] & X_3}
+   \end{tabular}\]
+
+   \underline{Products}: Fix \'etale covers $U_1\to X_1$ and $U_2\to X_2$. (1) Since products of
+   sheaves are sheaves, $P$ is a sheaf.
+
+   (2) We must check representability of the diagonal. Let $Z$ be a scheme.
+   \[\xymatrix@C=-2pc{
+    (Z\times_{X_1\times X_1} X_1) \times_Z (Z\times_{X_2\times X_2} X_2)
+    \ar[r] \ar[d] & Z \ar[d]\\
+    (X_1\times X_2) \ar[r] & (X_1\times X_2)\times (X_1\times X_2)
+    \ar@{}[rr]|<>(.5){\cong}
+    & \hspace{5pc} & (X_1\times X_1)\times (X_2\times X_2)
+   }\]
+   Since $Z\times_{X_1\times X_1} X_1$ and $Z\times_{X_2\times X_2} X_2$ are schemes
+   (since $\Delta_{X_1}$ and $\Delta_{X_2}$ are representable), so is the product.
+
+   (3) $U_1\times U_2\to X_1\times X_2$ is an \'etale surjection.
+
+   \smallskip
+    \underline{Fiber Products}: (1) Since the product of sheaves over another sheaf is a sheaf, $P$
+    is a sheaf. (2) We must check that the diagonal is representable. Let $Z$ be a scheme,
+    then we wish to show that $W$ in the diagram below is a scheme.
+    \[\xymatrix@C-1pc{
+     W \ar[d]\ar[rr] \ar@{}[dr]|(.25)\pb & & Z\ar[d]\\
+     (X_1\times_{X_3} X_2)\ar@{}[dr]|(.25)\pb \ar[d] \ar[rr]^<>(.5)\Delta & & (X_1\times_{X_3} X_2)\times (X_1\times_{X_3} X_2)\ar[d]\\
+     (X_1\times X_2) \ar[rr]^<>(.5)\Delta & & (X_1\times X_2)\times (X_1\times X_2)\\
+    }\]
+   %% This is a little different from what we did in class %%
+    Verify that the bottom square is cartesian; then the outer square is cartesian. By
+    the case of products, $\Delta_{X_1\times X_2}$ is representable, so $W$ is a scheme.
+
+%   \xymatrix@C-1pc{
+%    R \ar[r]\ar[d]_\pi \ar@{}[dr]|(.25)\pb & Z \ar[d]^{(h\times h)\circ f} \\
+%    (X_1\times X_2) \ar[r]^<>(.5)\Delta & (X_1\times X_2)\times (X_1\times X_2)}
+%   Next we will verify the following diagram. Once we do, it will follow that $W$ is a
+%   scheme because $\Delta_{X_3}$ is representable.
+%   \[\xymatrix{
+%    W\ar[rr]^{(h\circ p,q)} \ar[d]_{(f_1\times_{X_3}f_2)\circ p}\ar@{}[dr]|(.25)\pb & & R \ar[d]^{(f_1\times f_2)\circ \pi} \\
+%    X_3 \ar[rr]^<>(.5){\Delta} & & X_3\times X_3
+%   }\]
+%   Since these are sheaves of sets, we can treat everything as sets in the verification.
+%   An element of $R$ is
+
+   (3) We have that $U_1\times_{X_3}U_2 \to X_1\times_{X_3} X_2$ is an \'etale cover, and
+   $U_1\times_{X_3} U_2$ is a scheme by Lemma \ref{lec12L:prod_schemes_over_alg_space}.
+ \end{proof}
+
+ \begin{definition}
+   If $U$ and $R$ are $S$-schemes, we say that a morphism $R\to U\times_S U$ is an
+   \emph{equivalence pre-relation} if for every $S$-scheme $T$, the image of $R(T)$ in
+   $U(T)\times U(T)$ is an equivalence relation.\footnote{\anton{Is this acceptable
+   terminology?}} We say that an equivalence pre-relation \emph{has a property} $\P$ of
+   morphisms if the two projection maps $R\to U\times U\rightrightarrows U$ have property
+   $\P$. Furthermore, we say that an equivalence pre-relation is an \emph{equivalence
+   relation} if for every $S$-scheme $T$, $R(T)\to U(T)\times U(T)$ is injective. We say
+   that ``$R\rightrightarrows U$ is a (pre)-equivalence relation (with property $\P$)''.
+%   An \emph{\'etale equivalence relation} $R$ on an $S$-scheme
+%   $U$ is a morphism of schemes $R\to U\times U$ such that
+%   \begin{enumerate}
+%     \item for every $T\to S$, $R(T)\to U(T)\times U(T)$
+%     is injective and the image is an equivalence relation, and
+%     \item the two projections $R\rightrightarrows U$ are \'etale.
+%   \end{enumerate}
+ \end{definition}
+  Let $U/R$ denote the sheafification of the presheaf on $(\sch/S)_{et}$
+ given by $T\mapsto U(T)/\sim_{R(T)}$.
+ \begin{remark}
+   Every algebraic space is isomorphic to $U/R$ for some scheme $U$ and some \'etale
+   equivalence relation $R\rightrightarrows U$. To see this, let $U\to X$ be some \'etale
+   cover, and consider $R=U\times_X U$. This is a scheme by Lemma
+   \ref{lec12L:prod_schemes_over_alg_space}. Then the projections are \'etale because
+   $U\to X$ is \'etale (the projections are obtained by base extension). One can check
+   that $X\cong U/R$. \anton{check this}
+ \end{remark}
+ \begin{proposition} \label{lec12P:U/R_alg_space}
+   Let $R\rightrightarrows U$ be an \'etale equivalence relation, and assume that $R\to
+   U\times U$ is either quasi-compact or an immersion (closed immersion followed by an
+   open immersion). Then the quotient $X=U/R$ is an algebraic space.
+ \end{proposition}
+ \begin{proof}
+   (1) As a sheafification, $X$ is a sheaf.
+
+   (2) We need to check representability of $\Delta_X$. Let $Z$ be a scheme and let
+   $z:Z\to X\times X$ be a morphism, and let $P = Z\times_{X\times X} X$. We wish to show
+   that $P$ is a scheme.
+
+   \underline{Base Case}: Assume $z$ factors through $U\times U$.
+   The bottom square in the left diagram is cartesian (basically by definition of $X$),
+   and the outer square is cartesian (by assumption), so the top square is cartesian.
+   Thus, $P$ is a product of schemes over a scheme, so it is a scheme.
+   \[\xymatrix{
+      P\ar[r] \ar[d] & Z\ar[d]^{\tilde z}\\
+      R\ar[r] \ar[d] & U\times U\ar[d]\\
+      X\ar[r]^<>(.5)\Delta & X\times X
+   }\qquad\qquad
+%   \raisebox{-2pc}{$\xymatrix{
+%    Z'\ar[d]_{\tilde z'} \ar[r]\ar@{}[dr]|(.25)\pb & Z\ar[d]^z\\
+%    U\times U \ar[r] & X\times X
+%   }$}\qquad\qquad
+   \raisebox{1pc}{$\xymatrix@!0 @C+1pc{
+      p_1^*P'= p_2^*P'\ar[rr]& & Z'\times_Z Z' \ar@<.5ex>[dd] \ar@<-.5ex>[dd] \\
+      & R \ar[rr]|(.48)\hole|(.52)\hole \ar[dd]|\hole& & **[r] U\times U \ar[dd] \\
+      P' \ar@{<-}p+(.4,1.3) \ar@{<-}p+(-.4,1.3) \ar[ur] \ar[rr]^(.7){w'}\ar[dd] & & Z' \ar[dd]_(.7)f \ar[ur]_{\tilde z'}\\
+      & X\ar[rr]^<>(.8)\Delta|\hole & & **[r] X\times X\\
+      P \ar[rr]_w \ar[ur] & & Z \ar[ur]_z
+    }$}\]
+%   \[\xymatrix{
+%    P \ar[r]\ar[d] & Z\ar[d]^z\\
+%    X\ar[r]^\Delta & X\times X
+%   }
+%\]
+
+   \underline{General Case}: We have that $U\to X$ is a surjection of \'etale sheaves, so
+   $U\times U\to X\times X$ is a surjection of \'etale sheaves. This means that for any
+   element $z\in (X\times X)(Z)$, there is some scheme $Z'$ with an \'etale cover $f:Z'\to
+   Z$ so that the image $\tilde z\in (X\times X)(Z')$ is in the image of $(U\times
+   U)(Z')$. In the diagram on the right, all squares are cartesian except the ``left''
+   and the ``right'' squares. By the base case, $P'$ is a scheme.
+
+   Note that any stable property of $R\to U\times U$ is shared by $w'$. Note also that
+   $w':P'\to Z'$ comes with descent data relative to the \'etale surjection $Z'\to Z$.
+
+   ($w'$ closed immersion) $P'$ is given by a
+   quasi-coherent sheaf of ideals on $Z'$ which descends to $Z$. Thus, $P$ is a closed
+   subscheme of $Z$, so it is a scheme.
+
+   ($w'$ open immersion) Since $P'\subseteq Z'$ is open and $f:Z'\to Z$ is \'etale (and
+   so open), $f(P')\subseteq Z$ is open. To show that $P=f(P')$, it is enough to show
+   that $P'' = f^{-1}\bigl(f(P')\bigr)$. Let $p'\in P$ and $y\in Z'$ have the same image
+   in $Z$, then we want to show that $y\in P''$. But we have that
+   $\bigl(f(y),(p',y)\bigr)\in p_2^*P'=P\times_Z (Z'\times_Z Z')$, so $p_2(p',y)=y\in
+   P''$. \anton{how can this be made clearer?}
+
+   ($w'$ immersion) \anton{I don't know\dots somehow $P$ is a scheme}
+
+   ($w'$ quasi-compact) \anton{I don't know\dots somehow $P$ is a scheme}
+%   In general, we have assumed that $w'$ is either
+%   quasi-compact\footnote{quasi-affine actually, so factors as quasi-compact open
+%   immersion followed by affine by a theorem of Deligne.} or an immersion. Somehow, you
+%   prove that $P$ is a scheme. \anton{I think I can fill some of this in}
+
+   (3) We claim that $U\to X$ is an \'etale surjection. By Lemma
+   \ref{lec12L:prod_schemes_over_alg_space}, $U\to X$ is representable. To verify that it
+   is an \'etale surjection, we need to take a morphism from a scheme $T\to X$ and check
+   that $T\times_X U\to T$ is an \'etale surjection. Since $U\to X$ is a surjection of
+   \'etale sheaves, there is some \'etale cover $T'\to T$ so that $T'\to X$ factors
+   through $U$.
+   \[\xymatrix@!0{
+    & \bullet \ar[dl] \ar[dd]|\hole \ar[rr] & & T\times_X U \ar[dd] \ar[dl]\\
+    R\ar[rr] \ar@{->>}[dd]_{et} & & U\ar[dd]\\
+    & T'\ar[dl]\ar@{->>}[rr]^(.7){et}|\hole & & T\ar[dl]\\
+    U\ar[rr] & & X
+   }\]
+    In the diagram above, all squares are cartesian except the ``top'' and ``bottom''
+   squares. Since $R\to U$ is \'etale surjective (surjective because $R$ contains the
+   diagonal), and \'etale surjective is stable, we get that $T\times_X U\to T$ is \'etale
+   surjective, as desired.
+%
+%
+%   It is an exercise to verify that $U\to X$
+%   is an \'etale surjection (in particular, $U\to X$ is representable!). \anton{how do
+%   you show this?}\footnote{\anton{If $Z$ is a scheme and $f:Z\to X$ factors through
+%   $\tilde f:Z\to U$, then $Z\times_X U \cong R\times_{U\times U, \tilde f\times \id}
+%   (Z\times U)$, so it is a scheme. Moreover, whatever property $R\to U\times U$ has
+%   (immersion, quasi-compact), $Z\times_X U\to Z\times U$ also has it. It would be really
+%   nice if in general, there were a good candidate scheme $Z'$ with an fppf (maybe even
+%   \'etale) cover $Z'\to Z$ so that $Z'\to X$ factored through $U$. Then we could apply
+%   whatever descent argument we have at the end of this proof for descending immersions
+%   or quasi-compact morphisms and showing that their domains are schemes.}}
+ \end{proof}

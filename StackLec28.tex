@@ -1,0 +1,209 @@
+\sektion{28}{More about Algebraic Stacks; Examples}
+
+ \begin{lemma}
+   Let $f:\X\to X$ be a representable morphism from a stack to an
+algebraic space. Then
+   $\X$ is an algebraic space.
+ \end{lemma}
+ \begin{proof}
+   First we check that $\X$ is equivalent to a sheaf (i.e.~that it is
+fibered in discrete
+   groupoids). To do this, it is enough to show that there are no
+non-identity
+   automorphisms in the fibers of $\X$. Let $x\in \X(T)$ for some
+scheme $T$, thought of
+   as a morphism $x:T\to \X$.
+
+   (1) Let $F:(\sch/S)^{op}$ be the presheaf given by $(T\to
+X)\mapsto \{$isomorphism
+   classes in $\X(T)\}$. Then $\X\to F^{fib}$ is an equivalence. That
+is, $\X(T)\to
+   \pi_0\bigl(\X(T)\bigr)$ is an equivalence of categories
+(\anton{exercise} it is enough
+   to check that objects of $\X(T)$ have no non-trivial
+automorphisms). To see this, let
+   $x\in \X(T)$, then we have
+   \[\xymatrix{
+    (x,\id,\id)\ar@{}[r]|{\mbox{$\in$}} &\X\times_X T \ar[r]\ar[d]&
+T\ar[d]^{f(x)}\\
+    & \X \ar[r] & X
+   }\]
+    An automorphism of $x$ gives an automorphism of $(x,\id,\id)$,
+which can't happen
+    because the product is an algebraic space (so fibered in sets).
+
+    (2) Check that $F$ is an algebraic space. It is a sheaf for free.
+
+    (a) $F\to F\times_X F$ is representable (by
+    schemes). Let $T\to F\times F$ be a morphism from a scheme, then
+$T\times_{F\times F}
+    F\cong (F\times_X T)\times_{(F\times_X T)\times_T (F\times_X T)}
+T$, so it is a
+    scheme (because $F\times_X T$ is an algebraic space, so its
+diagonal is representable). This implies that $F\to F\times F$ is
+representable \anton{as in appendix}
+
+    (b) Let $U\to X$ be an \'etale cover by a scheme, let
+$V=F\times_X U$ (which is
+    an algebraic space), and let $V'\to V$ be an \'etale cover by a
+scheme. Then $V'\to
+    F$ is an \'etale cover.
+ \end{proof}
+ \begin{corollary}
+   If $\X$ is an algebraic stack, then any morphism $x:X\to \X$ from
+an algebraic space
+   is representable.
+ \end{corollary}
+ \begin{proof}
+   Let $T$ be a scheme with a morphism to $\X$.
+   \[\xymatrix{
+    P_U\ar[r]\ar[d] & U\ar[d]\\
+    P\ar[r]\ar[d] & X\ar[d]\\
+    T\ar[r] & \X
+   }\]
+    We see that $P\to X$ is representable (for any $U$, $P_U$ is an
+algebraic space
+   because it is $U\times_\X T$), so $P$ is an algebraic space by the
+lemma.
+ \end{proof}
+ \begin{example}
+   This is a main source of algebraic stacks. Let $Y/S$ be an
+algebraic space, and let
+   $G/S$ be a smooth group scheme. Then $\X=[Y/G]$ is an algebraic
+stack. Recall that
+   $[Y/G](T\to S)$ is the groupoid of diagrams $T\xleftarrow{G_T}
+P\xrightarrow\rho Y$, where $P\to T$ is a
+   $G$-torsor and $P\to Y$ is $G$-equivariant.
+   \begin{proof}
+     Representability of the diagonal: consider
+     \[\xymatrix{
+      \isom\bigl((P_1,\rho_1),(P_2,\rho_2)\bigr) \ar[r]\ar[d]
+        & T\ar[d]^{(P_1,\rho_1)\times(P_2,\rho_2)}\\
+      \X \ar[r]^<>(.5)\Delta & \X\times \X
+     }\qquad\qquad
+     \xymatrix{
+      P_1\ar[dd]\ar[drr]^{\rho_1}\\
+      & P_2\ar[r]_{\rho_2}\ar[dl] & Y\\
+      T
+     }\]
+      $I:(\sch/T)^{op}\to \set$ is given by $(T'\to T)\mapsto
+     \{\sigma:P_{1,T'}\xrightarrow\sim P_{2,T'}$ such that
+$\rho_1=\rho_2\circ \sigma\}$.
+     To show that $I$ is an algebraic space, it is enough to consider
+the case where
+     there exist sections $s_1:T\to P_i$ (because we can work \'etale
+locally, and
+     torsors are locally trivial).
+
+     We see that $I\subseteq G_T$. $G_T$ is in bijection with
+isomorphisms $\sigma:P_1\to
+     P_2$, given by $\sigma\mapsto$ the unique $g$ such that
+$\sigma(s_1)=gs_2$. We have
+     \[\xymatrix{
+      I\ar[d]\ar[r]\ar@{}[dr]|(.25)\pb & Y\ar[d]\\
+      G_T \ar[d]\ar[r] & Y\times Y\\
+      T
+     }\qquad
+      g\mapsto \bigl(\rho_1(s_1),g\rho_2(s_2)\bigr)
+     \]
+      (Aside: If $Y$ is separated, then $I$ is a closed subscheme of
+$G_T$. If $G$ was
+      affine, we'd get descent for schemes, so $I$ would be a scheme.)
+
+      Smooth cover: $Y\to [Y/G]$.What does $Y$ represent? If $T\to
+[Y/G]$, what does it
+      mean for the map to factor through $Y$? It is the same as
+choosing a section $T\to
+      T\times_{[Y/G]}Y$. Thus, $Y$ represents the functor of triples
+$(P,\rho,s)$, where
+      $s$ is a trivialization of the torsor $P$.
+   \end{proof}
+ \end{example}
+ \begin{example}
+   If $Y=\spec k$ and $G$ is a smooth group scheme, then the
+universal torsor is $\spec
+   k\to [\spec k/G]$, which looks kind of boring, but thats what it
+is.
+ \end{example}
+ \begin{example}[Weighted projective stack]
+   Let $\alpha_0,\dots, \alpha_n\in \ZZ$. Then we define the
+\emph{weighted projective stack} $\tilde \PP(\alpha_0,\dots,
+\alpha_n) = [(\AA^{n+1}\setminus\{0\})/\GG_m]$, where the action is
+given by $u\cdot (x_0,\dots, x_n)=(u^{\alpha_0}x_0,\dots,
+u^{\alpha_n}x_n)$.
+ \end{example}
+ Application to $\M_{1,1}$. Recall that objects of $\M_{1,1}$ are
+pairs
+ $(S,\xymatrix@-1pc{E\ar[r] & S\ar@/_/[l]})$ and morphisms are
+cartesian diagrams.
+ \[\xymatrix{
+    E'\ar[d]\ar[r] & E\ar[d]\\
+    S'\ar[r]\ar@/^/[u] & S\ar@/_/[u]
+ }\]
+  Goal: see this in a weighted projective stack (in fact,
+$\bbar\M_{1,1}\cong
+ \tilde\PP(4,6)$ over $\ZZ[1/6]$).
+
+ Let's start with $Y:(\sch/\ZZ[1/6])^{op}\to \set$, given by $S\mapsto
+ \{(E/S,e,b:\O_S\xrightarrow\sim \w_{E/S})\}/\cong$, where
+$\w_{E/S}=f_*\Om^1_{E/S}$ (this
+ is locally free of rank 1 and commutes with arbitrary base change),
+and where an
+ isomorphism of elliptic curves $\sigma:E\xrightarrow\sim E'$ induces
+an isomorphism
+ $f_*(\sigma):\w_{E/S}\xrightarrow\sim \w_{E'/S}$, and we only allow
+the isomorphisms
+ which work well with $b$ and $b'$. In fact, we could make a
+category, but it turns out
+ that that category is equivalent to this set.
+
+ As a stack, $\M_{1,1}$ should be $Y/\GG_m$ because $b$ is unique up
+to the action of
+ $\GG_m$.
+ \begin{proposition}
+   $Y$ is represented by $Y'=\spec
+\ZZ[1/6][g_2,g_3][1/\Delta]\subseteq
+   \AA^2_{\ZZ[1/6]}$, where $\Delta=g_2^3-27g_3^2$.
+ \end{proposition}
+ The action of $\GG_m$ is given by $g_2\mapsto u^4g_2$, $g_3\mapsto
+u^6g_3$. We'll see
+ that $\M_{1,1}=[Y/\GG_m]$.
+ \begin{proof}
+   (This is in \cite{Hartshorne}) Define $\xymatrix@-1pc{E'\ar[r] &
+Y'\ar@/_/[l]_e}$ by
+   $(2y)^2=4x^3-g_2x-g_3$, with $b'=-dx/2y$ giving us an isomorphism
+   $\O_{Y'}\xrightarrow\sim f_*\Om^1_{E'/Y'}$. So this gives us a
+morphism of functors
+   $Y'\to Y$. To check that it is an isomorphism, we need to show
+that for every scheme
+   $S=\spec A$ (we can assume affine because we could define it as a
+stack and check
+   sheafy, so we can work locally) and $(E,e,b)\in Y(S)$, there
+exists a unique $g_2,g_3$
+   such that $(E,e,b)$ is given by $(E',e',b')_{(g_2,g_3)}$.
+
+   We have $\xymatrix@-1pc{E\ar[r] & \spec A\ar@/_/[l]_e}$. Let $\hat
+   \O_{E,e}=\varprojlim \O_E/\I_e^n\cong A[[T]]$. Choose $T$ such
+that $b=(1+$higher
+   terms$)\cdot dT$; this choice is unique up to $T\mapsto T+$higher
+terms. We have that
+   $f_*\I_e^n$ is locally free of rank $n$ for $n\ge 2$. Shrink a
+little to make it free
+   for $n=2$. Choose a basis $1,x$ for $f_*\I_e^2$ so that
+$x=\frac{1}{T^2}(1+$higher$)$,
+   and choose a basis $1,x,y$ for $f_*\I_e^3$ so that
+$y=\frac{1}{T^3}(1+$higher$)$. Then
+   you get that you can write $y^2+a_1xy+a_3y=x^3+a_2x^2+a_4x+a_6$.
+Exercise: There is a
+   unique choice of $y$ such that $a_1=a_3=0$ and a unique choice of
+$x$ so that $a_2=0$.
+   Thus, we get $y^2=x^3+a_4x+a_6$. Let $g_2=-4a_4$ and $g_3=-4a_6$.
+
+   It remains to see what the action is. Let $u\in
+\GG_m(A)=A^\times$. Then $T$ is
+   replaced by $uT$, $x$ gets replaced by $u^{-2}x$, and $y$ gets
+replaced by $u^{-3}y$.
+   So $g_2$ gets replaced by $u^4g_2$ and $g_3$ gets replaced by
+$u^6g_3$.
+ \end{proof}
+ Upshot: $\M_{1,1}\cong [Y/\GG_m]$.

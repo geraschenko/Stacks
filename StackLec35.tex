@@ -1,0 +1,221 @@
+\sektion{35}{The Lisse-\'etale site on an algebraic stack}
+
+
+\underline{Quasi-coherent sheaves}. We have to define a good topology
+on a stack where the sheaves will live. Let $\X$ be an algebraic
+stack over $S$, then we want a good topos of sheaves on $\X$.
+\begin{itemize}
+ \item \'etale. This is OK for Deligne-Mumford stacks (and is clearly
+the good topology). In general, if $\X$ is an algebraic stack, you
+might try to take objects to be $\Y\to \X$ representable \'etale
+morphisms of algebraic stacks. Then any morphism between two such
+things something. Morphisms are $\X$-morphisms. This gives a site,
+but it doesn't have enough sheaves.
+
+ Let $k=\bbar k$ and let $G/k$ be a connected smooth group scheme
+(like $G=\GG_m$). Then $BG$ has no non-trivial (non-identity) \'etale
+covers. Reason: assume $\Y\to BG$ is \'etale, then
+ \[\xymatrix{
+  Y\ar[r]\ar[d]_{et} & \Y\ar[d]^{et}\\
+  \spec k \ar[r] & BG
+ }\]
+ Then $Y=\coprod \spec k$ with an action of $G$. Since $G$ is
+connected, this is the trivial action. This implies that $\Y$ is a
+disjoint union of copies of $BG$.
+
+ \item flat site (fppf). This is OK, but not great. It is bad for
+differential geometry.
+
+ \item lisse-\'etale, which has its own problems, but it is the best
+we can do.
+\end{itemize}
+
+\begin{definition}
+  Let $\X$ be an algebraic stack over $S$. The \emph{lisse-\'etale
+site} $\Liset(\X)$ of $\X$ has objects smooth morphisms $u:U\to \X$
+with $U$ an algebraic space (notation: we will denote such an object
+by $(U,u)$) and morphisms $(U,u)\to (V,v)$ are pairs $(f,f^\flat)$
+where $f:U\to V$ is an $S$-morphism and $f^\flat:u\to v$ is an
+(automatically cartesian) arrow in $\X$ over $f$. A collection
+$\{(U_i,u_i)\xrightarrow{(f_i,f_i^\flat)} (V,v)\}$ is a covering if
+$\coprod U_i\to V$ is \'etale surjective. Let $\X_\liset $ be the
+associated topos. We define the structure sheaf $\O_{\X_\liset }$ to
+be $(U,u)\mapsto \Ga(U_{et},\O_{U_{et}})$.
+\end{definition}
+\begin{remark}
+  Concretely, to give a sheaf $F$ in this site is equivalent to a
+sheaf $F_{(U,u)}$ on the \'etale site $U_{et}$ for every object
+$(U,u)\in \Liset(\X)$ and transition maps (don't have to be
+isomorphisms) $\phi_f:f^{-1}F_{(V,v)}\to F_{(U,u)}$ for every
+morphism $(f,f^\flat):(U,u)\to (V,v)$ compatible with composition
+($\phi_{gf}=\phi_f \circ f^{-1}\phi_{g}$) \anton{I think we have to
+require that when $f$ is \'etale, $\phi_f$ is an isomorphism. This is
+to verify the sheaf condition on the lisse-\'etale sheaf you build
+from such data}.
+
+  \anton{write out the verification better} Given a sheaf $F\in
+\X_\liset$, we define $F_{(U,u)}$ to be the restriction of $F$ to the
+small \'etale site of $U$. It is easy to see that the sheaf condition
+on $F$ implies the sheaf condition on $F_{(U,u)}$. For a morphism
+$f^\flat:u\to v$ (which projects to $f:U\to V$), we get a morphism
+$f^{-1}F_{(V,v)}\to F_{(U,u)}$ by the universal property of limits
+(you have to remember the definition of $f^{-1}$); since this is
+defined by a universal property, it probably automatically plays well
+with composition. Note that if $f$ is \'etale, then this map is an
+isomorphism (because the directed system over which you take a limit
+has a terminal object).
+
+  Conversely, if you have the data, define $F(U,u):=F_{(U,u)}(\id_U)$
+and observe that the $\phi_f$ give you restriction maps. The sheaf
+axiom follows from the fact that $\phi_f$ is an isomorphism when $f$
+is \'etale. \anton{complete this}
+\end{remark}
+\begin{remark}
+  If $\X$ is an algebraic space, then this is as close to the \'etale
+topology as you can get: the inclusion $Et(\X)\hookrightarrow
+\Liset(\X)$ is continuous and $Et(\X)$ has finite projective limits,
+so we get a morphism of topoi $\e:\X_\liset \to \X_{et}$. Note that
+$\e_*$ is exact: $\e_*F=F_{(\X,\id_\X)}$ is exact because do
+something on each \'etale something \anton{}.
+\end{remark}
+
+It might be true that the Lisse-Lisse site gives you the same topos
+(even though it looks like it should give a smaller topos) because
+every smooth morphism \'etale locally has a section. I dunno.
+
+\begin{example}
+  $\Liset(\M_{1,1})$ has objects pairs $(U,E_U)$ where $U$ is an
+algebraic space and $E_U$ is an elliptic curve over $U$ such that
+$E_U:U\to \M_{1,1}$ is smooth \anton{how should I think about this
+condition?}. Morphisms incorporate the automorphisms: a morphism
+$(U,E_U)\to (V,E_V)$ is a cartesian diagram
+%   \[\xymatrix{
+%     E_U\ar[r]^{f^\flat}\ar[d] & E_V\ar[d]\\
+%     U\ar[r]^f & V
+%   }\]
+  \[\xymatrix{
+   E_U\ar[d]\ar[r]^{f^\flat} & E_V\ar[d]\\
+   U\ar[r]^f \ar@/^/[u]^{e_U} & V \ar@/_/[u]_{e_V}
+  }\]
+  You have choices for $f^\flat$.
+
+  What is an example of a sheaf? If $(U,E_U)$ is an object, define
+$\w_U=e^*\Om^1_{E_U/U}$ ($e$ is the section $U\to E_U$), which is a
+locally free sheaf of rank 1 on $U_{et}$. We have a cartesian diagram
+as above. Then we get $f^*e_V^*\Om^1_{E_V/V}\cong e_U^*\Om^1_{E_U/U}$
+\anton{here upper $f^*$ means $f^{-1}$; note that
+$\Om^1_{E_U/U}=f^{\flat*}\Om^1_{E_V/V}$} so we get a sheaf $\w\in
+\M_{1,1,\liset}$. This would work even in the big fppf site.
+
+  Note that this is an $\O_{\M_{1,1}}$-module.
+\end{example}
+\begin{definition}
+  A sheaf $F$ of $\O_\X$-modules is \emph{quasi-coherent} if each
+$F_{(U,u)}$ is quasi-coherent and for every morphism
+$(f,f^\flat):(U,u)\to (V,v)$, the map $f^\star F_{(V,v)}\to
+F_{(U,u)}$ is an isomorphism.
+\end{definition}
+If $F_{(V,v)}$ is a sheaf of ideals and $f$ is not flat, then
+$f^*F_{(V,v)}$ need not be a sheaf of ideals \dots we'll take care of
+this later.
+\begin{remark}
+  We can also talk about locally free sheaves of finite rank (each
+$F_{(U,u)}$ should be locally free of finite rank). In the locally
+noetherian case, we can talk about coherent sheaves. If $\X$ is an
+algebraic space, a sheaf $F$ of $\O_{\X_\liset }$-modules is
+quasi-coherent if and only if $F_X=\e_*F$ is quasi-coherent and the
+adjunction map $\e^*F_\X=\e^*\e_*F\to F$ is an isomorphism.
+\anton{this gives an equivalence of categories of quasi-coherent
+sheaves?}
+\end{remark}
+\begin{example}
+  Let $k$ be a field, and let $G$ be a smooth group scheme over $k$.
+Then $\qco(BG)\cong Rep_k(G)$.
+  \[\xymatrix{
+   F \spec k\ar[r]^{f_g}& \spec k, F \rlap{$k$-vector space}\ar[d]  \\
+   & BG, \F \rlap{quasi-coherent sheaf}
+  }\]
+  for every $g\in G(k)$, you get a map $f_g$ (something about the
+${}^\flat$s). Thus, we get an action of $G(k)$ on $F$. Exercise to
+check that this actually defines an equivalence of categories.
+
+  What is $H^0(BG,\F)$? $\spec k\to BG$ is a smooth surjection, so
+$H^0(BG,\F)\hookrightarrow F$.
+  \[\xymatrix{
+    & \spec k\ar[d]\\
+   T\ar[r]\ar[ur]^{et\ locally} & BG
+  }\]
+  It turns out that $H^0(BG,\F)\cong F^G$. This can be generalized to
+$\X=[Y/G]$ over any base $S$ where quasi-coherent sheaves become
+$G$-linearized and \dots
+\end{example}
+\underline{Functoriality}: If $f:\X\to \Y$ is a morphism of algebraic
+stacks, we have no hope of getting a morphism of topoi \anton{we saw
+this for schemes?}. We want adjoint functors $f_*:\X_\liset \to
+\Y_\liset $ and $f^{-1}:\Y_\liset \to \X_\liset $. $f^{-1}$ is not
+exact, so this is not a morphism of topoi.
+ 
+If $f$ is representable, then we have a continuous map $\Liset(\Y)\to
+\Liset(\X)$ given by $(U\xrightarrow u \Y)\mapsto (U\times_\Y \X\to
+\X)$. To get the functors $f_*$ and $f^{-1}$, there are two options:
+
+(1) note that in the definition of the lisse-\'etale site, we could
+have taken morphisms from stacks instead of from algebraic spaces.
+Define $\widetilde{\Liset}(\X)$ to have objects representable smooth
+morphisms $\U\to \X$ and morphisms are
+\[\xymatrix{
+ \U\ar[rr]^f \ar[dr]^{}="a" & & \U'\ar[dl]_(.2){}="b"\\
+ & \X
+ \ar@{=>}^{f^\flat} "a";"b"
+}\]
+Then check that this gives you the same topos.
+
+(2) First define $f^{-1}$ on representable sheaves. If $y:Y\to \Y$ is
+smooth and $u:U\to \Y$, then
+$h_{(Y,y)}(U,u)=\hom_{lis-et(\Y)}\bigl((U,u),(Y,y)\bigr)$. Then
+$f^{-1}(h_{(Y,y)})(U\to \X)=\Bigl\{ \xymatrix{U\ar[d]_u \ar[r] &
+Y\ar[d]^y_{}="b"\\ \X\ar[r]^{}="a" & \Y \ar@{=>} "a";"b"}\Bigr\}$.
+Then define $(f_*F)(Y\xrightarrow y \Y) = \hom_{\Y_\liset
+}(h_{(Y,y)},f_*F) = \hom_{\X_\liset
+}(f^{-1}h_{(Y,y)},F)=\Ga(\X_\liset |_{f^{-1}(Y,y)},F)$
+
+Recall that if $T$ is a topos and $G\in T$, then we can define $T/G$,
+which turns out to be a topos. For $G\in \Y_\liset $, define $(\hat
+f^{-1} G)(U\xrightarrow u \X)$ to be the limit over $I_{(U,u)}$, the
+category of diagrams
+ \[\xymatrix{U\ar[d]_u \ar[r] & V\ar[d]^v_{}="b"\\
+ \X\ar[r]^{}="a" & \Y \ar@{=>} "a";"b"}
+ \]
+ of $G(V,v)$. Then $f^{-1}G$ is the sheaf associated to the presheaf
+$\hat f^{-1}G$.
+\begin{remark}
+  $I_{(U,u)}$ is not filtering, which is what ruins the exactness of
+$f^{-1}$.
+\end{remark}
+\begin{remark}
+  There is a natural map $f^{-1}\O_{\Y_\liset }\to \O_{\X_\liset }$.
+So we can define $f^*G=f^{-1}G\otimes_{f^{-1}\O_{\Y_\liset
+}}\O_{\X_\liset }$ for an $\O_\Y$-module $G$.
+\end{remark}
+\begin{proposition}
+  Let $G$ be a quasi-coherent sheaf on $\Y$. Then $f^*G$ is also
+quasi-coherent.
+\end{proposition}
+\begin{proof}
+  Note that $f^*G=(\hat f^{-1}G\otimes_{f^{-1}\O_\Y} \O_\X)^a$
+because they have the same universal property \dots use the
+adjunction. We need to compute $\lim_{I_{(U,u)}} (\tilde f^*
+G_V)(U)$. Define $\bbar I_{(U,u)}$ to be the poset whose elements are
+$(g:U\to V)\in \I_{(U,u)}$ where we say that $(g:U\to V)\ge (g':U\to
+V')$ if there exists a $V\to V'$ in $I_{(U,u)}$.
+
+  The category $I_{(U,u)}$ is almost filtering; we just squash
+multiple arrows together.
+
+  We have a surjection $I_{(U,u)}\to \bbar I_{(U,u)}$. The claim is
+that
+  \[\xymatrix{
+   I_{(U,u)}\ar[dr]\ar[rr]^{\tilde f^*G_V} & & \Ga(U,\O_U)\mod\\
+   & \bbar I_{(U,u)}\ar@{-->}[ur]
+  }\]
+\end{proof}

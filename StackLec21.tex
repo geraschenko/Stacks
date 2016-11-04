@@ -1,0 +1,247 @@
+\sektion{21}{Fibered categories}
+
+ A very good reference for this upcoming stuff is \cite{Vistoli}. Vistoli does more than
+ we will.
+
+ The impression is that a lot of people got lost in the details of
+ algebraic spaces. That's ok, because we're about to do it all over again (in some sense).
+ \[\begin{tabular}{l|l}
+   algebraic spaces & Artin stacks\\ \hline
+   a sheaf $X$ & a stack in groupoids $\X$\\
+   $\Delta_X$ representable by schemes & $\Delta_\X$ representable by algebraic spaces\\
+   \'etale surjection from a scheme & smooth surjection from an algebraic space
+ \end{tabular}\]
+ Note that the smooth surjection from an algebraic space may as well be from a scheme
+ since any algebraic space is smoothly covered by a scheme.
+
+ \bigskip
+ Let's say we want to study genus $g$ curves. Then we'd like to say there is a functor
+ $\M_g:\sch^{op}\to\cat$, given by $S\mapsto \M_g(S)$, whose objects are proper smooth
+ morphisms $B\to S$ whose geometric fibers are connected genus $g$ curves and whose
+ morphisms are $S$-isomorphisms. However, the pullback functors $f^*:\M_g(S)\to
+ \M_g(S')$ associated to morphisms $f:S'\to S$ do not behave nicely with respect to
+ composition. We have that $(fg)^*$ is canonically isomorphic to $g^*f^*$, but not
+ \emph{equal} to it. That is, $\M_g:\sch^{op}\to \cat$ is a lax 2-functor. To get a
+ better understanding of such things, we need to build up some machinery. \anton{maybe
+ this is worth shortening since it gets repeated} The problem is that we do not have a
+ canonical choice for the pullback of a curve along a morphism.
+
+ Sometimes people say that a stack is is a ``category-valued functor'', but that isn't
+ right because it is really a category-valued lax 2-functor. \anton{or something like that}
+
+ \begin{definition}
+   Let $\C$ be any category. Then a \emph{category over $\C$} is a category $\F$ with a
+   functor $p:\F\to \C$.
+ \end{definition}
+ \begin{example}
+   Let $\C=\sch$. Then we define $\M_g$ to be the category whose objects are pairs
+   $(S,B/S)$ where $S$ is a scheme and $B\to S$ is a proper smooth morphism whose
+   geometric fibers are connected genus $g$ curves. The morphisms $(S',B'/S')\to (S,B/S)$
+   are cartesian diagrams
+   \[\xymatrix{
+    B'\ar[d]\ar[r]^{\tilde f} \ar@{}[dr]|(.25)\pb & B\ar[d]\\
+    S'\ar[r]^f & S
+   }\]
+   The functor $p:\M_g\to \sch$ is given by $(S,B/S)\mapsto S$.
+ \end{example}
+
+ \begin{definition}
+   Let $p:\F\to \C$ be a category over $\C$. An arrow $\phi:\xi\to \eta$ in $\F$ is called
+   \emph{cartesian} if for any $\psi:\zeta\to \eta$ and for any $h:p(\zeta)\to p(\xi)$
+   such that $p(\psi)=p(\phi)\circ h$, there exists a unique $\theta:\zeta\to \xi$ so
+   that $\psi=\phi\circ \theta$.
+   \[\xymatrix@R-1.5pc{
+    \zeta \ar@{|->}[dd]\ar@{-->}[dr]_{\exists! \theta} \ar@/^/[rrd]^{\forall \psi}\\
+     & \xi\ar@{|->}[dd] \ar[r]_\phi & \eta \ar@{|->}[dd]\\
+    p(\zeta) \ar[dr]_{\forall h} \ar@/^/[rrd]^(.65){p(\psi)}|!{[ru];[rd]}\hole \\
+    & p(\xi) \ar[r]_{p(\phi)} & p(\eta)
+   }\]
+    In this case, $\xi$ is called a \emph{pullback of $\eta$ to $p(\xi)$}.
+ \end{definition}
+ \begin{definition}
+   let $p:\F\to \C$ be a category over $\C$, and let $U\in \C$. We define the \emph{fiber}
+   $\F(U)$ to be the sub-category of $\F$ whose objects are $\xi\in \F$ such that $p(\xi)=U$
+   and whose morphisms are $\phi:\xi'\to \xi$ in $\F$ such that $p(\phi)=\id_U$. That is,
+   $\F(U)$ is the subcategory of $\F$ whose objects lie over $U$ and whose morphisms lie
+   over $\id_U$.
+ \end{definition}
+ \begin{definition}
+   A \emph{fibered category} over $\C$ is a category over $\C$ $p:\F\to \C$ such that for
+   every arrow $f:U\to V$ in $\C$ and every $\xi\in \F(V)$, there exists $\eta\in \F(U)$
+   and a cartesian arrow $\phi:\eta\to \xi$ with $p(\phi)=f$.
+ \end{definition}
+ \begin{remark}
+   A fibered category over $\C$ is a category over $\C$ in which pullbacks always exist.
+   It is an easy exercise to check that different pullbacks are unique up to unique
+   isomorphism.
+ \end{remark}
+ \begin{example}
+   $\M_g$ is a fibered category over $\sch$. In fact, every arrow in $\M_g$ is cartesian.
+   \anton{expand?}
+ \end{example}
+ \begin{example}[``representable fibered
+ categories'']\label{lec21Eg:representable_fibered_categories}
+   Let $\C$ be a category and let $X\in \C$. Then $\C/X$ is a fibered category over $\C$
+   in which every arrow is cartesian. To see this, let $Y''$, $Y'$, and $Y$ be objects
+   over $X$, let $\phi$ and $\psi$ be $X$-morphisms, and let $h$ be a morphism such that
+   $\psi=\phi\circ h$.
+   \[\xymatrix@R-1.5pc{
+    (Y''\to X) \ar@{|->}[dd]\ar@{-->}[dr] \ar@/^/[rrd]^{\psi}\\
+     & (Y'\to X)\ar@{|->}[dd] \ar[r]_\phi & (Y\to X) \ar@{|->}[dd]\\
+    Y'' \ar[dr]_{h} \ar@/^/[rrd]^(.65){\psi}|!{[ru];[rd]}\hole \\
+    & Y' \ar[r]_{\phi} & Y
+   }\qquad\qquad
+   \xymatrix@R-.5pc{
+    Y'' \ar[rr]^h \ar[dr]^\psi \ar[ddr] & & Y'\ar[dl]_\phi \ar[ddl]\\
+    & Y\ar[d]\\ & X
+   }\]
+    Then $h$ is an $X$-morphism (the outer triangle on the right is composed of three
+   commutative triangles, so it is commutative), and the only $X$-morphism from $Y''$ to
+   $Y'$ which ``projects'' to $h$ when you forget about the maps to $X$ is $h$ itself.
+ \end{example}
+ In the next lecture, we'll prove an analogue of Yoneda's lemma for fibered categories,
+ which will say roughly that the construction above gives a fully faithful embedding of
+ $\C$ into the category of fibered categories over $\C$.
+ \begin{definition}
+   Let $\F$ and $\G$ be fibered categories over $\C$. Then a \emph{morphism of fibered
+   categories} $f:\F\to \G$ is a functor such that
+   \begin{enumerate}
+     \item $p_\G\circ f=p_\F$ (actual equality!)
+     \item $f$ sends cartesian arrows to cartesian arrows. \qedhere
+   \end{enumerate}
+ \end{definition}
+ \begin{remark}
+   One can restrict a morphism of fibered categories to the fibers. If $\xi\in \F$, with
+   $p_\F(\xi)=U$, then $p_\G(f(\xi))=p_\F(U)=U$, and if $\phi:\xi'\to \xi$ is a morphism in
+   $\F(U)$, then $p_\G(f(\phi))=p_\F(\phi)=\id_U$.
+%    by the definition of a
+%   morphism of fibered categories.
+%   \[\xymatrix@C-1pc{
+%      \xi'\ar[d]_\phi & & f(\xi') \ar[d]^{f(\phi)}\\
+%      \xi\ar@{|->}[dr] & & f(\xi)\ar@{|->}[dl]\\
+%      & U
+%   }\]
+ \end{remark}
+ Why can you actually demand equality in the first condition? Let $\M_{1,1}$ be the
+ category of pairs $(S,E/S)$, where $E$ is an elliptic curve over $S$. Then we have a
+ functor $J:\M_{1,1}\to \M_{1,1}$ given by $(S,E/S)\mapsto (S,Jac(E)/S)$. Note that the
+ equality is strict. It just so happens that $J$ is isomorphic to the identity functor.
+ \anton{I don't understand what this paragraph is doing.}
+ \begin{definition}
+   If $g,g':\F\to \G$ are two morphisms of fibered categories, then a \emph{base-preserving
+   natural transformation} $\alpha:g\to g'$ is a natural transformation such that for
+   every $\xi\in \F$, the arrow $\alpha_\xi:g(\xi)\to g'(\xi)$ projects to the identity in
+   $\C$. That is, a base-preserving natural transformation is one which restricts to a
+   natural transformation on each fiber. Define the category $\HOM_\C(\F,\G)$, whose
+   objects are morphisms of fibered categories, and whose morphisms are base-preserving
+   natural transformations.
+ \end{definition}
+ \begin{remark}
+   The composition of two morphisms of fibered categories is a morphism of fibered
+   categories, and the composition of two base-preserving natural transformations (in
+   either way)\footnote{There are two ways to compose natural transformations: (1) if
+   $F,G,H:\C\to \D$ are functors and $\eta:F\to G$ and $\tau:G\to H$ are natural
+   transformations, then $\tau\cdot \eta:F\to H$ is a natural transformation, and (2) if
+   $F,G:\C\to \D$ and $F',G':\D\to \E$ are functors, and $\eta:F\to G$ and $\eta':F'\to
+   G'$ are natural transformations, then $\eta'\circ\eta:F'\circ F\to G'\circ G$ is a
+   natural transformation. A 2-category must have two such flavors of composition of
+   2-morphisms. See Appendix \ref{ApdxSec:2-categories}.} is a base-preserving natural transformation. Thus, we have \emph{the
+   2-category of fibered categories over $\C$}.
+ \end{remark}
+ \begin{definition}
+   A morphism of fibered categories $f:\F\to \G$ is an \emph{equivalence} if there exists a
+   morphisms $g:\G\to \F$ such that $f\circ g\cong \id_\G$ in $\HOM_\C(\G,\G)$ and $g\circ
+   f\cong \id_\F$ in $\HOM_\C(\F,\F)$. That is, both compositions should be identities up to
+   2-morphisms.
+ \end{definition}
+ Next we will prove that equivalences of fibered categories ``can be checked on fibers''
+ (Proposition \ref{lec21P:check_equivs_on_fibers}). First we'll need to prove the
+ following lemma.
+ \begin{lemma}\label{lec21L:full_faithfulness_on_fibers}
+   Let $f:\F\to \G$ be a morphism of fibered categories such that for every $U\in \C$, the
+   functor $f_U:\F(U)\to G(U)$ is fully faithful. Then $f$ is fully faithful.
+ \end{lemma}
+ \begin{proof}
+   Given $x,y\in \F$ and an arrow $\phi:f(x)\to f(y)$, we wish to show that there exists a
+   unique arrow $\psi:x\to y$ such that $f(\psi)=\phi$. Let $U=p_\F(x) =
+   p_\G(f(x))$, $V=p_\F(y)=p_\G(f(y))$, and let $\bar\phi=p_\F(\phi):U\to V$.
+   \[\xymatrix{
+    x \ar@{-->}[dr]^\psi \ar[d]_{\chi} \\
+    \tilde y \ar@{|->}[d] \ar[r]_{\exists h}^{\text{cart}}& y \ar@{|->}[d]\\
+    U\ar[r]^{\bar\phi} \ar@(dl,ul)^{\id_U} & V
+   }\qquad\qquad \xymatrix{
+    f(x)\ar@{-->}[d]_{\exists ! \e} \ar[dr]^\phi \\
+    f(\tilde y)\ar[r]_{f(h)} \ar@{|->}[d]& f(y)\ar@{|->}[d] \\
+    U\ar[r]^{\bar\phi} \ar@(dl,ul)^{\id_U} & V
+   }\]
+    Since $\F$ is a fibered category, there is some cartesian arrow $h:\tilde y\to y$ lying
+   over $\bar\phi$. Since $f$ is a morphism of fibered categories, we have that $f(h)$ is
+   cartesian. Thus, there is a unique $\e$ with $p_\G(\e)=\id_U$ which makes the top
+   triangle on the right commute. Since $f_U$ is fully faithful, $\e=f(\chi)$ for a
+   unique morphism $\chi:x\to \tilde y$, with $p_\F(\chi)=\id_U$. Then we can take
+   $\psi=h\circ \chi$.
+
+   Finally, one checks uniqueness. Let $\psi':x\to y$, with $f(\psi')=\phi$. Then by
+   cartesian-ness of $h$, we get some map $\chi':x\to \tilde y$ so that
+   $p_\F(\chi')=\id_U$ and $\psi'=h\circ \chi'$. Since $\phi=f(\psi')=f(h)\circ f(\chi')$,
+   cartesian-ness of $f(h)$ tells us that $f(\chi')=\e$. Since $f_U$ is fully faithful,
+   this implies that $\chi'=\chi$, so $\psi'=\psi$.
+ \end{proof}
+ \begin{proposition} \label{lec21P:check_equivs_on_fibers}
+   Let $f:\F\to \G$ be a morphism of fibered categories. Then $f$ is an equivalence of
+   fibered categories if and only if for every object $U\in \C$, the restriction
+   $f_U:\F(U)\to \G(U)$ is an equivalence of categories in the usual sense.
+ \end{proposition}
+ \begin{proof}
+   ($\Rightarrow$) Let $g:\G\to \F$ be an inverse for $f$, so we have base-preserving
+   natural isomorphisms $f\circ g\cong \id_\G$ and $g\circ f\cong \id_\F$. These restrict
+   to isomorphisms $f_U\circ g_U\cong \id_{\G(U)}$ and $g_U\circ f_U\cong \id_{\F(U)}$.
+
+   $(\Leftarrow)$ We need to find some $g:\G\to \F$ such that $f\circ g\cong \id_\G$ and
+   $g\circ f\cong \id_\F$. For every $U\in \C$, we have a functor $g_U$ and natural
+   isomorphisms $\alpha_U:\id_\G\to f_Ug_U$ and $\beta_U:g_Uf_U\to \id_\F$.
+
+   For an object $y\in \G$, define $g(y):=g_{p_\G(y)}(y)$. By Lemma
+   \ref{lec21L:full_faithfulness_on_fibers}, $f$ is fully faithful, so for any arrow
+   $\phi:y\to y'$ in $\G$, there exists a unique arrow $g(\phi):g(y)\to g(y')$ such that
+   the following diagram commutes. That is, there is a unique arrow $g(\phi)$ so that
+   $f(g(\phi))=\alpha(y')\circ \phi \circ \alpha(y)^{-1}$.
+   \[\xymatrix@C+1pc{
+    y\ar[r]^\phi \ar[d]_{\alpha(y)}^\wr & y'\ar[d]^{\alpha(y')}_\wr \\
+    f(g(y))\ar[r]^{f(g(\phi))} & f(g(y'))
+   }\]
+    Note that $g$ respects identity arrows and composition, so it is a functor (though we
+   still don't know that it sends cartesian arrows to cartesian arrows). By the way we
+   have defined $g$, the $\alpha_U$ glue together to give us a (base-preserving) natural
+   isomorphism $\alpha:\id_\G\to f\circ g$. Given any $x\in \F$, this gives us an
+   isomorphism $\alpha(f(x)):f(x)\to f\bigl(g(f(x))\bigr)$ with
+   $p_\G\bigl(\alpha(f(x))\bigr)=\id_{p_\G(f(x))}$. By full faithfulness of $f$,
+   $\alpha(f(x))=f(\beta(x))$ for some unique isomorphism $\beta(x):x\to g(f(x))$ with
+   $p_\F(\beta(x))=\id_{p_\F(x)}$. Since $f(\beta)$ is a natural transformation,
+   $\beta:\id_\F\to g\circ f$ is a natural transformation (base-preserving by
+   construction). Thus, $g$ is an inverse to $f$.
+
+   Finally, we must check that $g$ is a morphism of fibered categories (i.e.~that it takes
+   cartesian arrows to cartesian arrows). Let $\phi:y\to y'$ be a cartesian arrow in $\G$,
+   let $\psi:z\to g(y')$, and let $h:p_\F(z)\to p_\F(g(y))$ such that
+   $p_\F(\psi)=p_\F(g(\phi))\circ h$. We'd like to show that we can fill in the dashed
+   arrow on the left uniquely.
+   \[\xymatrix@R-1.5pc{
+                                                     & & & &
+        & y \ar[r]^\phi \ar[dd]^(.35){\alpha(y')}_(.35)\wr & y' \ar[dd]^{\alpha(y)}_\wr \\
+    z \ar@{|->}[dd]\ar@{-->}[dr] \ar@/^/[rrd]^{\psi} & & & &
+        f(z) \ar@{|->}[dd]_(1.25){\qquad}="a2"_(.25){\qquad}="b2" \ar@{-->}[dr] \ar@/^/[rrd]^(.7){f(\psi)}|!{[ru];[rd]}\hole \\
+    & g(y)\ar@{|->}[dd] \ar[r]_\phi & g(y') \ar@{|->}[dd]^(.75){\qquad}="a1"^(-.25){\qquad}="b1" & & &
+        f(g(y)) \ar@{|->}[dd]\ar[r]_{f(g(\phi))}& f(g(y'))\ar@{|->}[dd]\\
+    p_\F(z) \ar[dr]_{h} \ar@/^/[rrd]^(.65){p_\F(\psi)}|!{[ru];[rd]}\hole & & & &
+        p_\G(f(z))\ar[dr]_{f(h)} \ar@/^/[rrd]^(.7){p_\G(f(\psi))}|!{[ru];[rd]}\hole\\
+    & p_\F(g(y)) \ar[r]_{p_\F(\phi)} & p_\F(g(y')) & & &
+        p_\G(y) \ar[r]_{p_\G(f(\phi))} & p_\G(y')
+    \ar@{=>}^{\txt{$\id_\C$}} "a1";"a2"
+    \ar@{=>}^{\txt{$f$}} "b1";"b2"
+   }\]
+   Applying $f$ the the diagram on the left, we get the diagram on the right. Since
+   $\phi$ is cartesian, there is a unique way to fill in the dashed arrow in the diagram
+   on the right. Since $f$ is fully faithful, there is a unique way to fill in the dashed
+   arrow in the diagram on the left.
+ \end{proof}

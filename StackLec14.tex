@@ -1,0 +1,101 @@
+\sektion{14}{Affine/(Finite \'Etale Relation) = Affine, Part II}
+
+
+ \begin{example} \label{lec14Eg:Quot_by_finite_group}
+   If $U=\spec A$ and $G$ is a finite group which acts freely on on the right of $U$ (we
+   need the action to be free to get a relation rather than a pre-relation). Then
+   $R_G=U\times G\to U\times U$ is given by $(u,g)\mapsto \bigl(g(u),u\bigr)$. The right
+   action of $G$ on $U$ induces a left action of $G$ on $A$: for $g\in G$, the
+   isomorphism $-\cdot g^{-1}:U\xrightarrow\sim U$ corresponds to some isomorphism
+   $g\cdot -:A\xleftarrow\sim A$. The two projections $R\to U$ correspond to the two
+   morphisms $A\to \prod_{g\in G} A$ given by $a\mapsto (ga)_{g\in G}$ \anton{or maybe
+   $(g^{-1}a)_{g\in G}$} and $a\mapsto (a)_{g\in G}$. The equalizer (which we called $B$)
+   is the ring $A^G$ of invariants of $A$ under the $G$-action. By the theorem, $\spec
+   A^G$ is the sheaf quotient of $U$ by the $G$-action.
+
+   Even if the action of $G$ on $U$ is not free, $R_G=U\times G\to U\times U$ is a
+   pre-relation, so Lemma \anton{exact as schemes} tells us that $\spec A^G$ is the
+   \emph{categorical quotient} of $U$ by $G$. That is, $\spec A^G$ satisfies the right
+   universal property in the category of schemes (that any $G$-invariant morphism from
+   $U=\spec A$ factors through $\spec A^G$). The interesting thing in the case of a free
+   action is that the morphism $\spec A\to \spec A^G$ is \'etale.
+%   \anton{how does the $G$-action on $U$ translate into a $G$-action
+%   on $A$?} , and the quotient $U/R$ is $\spec (A^G)$. This theorem will show that this
+%   is the algebraic space quotient. The main thing in the proof is that we have to show
+%   that $\spec A\to \spec A^G$ is finite \'etale, with $A\times_{A^G}A\xrightarrow\sim
+%   \prod_g A$. This generalizes Galois theory stuff.
+ \end{example}
+
+ \begin{corollary}\label{lec14C:sep_algsp->dense_subscheme}
+   Let $X$ be an algebraic space with quasi-compact diagonal morphism. Then there exists
+   a scheme $V$ and a dense open immersion $j:V\hookrightarrow X$ (we make sense of this
+   even though ``dominant'' is not stable; for any \'etale morphism from a scheme $Z\to
+   X$, $Z\times_X V\to Z$ must be a dominant open immersion).
+ \end{corollary}
+ \begin{proof}
+   Choose an \'etale cover $U\to X$ and set $R=U\times_X U$, so $X=U/R$. If $U_i$ are
+   quasi-compact open subschemes which cover $U$, then we define $R_i=R\times_{U\times
+   U}(U_i\times U_i)$ and $X_i=U_i/R_i$. Check that $X_i\to X$ are open
+   immersions.\footnote{Check that $X_i(T)=\{f\in X(T)| T\times_X U\to T \text{
+   surjective}\}$. In general, $T\times_X U\to T$ is \'etale, so its image is open in
+   $T$; this open subset is $T\times_X X_i$. This shows that $X_i\to X$ is an open
+   immersion.} If we could find dominant open immersions of schemes $V_i\to X_i$, then
+   they would glue to give a dominant open immersion $V\to X$. Thus, we have reduced to
+   the case where $X$ is quasi-compact (quasi-compact is not stable; we just mean that it
+   is \'etale covered by something quasi-compact).
+
+   We may assume $U$ is quasi-compact. Choose a dense open affine subset $W\subseteq U$
+   (note that you can always do this \anton{}). Then we can get the obvious restriction
+   $R_W=R\times_{U\times U} (W\times W)$. Since $\Delta_X$ is quasi-compact and $U\times
+   U\to X\times X$ is \'etale \anton{is $\Delta_X$ q-compact enough?}, $R\to U\times U$
+   is quasi-compact. Since $U$ is quasi-compact, the projections $U\times U\to U$ are
+   quasi-compact. Thus, the projections $R\to U$ are quasi-compact as well as \'etale, so
+   $R_W\to W$ are quasi-compact and \'etale. A quasi-compact \'etale map is
+   quasi-finite,\footnote{Quasi-finite means that geometric fibers are finite.
+   Quasi-compact and \'etale imply finite because the only \'etale extensions of an
+   algebraically closed field $\Om$ are disjoints unions of copies of $\Om$;
+   quasi-compactness implies that they must be finite disjoint unions.} and there is some
+   kind of semi-continuity result \anton{} which tells us that there is a dense open
+   subset $W'\subseteq W$ where $R_{W'}\to W$ are finite. We may choose $W'$ to be
+   affine, so then $R_{W'}$ will be affine since it is finite over affine. By the
+   theorem, $W'/R_{W'}$ is an affine scheme. Now we have a dominant open immersion
+   $W'/R_{W'}\to X$.\anton{}
+%
+%    Then $W/R_W\hookrightarrow X$ is an open
+%   immersion (of an affine scheme by the theorem\anton{somehow the theorem applies}).
+%   \anton{morphisms $Z\to U/R$ factor through $U$ \emph{locally}. Then use some descent
+%   for open immersions.}
+%
+%   Thus, we may assume $X$ is quasi-compact (cover it by quasi-compact guys). Choose $W$
+%   to be dense open and the projections $R_W\rightrightarrows W$ finite. \anton{how's
+%   this done?}
+%   \[\xymatrix{
+%    U\ar[d] & W\ar@{_(->}[l]\\
+%    X
+%   }\]
+ \end{proof}
+
+ \begin{example}
+   Consider $\CC[x,y]$ with an action of $\ZZ/2$, given by $x,y\mapsto -x,-y$. If you
+   take invariants, the invariant ring is generated by $x^2=z,y^2=w,xy=u$, so it is
+   $\CC[z,w,u]/(zw=u^2)$. So we get a map $U=\spec \CC[x,y] \to \spec \CC[z,w,u]/(zw=u^2)$
+   \anton{which is not \'etale}, so that for any morphism $\spec \CC[x,y]\to T$ which is
+   $\ZZ/2$-invariant, it factors uniquely.
+
+   Here $\ZZ/2\times U\to U\times U$ is not a monomorphism. Something is still \'etale,
+   but not an equivalence relation. What we've constructed here is the quotient in the
+   category of ringed spaces.
+ \end{example}
+ \begin{remark}
+   For non-free group actions, the quotient construction does not commute with base
+   change. In the free case, we have
+   \[\xymatrix{
+    R\ar@<.5ex>[d] \ar@<-.5ex>[d] \\
+    U\ar[d]\\
+    U/R \ar[d] & U'/R' \ar[l] \ar[d]\\
+    S & S'\ar[l]
+   }\]
+   If your group has order prime to the residue characteristic, then it still commutes
+   with base change because invariants is an exact functor and the representation
+   category is semi-simple.
+ \end{remark}

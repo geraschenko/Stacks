@@ -1,0 +1,301 @@
+\sektion{23}{Split fibered categories}
+
+ People like to think of fibered categories $\F\to \C$ as functors $\C^{op}\to \cat$,
+ with $U\mapsto \F(U)$, but this is really not correct. If $\F$ were a functor, then a
+ morphism $f:V\to U$ would induce a functor $\F f:\F(U)\to \F(V)$, and it doesn't. We'd
+ like to say that for an object $u\in \F(U)$, we should define $\F f(u)$ as ``the''
+ pullback $f^*u$ along $f$, but this requires us to choose a cartesian arrow lying over
+ $f$, and there may be many of them.
+
+ To fix this problem, we can add some information. A \emph{cleavage} of a fibered
+ category is a choice of cartesian arrow for each arrow in $\C$ and each object in the
+ fiber of its target. Given a fibered category and a cleavage, a morphism $f:V\to U$
+ induces a functor $\F f=f^*:\F(U)\to \F(V)$, but all is not well. The identity
+ morphism $\id_U:U\to U$ does not necessarily produce the identity functor (though this
+ can be fixed by insisting that the cartesian arrow over an identity arrow is an identity
+ arrow), and the functor $(f\circ g)^*$ does not necessarily equal the composite $g^*
+ \circ f^*$ (i.e.~your choices of cartesian arrows don't compose well). A
+ \emph{splitting} is a cleavage which doesn't have these problems.
+ \begin{definition}
+   Let $\F\to \C$ be a fibered category. A \emph{splitting} of $\F$ is a subcategory
+   $\K\subseteq \F$ such that the following conditions hold.
+   \begin{enumerate}
+     \item every arrow in $\K$ is cartesian,
+     \item $\K$ contains all objects, and
+     \item for every $f:V\to U$ in $\C$ and $x\in F(U)$, there is a unique $y\to x$ over
+     $f$ in $\K$.
+   \end{enumerate}
+   A \emph{split fibered category} is a fibered category together with a splitting.
+ \end{definition}
+ \begin{lemma} \label{lec23L:split<=>functor}
+   The category of split fibered categories over $\C$ (in which morphisms respect
+   splittings) is equivalent to the category $\fun(\C^{op},\cat)$.
+ \end{lemma}
+ \begin{proof}
+   By the discussion preceding the definition, a fibered category with a splitting
+   defines a functor $\C^{op}\to \cat$. Conversely, if $F:\C^{op}\to \cat$ is a functor,
+   then we can define $F^{fib}$ to be the fibered category whose objects are pairs
+   $(U,\gamma)$ where $U\in \C$ and $\gamma\in F(U)$, in which a morphism $(V,\delta)\to
+   (U,\gamma)$ is a pair $(g,\alpha)$, where $g:V\to U$ is a morphism in $\C$ and
+   $\alpha:\delta\to Fg(\gamma)$ is a morphism in $F(V)$. The composition
+   $(W,\e)\xrightarrow{(h,\beta)}(V,\delta)\xrightarrow{(g,\alpha)}(U,\gamma)$ is taken
+   to be $\bigl(g\circ h,Fh(\alpha)\circ \beta\bigr)$.
+
+   Let $\K$ be the subcategory of arrows of the form $(g,\id)$, where $g$ is a morphism
+   in $\C$. Let's check that the arrows of $\K$ are cartesian. Let $W\xrightarrow h
+   V\xrightarrow g U$ be an arrow in $\C$, let $\gamma\in F(U)$, and let $\e\in F(W)$,
+   with $(g\circ h,\alpha):(W,\e)\to (U,\gamma)$ (the first part must be $g\circ h$ if
+   the arrow is to lie over $g\circ h$). Then we wish to show that there is an unique
+   arrow $(W,\e)\to \bigl(V,Fg(\gamma)\bigr)$ lying over $h$ which composes with
+   $(g,\id_{Fg(\gamma)})$ to give $(g\circ h,\alpha)$. Well, since the arrow must lie
+   over $h$, it must be of the form $(h,\beta)$ for some $\beta:F(g\circ h)(\gamma)\to
+   \e$ in $F(W)$. But then we have $(g\circ h,\alpha)=(g,\id)\circ (h,\beta)=(g\circ
+   h,Fh(\id)\circ \beta)=(g\circ h,\beta)$, so we must have $\beta=\alpha$. This shows
+   that $F^{fib}$ is a fibered category and $\K$ is a splitting.
+
+   We omit the discussion of how these constructions behave on morphisms and the proof
+   that they are indeed inverses.
+ \end{proof}
+ \begin{remark}
+   If $F:\C^{op}\to \set$ is a presheaf, we can think of it as a functor to $\cat$. In
+   this case $F^{fib}$ is exactly the fibered category defined in Definition
+   \ref{lec22D:F^fib}, so there is no conflict in the notation.
+ \end{remark}
+ \begin{remark}
+   Similarly, we could show that the category of fibered categories with cleavage (in
+   which morphisms respect cleavage) is equivalent to the category of lax 2-functors
+   $\C^{op}\to \cat$.
+ \end{remark}
+ The following example illustrates that splittings need not exist in general, but Theorem
+ \ref{lec23T:equiv_to_split} tells us that every fibered category is equivalent to one
+ with a splitting.
+ \begin{example}
+   A group $G$ can be thought of as a category with one object, whose morphisms are the
+   elements of $G$ (with composition given by multiplication). If $G$ and $H$ are
+   groups, then a functor $p:G\to H$ is the same thing as a homomorphism.
+
+   Note that $p:G\to H$ a fibered category if and only if $p$ is surjective: every arrow
+   in $G$ is cartesian (see diagram below), and you need to find an arrow (element) in
+   $G$ lying over every arrow (element) in $H$.
+   \[\xymatrix@R-1.5pc{
+    \ast_G \ar@{|->}[dd]\ar@{-->}[dr]_(.6){g_1^{-1}g_3} \ar@/^/[rrd]^{g_1}\\
+     & \ast_G\ar@{|->}[dd] \ar[r]_{g_3} & \ast_G \ar@{|->}[dd]\\
+    \ast_H \ar[dr]_{h_2} \ar@/^/[rrd]^(.65){h_1}|!{[ru];[rd]}\hole \\
+    & \ast_H \ar[r]_{h_3} & \ast_H
+   }\]
+%   In fact, if all arrows are isomorphisms, all arrows are cartesian.\anton{}
+
+   (2) If $p$ is surjective, then a splitting of $p:G\to H$ is a section $s:H\to G$ of
+   $p$ which is a group homomorphism (the ``homomorphism'' part follows from the
+   subcategory condition). Such a section may not exist in general.
+ \end{example}
+ \begin{theorem}\label{lec23T:equiv_to_split}
+   Let $\F\to \C$ be a fibered category. Then there exists a (canonical!) split fibered
+   category $(\tilde \F,\K)$ and an equivalence $\tilde \F\to \F$.
+ \end{theorem}
+ \begin{proof}
+   Take the $\tilde\F$ to be the fibered category associated to the functor $\C^{op}\to
+   \cat$ given by $U\mapsto \HOM_\C(\C/U,\F)$ (as constructed in the proof of Lemma
+   \ref{lec23L:split<=>functor}. An object in $\tilde\F$ is of the form $(U,\gamma)$,
+   with $\gamma\in \HOM_\C(\C/U,\F)$, and a morphism $(V,\delta)\to (U,\gamma)$ is a pair
+   $(g,\alpha)$ where $g:V\to U$ and $\alpha:\delta\to \gamma\circ \tilde g$ is a
+   base-preserving natural transformation ($\tilde g:\C/V\to \C/U$ is the morphism of
+   fibered categories associated to $g$).
+   \[\xymatrix@R-1.5pc @C-.5pc{
+     & & \hspace{-5ex}(g:V\to U) \ar@{|->}@/^/[ddrr] \ar[r]^<>(.5){g} & \id_U \ar@{|->}@/^/[ddrr]\\
+     & & \C/U \ar@/^/[dr]^\gamma \\
+    \id_V \ar@{|->}@(dr,l)[drrr] \ar@{|->}@/^/[uurr] &\C/V \ar@/^/[ur]^{\tilde g} \ar@/_/[rr]_\delta^{}="a" & & \F &
+    \gamma(g) \ar[r]_{\gamma(g)}& \gamma(\id_U)\\
+    & & & \delta(\id_V) \ar[ur]_{\alpha(\id_V)}
+    \ar@{=>}_\alpha "a";"a"+(0,.7)
+   }\]
+   We define $e:\tilde \F\to \F$ by $e(U,\gamma)= \gamma(\id_U:U\to U)$, and
+   $e(g,\alpha) = \gamma(g)\circ \alpha(\id_V)$. This is a morphism of fibered
+   categories. It is easy to see that the fibers $\tilde \F(U)$ are $\HOM_\C(\C/U,\F)$
+   and that $e$ restricts to the evaluation map on fibers. By the 2-Yoneda lemma, $e$ is
+   an equivalence on each fiber. By Proposition \ref{lec21P:check_equivs_on_fibers}, $e$
+   is an equivalence of fibered categories.
+ \end{proof}
+ \begin{warning}
+   You may be thinking to yourself, ``every fibered category is equivalent to a split
+   fibered category, and split fibered categories are equivalent to functors $\C^{op}\to
+   \cat$, so the category of fibered categories over $\C$ is equivalent to the category
+   $\fun(\C^{op},\cat)$.'' This is WRONG! The \emph{category of fibered categories} is
+   not equivalent to the \emph{category of split fibered categories}. It is true that
+   every fibered category is equivalent to split fibered category, but a morphism of
+   fibered categories need not respect the splitting. That is, $\fun(\C^{op},\cat)$
+   injects into the category of fibered categories over $\C$, and the injection is
+   faithful and essentially surjective, but is is not \emph{fully faithful}; there are
+   extra morphisms.
+ \end{warning}
+
+% \begin{proof}[Proof of Theorem \ref{lec23T:equiv_to_split}]
+%   The objects of $\tilde \F$ are pairs $(U,\gamma)$, where $\gamma\in \HOM_\C(\C/U,\F)$.
+%   A morphism $(V,\delta)\to (U,\gamma)$ is a pair $(g,\alpha)$, with $g:V\to U$ and
+%   $\alpha$ is a morphism in $\HOM_\C(\C/V,\F)$ from $\delta$ to $\gamma\circ \tilde g$
+%   (see the diagram on the left).
+%   \[\xymatrix@R-1.5pc @C-.5pc{
+%    & \C/U \ar@/^/[dr]^\gamma \\
+%    \C/V \ar@/^/[ur]^{\tilde g} \ar@/_/[rr]_\delta^{}="a" & & \F
+%    \ar@{=>}_\alpha "a";"a"+(0,.7)
+%   }\qquad\qquad
+%   \xymatrix@R-1.5pc{
+%    & h_U^* \ar@/^/[dr]^\gamma \\
+%    h_W^* \ar@/^/[ur]^{\widetilde{g\circ g'}} \ar@/_/[rr]_\e^(.4){}="a" & & \F
+%    \ar@{=>}_{\tilde g'^*\!\alpha\circ \alpha'} "a";"a"+(0,.7)
+%   }
+%   \raisebox{-1.5pc}{$\ =\ $}
+%   \xymatrix@R-1.5pc{
+%       & & h_U^* \ar@/^/[dr]^{\gamma}\\
+%    h_W^* \ar[r]^{\tilde g'} \ar@/_4ex/[rrr]_\e^{}="a"
+%       & h_V^* \ar@/^/[ur]^{\tilde g} \ar[rr]_\delta & \ar@{=>}[u]_<>(.5){\alpha} & \F
+%    \ar@{=>}^{\alpha'} "a";"a"+(0,.55)
+%   }\]
+%    The composition $(W,\e) \xrightarrow{(g',\alpha')} (V,\delta)\xrightarrow{(g,\alpha)}
+%   (U,\gamma)$ is defined to be $(g\circ g',\tilde g'^*(\alpha)\circ \alpha')$, where
+%   $\tilde g'^*$ is the functor $\HOM_\C(\C/V,\F)\to \HOM_\C(\C/W,\F)$ given by
+%   pre-composing with $\tilde g'$ (note that this respects composition on the nose).
+%
+%   There is an obvious splitting $\K\subseteq \tilde \F$. It is the subcategory of arrows
+%   $(U',\tilde g\circ \gamma)\xrightarrow{(g,\id)} (U,\gamma)$ for all $g:U'\to U$ in
+%   $\C$.
+%   \[
+%   \xymatrix@R-2pc{
+%    & \C/U \ar@/^/[dr]^\gamma \\
+%    \C/U' \ar@/^/[ur]^{\tilde g} \ar@/_/[rd]_{\tilde g} & & \F\\
+%    & \C/U \ar@/_/[ur]_\gamma \ar@{=>}[uu]_{\id} \\
+%   }\qquad
+%   \xymatrix@R-1.5pc @C-.5pc{
+%     & & \hspace{-5ex}(g:V\to U) \ar@{|->}@/^/[ddrr] \ar[r]^<>(.5){g} & \id_U \ar@{|->}@/^/[ddrr]\\
+%     & & \C/U \ar@/^/[dr]^\gamma \\
+%    \id_V \ar@{|->}@(dr,l)[drrr] \ar@{|->}@/^/[uurr] &\C/V \ar@/^/[ur]^{\tilde g} \ar@/_/[rr]_\delta^{}="a" & & \F &
+%    \gamma(g) \ar[r]_{\gamma(g)}& \gamma(\id_U)\\
+%    & & & \delta(\id_V) \ar[ur]_{\alpha(\id_V)}
+%    \ar@{=>}_\alpha "a";"a"+(0,.7)
+%   }\]
+%
+%%   Let's define $\tilde \F$. We can think of it as a functor $U\in \C \mapsto
+%%   \HOM_\C(h_U^*,\F)\xrightarrow\sim \F(U)$. There is a good pullback here. If $f:V\to
+%%   U$, then we have an induced morphism of fibered categories $\tilde f:\C/V\to \C/U$,
+%%   then we get $f^*:\HOM_\C(h_U^*,\F)\to \HOM_\C(h_V^*,\F)$ given by composition with
+%%   $\tilde f$. This really gives you composition on the nose.
+%%
+%%   As a fibered category: the objects of $\tilde \F$ are pairs
+%%   $(U,\gamma\in\HOM_\C(h_U^*,\F))$ and a morphism $(V,\delta)\to (U,\gamma)$ is a pair
+%%   $(g,\alpha)$, where $g:V\to U$ and $\alpha\in \HOM_\C(h_V^*,F)$.
+%%   \[\xymatrix@R-1.5pc{
+%%    & h_U^* \ar@/^/[dr]^\gamma \\
+%%    h_V^* \ar@/^/[ur]^{\tilde g} \ar@/_/[rr]_\delta & \ar@{=>}[u]_<>(.5)\alpha & \F
+%%   }\]
+%%    How do we compose? We say $(g\circ g',\alpha''):(W,\e) \xrightarrow{(g',\alpha')}
+%%   (V,\delta)\xrightarrow{(g,\alpha)} (U,\gamma)$.
+%%   \[\xymatrix@R-1.5pc{
+%%    & h_U^* \ar@/^/[dr]^\gamma \\
+%%    h_W^* \ar@/^/[ur]^{\widetilde{g\circ g'}} \ar@/_/[rr]_\e & \ar@{=>}[u]_<>(.5){\alpha''} & \F
+%%   }
+%%   \raisebox{-1.5pc}{$\qquad=\qquad$}
+%%   \xymatrix@R-1.5pc{
+%%       & & h_U^* \ar@/^/[dr]^{\gamma}\\
+%%    h_W^* \ar[r]^{\tilde g'} \ar@/_5ex/[rrr]_\e^{}="a"
+%%       & h_V^* \ar@/^/[ur]^{\tilde g} \ar[rr]_\delta & \ar@{=>}[u]_<>(.5){\alpha} & \F
+%%    \ar@{=>}_{\alpha'} "a";"a"+(0,.6)
+%%   }\]
+%
+%   Now we define $e:\tilde \F\to \F$ by $e(U,\gamma)= \gamma(\id_U:U\to U)$, and
+%   $e(g,\alpha) = \gamma(g)\circ \alpha(\id_V)$. This is a morphism of fibered
+%   categories. It is easy to see that the fibers $\tilde \F(U)$ are $\HOM_\C(\C/U,\F)$
+%   and that $e$ restricts to the evaluation map on fibers. By the 2-Yoneda lemma, $e$ is
+%   an equivalence on each fiber. By Proposition \ref{lec21P:check_equivs_on_fibers}, $e$
+%   is an equivalence of fibered categories.
+% \end{proof}
+ \begin{example}
+   Consider the fibered category $G=\ZZ/4 \to \ZZ/2=H$. Just for fun, let's calculate
+   $\tilde G$. First we need to calculate the fibered category $H/\ast_H\to H$, which is
+   pretty easy; there are two elements, $x_0=\id:\ast_H\xrightarrow{0} \ast_H$ and
+   $x_1:\ast_H\xrightarrow 1 \ast_H$, and the morphisms are pretty straightforward too.
+   It is pictured on the left. The morphism $x_1\to x_0$ should be labeled $1$, but we
+   call it $1^{-1}$ for ease of reference.
+   \[\xymatrix@R-1.5pc @C+2pc{
+     & x_0 \ar@(ul,dl)_0 \ar@/^4.5ex/@<3pt>[dd]^1\\
+    H/\ast_H  & & \ar@<1ex>[r]^{(\ast_H,f_1)} \ar@<-1ex>[r]_{(\ast_H,f_3)} & &
+        \ast_G \ar@(l,ul)^0 \ar@(l,dl)_2
+               \ar@(r,ur)_1 \ar@(r,dr)^3 & G \\
+    & x_1 \ar@(ul,dl)_0 \ar@/_4ex/@<3pt>[uu]^{1^{-1}} \\ \\
+    H\quad & \ast_H \ar@(ul,dl)_0 \ar@(ur,dr)^1 & \ar[r]^{\id_H} & &
+    \ast_H \ar@(ul,dl)_0 \ar@(ur,dr)^1
+   }\]
+    The objects of $\tilde G$ are pairs $(U,\gamma)$, where $U=\ast_H$ and $\gamma\in
+   \HOM_H(H/\ast_H,G)$. There are two such objects, $(\ast_H,f_i)$, where $f_i$ sends the
+   morphism 1 to the morphism $i$ (then it must send $1^{-1}$ to $4-i$); since $f_i$ must
+   be base-preserving, $i$ may be 1 or 3. The morphisms in the fiber $\tilde G(\ast_H)$
+   are base-preserving natural transformations $\eta:(\ast_H,f_i)\to (\ast_H,f_j)$. Such
+   a transformation consists of two maps, $\eta_0$ and $\eta_1$, such that
+   $\eta_0+j=\eta_1+i$.
+   \[\xymatrix@!0 @R=3.5pc @C=5pc{
+    f_i(x_0) \ar[r]^{\eta_0} \ar[d]_{f_i(1)} & f_j(x_0) \ar[d]^{f_j(1)}\\
+    f_i(x_1) \ar[r]^{\eta_1} & f_j(x_1)
+   }\raisebox{-1.5pc}{$\qquad=\qquad$}
+   \xymatrix@!0 @R=3.5pc @C=5pc{
+    \ast_G \ar[r]^{\eta_0} \ar[d]_i & \ast_G \ar[d]^j\\
+    \ast_G \ar[r]^{\eta_1} & \ast_G
+   }\]
+    Moreover, the condition ``base-preserving'' forces $\eta_0$ and $\eta_1$ to be 0 or
+   2. If $\eta_0=k$ and $\eta_1=l$, then we will write the morphism $(0,\eta)$ in $\tilde
+   G$ as $kl$.
+
+   The morphism $1:\ast_H\to \ast_H$ induces the automorphism of $H/\ast_H$ which
+   switches $x_0$ and $x_1$. In particular, pre-composing with this automorphism switches
+   $f_1$ and $f_3$. If $\eta:f_i\to f_j\circ \tilde 1$ has $\eta_0=k+i$ and $\eta_1=l-i$,
+   then we write the morphism $(1,\eta)$ in $\tilde G$ as $kl$ (this weird notation will
+   make the composition and evaluation more transparent).
+   \[\xymatrix@R-1pc{
+    & (\ast_H,f_1) \ar@`{p+(-1,-.2),p+(-2,0),p+(-1,1),p+(0,.3),p}|(.3){00}
+                 \ar@`{p+(-.7,0),p+(-1.7,0),p+(-.7,.7),p}|{22}
+                 \ar@`{p+(1,-.2),p+(2,0),p+(1,1),p+(0,.3),p}|(.3){31}
+                 \ar@`{p+(.7,0),p+(1.7,0),p+(.7,.7),p}|{13}
+                 \ar@{<-}@/^4ex/[dd]|(.6){33} \ar@{<-}@/^4ex/@<8pt>[dd]|(.4){11}
+                 \ar@/^6ex/@<10pt>[dd]|(.6){11} \ar@/^6ex/@<18pt>[dd]|(.4){33}\\
+    \tilde G \qquad  & & **[l]\qquad \ar[r]^{e} & &
+        \ast_G \ar@(l,ul)^0 \ar@(l,dl)_2
+               \ar@(r,ur)_1 \ar@(r,dr)^3 & G \\
+    & (\ast_H,f_3) \ar@`{p+(-1,.2),p+(-2,0),p+(-1,-1),p+(0,-.3),p}|(.3){00}
+                 \ar@`{p+(-.7,0),p+(-1.7,0),p+(-.7,-.7),p}|{22}
+                 \ar@`{p+(1,.2),p+(2,0),p+(1,-1),p+(0,-.3),p}|(.3){13}
+                 \ar@`{p+(.7,0),p+(1.7,0),p+(.7,-.7),p}|{31}
+                 \ar@/^4ex/[uu]|(.4){20} \ar@/^4ex/@<8pt>[uu]|(.6){02}
+                 \ar@{<-}@/^6ex/@<10pt>[uu]|(.4){20} \ar@{<-}@/^6ex/@<18pt>[uu]|(.6){02}\\
+    \\
+    H\quad & \ast_H \ar@(ul,dl)_0 \ar@(ur,dr)^1 & \ar[r]^{\id_H} & &
+    \ast_H \ar@(ul,dl)_0 \ar@(ur,dr)^1
+   }\]
+   The morphisms in $\tilde G$ compose by adding modulo 4 (in the obvious way). The
+   evaluation map $e$ sends $ij$ to $i$.
+
+%   Consider the fibered category $\F=G=\ZZ/4\to \ZZ/2=H=\C$. Let's calculate $\tilde \F$.
+%   Objects are morphisms of fibered categories
+%   \[\xymatrix@C-1pc{
+%    h_{\ast_H}^* \ar[rr] \ar[dr] & & G \ar[dl]\\
+%     & H
+%   }\]
+%    The fibered category $h_{\ast_H}^*$ has two objects $\ast_0$ and $\ast_1$ (the two
+%   morphisms), and you get $\gamma:\ast_1\to \ast_0$ (which has an
+%   inverse).\anton{picture here}
+%
+%   There are two such functors $f_1,f_3:h_{\ast_H}^*\to G$, with $f_1(\gamma)=1$ and
+%   $f_3(\gamma)=3$. So $\tilde \F$ has two objects, $f_1$ and $f_3$. What are the
+%   morphisms? There is translation by 2, $t_2$. There are also automorphisms given by 2 somehow \anton{}. Pullback along non-trivial arrow in $H$:
+%   \[\xymatrix{
+%    \ast_0 \ar[dr]|\hole\ar[r] \ar[d]_\gamma & \ast_0 \ar[d]^\gamma\\
+%    \ast_1 \ar[r] \ar[ur] & \ast_1
+%   }\]
+   The upshot is that if you choose a splitting, you really have no idea what's going on.
+ \end{example}
+
+% \underline{Stacks}: Let $\C$ be a site, and assume (for simplicity, so we don't need to
+% worry about coverings being families \anton{really?}) that coproducts are representable
+% in $\C$. Let $(\F,\K)$ be a split fibered category over $\C$. Let $V\to U$ be a covering
+% in $\C$. Define $F(V\to U)$ to be a category with objects $(x,\sigma)$, where $x\in
+% F(V)$ and $\sigma:p_2^* x\xrightarrow\sim p_1^* x$ in $F(V\times_U V)$ with a cocycle
+% condition, and the morphisms are as before. Then $\F$ is a stack if the pullback
+% functor $F(U)\to F(V\to U)$ is an equivalence for every covering $V\to U$. That is, a
+% stack is a fibered category which satisfies descent. These play the role of sheaves.

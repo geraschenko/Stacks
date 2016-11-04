@@ -1,0 +1,87 @@
+\sektion{2}{Grothendieck topologies}
+
+We ignore all set-theoretic issues in this class; I don't know how to handle them, but they are taken care of elsewhere (e.g.~in \cite{SGA}).
+
+\begin{definition}
+ Let $\C$ be a category. A \emph{Grothendieck topology} on $\C$ consists of, for each object $X$ in $\C$, a collection $Cov(X)$ of sets $\{X_i\to X\}$ of arrows, called \emph{coverings of $X$}, such that
+ \begin{enumerate}
+  \item If $V\to X$ is an isomorphism, then $\{V\to X\}\in Cov(X)$.
+  \item If $\{X_i\to X\}\in Cov(X)$ and any arrow $Y\to X$, then the fiber products $X_i\times_X Y$ exist, and $\{X_i\times_X Y\to Y\}\in Cov(Y)$.
+  \item If $\{X_i\to X\}\in Cov(X)$ and $\{V_{ij}\to X_i\}\in Cov(X_i)$ for each $i$,
+     then $\{V_{ij}\to X_i\to X\}\in Cov(X)$.
+ \end{enumerate}
+ A \emph{site} is a category $\C$ together with a Grothendieck topology.
+\end{definition}
+\begin{remark}
+ This is called a ``pre-topology'' in SGA4, but I don't see any reason not to call it a topology.
+\end{remark}
+There is a general framework into which many interesting sites fit. We describe it here in $\sch$, but it can be done in other categories, like \textbf{Top}. Let $\mathcal P$ and $\mathcal Q$ be properties of morphisms of schemes. The \emph{$\mathcal P$-$\mathcal Q$ site} on a scheme $Y$ is the full subcategory of $\sch/Y$ whose objects are $\mathcal P$ morphisms to $Y$, with $\Bigl\{\raisebox{1ex}{$\xymatrix@!0 @R=2ex @C=2pc{ X_i \ar[rr] \ar[dr] & & X\ar[dl]\\ & Y}$}\Bigr\}\in Cov(X\to Y)$ if each $X_i\to X$ is $\mathcal Q$ and $\coprod X_i\to X$ is surjective. If $Y$ is not specified, it is taken to be the final object $\spec \ZZ$. Obviously, this does not form a site in general, but for certain $\mathcal P$ and $\mathcal Q$, it does.
+\begin{example}[Big and small sites]
+ If $\mathcal P$ is vacuous (i.e.~all morphisms are $\mathcal P$, so we are working in the category $\sch/Y$), then we get the \emph{big $\mathcal Q$ site} on $Y$. If $\mathcal P=\mathcal Q$, then we get the \emph{small $\mathcal Q$ site} on $Y$.
+\end{example}
+We will often think about the following sites. You should check that they are indeed
+sites.
+\begin{itemize}
+ \item Big/small site of a topological space ($\mathcal Q=$ homeomorphism to an open subset).
+ \item Big/small Zariski site of a scheme ($\mathcal Q=$ open immersion).\footnote{It is better to define the Zariski site by taking $\mathcal Q$ to be the property of being ``locally and open immersion'', where $f:X\to Y$ is locally an open immersion if for every point $x\in X$, there is a neighborhood $U$ of $x$ such that $f:U\to Y$ is an open immersion. This is a better definition because this way we get a chain of topologies, getting progressively finer: Zariski, \'etale, lisse, fppf, fpqc.}
+ \item Big/small \'etale site on a scheme ($\mathcal Q=$ \'etale). Note that if two schemes are \'etale over another scheme $S$, then any $S$-morphism between them is automatically \'etale.
+ \item Big fppf site on a scheme ($\mathcal Q=$ fppf = flat, locally of finite presentation).\footnote{If we are dealing with locally noetherian schemes, then locally of finite presentation is the same as locally of finite type.}
+ \item Big fpqc site on a scheme ($\mathcal Q=$ fpqc\footnote{A morphism $f\colon X\to Y$ is said to be fpqc if it is locally faithfully flat and quasi-compact. That is, for every point $x\in X$, there is a quasi-compact open neighborhood of $x$ whose image under $f$ is an open affine of $Y$.})
+ \item Lisse-\'etale\footnote{``Lisse'' is French for ``smooth''.} site on a scheme ($\mathcal P=$ smooth, $\mathcal Q=$ \'etale). Note that $Y$-morphisms between smooth schemes over $Y$ are not necessarily smooth.
+\end{itemize}
+
+% \begin{example}[The small site of a topological space]
+%   Let $X$ be a topological space. Let $\C$ be the category of open subsets of $X$, with morphisms inclusions of open subsets (so two objects have either zero or one morphism between them). We say $\{U_i\to U\}\in Cov(U)$ if $U=\bigcup U_i$. Obviously, isomorphisms (identity maps) are coverings. Fiber products are just intersections, and we can refine coverings.
+% \end{example}
+% \begin{example}[The big site of topological spaces]
+%   Let $\C=\textbf{Top}$. We say $\{X_i\to X\}\in Cov(X)$ if each $X_i\to X$ is an open immersion (homeomorphism onto an open subset) and $X=\bigcup \im X_i$. Again, it is easy to check the axioms.
+% \end{example}
+% \begin{example}[The big Zariski site of a scheme]
+%   Let $X$ be a scheme, and let $\C = \sch/X$. We define $Cov(X'\to X) = \bigl\{\{X_i'\to X'|X_i'\to X\text{ open immersions and }X'=\bigcup X_i'\}\bigr\}$
+% \end{example}
+\begin{example}[Induced site structure on an over category] \label{lec02Eg:comma_sites}
+ Let $(\C,Cov)$ be a site, and let $X\in Ob(\C)$. Then we can define $\C/X$, whose objects are morphisms to $X$ and morphisms are commutative triangles as usual. We define $\Bigl\{ \raisebox{1ex}{$\xymatrix@!0 @R=2ex @C=2pc{X_i'\ar[dr]\ar[rr]& & X'\ar[dl]\\ & X}$} \Bigr\}$ to be a covering if $\{X_i'\to X'\}$ is a covering in $(\C,Cov)$. It is immediate to verify the axioms (the fiber products are all the same).
+\end{example}
+\begin{example}[Induced site structure on $(\C\downarrow F)$] \label{lec02Eg:over_sites}
+ Let $(\C,Cov)$ be a site. Let $\Delta$ be the simplicial category (or any category for that matter). Let $F:\Delta^{op}\to \C$ be a functor. Define $\C_F$ as the category whose objects are pairs $\bigl(\delta, X\to F(\delta)\bigr)$, where $\delta\in \Delta$ and $X\to F(\delta)$ an arrow in $\C$, and a morphism $\bigl(\delta',X'\to F(\delta')\bigr)\xrightarrow{(f,f^\flat)} \bigl(\delta,X\to F(\delta)\bigr)$ is a map $f:\delta\to \delta'$ in $\Delta$ and a morphism $f^\flat$ making the following diagram commute.
+ \[\xymatrix{
+   X'\ar[d] \ar[r]^{f^\flat} & X \ar[d]\\
+   F(\delta') \ar[r]^{F(f)} & F(\delta)
+ }\]
+ We define coverings of $\bigl(\delta,X\to F(\delta)\bigr)$ to be a set of the form
+ \[
+ \Bigl\{\bigl(\delta,X_i\to
+ F(\delta)\bigr)\xrightarrow{(\id,f^\flat)}\bigl(\delta,X'\to
+ F(\delta)\bigr)\Bigm|\{X_i\xrightarrow{f^\flat} X\}\in Cov_{\C}(X)\Bigr\}.
+ \qedhere
+ \]
+\end{example}
+\begin{remark}
+ Example \ref{lec02Eg:comma_sites} is a special case of Example \ref{lec02Eg:over_sites} by taking $\Delta$ to be the one point category with only the identity morphism, with $F(\ast)=X$.
+\end{remark}
+% \begin{definition}[Small \'etale site on a shceme]
+%   Let $X$ be a scheme, and define $\C$ to be the category with objects \'etale morphisms
+%   $X_i\to X$ and morphisms are regular commutative triangles (these morphisms are
+%   automatically \'etale, by the way). A covering of $X'\to X$ is a set $\{X_i'\to
+%   X'|\coprod X_i'\to X\text{ is surjective}\}$. On the homework, you'll verify that this
+%   is a site.
+% \end{definition}
+% \begin{definition}[Big \'etale site on a scheme]
+%   Let $X$ be a scheme, and define $\C=\sch/X$. A covering of $X'\to X$ is a set
+%   \[\{X_i'\to X'|\text{each }X_i'\to X'\text{ is \'etale and }\coprod X_i'\to X\text{
+%   surjective}\}.\]
+% \end{definition}
+% \begin{definition}[Big fppf (faithfully flat finite presentation) site]
+%   Let $X$ be a scheme. Let $\C=\sch/X$, A cover of $X'\to X$ is a set \[\{X_i'\to
+%   X'|X_i'\to X'\text{ is flat of finite presentation and }\coprod X_i'\to X\text{
+%   surjective}\}.\]
+% \end{definition}
+% \begin{definition}[lisse-\'etale site]
+%   Let $X$ be a scheme. Let $\C$ be the category with objects smooth morphisms $X'\to X$
+%   and morphisms commutative triangles
+%    \raisebox{1ex}{$\xymatrix@R=0pc@C-1.5pc{
+%   X'' \ar[rr]^g \ar[dr] & & X'\ar[dl]\\ & X}$}
+%    where $g$ is not necessarily smooth! A covering of $X'\to X$ is a set
+%   \[\{X_i'\xrightarrow{g_i} X'|\text{each }g_i \text{ \'etale and }\coprod X_i'\to
+%   X\text{ surjective}\}.\]
+% \end{definition}

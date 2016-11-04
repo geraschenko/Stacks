@@ -1,0 +1,92 @@
+\sektion{42}{Cohomological descent}
+
+The next two lectures address the following question: given a stack $\X$ and a sheaf $F$ on $\X$, how does one compute compute $H^\udot(\X,F)$? More generally, we'd like to compute $R^i\!f_*$. The idea is basically that of \v Cech cohomology: the cohomology of $\X$ is computable from the cohomology of a cover of $\X$ together with the cohomologies of intersections, triple intersections, etc.
+
+\begin{definition}
+  The \emph{simplicial category} $\tilde \Delta$ is the category of finite ordered sets with (weakly) order-preserving maps. This is equivalent to the category whose objects are $[n]=\{0, 1, \cdots, n\}$ with $n\ge -1$ ($[-1]=\varnothing$). Then there are $i+1$ special order-preserving maps $[i]\to [i+1]$ and $i$ special maps $[i+1]\to [i]$. \anton{these should be called $d_j$ and $\delta_j$, and should be explained. check out the standard notation for simplicial objects. The point is that these maps generate $\tilde \Delta$ with some relations (which should be written here)}
+  
+  We define $\Delta\subseteq \tilde \Delta$ be the full subcategory of non-empty sets, and define $\Delta^+\subseteq \Delta$ to be the subcategory with the same objects as $\Delta$, but only injective maps.
+
+  Let $\C$ be a category. A \emph{simplicial object in $\C$} is a functor $\Delta^{op}\to \C$.
+\end{definition}
+Given an algebraic stack $\X$, there is a presentation $X\to \X$. Define $X_i=X\times_\X\cdots \times_\X X$ ($i+1$ times). There are $i+1$ obvious projections $X_i\to X_{i-1}$ and $i$ obvious morphisms $X_{i-1}\to X_{i}$ (given by repeating one of the factors), and these satisfy the usual relations. Thus, we have a simplicial algebraic space $X_\udot$
+
+We want to compute $H^\udot(\X,F)$ in terms of $H^\udot(X_i,F_{X_i})$. We need a supped up version of \v{C}ech cohomology. This is \emph{Cohomological descent}, which you should think of as \v{C}ech cohomology on steroids.
+
+We can talk about $\algsp/\X$, where objects are arrows $v:V\to \X$ and morphisms are morphisms over $\X$ (up to 2-isomorphism). Then $X_i(T\to \X)=\hom(T,X)^{[i]}$ ($i+1$ maps from $T$ to $X$ over $\X$). Then it is clear that if we have an order-preserving map $[i]\to[j]$, then we get a map $X_j(T\to \X)\to X_i(T\to \X)$. These simplicial objects are very complicated.
+
+Each $X_i$ has an \'etale topos, and we'd like to package them all together.
+\begin{definition}
+  Let $\D$ be a category. A \emph{$\D$-topos} is a functor $p:\T\to \D$ such that
+  \begin{enumerate}
+   \item $\T$ is fibered and cofibered over $\D$ ($\T^{op} \to \D^{op}$ is fibered),
+   \item for all $d\in \D$, the fiber $\T_d$ is a topos,
+   \item for each $m:d'\to d$ in $\D$, $\xymatrix{\T_{d'}\ar@/^/[r]^{m^*} & \T_d \ar@/^/[l]^{m_*}}$, there is a morphism of topoi $f:\T_d\to \T_{d'}$ such that $m^*=f_*$ and $m_*=f^*$. \anton{this makes me uncomfortable \dots it seems like $p$ must be a \emph{split} fibered cofibered category for this definition to make sense}
+  \end{enumerate}
+  The \emph{total topos} of a $\D$-topos is $\Tot(\T)=\HOM_\D(\D,\T)$, the category whose objects are data $(\{F_d\},\{\phi^\sharp\})$ where $F_d\in \T_d$ and for every $\phi:d\to d'$, we have $\phi^\sharp:\phi^*F_{d'}\to F_d$ which are compatible \anton{write compatibility condition}. \anton{how to prove that the total topos is actually a topos? If $\T_d$ is the topos of some site $\C_d$, then $\Tot(\T)$ should be the topos on some site $\C$ fibered over $\D$ whose fibers are $\C_d$}
+\end{definition}
+\anton{define quasi-coherent sheaves on the total topos here}
+
+Roughly, a $\D$-topos is a functor $\T:\D^{op}\to \topoi$ with $d\mapsto \T_d$ \anton{if we require the spitting, then this is exactly what a $\D$-topos is}. We see that $X_{\udot et}:\Delta^{op}\to Topoi$, given by $[i]\mapsto X_{i,et}$, is a $\Delta$-topos.
+
+\begin{example}
+  For $X_{\udot et}$, the total topos consists of data $(\{F_i\},\{\phi_\sigma^\sharp\})$, where $F_i\in X_{i,et}$ and for every $\sigma:[i]\to [j]$ (order preserving), we get a map $X(\sigma):X_j\to X_i$, and we want $X(\sigma)^*F_i\to F_j$ in a compatible way.
+\end{example}
+
+Now we want to compute the cohomology of the simplicial topos and relate it to the cohomology of the stack. How do you compute the cohomology of a $\Delta$-topos (or $\Delta^+$-topos)?
+
+Say we have a $\tilde \Delta$-topos; let $\T_\udot$ be associated $\Delta$-topos.
+\[
+ \xymatrix{
+   {}& \T_2 \ar@3{->}[r]_(.75){\makebox[0pt]{$\underbrace{\hspace{10pc}}_{\mbox{$\T_\udot$}}$}}\ar@{}[l]|{\mbox{$\cdots$}} & \T_1 \ar@/_/@{=>}[l] \ar@{=>}[r] & \T_0 \ar[r]\ar@/_/[l] & \T_\varnothing
+}\]
+Let $\e^i:\T_i\to \T_\varnothing$. There is a morphism of topoi $\e_\udot:\Tot(\T_\udot)\to \T_\varnothing$ with $\e_\udot(\{F_i\},\phi_\sigma^\sharp):= Eq(\e_*^0F_0\rightrightarrows \e_*^1 F_1)$, and $\e^*G=(\{\e^{n*}G\},\text{can})$. \anton{how does one check the adjunction?}
+
+Let $\X$ be a scheme and let $X_\udot\to \X$ be a flat surjection. Then we have $\tilde X_\udot:\tilde \Delta^{op}\to \sch$, with $\tilde X_\varnothing=\X$.
+\begin{example}
+  We could define $\T_\udot$ to be the $\Delta$-topos ($\T_i=X_{i,et}$) and $\T_\varnothing=\set$ (point topos). Here, $\e_*:\T_\udot\to \ast$ is the global section functor. \anton{this isn't clear}
+\end{example}
+If we want to compute cohomology, we need to know how to compute $R^i\e_*F_\udot$ (we want to push forward a sheaf on the total topos to $\T_\varnothing$).
+
+The ``standard reference'' is \cite[4 1/2]{SGA}, which is based on some lectures of Deligne, which the author didn't understand. The idea isn't too bad.
+
+So $F_\udot\in Tot(\T_\udot)$ and we're trying to compute pushforward. If you like, think of the case where the target is a point and we're trying to compute global sections. \begin{remark}[Aside]
+  \anton{This remark should appear earlier}
+  We started with a stack $\X$ with a presentation $X_\udot$ and a quasi-coherent sheaf $\F$. Then you get a simplicial sheaf $F_\udot$ on $X_\udot$. Later, we'll prove that $H^\udot(\X,\F)=H^\udot\bigl(\Tot(X_{\udot et},F_\udot\bigr)$ (this should properly be called ``cohomological descent'') \anton{I don't think we actually prove this. Find a ref}. You should view this as some kind of derived version of \v{C}ech cohomology (note that working with the total topos makes it so that you don't have to worry about taking affine covers or whatever).
+
+  For every smooth $V\to \X$, we have the (quasi-coherent) restriction $\F_V\in V_{et}$ and for every morphism $g:U\to V$ over $\X$ (with 2-isomorphism), we have an isomorphism $g^*\F_V\xrightarrow\sim \F_U$. This gives us the $F_\udot$.
+\end{remark}
+We need to understand injectives in $\Tot(\T_\udot)$. The answer: for every injective $I_\udot\in \ab\bigl(\Tot(\T_\udot)\bigr)$, the sheaf $I_i$ is injective in $\ab(\T_i)$ for all $i$. $\e_*I\xrightarrow{q-iso}\e_*^0I_0\to \e_*^1I_1\to \e_*^2 I_2\to \cdots$ where the maps are $\sum (-1)^i d_i$ as in usual \v{C}ech cohomology.
+
+How to compute $\e_*F_\udot$: choose an injective resolution $F_\udot \to I_\udot^\udot$, so we have
+ \[\xymatrix{
+   F_2 & {} & {} & {} \\
+   F_1\ar[u]\ar[r] & I_1^0\ar[r]\ar[u] & I^1_1 \ar[r]\ar[u] & I_1^2\ar[r]\ar[u] & {} \\
+   F_0\ar[u]\ar[r] & I_0^0 \ar[r]\ar[u] & I_0^1\ar[r]\ar[u] & I_0^2\ar[r]\ar[u] & {}
+ }\qquad\qquad\xymatrix{
+   {} & {} & {} \\
+   \e_*I_1^0\ar[r]\ar[u] & \e_*I^1_1 \ar[r]\ar[u] & \e_*I_1^2\ar[r]\ar[u] & {} \\
+   \e_*I_0^0 \ar[r]\ar[u] & \e_*I_0^1\ar[r]\ar[u] & \e_*I_0^2\ar[r]\ar[u] & {} \\
+   K^0\ar[r]\ar@{^(->}[u] & K^1\ar[r]\ar@{^(->}[u] & K^2\ar@{^(->}[u]\ar[r] & {}
+ }\]
+the vertical maps are alternating sums of the $d_i$. We're supposed to apply $\e_*$ to the whole complex (without the left column) and get the kernels $K^\udot$. We claim that the columns are exact after applying $\e_*$. We have a quasi-isomorphism $K^\udot\to \tot(\e_*I^\udot)$, given by
+\[\xymatrix{
+  \e_*I^0_0 \ar[r] &\e_* I^1_0\oplus \e_* I^0_1\ar[r]& \cdots\\
+  K^0\ar@{^(->}[u] \ar[r] & K^1 \ar[u] \ar[r] &
+}\]
+The upshow is that you can forget about the mysterious equalizer, you're just computing the total cohomology of the bicomplex.
+
+$R^i\e_*F=\mathcal{H}^i\bigl(\tot(\e_*I^\udot_\udot)\bigr)$. Whenever you have a bicomplex, you get a filtration $Fil^\udot$ on $\tot(\e_*I_\udot^\udot)$.
+\[
+  Fil^k=\bigoplus_{i+j=n,j\ge k} \e_* I^i_j \subseteq
+  \bigoplus_{i+j=n}\e_* I^i_j
+\]
+You allow things that don't go too far vertical.
+Whenever you have a filtration, you have some spectral sequence which relates the cohomology of the filtered pieces to the cohomology of the whole thing. \cite[XX.9.3]{Lang:Algebra}
+
+The claim is that $Fil^k/Fil^{k+1}=I^\udot_k$. You find that there is a spectral sequence $E^{p,q}_1=R^q\e_*^p F_p\Rightarrow R^{p+q}\e_* F$. Note that the first thing is some cohomlogy on one of the spaces.
+
+
+
+
+

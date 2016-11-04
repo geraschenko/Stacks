@@ -1,0 +1,225 @@
+\sektion{27}{Algebraic Stacks}
+
+ \begin{definition}[Coproducts]
+   If $\C$ is a site and $\{\X_i\}_{i\in I}$ are fibered categories over $\C$, then we define $\coprod \X_i$ to be a fibered category with objects $(i\in I,x\in \X_i)$, and $\hom\bigl((j,y\in \X_j),(i,x\in \X_i)\bigr)=\begin{cases} \varnothing & i\neq j\\ \hom_{\X_i}(y,x) & \text{else} \end{cases}$. Note that if all the $\X_i$ are stacks (resp.~stacks fibered in groupoids), then so is the coproduct.
+ \end{definition}
+ \begin{definition}[Fiber Products]
+   If $\Z\xrightarrow F \Y \xleftarrow G \X$ is a diagram of fibered categories over $\C$, then define $\X\times_\Y \Z$ to be the fibered category over $\C$ whose objects are 4-tuples $(U,x,z,\eta)$, where $U\in \C$, $x\in\X(U)$, $z\in \Z(U)$, and $\eta:Fz\xrightarrow\sim Gx$ is an isomorphism in $\Y(U)$. A morphism $(U',x',z',\eta')\to (U,x,z,\eta)$ is a pair of morphisms $\chi:x'\to x$ in $\X$ and $\zeta:z'\to z$ in $\Z$ lying over the same morphism $U'\to U$ in $\C$, so that the following diagram in $\Y$ commutes.
+ \[\raisebox{3pc}{$\xymatrix{
+    Fz' \ar[r]^{\eta'} \ar[d]_{F\zeta} & Gx'\ar[d]^{G\chi}\\
+    Fz \ar[r]^\eta & Gx
+ }$}\qedhere\]
+ \end{definition}
+ One can check that if $\X$, $\Y$, and $\Z$ are stacks (resp.~stacks in groupoids), then
+ so is $\X\times_\Y\Z$.\anton{exercise}
+
+ We saw in Lemma \ref{ApdxL:proj_limits_in_CAT} that fiber products exist in the category
+ of categories. One can see that the fibered product defined above has the property that
+ for any fibered category $\F$ over $\C$, the functor
+ $\HOM_\C(\F,\X\times_\Y\Z)\to \HOM_\C(\F,\X)\times_{\HOM_\C(\F,\Y)}\HOM_\C(\F,\Z)$ is an
+ equivalence of categories, and that this functor being an equivalence of categories is
+ exactly the condition that $\X\times_\Y\Z$ is the fibered product in the sense of
+ Definition \ref{ApdxD:limits_in_2-categories}. That is, \emph{fiber products are
+ representable in the 2-category of stacks over $\C$}.
+
+% We replace sheaves on $\sch/S$ by stacks in groupoids over $\sch/S$.
+%
+% Coproducts:
+%
+% Fibered products: Suppose we have a diagram of stacks fibered in groupoids over $\C$.
+% \[\xymatrix{
+%    \Z\times_\Y \X \ar[r]^<>(.5){p_2}\ar[d]_{p_1}& \X\ar[d]^g_(.3){}="b"\\
+%    \Z\ar[r]_f^(.3){}="a" & \Y
+%    \ar@{=>}^\alpha "a";"b"
+% }\]
+% with $\alpha$ an isomorphism $f\circ p_1\xrightarrow\sim g\circ p_2$ in
+% $\HOM(\Z\times_Y\X,\Y)$.
+%
+% Then the fibered product $\Z\times_\Y \X$ has the universal property that for any stack
+% in groupoids $\F$ over $\C$, then the functor $\HOM(\F,\Z\times_\Y\X)\to
+% \HOM(\F,\Z)\times_{\HOM(\F,\Y)}\HOM(\F,\X)$ is an equivalence.
+%
+%
+% \anton{dictionary algebraic spaces to algebraic stacks}
+%
+% \underline{Fiber products}: If $\C_1$, $\C_2$, and $\C_3$ are categories, then we define
+% the fiber product
+% \[\xymatrix{
+%    \C_1\times_{\C_2}\C_3 \ar[r]^{x_3}\ar[d]_{x_1}& \C_3 \ar[d]^b\\
+%    \C_1\ar[r]^a & \C_2
+% }\]
+% To have objects $(x_1\in\C_1,x_3\in \C_3,\sigma:a(x_1)\xrightarrow\sim b(x_3))$ and
+% morphisms $(x_1',x_3',\sigma')\to (x_1,x_3,\sigma)$ to be a pair $f:x_1'\to x_1$,
+% $g:x_3'\to x_3$, and a diagram
+% \[\xymatrix{
+%    a(x_1')\ar[r]^{a(f)} \ar[d]_{\sigma'} & a(x_1)\ar[d]^\sigma\\
+%    b(x_3')\ar[r]^{b(g)} & b(x_3)
+% }\]
+% \anton{some universal property}
+%
+% Now consider some diagram of stacks of groupoids over a site $\C$
+% \[\xymatrix{
+%    \F \ar@/^3ex/[rr] \ar[dr] \ar@{.>}[r]_{\exists!} & \P\ar[r]\ar[d] & \X\ar[d]^G_{}="b"\\
+%    & \Z\ar[r]^F="a" & \Y
+%    \ar@{=>}^\eta "a";"b"
+% }\]
+% We want $\HOM(\F,\P)\xrightarrow\sim \HOM(\F,\Z)\times_{\HOM(\F,\Y)}\HOM(\F,\X)$ to be
+% an equivalence of categories.
+%
+% Why does such a thing exist? We will now construct it. Define the objects of
+% $\X\times_\Y \Z$ to be 4-tuples $(U\in \C,x\in\X(U),z\in\Z(U),\eta:G(x)\xrightarrow\sim
+% F(z))$ with $p_\Y(\eta)=\id_U$. Morphisms are define as before: a morphism
+% $(U',x',z',\eta')\to (U,x,z,\eta)$ is $U'\to U$, $x'\to x$, $z'\to z$ compatible with
+% $\eta'$ and $\eta$. The projections are what you think.
+%
+% Now observe that $\HOM(\F,\X\times_\Y\Z)\xrightarrow\sim
+% \HOM(\F,\Z)\times_{\HOM(\F,\Y)}\HOM(\F,\X)$ (in fact, it is an equality of categories
+% \anton{maybe an isomorphism})
+%
+% Now we need to check that this is a stack, but \anton{exercise}.
+
+ \begin{example}
+   Let $f:\X\to \Y$ be a morphism of fibered categories, then we can form $\X\times_\Y
+   \X$, and we get the diagonal $\Delta_\X:\X\to \X\times_\Y \X$, given by $x\mapsto
+   (x,x,\id_{f(x)})$.
+ \end{example}
+% \begin{definition}
+%   If $\X$ is a fibered category over $\C$ with some choice of cleavage, and
+%   $x,y\in\X(U)$, then $\isom(x,y):(\C/U)^{op}\to \set$ is the presheaf given by $(f:V\to
+%   U)\mapsto \text{Isom}_{\X(V)}(f^*x,f^*y)$, the set of isomorphisms between $f^*x$ and
+%   $f^*y$ in $\X(V)$. As with $\uhom(x,y)$ (Definition \ref{lec24D:uhom}), this presheaf
+%   is independent of cleavage, and if $\X$ is a stack, $\isom(x,y)$ is a sheaf for all
+%   $x,y$.
+% \end{definition}
+
+ The basic model for the rest of the course are things of the form $[X_\udot]$, in which
+ all the fibers are groupoids. \textbf{\textit{From now on, ``stack'' will mean ``stack
+ in groupoids'' unless otherwise stated.}}
+ \begin{remark}
+   Being a category fibered in groupoids is equivalent to all arrows being cartesian. Suppose
+   $f:V\to U$, with $z\to u$ over $f$. There is some cartesian arrow $f^*u\to u$, and
+   $z\to u$ factors through it by the cartesian property. Since the fiber over $V$ is a
+   groupoid, we get that $z\cong f^*u$, so $z\to u$ is cartesian.
+
+   Conversely, if every arrow is cartesian, then any arrow in the fiber is a pullback
+   along the identity morphism, so it is isomorphic to the identity pullback (i.e.~it is
+   an isomorphism; in fact, any pullback along an isomorphism is an isomorphism).
+ \end{remark}
+ \begin{remark}
+   Every base-preserving functor to a category fibered in groupoids takes cartesian
+   arrows to cartesian arrows, so it is a morphism of fibered categories.
+ \end{remark}
+ Notation: All morphisms in fibers are now isomorphisms, so instead of  $\uhom(x,y)$
+ (see Definition \ref{lec24D:uhom}) we'll write $\isom(x,y)$.
+ \begin{example} \label{lec27Eg:UxV_Isom}
+   Let $\X$ be a stack in groupoids over $\C$, and $U$ and $V$ be object in $\C$ (which
+   are sheaves), and let $u\in \X(U)$, $v\in \X(V)$. By the 2-Yoneda lemma, we may think
+   of these as morphisms $u:U\to \X$ and $v:V\to \X$ (where we interpret $U$ and $V$ as
+   their associated fibered categories, $\C/U$ and $\C/V$). If $p_U:U\times V\to U$ and
+   $p_V:U\times V\to V$ are the projections, then we see that $U\times_\X V =
+   \isom(p_U^*u,p_V^*v)$ (we can think of this as a fibered category over $\C/(U\times
+   V)$, which is fibered over $\C$, so we can think of $\isom(p_U^*u,p_V^*v)$ as fibered
+   over $\C$) \anton{does this need to be expanded?}. As usual, this is independent of
+   cleavage up to equivalence.
+
+%   \[\xymatrix{
+%    V\times_\X U\ar[r]^{p_U}\ar[d]_{p_V}& U\ar[d]^u\\
+%    V\ar[r]^v & \X
+%   }\]
+%   Then $\isom(p_V^*v,p_U^* u)=V\times_\X U\to V\times U$, where
+%   $\isom(p_V^*v,p_U^*u):(\C/V\times U)^{op}\to \set$ is given by $(g:T\to V\times
+%   U)\mapsto \{$isomorphisms $g^*p_V^*v\xrightarrow\sim g^*p_U^*u$ in $\X(T)\}$. You had
+%   to assume $\X$ has a splitting for this.
+%
+%   Aside: you can define $Isom$ without replacing $\X$ by choosing a pullback functor
+%   $g^*:\X(W)\to \X(R)$ for every arrow $g:R\to W$ in $\C$. In this case, we need for
+%   each $g':T'\to T$,
+%   \[\xymatrix{
+%    \isom(p_V^*v,p_U^* u)(T\xrightarrow g U\times V) \ar[d]^{\tilde g'}\\
+%    \isom(p_V^*v,p_U^* u)(T'\xrightarrow{g\circ g'} U\times V)
+%   }\]
+%   we want
+%   \[\xymatrix{
+%    g^*p_V^*v \ar[r]^\sigma \ar@{.>}[r]^{\tilde g'(\sigma)} & g^*p_U^*u\\
+%    (g\circ g')^*p_V^*v \ar[d]_{\text{can}} & (g\circ g')p_U^*u\ar[d]^{\text{can}}\\
+%    g'^*g^*p_V^*v \ar[r]_\sim^{g'^*(\sigma)} & g'^*g^*p_U^*u
+%   }\]
+%
+%   Anyway, we have
+%   \[\xymatrix{
+%    \isom(p_V^*v,p_U^* u)\ar[r]^{p_U}\ar[d]_{p_V}& U\ar[d]^u\\
+%    V\ar[r]^v & \X
+%   }\]
+   Note that
+   \begin{enumerate}
+     \item $U\times_\X V$ is fibered in sets (because it is the sheaf
+      $\isom(p_U^*u,p_V^*v)$).
+     \item $U\times_\X V\to U\times V$ need not be a monomorphism. That is,
+      given $g:T\to U\times V$, there may be more than one isomorphism between
+      $g^*p_U^*u$ and $g^*p_V^*v$ in the fiber $\X(T)$.
+      \qedhere
+   \end{enumerate}
+ \end{example}
+
+% Now let's specialize to the case $\C=\sch/S$ with the \'etale topology. All stacks from
+% here on (basically for the rest of the course) are stacks in groupoids.
+% The following definition is unfortunate.
+ \begin{definition}
+   A stack is \emph{representable} if it is equivalent to an algebraic space. A morphism
+   of stacks $f:\X\to \Y$ is \emph{representable} if for every scheme $U$ over $S$ and
+   every $u:U\to \Y$, the fiber product $U\times_\Y \X$ is representable.
+ \end{definition}
+ \begin{definition}
+   Let $\P$ be an (\'etale) stable property of morphisms of algebraic spaces. Then a
+   representable morphism of stacks $f:\X\to \Y$ \emph{has $\P$} if for every scheme $U$
+   over $S$ and $u:U\to \Y$, the map $U\times_\Y \X\to U$ has $\P$.
+ \end{definition}
+ \begin{example}
+   surjective, universally open (or closed), separated, quasi-compact, locally of finite type, flat, smooth, etc.
+ \end{example}
+ \begin{definition}
+   A stack in groupoids $\X$ over $(\sch/S)_{et}$ is \emph{algebraic} if the following hold.
+   \begin{enumerate}
+     \item $\Delta:\X\to \X\times_S \X$ is representable. \anton{does this imply that $\X$ is a stack \emph{in groupoids}? probly not; it's just that groupoids are the next level up from sets \dots next would be simplicial objects with no homotopy higher than 2?}
+     \item There exists a scheme $X$ over $S$ and a smooth surjection $X\to \X$. This
+     makes sense because condition (1) implies that any morphism from a scheme to $\X$ is
+     representable.
+   \end{enumerate}
+ \end{definition}
+ \begin{remark}\label{lec27R:yucky_def}
+   This definition of representability of a morphism of stacks is unfortunate. It really
+   should say ``$\X\to \Y$ is representable if for every \emph{algebraic space} $U$ and
+   every $u:U\to \Y$, the fiber product $U\times_\Y \X$ is equivalent to an algebraic
+   space''. Consider the following variations of condition (2) in the definition above.
+   \begin{enumerate}
+     \item $\Delta:\X\to \X\times_S \X$ is representable,
+     \item for every scheme $U$, and every $x,y\in\X(U)$, $\isom(x,y)$ is an algebraic space,
+     \item for every scheme $U$, every $u:U\to \X$ is representable,
+     \item for every algebraic space $U$, every $u:U\to \X$ is representable.
+   \end{enumerate}
+   We saw in Example \ref{lec27Eg:UxV_Isom} that (2) is equivalent to (3),
+   and (1) implies (3) (the proof of Lemma \ref{lec12L:prod_schemes_over_alg_space}
+   works). To see that (3) implies (1), observe that for a morphism from a scheme
+   $f\times g:T\to \X\times \X$, we have that $T\times_{\X\times \X}\X \cong
+   (T\times_{f,X,g} T)\times_{T\times T} T$. It is clear that (4) implies (3). Under
+   certain circumstances \anton{which are?}, we will see that (3) implies (4).
+ \end{remark}
+% Aside: Condition (2) makes sense because (1) implies that for every $S$-scheme $X$, any
+% morphism $x:X\to\X$ is representable because for any $T\to \X$, we have that
+% \[\xymatrix{
+%    X\times_\X T \ar[d] \ar[r] \ar@{}[dr]|(.25)\pb & X\times_S T\ar[d]\\
+%    \X\ar[r]^\Delta & \X\times_S\X
+% }\]
+% \begin{remark}
+%   Consider the following conditions: (1)
+%   (2)  (3)
+%   , and (4) same as
+%   (3), but an algebraic space.
+%
+%   We see that (1), (2), and (3) are equivalent, and $(4)\Rightarrow (3)$, but I owe you
+%   some conditions under which $(3)\Rightarrow (4)$.
+% \end{remark}
+% \begin{example}
+%   $Y/S$ a scheme and $G/S$ is a smooth group-scheme acting on $Y$. Then $[Y/G]$ is
+%   algebraic.
+% \end{example}

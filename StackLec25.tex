@@ -1,0 +1,212 @@
+\sektion{25}{Groupoids. Stackification.}
+
+ \begin{definition}
+   A \emph{groupoid} is a category where all morphisms are isomorphisms.
+ \end{definition}
+ We'll give some examples of groupoids in a moment, but first consider the following
+ definition.
+ \begin{definition}
+   Let $\C$ be a category. We define a \emph{groupoid object in $\C$} to be a 7-tuple
+   $X_\udot=(X_0,X_1,s,t,i,\e,m)$, where $X_0$ (objects) and $X_1$ (morphisms) are
+   objects in $\C$, with morphisms $s,t:X_1\to X_0$ (source and target), $\e:X_0\to X_1$
+   (identity map), $i:X_1\to X_1$ (inverse), and $m:X_1\times_{s,X_0,t}X_1\to X_1$
+   (composition), subject to the following relations.
+   \[\begin{array}{c@{\qquad}c}
+      \xymatrix{X_0 \ar[r]^\e\ar[d]_\e\ar[dr]^\id & X_1\ar[d]^t\\ X_1\ar[r]_s & X_0}\qquad
+      \xymatrix{X_1\ar[r]^i\ar[d]_\id & X_1\ar[d]^s \ar[dl]_i\\ X_1\ar[r]_t & X_1} &
+      \xymatrix{
+        X_1\ar[d]_s & X_1\times_{s,X_0,t}X_1
+        \ar[l]_<>(.5){p_1}\ar[r]^<>(.5){p_2}\ar[d]^m & X_1\ar[d]^t\\
+        X_0 & X_1\ar[l]_s \ar[r]^t & X_0}
+      \\ \rule{0pt}{2em}
+      \text{(inverse)}&\text{(identity)}\\
+      \xymatrix{
+       X_1\ar[d]_s\ar[r]^<>(.5){i\times\id} & X_1\times_{s,X_0,t}X_1 \ar[d]^m
+       & X_1 \ar[d]^t \ar[l]_<>(.5){\id\times i}\\
+       X_0\ar[r]^\e & X_1 & X_0\ar[l]_\e} &
+      \xymatrix{
+        X_0\times_{\id,X_0,t}X_1 \ar@{=}[r] \ar[d]_{\e\times\id} & X_1\ar@{=}[r]\ar@{=}[d]
+        & X_1\times_{s,X_0,\id}X_0 \ar[d]^{\id\times\e}\\
+        X_1\times_{s,X_0,t}X_1 \ar[r]^<>(.5)m & X_1 & X_1\times_{s,X_0,t}X_1\ar[l]_<>(.5)m}
+      \\ \rule{0pt}{2em}
+      & \text{(associativity)}\\
+      & \xymatrix{
+        X_1\times_{s,X_0,t}X_1\times_{s,X_0,t}X_1 \ar[r]^<>(.5){m\times\id}
+        \ar[d]_<>(.5){m\times\id} & X_1\times_{s,X_0,t}X_1 \ar[d]^m\\
+        X_1\times_{s,X_0,t}X_1\ar[r]^<>(.5)m & X_1}
+    \end{array}\]
+     A \emph{groupoid in spaces} is a groupoid in the category of algebraic spaces (over
+    some scheme $S$).
+ \end{definition}
+ \begin{remark}
+   A (small) groupoid is the same thing as a groupoid object in $\set$.
+ \end{remark}
+ \begin{example}
+   A group $G$, thought of as a category, is a groupoid. An equivalence relation
+   $R\subseteq X\times X$ on a set $X$ can be thought of as a groupoid.
+   \[\begin{array}{c|c|c}
+      & G & R\subseteq X\times X\\ \hline
+     X_0, X_1 & \{\ast_G\}, \{g\in G\} & X, R\\
+     s, t & G\to \ast & p_2,p_1:R\to X\\
+     \e & \text{identity element}:\ast \to G & \Delta:X\to R\\
+     i & \text{inverse}:G\to G & \text{``flip''}:R\to R\\
+     m & \text{multiplication}:G\times G\to G & X\!\times\! X\!\times\!
+     X\supseteq R\times_{p_2,X,p_1} R\xrightarrow{p_{13}} R \subseteq X\!\times\! X
+   \end{array}\]
+   In the case of the equivalence relation, the existence of the maps $\e$, $i$, and $m$
+   exactly states that $R$ is reflexive, symmetric, and transitive, respectively. In
+   general, a groupoid $X_\udot$ is an equivalence relation if and only if
+   $X_1\xrightarrow{s\times t}X_0\times X_0$ is an inclusion.
+ \end{example}
+ Note that $X_\udot$ is a groupoid object if and only if for every object $U\in \C$, the
+ 7-tuple $X_\udot(U)=\bigl(X_0(U),X_1(U),s(U),t(U),i(U),\e(U),m(U)\bigr)$ is naturally a
+ groupoid. That is, a groupoid object $X_\udot$ is the same as a functor $\C^{op}\to
+ \gpoid$ whose ``object functor'' is $X_0$ and whose ``arrow functor'' is $X_1$.
+ \begin{definition}
+   Let $X_\udot$ be a groupoid object in $\C$. Then $[X_\udot]^{ps}$ is the (split)
+   fibered category over $\C$ associated to the functor $X_\udot:\C^{op}\to \gpoid$.
+ \end{definition}
+ \begin{lemma}
+   If $\C$ is a category with a subcanonical topology (representable functors are
+   sheaves), then $[X_\udot]^{ps}$ is a prestack.
+ \end{lemma}
+ \begin{proof}
+   Let $U\in \C$, and let $x,y\in X_0(U)$. We have that $U$, $X_0$, and $X_1$ are sheaves
+   on $\C$, so they are sheaves on $\C/U$ (by restriction), so the fibered product $P$ is
+   a sheaf on $\C/U$. For an object $(f:T\to U)\in \C/U$, we can compute $P(T\to U)$
+   explicitly.
+   \[
+   \xymatrix{
+    P \ar[r]\ar[d]\ar@{}[dr]|(.25)\pb & X_1\ar[d]^{s\times t}\\
+    U\ar[r]^<>(.5){x\times y} & X_0\times X_0
+   }\qquad
+   \begin{array}[t]{r@{\:}l}
+     P(T\xrightarrow{f} U) &= \{\alpha\in X_1(T)| x\circ f=s\circ \alpha, y\circ f=t\circ \alpha\} \\
+     & = \{\alpha\in X_1(T)| f^*x=s(\alpha), f^*y=t(\alpha)\}\\
+     & = \{\alpha \in \hom_{X_\uudot(T)}(f^*x,f^*y)\}\\
+     &= \uhom(x,y)(T\xrightarrow{f} U)
+   \end{array}
+   \]
+    Thus, $\uhom(x,y)=P$ is a sheaf on $\C/U$, so $[X_\udot]^{ps}$ is a prestack.
+ \end{proof}
+
+% We want stacks over $(\sch/S)_{et}$. A \emph{groupoid in spaces} consists of
+% $(X_0,X_1,s,t,\e,i,m)$ where $X_0$ and $X_1$ are algebraic spaces over $S$, and all the
+% maps are morphisms of algebraic spaces, such that all the diagrams from last time still
+% work. This is equivalent to saying that if $U\in \sch/S$, then
+% $\bigl(X_0(U),X_1(U),s,t,\e,i,m\bigr)$ is a groupoid. We will call this groupoid
+% $[X_0(U)/X_1(U)]$.
+%
+% It's even better than that. If $f:V\to U$ is a morphism of $S$-schemes, we get a functor
+% $f^*:[X_0(U)/X_1(U)]\to [X_0(V)/X_1(V)]$, and the compositions match up on the nose.
+% That is, we have an actual functor $\sch/S\to \textbf{Groupoid}$. Define $[X_0]^{ps}\to
+% \sch/S$ to be the split fibered category whose objects are pairs $\bigl(U,x\in
+% X_0(U)\bigr)$ where $U\in \sch/S$, and a morphism $(U',x')\to (U,x)$ is a pair
+% $(f,\sigma)$ where $f:U'\to U$ is an $S$-morphism and $\sigma:x'\to f^*x$ is an element
+% of $X_1(U')$ with source $x'$ and target $f^*x$. Note that $\sigma$ is automatically an
+% isomorphism.
+ \begin{example}[{$[X_\udot]^{ps}$ need not be a stack}]\label{lec25Eg:etale_relation}
+   If $X_1=R\rightrightarrows X=X_0$ is an \'etale equivalence relation, then
+   $X_\udot(U)$ has objects $x\in X(U)$ and $\hom(x,y)$ is one point if $x\sim y$ and
+   empty otherwise. It follows that the map $X_\udot(U)\to X(U)/R(U)$ is an equivalence
+   of categories (the second category is the set of connected components of
+   $X_\udot(U)$). Thus, $[X_\udot]^{ps}$ is equivalent to the presheaf $X/R$. Since $X/R$
+   is not a sheaf in general, $[X_\udot]^{ps}$ need not be a stack.
+ \end{example}
+
+ This is not so good, because we want to get the algebraic space quotient $X/R$, which
+ you only get after sheafifying the presheaf quotient. For this, we need the following
+ proposition, which tells us that we can ``stackify'' a prestack.
+ \begin{proposition}[Stackification]\label{lec25P:stackification}
+   Let $\C$ be a site with coproducts, and let $p:\F\to \C$ be a prestack. Then there
+   exists a morphism of prestacks $\iota:\F\to\tilde \F$ with $\tilde \F$ a stack, such
+   that for every stack $\G$, the functor $\HOM(\tilde \F,\G)\xrightarrow{\iota^*}
+   \HOM(\F,\G)$ is an equivalence of categories.
+ \end{proposition}
+ \begin{remark}
+   This characterizes $\tilde \F$ and $\iota:\F\to \tilde \F$ uniquely up to an
+   isomorphism which is unique up to unique isomorphism of morphisms of stacks.
+ \end{remark}
+ \begin{proof}
+   Choose a cleavage for $\F$ and define $\tilde \F$ as follows. The objects of $\tilde
+   \F$ are triples $(\pi:V\to U,x,\sigma)$ where $\pi:V\to U$ is a covering and
+   $(x,\sigma)\in \F(V\to U)$. A morphism $(\pi:V\to U,x,\sigma)\to (V'\to
+   U',x',\sigma')$ is a pair $(f,\tilde f)$, where $f:U\to U'$ is a morphism in $\C$ and
+   $\tilde f:p^*(\pi,x,\sigma)\to q^*g^*(\pi',x',\sigma')$ is a morphism in
+   $\F(V\times_{U'}V'\to U)$.\footnote{Intuitively, $\tilde f$ should be a morphism from
+   $(\pi,x,\sigma)$ to $g^*(\pi',x',\sigma')$, but to make sense of such a morphism you
+   need to take the common refinement of $V\to U$ and $U\times_{U'}V'\to U$, which is
+   $V\times_U (U\times_{U'}V')=V\times_{U'}V'$.}
+   \[\raisebox{-1pc}{$\xymatrix{
+    V\times_{U'}V' \ar[r]^q\ar[d]_p & U\times_{U'} V'\ar[r]^<>(.5)g \ar[d]
+    & V'\ar[d]^{\pi'}\\
+    V\ar[r]^\pi & U\ar[r]^f & U'
+   }$}\qquad\qquad\quad
+   \xymatrix@R-1.5pc{
+    x \ar@{|->}[dd]\ar@{-->}[dr]_<>(.5){\exists!\alpha} \ar@/^/[rrd]^{\phi}\\
+     & (p_\F\phi)^* x'\ar@{|->}[dd] \ar[r] & x' \ar@{|->}[dd]\\
+    U \ar[dr]_\id \ar@/^/[rrd]^(.7){p_\F\phi}|!{[ru];[rd]}\hole \\
+    & U \ar[r]_{p_\F\phi} & U'
+   }\]
+    The functor $\iota:\F\to \tilde \F$ sends an object $x\in\F(U)$ to $(\id:U\to
+   U,x,\text{can})$ and a morphism $\phi:x\to x'$ to $(p_\F\phi,\alpha)$, where
+   $\alpha$ is the dashed arrow in the diagram on the right.
+
+   We'll omit the verification that this works. You have effectivity of descent basically
+   for free.\anton{I'd like to work it out}
+ \end{proof}
+ \begin{definition}
+   $[X_\udot]$ is the stackification of $[X_\udot]^{ps}$.
+ \end{definition}
+ \begin{remark}
+   From the proof, we see that $\iota$ is fully faithful. This is analogous to the fact
+   that the morphism from a separated presheaf to its sheafification is injective. One
+   can prove a similar theorem which says that you can stackify a fibered category, but
+   then $\iota$ will not be fully faithful. \anton{does the same construction work for
+   fibered categories, or do you have to pre-stackify before you stackify, like we had to
+   do for sheaves?}
+ \end{remark}
+ \begin{lemma}
+   If $\F$ is a prestack in sets (resp.~groupoids), then $\tilde \F$ is (equivalent to) a
+   stack in sets (resp.~groupoids).
+ \end{lemma}
+ \begin{proof}
+   First let $\F$ be a prestack in sets. Let $U\in \C$, let $\tilde x=(\pi:V\to
+   U,x,\sigma),\tilde x'=(\pi':V'\to U,x',\sigma')\in \tilde\F(U)$. Then we have that
+   \[
+     \hom_{\tilde \F(U)}(\tilde x,\tilde x') = \hom_{\F(V\times_U V'\to U)}( p^*\tilde
+     x,q^*\tilde x')\subseteq \hom_{\F(V\times_U V')}( p^*\tilde x,q^*\tilde x').
+   \]
+   Since $\F(V\times_U V)$ is a set, there is at most one element in the right hand side.
+   In general, if an isomorphism in $\F(V\times_U V\to U)$ respects some descent data, so
+   does its inverse. Thus, the one element of $\hom_{\tilde \F(U)}(\tilde x,\tilde x')$,
+   if it exists, is an isomorphism. Thus, $\tilde\F$ is a stack in discrete groupoids, so
+   it is equivalent to a stack in sets.
+
+   Similarly, if $\F$ is a prestack in groupoids, then all elements of $\hom_{\tilde
+   \F(U)}(\tilde x,\tilde x')$ are isomorphisms, so $\tilde \F$ is a stack in groupoids.
+ \end{proof}
+ \begin{corollary}\label{lec25C:stackification<=>sheafification}
+   If $F$ is a separated presheaf on $\C$ and $\tilde F$ is the sheafification of $F$,
+   then $(\tilde F)^{fib}\cong \widetilde{F^{fib}}$.
+ \end{corollary}
+ \begin{proof}
+   Since $F^{fib}$ is fibered in sets, $\widetilde{F^{fib}}$ is also fibered in sets, so
+   it is $R^{fib}$ for some sheaf $R$ (by Proposition
+   \ref{lec22P:presh<=>fibered_in_sets}). Then for any sheaf $G$, we have the following
+   natural bijection.
+   \[
+    \hom(R,G)=\HOM(R^{fib},G^{fib})=\HOM(\widetilde{F^{fib}},G^{fib})\xrightarrow\sim
+    \HOM(F^{fib},G^{fib})=\hom(F,G)
+   \]
+   But the unique sheaf $R$ which satisfies such a natural bijection is the
+   sheafification $\tilde F$. Thus, we have that $(\tilde F)^{fib}\cong
+   \widetilde{F^{fib}}$.
+ \end{proof}
+
+ \begin{example}[Example \ref{lec25Eg:etale_relation} continued]
+   Let $R\subseteq X\times X$ be an \'etale equivalence relation on an algebraic space
+   $X$. We have shown that $[X/R]^{ps}$ is equivalent to the fibered category associated
+   to the presheaf $X/R$. By the corollary, the stack $[X/R]$ is equivalent to the
+   fibered category associated to the algebraic space quotient $X/R$.
+ \end{example}

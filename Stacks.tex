@@ -1,0 +1,91 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  This is the main document for the Math 274 (Stacks) notes from      %%
+%%  Spring 2007. To compile these notes, you should put the following   %%
+%%  files in the same directory (these are all in FullStackSource.tgz,  %%
+%%  by the way):                                                        %%
+%%    Stacks.tex (this file), StacksPreamble.tex,                       %%
+%%    StacksTitle.tex, StacksIntro.tex,                                 %%
+%%    StacksAppendix.tex, StacksExercises.tex, StacksBibliography.tex,  %%
+%%    StackLec01.tex, StackLec02.tex,..., StackLec44.tex                %%
+%%  Then run 'latex Stacks.tex' (without quotes) three times (twice     %%
+%%  might be enough).                                                   %%
+%%                                                                      %%
+%%  If you want to get a pdf, don't use pdflatex, because I use         %%
+%%  pstricks. Instead, use latex, then dvips, then ps2pdf.              %%
+%%                                                                      %%
+%%  Anton                                                               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% The preamble loads packages, theorem styles, and macros %%%%%%%%%%%%%%
+\input{StacksPreamble}
+
+\begin{document}{
+
+% Any subset of the following lines can be commented out
+%
+\input{StacksTitle}}{  % Title page, Contents
+\input{StacksIntro}}{  % How these notes are coming to exist
+%%%%%%%%%%%%%%%%%%%%%%%% Topoi %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\part{Topoi}
+
+\input{StackLec01}}{   % Motivation: non-representable functors
+\input{StackLec02}}{   % Grothendieck topologies
+\input{StackLec03}}{   % Sheafification and Topoi
+\input{StackLec04}}{   % Continuous functors between sites
+\input{StackLec05}}{   % When $f^*$ commutes with finite limits
+\input{StackLec06}}{   % Representable functors are fppf sheaves
+\input{StackLec07}}{   % Descent for Quasi-coherent Sheaves
+\input{StackLec08}}{   % Descent for $\M_g$, $g\ge 2$
+%%%%%%%%%%%%%%%%%%%%%%%% Algebraic Spaces %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\part{Algebraic Spaces}
+\input{StackLec09}}{   % Warmup for Algebraic Spaces
+\input{StackLec10}}{   % Properties of Sheaves
+\input{StackLec11}}{   % Examples of Algebraic Spaces
+\input{StackLec12}}{   % Properties of Algebraic Spaces. \'Etale Relations.
+\input{StackLec13}}{   % Affine/(Finite \'Etale Relation) = Affine, I
+\input{StackLec14}}{   % Affine/(Finite \'Etale Relation) = Affine, II
+\input{StackLec15}}{   % Quasi-coherent Sheaves on Algebraic Spaces
+\input{StackLec16}}{   % Relative Spec
+\input{StackLec17}}{   % Separated, quasi-finite, locally finite type => quasi-affine
+\input{StackLec18}}{   % Chow's Lemma.
+\input{StackLec19_0}   % Sheaf Cohomology
+  \input{StackLec19_1} % Higher Direct Images of Proper Maps
+  \input{StackLec19_2}}{   % Coherence of Higher Direct images
+\input{StackLec20}}{   % Topological space assoc. to an alg.
+                               % Space                                
+%%%%%%%%%%%%%%%%%%%%%%%% Stacks %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\part{Stacks}
+\input{StackLec21}}{   % Fibered categories
+\input{StackLec22}}{   % The 2-Yoneda lemma
+\input{StackLec23}}{   % Split fibered categories
+\input{StackLec24}}{   % Stacks
+\input{StackLec25}}{   % Groupoids. Stackification.
+\input{StackLec26}}{   % Quotients by group actions
+\input{StackLec27}}{   % Algebraic Stacks
+\input{StackLec28}}{   % More about Alg. Stacks. Examples.
+\input{StackLec29}}{   % Hilb and Quot
+\input{StackLec30}}{   % Gerbes and torsors
+\input{StackLec31}}{   % More Gerbes
+\input{StackLec32}}{   % Properties of algebraic Stacks
+\input{StackLec33}     % Deligne-Mumford <=> Delta formally unramified
+  \input{StackLec34}}{ % Artin's theorem.
+\input{StackLec35}}{   % The Lisse \'etale site on a Stack
+\input{StackLec36}}{   % Quasi-Coherent sheaves on Stacks
+\input{StackLec37}}{   % Push forward of Quasi-coherent sheaves
+%%%%%%%%%%%%%%%%%%%%%%%% Special Topics %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\chapter{Special Topics}
+\input{StackLec38}     % Keel-Mori
+  \input{StackLec38_2} % Proof: I
+  \input{StackLec39}   % Proof: II
+  \input{StackLec40}   % Proof: III
+  \input{StackLec41}}{ % Proof: IV
+\input{StackLec42}     % Cohomological Descent
+  \input{StackLec43}}{ % More Cohomological Descent
+\input{StackLec44}}{   % Brauer Groups
+%%%%%%%%%%%%%%%%%%%%%%%% Extras %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\chapter{Extras}
+\input{StacksAppendix}}{% An appendix
+\input{StacksExercises}}{% Exercises and solutions
+\input{StacksBibliography}% The bibliography
+
+}\end{document}
